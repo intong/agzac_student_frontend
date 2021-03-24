@@ -4,7 +4,7 @@
 */
 
 @font-face {
-	font-family: 'NotoSansCJKkr-Regular';
+	font-family: 'NotoSansCJKkr';
 	font-weight: normal;
 	src: url("../src/assets/fonts/NotoSansCJKkr-Regular.otf") format(truetype);
   }
@@ -50,6 +50,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 	height:100%;
+	/* background:grey; */
 }
 ol, ul {
 	list-style: none;

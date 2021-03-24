@@ -21,12 +21,28 @@ const Header = () => {
 				<div
 					style={{
 						fontSize: "14px",
-						margin: "25px 131px 25px 0",
+						margin: "25px 14px 25px 0",
 						fontFamily: "NotoSansCJKkr-Medium",
 						color: "#ffffff",
 					}}
 				>
 					나가기
+				</div>
+				{/* 이미지교체부분 (임시저장이미지로 교체) */}
+				<img
+					src={leaveout}
+					alt='나가기버튼'
+					style={{ marginRight: "4px", marginTop: "-3px" }}
+				/>
+				<div
+					style={{
+						fontSize: "14px",
+						fontFamily: "NotoSansCJKkr-Medium",
+						color: "#ffffff",
+						marginRight: "37px",
+					}}
+				>
+					임시저장
 				</div>
 				<ULStyled>
 					<div
@@ -40,7 +56,7 @@ const Header = () => {
 					<img src={devide} alt='분단기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>
 						<NavLinkStyled to='/mainVideo' activeStyle={activeStyle}>
-							메인영상
+							EY한영 아그작교실 영상시청
 						</NavLinkStyled>
 					</LIStyled>
 					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
