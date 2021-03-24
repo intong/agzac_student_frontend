@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import btnDropdown from "../../assets/icons/btn-dropdown.svg";
 
-export function Dropbox({ style, options }) {
+export function Dropbox({ style, options, correct }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedOption, setSelectedOption] = useState(null);
 	const toggling = () => setIsOpen(!isOpen);
@@ -13,13 +13,13 @@ export function Dropbox({ style, options }) {
 	};
 
 	return (
-		<DropDownContainer>
-			<DropDownHeader onClick={toggling} open={isOpen} style={style}>
+		<DropDownContainer style={style}>
+			<DropDownHeader onClick={toggling} open={isOpen} correct={correct}>
 				<Text selectedOption={selectedOption}>{selectedOption || "선택"}</Text>
 				<Image isOpen={isOpen} src={btnDropdown} alt='화살표' />
 			</DropDownHeader>
-			<DropDownListContainer>
-				{isOpen && (
+			{isOpen && (
+				<DropDownListContainer>
 					<DropDownList>
 						{options &&
 							options.map((option, i) => (
@@ -28,8 +28,8 @@ export function Dropbox({ style, options }) {
 								</ListItem>
 							))}
 					</DropDownList>
-				)}
-			</DropDownListContainer>
+				</DropDownListContainer>
+			)}
 		</DropDownContainer>
 	);
 }
@@ -62,7 +62,12 @@ const DropDownHeader = styled.div`
 	width: 280px;
 	height: 42px;
 	border-radius: 2px;
-	border: ${(props) => (props.open ? "solid 1px #686868" : "solid 1px #e4e4e4")};
+	border: ${(props) =>
+		props.open === false
+			? props.correct === false
+				? "1px solid #ff3737"
+				: "solid 1px #e4e4e4"
+			: "solid 1px #686868"};
 	background-color: #fcfcfc;
 	position: relative;
 `;
@@ -83,17 +88,12 @@ const DropDownList = styled.ul`
 	border-radius: 2px;
 	border: solid 1px #686868;
 	overflow: scroll;
-	&:first-child {
-		/* padding-top: 0.8em; */
-	}
 `;
 
 const ListItem = styled.li`
-	/* background: red; */
 	width: 280px;
 	height: 42px;
 	border-radius: 2px;
-	/* background-color: rgba(252, 252, 252, 0); */
 	list-style: none;
 	&:hover {
 		background: #f5f5f5;

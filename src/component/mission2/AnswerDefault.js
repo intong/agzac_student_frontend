@@ -22,12 +22,12 @@ const AnswerDefault = ({ normal, correct }) => {
 	const leftDropbox = {
 		position: "absolute",
 		left: "24px",
-		border: normal === false && correct === false ? "1px solid #ff3737" : "",
+		// border: normal === false && correct === false ? "1px solid #ff3737" : "",
 	};
 	const rightDropbox = {
 		position: "absolute",
 		left: "320px",
-		border: normal === false && correct === false ? "1px solid #ff3737" : "",
+		// border: normal === false && correct === false ? "1px solid #ff3737" : "",
 	};
 	return (
 		<RightBox normal={normal} correct={correct}>
@@ -63,7 +63,7 @@ const AnswerDefault = ({ normal, correct }) => {
 						color: "#0f0f15",
 					}}
 				>
-					16
+					4
 				</span>
 			</Number>
 			<TitleRight>상품개발자</TitleRight>
@@ -91,8 +91,8 @@ const AnswerDefault = ({ normal, correct }) => {
 					background: "red",
 				}}
 			>
-				<Dropbox style={leftDropbox} options={options} />
-				<Dropbox style={rightDropbox} options={options} />
+				<Dropbox style={leftDropbox} options={options} correct={correct} />
+				<Dropbox style={rightDropbox} options={options} correct={correct} />
 			</div>
 			<ButtonPrimary
 				text='정답제출'

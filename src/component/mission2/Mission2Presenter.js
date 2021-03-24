@@ -39,7 +39,7 @@ const Mission2Presenter = () => {
 						</TextContentBox>
 					</LeftBox>
 					{/* 정답화면 교체 부분 
-						normal=true  : default 화면
+						normal=true && correct={true}  : default 화면
 						normal=false && correct={true} : 정답화면
 						normal=false && correct={false} : 오답화면
 					*/}
