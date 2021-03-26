@@ -152,10 +152,39 @@ const BtnSecondaryDisable = styled.button`
 	color: #000000;
 `;
 
+const FinalReportBtn = ({ text, style, onClick }) => {
+	return (
+		<FinalBrn style={style} onClick={onClick}>
+			<TextStyle>{text}</TextStyle>
+		</FinalBrn>
+	);
+};
+const FinalBrn = styled.button`
+	width: 148px;
+	height: 40px;
+	margin: 14px 111px 13px 1044px;
+	padding: 10px 14px;
+	opacity: 0.2;
+	border-radius: 2px;
+	background-color: #0f0f15;
+`;
+const TextStyle = styled.span`
+	font-family: "NotoSansCJKkr";
+	font-size: 14px;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: center;
+	color: #ffffff;
+`;
+
 export {
 	LoginButton,
 	ButtonPrimary,
 	ButtonPrimaryDisable,
 	ButtonSecondary,
 	ButtonSecondaryDisable,
+	FinalReportBtn,
 };

@@ -91,8 +91,18 @@ const AnswerDefault = ({ normal, correct }) => {
 					background: "red",
 				}}
 			>
-				<Dropbox style={leftDropbox} options={options} correct={correct} />
-				<Dropbox style={rightDropbox} options={options} correct={correct} />
+				<Dropbox
+					style={leftDropbox}
+					options={options}
+					correct={correct}
+					placeholder='선택'
+				/>
+				<Dropbox
+					style={rightDropbox}
+					options={options}
+					correct={correct}
+					placeholder='선택'
+				/>
 			</div>
 			<ButtonPrimary
 				text='정답제출'

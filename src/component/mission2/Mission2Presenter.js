@@ -43,7 +43,7 @@ const Mission2Presenter = () => {
 						normal=false && correct={true} : 정답화면
 						normal=false && correct={false} : 오답화면
 					*/}
-					<AnswerDefault normal={false} correct={false} />
+					<AnswerDefault normal={true} correct={true} />
 				</BottomContent>
 				<FaqBtn src={btnFaq} alt='힌트버튼' />
 				<JobsBtn src={btnJobs} alt='직업버튼' />

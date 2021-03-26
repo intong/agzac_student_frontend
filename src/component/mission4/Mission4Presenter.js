@@ -2,8 +2,20 @@ import React from "react";
 import styled from "styled-components";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
+import { ButtonSecondary } from "../../ui/button/Button";
+import SocialProblem from "./SocialProblem";
+import ProductDeveloper from "./ProductDeveloper";
+import ReasonDevelopProduct from "./ReasonDevelopProduct";
 
-const Mission4Presenter = () => {
+const btnStyle = {
+	width: "256px",
+	height: "40px",
+	position: "absolute",
+	bottom: "24px",
+	left: "24px",
+};
+
+const Mission4Presenter = ({ confirm, clickFunctionList }) => {
 	return (
 		<Wrapper>
 			<BlockTop>
@@ -21,7 +33,45 @@ const Mission4Presenter = () => {
 				</TopContent>
 			</BlockTop>
 			<BlockBottom>
-				<BottomContent></BottomContent>
+				<BottomContent>
+					<Title>사회문제를 해결하는 상품개발 기획서</Title>
+					<div
+						style={{
+							display: "flex",
+							marginTop: "16px",
+						}}
+					>
+						<LeftBox>
+							<LeftTitle>
+								홍길동님이 선택한 사회문제의 주제는 기후변화와 환경입니다.
+							</LeftTitle>
+							<ButtonSecondary text='다른 사회문제 선택' style={btnStyle} />
+						</LeftBox>
+						<RightBox>
+							<Tabs>
+								<Tab1 confirm={confirm}>
+									<Text>사회문제</Text>
+								</Tab1>
+								<Tab2 confirm={confirm}>
+									<Text>상품개발 이유</Text>
+								</Tab2>
+								<Tab3 confirm={confirm}>
+									<Text>상품 개발자</Text>
+								</Tab3>
+							</Tabs>
+							{/* 변경 자리 */}
+							{confirm.social === "ok" ? (
+								confirm.social === "ok" && confirm.reason === "ok" ? (
+									<ProductDeveloper clickFunctionList={clickFunctionList} />
+								) : (
+									<ReasonDevelopProduct clickFunctionList={clickFunctionList} />
+								)
+							) : (
+								<SocialProblem clickFunctionList={clickFunctionList} />
+							)}
+						</RightBox>
+					</div>
+				</BottomContent>
 				<FaqBtn src={btnFaq} alt='힌트버튼' />
 				<JobsBtn src={btnJobs} alt='직업버튼' />
 			</BlockBottom>
@@ -30,7 +80,6 @@ const Mission4Presenter = () => {
 };
 
 const Wrapper = styled.div`
-	/* background: lightgreen; */
 	width: 100%;
 	height: 100%;
 `;
@@ -49,16 +98,108 @@ const TopContent = styled.div`
 
 const BlockBottom = styled.div`
 	background: #f7f7f7;
-	/* background: red; */
 	width: 1440px;
-	height: 652px;
+	height: 100%;
 	margin: 0 auto;
 	position: relative;
 `;
 const BottomContent = styled.div`
 	width: 944px;
-	height: 652px;
+	height: 100%;
 	margin: 0 auto;
+	position: relative;
+`;
+const Title = styled.div`
+	width: 278px;
+	height: 24px;
+	font-family: "NotoSansCJKkr";
+	font-size: 18px;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.33;
+	letter-spacing: normal;
+	color: #0f0f15;
+	padding-top: 39px;
+	/* position: absolute;
+	top: 39px; */
+`;
+const Tabs = styled.div`
+	width: 624px;
+	height: 50px;
+	display: flex;
+	flex-direction: row;
+	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
+	margin-bottom: 16px;
+	/* position: absolute;
+	top: 79px;
+	right: 0px; */
+`;
+const Text = styled.div`
+	width: 206.7px;
+`;
+// social
+const Tab1 = styled.div`
+	width: 208px;
+	height: 50px;
+	background-color: #0f0f15;
+	color: #ffffff;
+	opacity: ${(props) => props.confirm.social === "ok" && "0.8"};
+	text-align: center;
+	line-height: 53px;
+`;
+//reason
+const Tab2 = styled.div`
+	width: 208px;
+	height: 50px;
+	background-color: ${(props) =>
+		props.confirm.social === "ok" ? "#0f0f15" : "#ffffff"};
+	text-align: center;
+	line-height: 53px;
+	color: ${(props) => (props.confirm.social === "ok" ? "#ffffff" : "#686868")};
+	opacity: ${(props) =>
+		props.confirm.social === "ok" && props.confirm.reason === "ok" ? "0.8" : ""};
+`;
+// developer
+const Tab3 = styled.div`
+	width: 209px;
+	height: 50px;
+	background-color: ${(props) =>
+		props.confirm.reason === "ok" ? "#0f0f15" : "#ffffff"};
+	text-align: center;
+	line-height: 53px;
+	color: ${(props) => (props.confirm.reason === "ok" ? "#ffffff" : "#686868")};
+`;
+const LeftBox = styled.div`
+	width: 304px;
+	height: 458px;
+	border-radius: 2px;
+	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
+	background-color: #ffffff;
+	position: relative;
+	/* position: absolute;
+	top: 79px;
+	left: 0px; */
+`;
+const RightBox = styled.div`
+	width: 304px;
+	height: 100%;
+	margin-left: 16px;
+`;
+const LeftTitle = styled.div`
+	width: 256px;
+	height: 48px;
+	font-family: "NotoSansCJKkr";
+	font-size: 18px;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.33;
+	letter-spacing: normal;
+	color: #0f0f15;
+	position: absolute;
+	top: 26px;
+	left: 24px;
 `;
 
 const FaqBtn = styled.img`

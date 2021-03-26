@@ -78,8 +78,8 @@ const Mission1Presenter = () => {
 					<div style={{ position: "absolute", top: "79px", right: " 248px" }}>
 						{/*정답화면 교체*/}
 						<Answer1Default />
-						{/* <Answer2Correct /> */}
-						{/* <Answer3Wrong /> */}
+						{/* <Answer2Correct />
+						<Answer3Wrong /> */}
 					</div>
 				</BottomContent>
 				<FaqBtn src={btnFaq} alt='힌트버튼' />

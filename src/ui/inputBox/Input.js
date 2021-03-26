@@ -1,27 +1,31 @@
 import styled from "styled-components";
-const InputDefault = ({ style, onChange, placeholder, wrong }) => {
+const InputDefault = ({ name, style, onChange, placeholder, wrong, value }) => {
 	return (
 		<Input
+			name={name}
 			style={style}
 			onChange={onChange}
 			placeholder={placeholder}
 			wrong={wrong}
+			value={value}
 		/>
 	);
 };
 
 const Input = styled.input`
-	font-family: NotoSansCJKkr-Regular;
+	font-family: "NotoSansCJKkr";
 	font-size: 14px;
 	line-height: 1.57;
 	color: #0f0f15;
 	padding-left: 10px;
+	border-radius: 2px;
+	box-shadow: ${(props) =>
+		props.wrong === false ? " 0 0 0 1px #ff3737" : " 0 0 0 1px #e4e4e4"};
 	::placeholder {
 		color: #d8d8d8;
 	}
 	&:focus {
-		outline: ${(props) =>
-			props.wrong === true ? "solid 1px #ff3737" : "solid 1px #686868"};
+		box-shadow: 0 0 0 1px #686868;
 		border-radius: 2px;
 		background: #fcfcfc;
 	}
@@ -38,16 +42,38 @@ const InputStyle = styled.input`
 	border-bottom: 1px solid #e4e4e4;
 	padding-bottom: 8px;
 	::placeholder {
-		font-family: NotoSansCJKkr-Regular;
+		font-family: "NotoSansCJKkr";
 		font-size: 14px;
 		color: #d8d8d8;
 	}
 	&:focus {
 		border-bottom: solid 1px #0f0f15;
-		font-family: NotoSansCJKkr-Regular;
+		font-family: "NotoSansCJKkr";
 		font-size: 14px;
 		color: #0f0f15;
 	}
 `;
 
-export { InputDefault, InputLineType };
+const TextArea = ({ style, onChange, placeholder }) => {
+	return (
+		<StyledTextArea style={style} onChange={onChange} placeholder={placeholder} />
+	);
+};
+
+const StyledTextArea = styled.textarea`
+	outline: none;
+	border-radius: 2px;
+	border: solid 1px #e4e4e4;
+	background-color: #fcfcfc;
+	padding: 10px;
+	font-family: "NotoSansCJKkr";
+	font-size: "14px";
+	font-weight: "normal";
+	font-stretch: "normal";
+	font-style: "normal";
+	line-height: "1.57";
+	letter-spacing: "normal";
+	color: "#0f0f15";
+`;
+
+export { InputDefault, InputLineType, TextArea };

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
+import { FinalReportBtn } from "../../ui/button/Button";
 
 const FinalReportPresenter = () => {
 	return (
@@ -26,9 +27,21 @@ const FinalReportPresenter = () => {
 				</TopContent>
 			</BlockTop>
 			<BlockBottom>
-				<BottomContent></BottomContent>
+				<BottomContent>
+					<VideoArea>영상</VideoArea>
+				</BottomContent>
 				<FaqBtn src={btnFaq} alt='힌트버튼' />
 				<JobsBtn src={btnJobs} alt='직업버튼' />
+				<FinalReportBtn
+					text='최종보고서 제출하기'
+					style={{
+						width: "148px",
+						height: "40px",
+						position: "absolute",
+						top: "459px",
+						left: "0px",
+					}}
+				/>
 			</BlockBottom>
 		</Wrapper>
 	);
@@ -45,6 +58,7 @@ const BlockTop = styled.div`
 	width: 1440px;
 	height: 206px;
 	margin: 0 auto;
+	margin-bottom: 39px;
 `;
 const TopContent = styled.div`
 	width: 944px;
@@ -64,6 +78,13 @@ const BottomContent = styled.div`
 	width: 944px;
 	height: 652px;
 	margin: 0 auto;
+`;
+const VideoArea = styled.div`
+	width: 944px;
+	height: 458px;
+	border-radius: 2px;
+	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
+	background-color: #ffffff;
 `;
 
 const FaqBtn = styled.img`

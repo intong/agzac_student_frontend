@@ -4,7 +4,7 @@ import { InputDefault } from "../../ui/inputBox/Input";
 import { ButtonPrimary } from "../../ui/button/Button";
 
 const inputStyle = {
-	width: "254px",
+	width: "244px",
 	height: "42px",
 	border: "solid 1px #e4e4e4",
 	background: "#fcfcfc",

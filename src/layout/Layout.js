@@ -19,7 +19,6 @@ const Layout = () => {
 export default Layout;
 
 const Wrapper = styled.div`
-	max-height: 988px;
 	display: flex;
 	flex-direction: column;
 `;
@@ -27,7 +26,5 @@ const Wrapper = styled.div`
 const Contents = styled.div`
 	background: #f5f5f5;
 	width: 1440px;
-	max-height: 858px;
-	flex: 1;
 	margin: 0 auto;
 `;

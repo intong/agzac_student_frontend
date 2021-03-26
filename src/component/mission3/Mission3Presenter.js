@@ -2,8 +2,21 @@ import React from "react";
 import styled from "styled-components";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
+import { ButtonPrimary } from "../../ui/button/Button";
+import Default from "./Default";
 
-const Mission3Presenter = () => {
+const Mission3Presenter = ({
+	selectTab,
+	choosed,
+	answerText,
+	firstAnswer,
+	secondAnswer,
+	thirdAnswer,
+	aa,
+	bb,
+	cc,
+	uiFunctionList,
+}) => {
 	return (
 		<Wrapper>
 			<BlockTop>
@@ -23,19 +36,87 @@ const Mission3Presenter = () => {
 				<BottomContent>
 					<Title>사회문제 선정하고 분석하기</Title>
 					<SubTitle>
-						사회문제 설명영상을 시청한 후 우리 기업이 해결하고 싶은 사회문제 테마
-						1가지를 최종 선택해주세요.
+						{choosed
+							? "선택한 사회문제를 분석해 주세요."
+							: "사회문제 설명영상을 시청한 후 우리 기업이 해결하고 싶은 사회문제 테마 1가지를 최종 선택해주세요."}
 					</SubTitle>
 					<Tabs>
-						<Tab1></Tab1>
-						<Tab2></Tab2>
-						<Tab3></Tab3>
+						<Tab1 selectTab={selectTab}>
+							<div
+								style={{
+									width: "20px",
+									height: "20px",
+									background: "grey",
+									position: "absolute",
+									top: "15px",
+									left: "80px",
+								}}
+								onClick={() =>
+									choosed === false && uiFunctionList.tabSelectFunction("tab1")
+								}
+							></div>
+							<Tab1Title selectTab={selectTab}>기후변화와 환경</Tab1Title>
+						</Tab1>
+						<Tab2 selectTab={selectTab}>
+							<div
+								style={{
+									width: "20px",
+									height: "20px",
+									background: "grey",
+									position: "absolute",
+									top: "15px",
+									left: "95px",
+								}}
+								onClick={() =>
+									choosed === false && uiFunctionList.tabSelectFunction("tab2")
+								}
+							></div>
+							<Tab2Title selectTab={selectTab}>고령화 사회</Tab2Title>
+						</Tab2>
+						<Tab3 selectTab={selectTab}>
+							<div
+								style={{
+									width: "20px",
+									height: "20px",
+									background: "grey",
+									position: "absolute",
+									top: "15px",
+									left: "97px",
+								}}
+								onClick={() =>
+									choosed === false && uiFunctionList.tabSelectFunction("tab3")
+								}
+							></div>
+							<Tab3Title selectTab={selectTab}>재난과 안전</Tab3Title>
+						</Tab3>
 					</Tabs>
-					<VideoArea></VideoArea>
-					{/*  */}
-					{/* <LeftBox></LeftBox>
-					<RightBox></RightBox> */}
+					<Default
+						selectTab={selectTab}
+						choosed={choosed}
+						answerText={answerText}
+						firstAnswer={firstAnswer}
+						secondAnswer={secondAnswer}
+						thirdAnswer={thirdAnswer}
+						aa={aa}
+						bb={bb}
+						cc={cc}
+						uiFunctionList={uiFunctionList}
+					/>
 				</BottomContent>
+				{choosed === false && (
+					<ButtonPrimary
+						text='사회문제 최종선택'
+						style={{
+							width: "135px",
+							height: "40px",
+							position: "absolute",
+							bottom: "29px",
+							right: "248px",
+						}}
+						onClick={uiFunctionList.clickFinalChoice}
+					/>
+				)}
+
 				<FaqBtn src={btnFaq} alt='힌트버튼' />
 				<JobsBtn src={btnJobs} alt='직업버튼' />
 			</BlockBottom>
@@ -146,41 +227,85 @@ const Tabs = styled.div`
 const Tab1 = styled.div`
 	width: 313.3px;
 	height: 50px;
-	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.1);
-	border: solid 1px #686868;
-	background-color: #ffffff;
+	box-shadow: ${(props) =>
+		props.selectTab === "tab1" && "0 0 10px 0 rgba(15, 15, 21, 0.1)"};
+	border: ${(props) =>
+		props.selectTab === "tab1" ? "solid 1px #686868" : "solid 1px #d8d8d8"};
+	background-color: ${(props) =>
+		props.selectTab === "tab1" ? "#ffffff" : "rgba(255, 255, 255, 0.5)"};
+	position: relative;
 `;
+const Tab1Title = styled.div`
+	width: 94px;
+	height: 20px;
+	font-family: "NotoSansCJKkr";
+	font-size: 14px;
+	font-weight: ${(props) => (props.selectTab === "tab1" ? "500" : "normal")};
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 22.9px;
+	letter-spacing: normal;
+	text-align: center;
+	color: ${(props) => (props.selectTab === "tab1" ? "#0f0f15" : "#686868")};
+	position: absolute;
+	top: 15px;
+	left: 110px;
+`;
+
 const Tab2 = styled.div`
 	width: 313.3px;
 	height: 50px;
-	border: solid 1px #d8d8d8;
-	background-color: rgba(255, 255, 255, 0.5);
+	box-shadow: ${(props) =>
+		props.selectTab === "tab2" && "0 0 10px 0 rgba(15, 15, 21, 0.1)"};
+	border: ${(props) =>
+		props.selectTab === "tab2" ? "solid 1px #686868" : "solid 1px #d8d8d8"};
+	background-color: ${(props) =>
+		props.selectTab === "tab2" ? "#ffffff" : "rgba(255, 255, 255, 0.5)"};
+	position: relative;
 `;
+const Tab2Title = styled.div`
+	width: 68px;
+	height: 20px;
+	font-family: "NotoSansCJKkr";
+	font-size: 14px;
+	font-weight: ${(props) => (props.selectTab === "tab2" ? "500" : "normal")};
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 22.9px;
+	letter-spacing: normal;
+	text-align: center;
+	color: ${(props) => (props.selectTab === "tab2" ? "#0f0f15" : "#686868")};
+	position: absolute;
+	top: 15px;
+	left: 125px;
+`;
+
 const Tab3 = styled.div`
 	width: 313.3px;
 	height: 50px;
-	border: solid 1px #d8d8d8;
-	background-color: rgba(255, 255, 255, 0.5);
+	box-shadow: ${(props) =>
+		props.selectTab === "tab3" && "0 0 10px 0 rgba(15, 15, 21, 0.1)"};
+	border: ${(props) =>
+		props.selectTab === "tab3" ? "solid 1px #686868" : "solid 1px #d8d8d8"};
+	background-color: ${(props) =>
+		props.selectTab === "tab3" ? "#ffffff" : "rgba(255, 255, 255, 0.5)"};
+	position: relative;
 `;
-const VideoArea = styled.div`
-	width: 624px;
-	height: 388px;
-	border-radius: 2px;
-	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
-	background-color: #ffffff;
+const Tab3Title = styled.div`
+	width: 68px;
+	height: 20px;
+	font-family: "NotoSansCJKkr";
+	font-size: 14px;
+	font-weight: ${(props) => (props.selectTab === "tab3" ? "500" : "normal")};
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 22.9px;
+	letter-spacing: normal;
+	text-align: center;
+	color: ${(props) => (props.selectTab === "tab3" ? "#0f0f15" : "#686868")};
 	position: absolute;
-	top: 181px;
-	left: 0;
-`;
-const RightBox = styled.div`
-	width: 304px;
-	height: 388px;
-	border-radius: 2px;
-	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
-	background-color: #ffffff;
-	position: absolute;
-	top: 181px;
-	right: 0;
+	top: 15px;
+	left: 127px;
 `;
 
 export default Mission3Presenter;
