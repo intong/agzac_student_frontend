@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Mission3Presenter from "./Mission3Presenter";
+import ProcessContext from "../../contextApi/Process";
 
-const Mission3Container = () => {
+const Mission3Container = ({ history }) => {
+	const { actions } = useContext(ProcessContext);
 	const [selectTab, setSelectTab] = useState();
 	const [choosed, setChoosed] = useState(false);
 	const [firstAnswer, setFirstAnswer] = useState();
@@ -10,6 +12,12 @@ const Mission3Container = () => {
 	const [aa, setAa] = useState();
 	const [bb, setBb] = useState();
 	const [cc, setCc] = useState();
+
+	const setProcessFunction = () => {
+		//validation 추가
+		actions.setMission3("ok");
+		history.push("/mission4");
+	};
 
 	const uiFunctionList = {
 		tabSelectFunction: (tab) => {
@@ -76,6 +84,7 @@ const Mission3Container = () => {
 	return (
 		<>
 			<Mission3Presenter
+				setProcessFunction={setProcessFunction}
 				selectTab={selectTab}
 				choosed={choosed}
 				firstAnswer={firstAnswer}

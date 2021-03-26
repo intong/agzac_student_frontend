@@ -1,12 +1,15 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import Auth from "./router/Auth";
+import { ProcessProvider } from "./contextApi/Process";
 
 function App() {
 	return (
-		<BrowserRouter>
-			<Auth />
-		</BrowserRouter>
+		<ProcessProvider>
+			<BrowserRouter>
+				<Auth />
+			</BrowserRouter>
+		</ProcessProvider>
 	);
 }
 

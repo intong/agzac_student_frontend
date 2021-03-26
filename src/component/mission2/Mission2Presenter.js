@@ -4,7 +4,7 @@ import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
 import AnswerDefault from "./AnswerDefault";
 
-const Mission2Presenter = () => {
+const Mission2Presenter = ({ setProcessFunction }) => {
 	return (
 		<Wrapper>
 			<BlockTop>
@@ -43,7 +43,11 @@ const Mission2Presenter = () => {
 						normal=false && correct={true} : 정답화면
 						normal=false && correct={false} : 오답화면
 					*/}
-					<AnswerDefault normal={true} correct={true} />
+					<AnswerDefault
+						normal={true}
+						correct={true}
+						setProcessFunction={setProcessFunction}
+					/>
 				</BottomContent>
 				<FaqBtn src={btnFaq} alt='힌트버튼' />
 				<JobsBtn src={btnJobs} alt='직업버튼' />

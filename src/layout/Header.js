@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import devide from "../assets/icons/icn-devide.svg";
 import nextBefor from "../assets/icons/icn-next-dim.svg";
 import nextAfter from "../assets/icons/icn-next.svg";
 import leaveout from "../assets/icons/icn-leaveout.svg";
+import ProcessContext from "../contextApi/Process";
 
 const Header = () => {
+	const { state } = useContext(ProcessContext);
 	const activeStyle = {
 		color: "#ffc300",
 	};
@@ -54,40 +56,61 @@ const Header = () => {
 						홍길동님의 아그작 기업 보고서
 					</div>
 					<img src={devide} alt='분단기호' style={{ marginTop: "-3px" }} />
+					{console.log(state.video)}
 					<LIStyled>
-						<NavLinkStyled to='/mainVideo' activeStyle={activeStyle}>
+						<NavLinkStyled1
+							to='/mainVideo'
+							activeStyle={activeStyle}
+							confirm={state.video}
+						>
 							EY한영 아그작교실 영상시청
-						</NavLinkStyled>
+						</NavLinkStyled1>
 					</LIStyled>
 					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>
-						<NavLinkStyled to='/mission1' activeStyle={activeStyle}>
+						<NavLinkStyled2
+							to='/mission1'
+							activeStyle={activeStyle}
+							confirm={state.mission1}
+						>
 							Mission01
-						</NavLinkStyled>
+						</NavLinkStyled2>
 					</LIStyled>
 					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>
-						<NavLinkStyled to='/mission2' activeStyle={activeStyle}>
+						<NavLinkStyled3
+							to='/mission2'
+							activeStyle={activeStyle}
+							confirm={state.mission2}
+						>
 							Mission02
-						</NavLinkStyled>
+						</NavLinkStyled3>
 					</LIStyled>
 					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>
-						<NavLinkStyled to='/mission3' activeStyle={activeStyle}>
+						<NavLinkStyled4
+							to='/mission3'
+							activeStyle={activeStyle}
+							confirm={state.mission3}
+						>
 							Mission03
-						</NavLinkStyled>
+						</NavLinkStyled4>
 					</LIStyled>
 					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>
-						<NavLinkStyled to='/mission4' activeStyle={activeStyle}>
+						<NavLinkStyled5
+							to='/mission4'
+							activeStyle={activeStyle}
+							confirm={state.mission4}
+						>
 							Mission04
-						</NavLinkStyled>
+						</NavLinkStyled5>
 					</LIStyled>
 					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>
-						<NavLinkStyled to='/finalreport' activeStyle={activeStyle}>
+						<NavLinkStyled6 to='/finalreport' activeStyle={activeStyle}>
 							최종보고서
-						</NavLinkStyled>
+						</NavLinkStyled6>
 					</LIStyled>
 				</ULStyled>
 			</Block>
@@ -124,7 +147,27 @@ const LIStyled = styled.li`
 	font-size: 14px;
 `;
 
-const NavLinkStyled = styled(NavLink)`
+const NavLinkStyled1 = styled(NavLink)`
 	text-decoration: none;
-	color: grey;
+	color: ${(props) => (props.confirm === "ok" ? "#ffffff" : "grey")};
+`;
+const NavLinkStyled2 = styled(NavLink)`
+	text-decoration: none;
+	color: ${(props) => (props.confirm === "ok" ? "#ffffff" : "grey")};
+`;
+const NavLinkStyled3 = styled(NavLink)`
+	text-decoration: none;
+	color: ${(props) => (props.confirm === "ok" ? "#ffffff" : "grey")};
+`;
+const NavLinkStyled4 = styled(NavLink)`
+	text-decoration: none;
+	color: ${(props) => (props.confirm === "ok" ? "#ffffff" : "grey")};
+`;
+const NavLinkStyled5 = styled(NavLink)`
+	text-decoration: none;
+	color: ${(props) => (props.confirm === "ok" ? "#ffffff" : "grey")};
+`;
+const NavLinkStyled6 = styled(NavLink)`
+	text-decoration: none;
+	color: ${(props) => (props.confirm === "ok" ? "#ffffff" : "grey")};
 `;

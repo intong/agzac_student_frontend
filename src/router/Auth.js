@@ -4,7 +4,7 @@ import LoginContainer from "../component/login/LoginContainer";
 import Layout from "../layout/Layout";
 
 const Auth = () => {
-	const [token, setToken] = useState(false);
+	const [token, setToken] = useState(true);
 	return (
 		<>
 			{token ? (

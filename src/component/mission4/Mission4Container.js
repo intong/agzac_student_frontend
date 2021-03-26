@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Mission4Presenter from "./Mission4Presenter";
+import ProcessContext from "../../contextApi/Process";
 
-const Mission4Container = () => {
+const Mission4Container = ({ history }) => {
+	const { actions } = useContext(ProcessContext);
 	const [confirm, setConfirm] = useState({
 		social: "",
 		reason: "",
@@ -19,6 +21,8 @@ const Mission4Container = () => {
 			} else {
 				// validation 체크 후 컨펌
 				alert("developer 버튼 클릭");
+				actions.setMission4("ok");
+				history.push("/finalreport");
 			}
 		},
 	};

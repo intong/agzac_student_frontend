@@ -10,8 +10,8 @@ import { ModalBase } from "../../ui/modal/Modal";
 import logoEY from "../../assets/icons/img-logo-ey.svg";
 import kidsn from "../../assets/icons/logo-img-kidsnfuture.svg";
 
-const optionsClass = ["1", "1", "1", "1", "1", "1"];
-const optionsYear = ["2", "2", "2", "2", "2", "2", "2"];
+const optionsClass = ["1 반", "2 반", "3 반", "4 반"];
+const optionsYear = ["1 학년", "2 학년", "3 학년"];
 
 const LoginPresenter = ({ isOpenModal, modalFunction }) => {
 	return (
@@ -40,7 +40,7 @@ const LoginPresenter = ({ isOpenModal, modalFunction }) => {
 									placeholder='학교명을 입력해 주세요. '
 									style={{ width: "100%", height: "20px", marginTop: "22px" }}
 								/>
-								<div style={{ display: "flex", marginTop: "24px" }}>
+								<div style={{ display: "flex", marginTop: "20px" }}>
 									<DropboxLineType
 										placeholder='학년'
 										style={{ width: "185px", height: "20px" }}
@@ -52,7 +52,7 @@ const LoginPresenter = ({ isOpenModal, modalFunction }) => {
 										options={optionsClass}
 									/>
 								</div>
-								<Title style={{ marginTop: "32px" }}>이름</Title>
+								<Title style={{ marginTop: "40px" }}>이름</Title>
 								<InputLineType
 									placeholder='이름을 입력해 주세요.'
 									style={{ width: "100%", height: "20px", marginTop: "22px" }}

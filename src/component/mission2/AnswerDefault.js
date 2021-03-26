@@ -18,7 +18,7 @@ const options = [
 	"option12",
 ];
 
-const AnswerDefault = ({ normal, correct }) => {
+const AnswerDefault = ({ normal, correct, setProcessFunction }) => {
 	const leftDropbox = {
 		position: "absolute",
 		left: "24px",
@@ -107,6 +107,7 @@ const AnswerDefault = ({ normal, correct }) => {
 			<ButtonPrimary
 				text='정답제출'
 				style={{ position: "absolute", bottom: "24px", right: "24px" }}
+				onClick={setProcessFunction}
 			/>
 			<CorrectText correct={correct} normal={normal}>
 				{correct ? "정답입니다!" : "다시 한번 생각해 볼까요?"}

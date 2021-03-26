@@ -7,7 +7,7 @@ import Answer1Default from "./Answer1Default";
 import Answer2Correct from "./Answer2Correct";
 import Answer3Wrong from "./Answer3Wrong";
 
-const Mission1Presenter = () => {
+const Mission1Presenter = ({ setProcessFunction }) => {
 	return (
 		<Wrapper>
 			<BlockTop>
@@ -77,7 +77,7 @@ const Mission1Presenter = () => {
 					</LeftBox>
 					<div style={{ position: "absolute", top: "79px", right: " 248px" }}>
 						{/*정답화면 교체*/}
-						<Answer1Default />
+						<Answer1Default setProcessFunction={setProcessFunction} />
 						{/* <Answer2Correct />
 						<Answer3Wrong /> */}
 					</div>

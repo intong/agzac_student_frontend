@@ -11,7 +11,7 @@ const inputStyle = {
 	marginLeft: "24px",
 };
 
-const MainVideoPresenter = () => {
+const MainVideoPresenter = ({ setProcessFunction }) => {
 	return (
 		<Wrapper>
 			<BlockTop>
@@ -43,6 +43,7 @@ const MainVideoPresenter = () => {
 						<ButtonPrimary
 							text='정답제출'
 							style={{ marginTop: "84px", marginLeft: "200px" }}
+							onClick={setProcessFunction}
 						/>
 					</RightBox>
 				</BottomContent>

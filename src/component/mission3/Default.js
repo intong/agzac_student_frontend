@@ -13,6 +13,7 @@ const inputStyle = {
 };
 
 const Default = ({
+	setProcessFunction,
 	selectTab,
 	choosed,
 	firstAnswer,
@@ -61,7 +62,10 @@ const Default = ({
 						<ButtonPrimary
 							text='정답제출'
 							style={{ marginLeft: "202px", marginTop: "15px" }}
-							onClick={uiFunctionList.checkAnswer}
+							onClick={() => {
+								uiFunctionList.checkAnswer();
+								setProcessFunction();
+							}}
 						/>
 						<AnwerText
 							firstAnswer={firstAnswer}

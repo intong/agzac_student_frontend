@@ -6,6 +6,7 @@ import { ButtonPrimary } from "../../ui/button/Button";
 import Default from "./Default";
 
 const Mission3Presenter = ({
+	setProcessFunction,
 	selectTab,
 	choosed,
 	answerText,
@@ -91,6 +92,7 @@ const Mission3Presenter = ({
 						</Tab3>
 					</Tabs>
 					<Default
+						setProcessFunction={setProcessFunction}
 						selectTab={selectTab}
 						choosed={choosed}
 						answerText={answerText}

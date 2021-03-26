@@ -154,7 +154,7 @@ const TextLine = styled.div`
 	line-height: 1.57;
 	width: 185px;
 	height: 22px;
-	margin-right: 10px;
+	/* margin: 10px; */
 	text-align: left;
 	color: ${(props) => (props.selectedOption ? "#0f0f15" : "#d8d8d8")};
 `;
@@ -162,7 +162,7 @@ const TextLine = styled.div`
 const ImageLine = styled.img`
 	transform: ${(props) => props.isOpen && "rotate(180deg)"};
 	position: absolute;
-	bottom: 1px;
+	bottom: 8px;
 	right: 10px;
 	&:hover {
 		cursor: pointer;
@@ -172,6 +172,7 @@ const ImageLine = styled.img`
 const DropDownHeaderLine = styled.div`
 	width: 185px;
 	height: 22px;
+	padding-bottom: 8px;
 	border-radius: 2px;
 	border-bottom: ${(props) =>
 		props.open === false
