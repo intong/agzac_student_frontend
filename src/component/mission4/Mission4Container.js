@@ -4,6 +4,7 @@ import ProcessContext from "../../contextApi/Process";
 
 const Mission4Container = ({ history }) => {
 	const { actions } = useContext(ProcessContext);
+	const [isOpen, setIsOpen] = useState(false);
 	const [confirm, setConfirm] = useState({
 		social: "",
 		reason: "",
@@ -27,8 +28,22 @@ const Mission4Container = ({ history }) => {
 		},
 	};
 
+	const modalFunction = {
+		openModal: () => {
+			setIsOpen(!isOpen);
+		},
+		closeModal: () => {
+			setIsOpen(!isOpen);
+		},
+	};
+
 	return (
-		<Mission4Presenter confirm={confirm} clickFunctionList={clickFunctionList} />
+		<Mission4Presenter
+			isOpen={isOpen}
+			confirm={confirm}
+			clickFunctionList={clickFunctionList}
+			modalFunction={modalFunction}
+		/>
 	);
 };
 

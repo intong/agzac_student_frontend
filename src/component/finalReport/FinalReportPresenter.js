@@ -3,8 +3,9 @@ import styled from "styled-components";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
 import { FinalReportBtn } from "../../ui/button/Button";
+import { HelpModal } from "../../ui/modal/Modal";
 
-const FinalReportPresenter = () => {
+const FinalReportPresenter = ({ isOpen, modalFunction }) => {
 	return (
 		<Wrapper>
 			<BlockTop>
@@ -40,11 +41,35 @@ const FinalReportPresenter = () => {
 					/>
 				</BottomContent>
 				<FaqBtn src={btnFaq} alt='힌트버튼' />
-				<JobsBtn src={btnJobs} alt='직업버튼' />
+				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 			</BlockBottom>
+			{isOpen && (
+				<ModalWrapper>
+					<ModalArea>
+						<HelpModal modalFunction={modalFunction} />
+					</ModalArea>
+				</ModalWrapper>
+			)}
 		</Wrapper>
 	);
 };
+
+const ModalWrapper = styled.div`
+	width: 100%;
+	height: 900px;
+	background: rgba(15, 15, 21, 0.8);
+	position: absolute;
+	top: 0;
+	z-index: 20;
+	display: flex;
+`;
+const ModalArea = styled.div`
+	width: 700px;
+	height: 503px;
+	position: absolute;
+	bottom: 122px;
+	right: 114px;
+`;
 
 const Wrapper = styled.div`
 	/* background: lightgreen; */
@@ -95,6 +120,9 @@ const JobsBtn = styled.img`
 	position: absolute;
 	top: 481px;
 	right: 30px;
+	&:hover {
+		cursor: pointer;
+	}
 `;
 
 const TextBoxTop = styled.div`

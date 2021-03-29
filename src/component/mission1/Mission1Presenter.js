@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { HelpModal } from "../../ui/modal/Modal";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
 import group from "../../assets/img/group@3x.png";
@@ -7,7 +8,7 @@ import Answer1Default from "./Answer1Default";
 import Answer2Correct from "./Answer2Correct";
 import Answer3Wrong from "./Answer3Wrong";
 
-const Mission1Presenter = ({ setProcessFunction }) => {
+const Mission1Presenter = ({ isOpen, setProcessFunction, modalFunction }) => {
 	const [aa, setAa] = useState(6);
 	return (
 		<Wrapper>
@@ -105,11 +106,35 @@ const Mission1Presenter = ({ setProcessFunction }) => {
 					</ProcessBarLabel>
 				</ProgressWrpper>
 				<FaqBtn src={btnFaq} alt='힌트버튼' />
-				<JobsBtn src={btnJobs} alt='직업버튼' />
+				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 			</BlockBottom>
+			{isOpen && (
+				<ModalWrapper>
+					<ModalArea>
+						<HelpModal modalFunction={modalFunction} />
+					</ModalArea>
+				</ModalWrapper>
+			)}
 		</Wrapper>
 	);
 };
+
+const ModalWrapper = styled.div`
+	width: 100%;
+	height: 900px;
+	background: rgba(15, 15, 21, 0.8);
+	position: absolute;
+	top: 0;
+	z-index: 20;
+	display: flex;
+`;
+const ModalArea = styled.div`
+	width: 700px;
+	height: 503px;
+	position: absolute;
+	bottom: 122px;
+	right: 114px;
+`;
 
 const Progress = styled.div`
 	justify-content: flex-start;
@@ -288,6 +313,9 @@ const JobsBtn = styled.img`
 	top: 746px;
 	right: 30px;
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
+	&:hover {
+		cursor: pointer;
+	}
 `;
 
 const TextBoxTop = styled.div`

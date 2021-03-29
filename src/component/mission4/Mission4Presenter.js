@@ -6,6 +6,7 @@ import { ButtonSecondary } from "../../ui/button/Button";
 import SocialProblem from "./SocialProblem";
 import ProductDeveloper from "./ProductDeveloper";
 import ReasonDevelopProduct from "./ReasonDevelopProduct";
+import { HelpModal } from "../../ui/modal/Modal";
 
 const btnStyle = {
 	width: "256px",
@@ -15,69 +16,100 @@ const btnStyle = {
 	left: "24px",
 };
 
-const Mission4Presenter = ({ confirm, clickFunctionList }) => {
+const Mission4Presenter = ({
+	isOpen,
+	confirm,
+	clickFunctionList,
+	modalFunction,
+}) => {
 	return (
-		<Wrapper>
-			<BlockTop>
-				<TopContent>
-					<TextBoxTop>Mission 04</TextBoxTop>
-					<TextBoxMiddle>사회문제를 해결하는 상품을 개발해주세요!</TextBoxMiddle>
-					<TextBoxBottom>
-						지금까지 4차산업기술을 보유한 미래인재 정보를 확보하고, 다양한 사회문제를
-						살펴 보았습니다. 지금부터는 우리 기업이 사회문제를 해결하는 상품을 개발할
-						차례입
-						<br />
-						니다. 확보한 미래인재 정보와 분석한 사회문제를 기반으로 멋진 상품을 개발해
-						주세요!
-					</TextBoxBottom>
-				</TopContent>
-			</BlockTop>
-			<BlockBottom>
-				<BottomContent>
-					<Title>사회문제를 해결하는 상품개발 기획서</Title>
-					<div
-						style={{
-							display: "flex",
-							marginTop: "16px",
-						}}
-					>
-						<LeftBox>
-							<LeftTitle>
-								홍길동님이 선택한 사회문제의 주제는 기후변화와 환경입니다.
-							</LeftTitle>
-							<ButtonSecondary text='다른 사회문제 선택' style={btnStyle} />
-						</LeftBox>
-						<RightBox>
-							<Tabs>
-								<Tab1 confirm={confirm}>
-									<Text>사회문제</Text>
-								</Tab1>
-								<Tab2 confirm={confirm}>
-									<Text>상품개발 이유</Text>
-								</Tab2>
-								<Tab3 confirm={confirm}>
-									<Text>상품 개발자</Text>
-								</Tab3>
-							</Tabs>
-							{/* 변경 자리 */}
-							{confirm.social === "ok" ? (
-								confirm.social === "ok" && confirm.reason === "ok" ? (
-									<ProductDeveloper clickFunctionList={clickFunctionList} />
+		<>
+			<Wrapper>
+				<BlockTop>
+					<TopContent>
+						<TextBoxTop>Mission 04</TextBoxTop>
+						<TextBoxMiddle>사회문제를 해결하는 상품을 개발해주세요!</TextBoxMiddle>
+						<TextBoxBottom>
+							지금까지 4차산업기술을 보유한 미래인재 정보를 확보하고, 다양한 사회문제를
+							살펴 보았습니다. 지금부터는 우리 기업이 사회문제를 해결하는 상품을 개발할
+							차례입
+							<br />
+							니다. 확보한 미래인재 정보와 분석한 사회문제를 기반으로 멋진 상품을
+							개발해 주세요!
+						</TextBoxBottom>
+					</TopContent>
+				</BlockTop>
+				<BlockBottom>
+					<BottomContent>
+						<Title>사회문제를 해결하는 상품개발 기획서</Title>
+						<div
+							style={{
+								display: "flex",
+								marginTop: "16px",
+							}}
+						>
+							<LeftBox>
+								<LeftTitle>
+									홍길동님이 선택한 사회문제의 주제는 기후변화와 환경입니다.
+								</LeftTitle>
+								<ButtonSecondary text='다른 사회문제 선택' style={btnStyle} />
+							</LeftBox>
+							<RightBox>
+								<Tabs>
+									<Tab1 confirm={confirm}>
+										<Text>사회문제</Text>
+									</Tab1>
+									<Tab2 confirm={confirm}>
+										<Text>상품개발 이유</Text>
+									</Tab2>
+									<Tab3 confirm={confirm}>
+										<Text>상품 개발자</Text>
+									</Tab3>
+								</Tabs>
+								{/* 변경 자리 */}
+								{confirm.social === "ok" ? (
+									confirm.social === "ok" && confirm.reason === "ok" ? (
+										<ProductDeveloper clickFunctionList={clickFunctionList} />
+									) : (
+										<ReasonDevelopProduct clickFunctionList={clickFunctionList} />
+									)
 								) : (
-									<ReasonDevelopProduct clickFunctionList={clickFunctionList} />
-								)
-							) : (
-								<SocialProblem clickFunctionList={clickFunctionList} />
-							)}
-						</RightBox>
-					</div>
-				</BottomContent>
-				<FaqBtn src={btnFaq} alt='힌트버튼' />
-				<JobsBtn src={btnJobs} alt='직업버튼' />
-			</BlockBottom>
-		</Wrapper>
+									<SocialProblem clickFunctionList={clickFunctionList} />
+								)}
+							</RightBox>
+						</div>
+					</BottomContent>
+					<FaqBtn src={btnFaq} alt='힌트버튼' />
+					<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
+				</BlockBottom>
+			</Wrapper>
+			{isOpen && (
+				<ModalWrapper>
+					<ModalArea>
+						<HelpModal modalFunction={modalFunction} style={{}} />
+					</ModalArea>
+				</ModalWrapper>
+			)}
+		</>
 	);
 };
+
+const ModalWrapper = styled.div`
+	width: 100%;
+	min-height: 1130px;
+	background: rgba(15, 15, 21, 0.8);
+	position: absolute;
+	top: 0;
+	z-index: 60;
+	display: flex;
+`;
+const ModalArea = styled.div`
+	width: 700px;
+	height: 503px;
+	position: absolute;
+	bottom: 122px;
+	right: 114px;
+`;
 
 const Wrapper = styled.div`
 	min-width: 1024px;
@@ -211,6 +243,9 @@ const JobsBtn = styled.img`
 	right: 30px;
 	bottom: 30px;
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
+	&:hover {
+		cursor: pointer;
+	}
 `;
 
 const TextBoxTop = styled.div`

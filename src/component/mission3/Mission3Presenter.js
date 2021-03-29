@@ -3,6 +3,7 @@ import styled from "styled-components";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
 import { ButtonPrimary } from "../../ui/button/Button";
+import { HelpModal } from "../../ui/modal/Modal";
 import Default from "./Default";
 
 const Mission3Presenter = ({
@@ -17,6 +18,8 @@ const Mission3Presenter = ({
 	bb,
 	cc,
 	uiFunctionList,
+	isOpen,
+	modalFunction,
 }) => {
 	return (
 		<Wrapper>
@@ -120,11 +123,35 @@ const Mission3Presenter = ({
 				</BottomContent>
 
 				<FaqBtn src={btnFaq} alt='힌트버튼' />
-				<JobsBtn src={btnJobs} alt='직업버튼' />
+				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 			</BlockBottom>
+			{isOpen && (
+				<ModalWrapper>
+					<ModalArea>
+						<HelpModal modalFunction={modalFunction} />
+					</ModalArea>
+				</ModalWrapper>
+			)}
 		</Wrapper>
 	);
 };
+
+const ModalWrapper = styled.div`
+	width: 100%;
+	height: 988px;
+	background: rgba(15, 15, 21, 0.8);
+	position: absolute;
+	top: 0;
+	z-index: 20;
+	display: flex;
+`;
+const ModalArea = styled.div`
+	width: 700px;
+	height: 503px;
+	position: absolute;
+	bottom: 122px;
+	right: 114px;
+`;
 
 const Wrapper = styled.div`
 	/* background: lightgreen; */
@@ -168,6 +195,9 @@ const JobsBtn = styled.img`
 	right: 30px;
 	bottom: 30px;
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
+	&:hover {
+		cursor: pointer;
+	}
 `;
 
 const TextBoxTop = styled.div`

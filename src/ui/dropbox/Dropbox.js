@@ -40,8 +40,9 @@ const DropDownContainer = styled.div`
 `;
 const Text = styled.div`
 	font-size: 14px;
-	line-height: 1.57;
-	width: 280px;
+	line-height: 3.3;
+	padding-left: 10px;
+	width: 270px;
 	height: 22px;
 	text-align: left;
 	color: ${(props) => (props.selectedOption ? "#0f0f15" : "#d8d8d8")};
