@@ -29,19 +29,18 @@ const FinalReportPresenter = () => {
 			<BlockBottom>
 				<BottomContent>
 					<VideoArea>영상</VideoArea>
+					<FinalReportBtn
+						text='최종보고서 제출하기'
+						style={{
+							width: "148px",
+							height: "40px",
+							marginLeft: "796px",
+							marginTop: "14px",
+						}}
+					/>
 				</BottomContent>
 				<FaqBtn src={btnFaq} alt='힌트버튼' />
 				<JobsBtn src={btnJobs} alt='직업버튼' />
-				<FinalReportBtn
-					text='최종보고서 제출하기'
-					style={{
-						width: "148px",
-						height: "40px",
-						position: "absolute",
-						top: "459px",
-						left: "0px",
-					}}
-				/>
 			</BlockBottom>
 		</Wrapper>
 	);
@@ -49,16 +48,14 @@ const FinalReportPresenter = () => {
 
 const Wrapper = styled.div`
 	/* background: lightgreen; */
-	width: 100%;
-	height: 100%;
+	min-width: 1024px;
+	max-width: 1920px;
 `;
 
 const BlockTop = styled.div`
 	background: #e4e4e4;
-	width: 1440px;
 	height: 206px;
 	margin: 0 auto;
-	margin-bottom: 39px;
 `;
 const TopContent = styled.div`
 	width: 944px;
@@ -69,14 +66,14 @@ const TopContent = styled.div`
 const BlockBottom = styled.div`
 	background: #f7f7f7;
 	/* background: red; */
-	width: 1440px;
-	height: 652px;
 	margin: 0 auto;
 	position: relative;
+	padding-top: 39px;
+	padding-bottom: 13px;
 `;
 const BottomContent = styled.div`
+	/* background: red; */
 	width: 944px;
-	height: 652px;
 	margin: 0 auto;
 `;
 const VideoArea = styled.div`
@@ -88,16 +85,16 @@ const VideoArea = styled.div`
 `;
 
 const FaqBtn = styled.img`
-	position: absolute;
-	right: 30px;
-	bottom: 108px;
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
+	position: absolute;
+	top: 403px;
+	right: 30px;
 `;
 const JobsBtn = styled.img`
-	position: absolute;
-	right: 30px;
-	bottom: 30px;
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
+	position: absolute;
+	top: 481px;
+	right: 30px;
 `;
 
 const TextBoxTop = styled.div`

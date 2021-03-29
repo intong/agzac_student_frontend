@@ -80,13 +80,12 @@ const Mission4Presenter = ({ confirm, clickFunctionList }) => {
 };
 
 const Wrapper = styled.div`
-	width: 100%;
-	height: 100%;
+	min-width: 1024px;
+	max-width: 1920px;
 `;
 
 const BlockTop = styled.div`
 	background: #e4e4e4;
-	width: 1440px;
 	height: 206px;
 	margin: 0 auto;
 `;
@@ -98,7 +97,6 @@ const TopContent = styled.div`
 
 const BlockBottom = styled.div`
 	background: #f7f7f7;
-	width: 1440px;
 	height: 100%;
 	margin: 0 auto;
 	position: relative;

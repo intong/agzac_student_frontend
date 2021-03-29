@@ -157,6 +157,7 @@ const RobotContainer = styled.img`
 	margin-left: -93px;
 `;
 const TextContainer = styled.div`
+	/* background: lightgreen; */
 	width: 292px;
 	height: 94px;
 	font-size: 32px;

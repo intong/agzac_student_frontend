@@ -104,20 +104,20 @@ const Mission3Presenter = ({
 						cc={cc}
 						uiFunctionList={uiFunctionList}
 					/>
+					{choosed === false && (
+						<ButtonPrimary
+							text='사회문제 최종선택'
+							style={{
+								width: "135px",
+								height: "40px",
+								position: "absolute",
+								bottom: "29px",
+								right: "0px",
+							}}
+							onClick={uiFunctionList.clickFinalChoice}
+						/>
+					)}
 				</BottomContent>
-				{choosed === false && (
-					<ButtonPrimary
-						text='사회문제 최종선택'
-						style={{
-							width: "135px",
-							height: "40px",
-							position: "absolute",
-							bottom: "29px",
-							right: "248px",
-						}}
-						onClick={uiFunctionList.clickFinalChoice}
-					/>
-				)}
 
 				<FaqBtn src={btnFaq} alt='힌트버튼' />
 				<JobsBtn src={btnJobs} alt='직업버튼' />
@@ -128,13 +128,12 @@ const Mission3Presenter = ({
 
 const Wrapper = styled.div`
 	/* background: lightgreen; */
-	width: 100%;
-	height: 100%;
+	min-width: 1024px;
+	max-width: 1920px;
 `;
 
 const BlockTop = styled.div`
 	background: #e4e4e4;
-	width: 1440px;
 	height: 206px;
 	margin: 0 auto;
 `;
@@ -147,7 +146,6 @@ const TopContent = styled.div`
 const BlockBottom = styled.div`
 	background: #f7f7f7;
 	/* background: red; */
-	width: 1440px;
 	height: 652px;
 	margin: 0 auto;
 	position: relative;

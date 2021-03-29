@@ -15,37 +15,6 @@ const Header = () => {
 	return (
 		<Wrapper>
 			<Block>
-				<img
-					src={leaveout}
-					alt='나가기버튼'
-					style={{ margin: "19px 4px 23px 50px" }}
-				/>
-				<div
-					style={{
-						fontSize: "14px",
-						margin: "25px 14px 25px 0",
-						fontFamily: "NotoSansCJKkr-Medium",
-						color: "#ffffff",
-					}}
-				>
-					나가기
-				</div>
-				{/* 이미지교체부분 (임시저장이미지로 교체) */}
-				<img
-					src={leaveout}
-					alt='나가기버튼'
-					style={{ marginRight: "4px", marginTop: "-3px" }}
-				/>
-				<div
-					style={{
-						fontSize: "14px",
-						fontFamily: "NotoSansCJKkr-Medium",
-						color: "#ffffff",
-						marginRight: "37px",
-					}}
-				>
-					임시저장
-				</div>
 				<ULStyled>
 					<div
 						style={{
@@ -56,7 +25,6 @@ const Header = () => {
 						홍길동님의 아그작 기업 보고서
 					</div>
 					<img src={devide} alt='분단기호' style={{ marginTop: "-3px" }} />
-					{console.log(state.video)}
 					<LIStyled>
 						<NavLinkStyled1
 							to='/mainVideo'
@@ -114,6 +82,44 @@ const Header = () => {
 					</LIStyled>
 				</ULStyled>
 			</Block>
+			<BtnsBlock>
+				<img
+					src={leaveout}
+					alt='나가기버튼'
+					style={{ width: "24px", height: "24px", marginRight: "4px" }}
+				/>
+				<div
+					style={{
+						width: "39px",
+						height: "20px",
+						fontSize: "14px",
+						lineHeight: "23px",
+						fontFamily: "NotoSansCJKkr-Medium",
+						color: "#ffffff",
+						marginRight: "12px",
+					}}
+				>
+					나가기
+				</div>
+				<img
+					src={leaveout}
+					alt='나가기버튼'
+					style={{ width: "24px", height: "24px", marginRight: "4px" }}
+				/>
+				<div
+					style={{
+						width: "52px",
+						height: "20px",
+						fontSize: "14px",
+						lineHeight: "23px",
+						fontFamily: "NotoSansCJKkr-Medium",
+						color: "#ffffff",
+						marginRight: "20px",
+					}}
+				>
+					임시저장
+				</div>
+			</BtnsBlock>
 		</Wrapper>
 	);
 };
@@ -121,17 +127,28 @@ const Header = () => {
 export default Header;
 
 const Wrapper = styled.div`
-	background: black;
-	width: 1440px;
+	background: #0f0f15;
+	width: 100%;
 	height: 70px;
 	margin: 0 auto;
+	display: flex;
 `;
 
 const Block = styled.div`
 	/* background: lightgreen; */
+	width: 944px;
 	margin: 0 auto;
 	display: flex;
 	flex-direction: row;
+	/* align-items: center; */
+	justify-content: center;
+`;
+const BtnsBlock = styled.div`
+	/* background: red; */
+	width: 179px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
 	align-items: center;
 `;
 

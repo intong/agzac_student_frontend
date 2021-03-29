@@ -162,8 +162,6 @@ const FinalReportBtn = ({ text, style, onClick }) => {
 const FinalBrn = styled.button`
 	width: 148px;
 	height: 40px;
-	margin: 14px 111px 13px 1044px;
-	padding: 10px 14px;
 	opacity: 0.2;
 	border-radius: 2px;
 	background-color: #0f0f15;

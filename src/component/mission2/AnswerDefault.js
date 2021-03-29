@@ -76,7 +76,6 @@ const AnswerDefault = ({ normal, correct, setProcessFunction }) => {
 				style={{
 					width: "624px",
 					height: "1px",
-
 					background: "#e4e4e4",
 				}}
 			></div>
@@ -130,7 +129,7 @@ const RightBox = styled.div`
 	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
 	position: absolute;
 	top: 79px;
-	right: 248px;
+	right: 0px;
 `;
 const Number = styled.div`
 	width: 304px;

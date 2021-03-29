@@ -8,9 +8,7 @@ const Layout = () => {
 	return (
 		<Wrapper>
 			<Header />
-			<Contents>
-				<Routes />
-			</Contents>
+			<Routes />
 			<Footer />
 		</Wrapper>
 	);
@@ -19,12 +17,6 @@ const Layout = () => {
 export default Layout;
 
 const Wrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-`;
-
-const Contents = styled.div`
-	background: #f5f5f5;
-	width: 1440px;
-	margin: 0 auto;
+	min-width: 1024px;
+	max-width: 1920px;
 `;
