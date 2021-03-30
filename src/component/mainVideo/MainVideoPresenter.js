@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Footer from "../../layout/Footer";
 import { InputDefault } from "../../ui/inputBox/Input";
 import { ButtonPrimary } from "../../ui/button/Button";
 
@@ -48,6 +49,7 @@ const MainVideoPresenter = ({ setProcessFunction }) => {
 					</RightBox>
 				</BottomContent>
 			</BlockBottom>
+			<Footer />
 		</Wrapper>
 	);
 };

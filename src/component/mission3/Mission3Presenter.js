@@ -2,9 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
+import close from "../../assets/icons/bnt-x-24.svg";
 import { ButtonPrimary } from "../../ui/button/Button";
 import { HelpModal } from "../../ui/modal/Modal";
 import Default from "./Default";
+import Footer from "../../layout/Footer";
 
 const Mission3Presenter = ({
 	setProcessFunction,
@@ -19,6 +21,7 @@ const Mission3Presenter = ({
 	cc,
 	uiFunctionList,
 	isOpen,
+	faqModal,
 	modalFunction,
 }) => {
 	return (
@@ -122,7 +125,11 @@ const Mission3Presenter = ({
 					)}
 				</BottomContent>
 
-				<FaqBtn src={btnFaq} alt='힌트버튼' />
+				<FaqBtn
+					src={btnFaq}
+					alt='힌트버튼'
+					onClick={modalFunction.toggleFaqModal}
+				/>
 				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 			</BlockBottom>
 			{isOpen && (
@@ -132,9 +139,64 @@ const Mission3Presenter = ({
 					</ModalArea>
 				</ModalWrapper>
 			)}
+			{faqModal && (
+				<ModalWrapperFaq>
+					<ModalAreaFaq>
+						<CloseDiv
+							src={close}
+							alt='닫기버튼'
+							onClick={modalFunction.toggleFaqModal}
+						/>
+						<TextDiv>* 이곳에 써주세요.</TextDiv>
+					</ModalAreaFaq>
+				</ModalWrapperFaq>
+			)}
+			<Footer />
 		</Wrapper>
 	);
 };
+
+const ModalWrapperFaq = styled.div`
+	width: 100%;
+	height: 988px;
+	background: rgba(15, 15, 21, 0.8);
+	position: absolute;
+	top: 0;
+	z-index: 20;
+	display: flex;
+`;
+const ModalAreaFaq = styled.div`
+	width: 944px;
+	margin: 0 auto;
+	color: black;
+	position: relative;
+`;
+const CloseDiv = styled.img`
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	top: 480px;
+	right: 24px;
+	filter: invert(100%);
+	&:hover {
+		cursor: pointer;
+	}
+`;
+const TextDiv = styled.div`
+	padding-left: 10px;
+	width: 246px;
+	height: 42px;
+	line-height: 3;
+	border-radius: 2px;
+	border: solid 1px #e4e4e4;
+	font-family: "NotoSansCJKkr";
+	font-size: 14px;
+	font-style: normal;
+	color: white;
+	position: absolute;
+	top: 509px;
+	right: 24px;
+`;
 
 const ModalWrapper = styled.div`
 	width: 100%;
@@ -189,6 +251,9 @@ const FaqBtn = styled.img`
 	right: 30px;
 	bottom: 108px;
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
+	&:hover {
+		cursor: pointer;
+	}
 `;
 const JobsBtn = styled.img`
 	position: absolute;

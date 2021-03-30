@@ -4,6 +4,7 @@ import ProcessContext from "../../contextApi/Process";
 
 const Mission2Container = ({ history }) => {
 	const { actions } = useContext(ProcessContext);
+	const [faqModal, setFaqModal] = useState();
 	const [isOpen, setIsOpen] = useState(false);
 
 	const setProcessFunction = () => {
@@ -19,10 +20,14 @@ const Mission2Container = ({ history }) => {
 		closeModal: () => {
 			setIsOpen(!isOpen);
 		},
+		toggleFaqModal: () => {
+			setFaqModal(!faqModal);
+		},
 	};
 	return (
 		<Mission2Presenter
 			isOpen={isOpen}
+			faqModal={faqModal}
 			setProcessFunction={setProcessFunction}
 			modalFunction={modalFunction}
 		/>

@@ -4,6 +4,7 @@ import ProcessContext from "../../contextApi/Process";
 
 const Mission3Container = ({ history }) => {
 	const { actions } = useContext(ProcessContext);
+	const [faqModal, setFaqModal] = useState();
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectTab, setSelectTab] = useState();
 	const [choosed, setChoosed] = useState(false);
@@ -89,6 +90,9 @@ const Mission3Container = ({ history }) => {
 		closeModal: () => {
 			setIsOpen(!isOpen);
 		},
+		toggleFaqModal: () => {
+			setFaqModal(!faqModal);
+		},
 	};
 
 	return (
@@ -105,6 +109,7 @@ const Mission3Container = ({ history }) => {
 				cc={cc}
 				uiFunctionList={uiFunctionList}
 				isOpen={isOpen}
+				faqModal={faqModal}
 				modalFunction={modalFunction}
 			/>
 		</>

@@ -128,7 +128,8 @@ export default Header;
 
 const Wrapper = styled.div`
 	background: #0f0f15;
-	width: 100%;
+	min-width: 1024px;
+	max-width: 1920px;
 	height: 70px;
 	margin: 0 auto;
 	display: flex;

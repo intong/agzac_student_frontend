@@ -29,7 +29,7 @@ const Footer = () => {
 export default Footer;
 
 const Wrapper = styled.div`
-	/* background: lightgreen; */
+	/* background: red; */
 	width: 100%;
 	height: 60px;
 `;
