@@ -2,8 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
+import { FinalReportBtn } from "../../ui/button/Button";
+import { HelpModal } from "../../ui/modal/Modal";
 
-const FinalReportPresenter = () => {
+const FinalReportPresenter = ({ isOpen, modalFunction }) => {
 	return (
 		<Wrapper>
 			<BlockTop>
@@ -26,23 +28,57 @@ const FinalReportPresenter = () => {
 				</TopContent>
 			</BlockTop>
 			<BlockBottom>
-				<BottomContent></BottomContent>
+				<BottomContent>
+					<VideoArea>영상</VideoArea>
+					<FinalReportBtn
+						text='최종보고서 제출하기'
+						style={{
+							width: "148px",
+							height: "40px",
+							marginLeft: "796px",
+							marginTop: "14px",
+						}}
+					/>
+				</BottomContent>
 				<FaqBtn src={btnFaq} alt='힌트버튼' />
-				<JobsBtn src={btnJobs} alt='직업버튼' />
+				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 			</BlockBottom>
+			{isOpen && (
+				<ModalWrapper>
+					<ModalArea>
+						<HelpModal modalFunction={modalFunction} />
+					</ModalArea>
+				</ModalWrapper>
+			)}
 		</Wrapper>
 	);
 };
 
+const ModalWrapper = styled.div`
+	width: 100%;
+	height: 900px;
+	background: rgba(15, 15, 21, 0.8);
+	position: absolute;
+	top: 0;
+	z-index: 20;
+	display: flex;
+`;
+const ModalArea = styled.div`
+	width: 700px;
+	height: 503px;
+	position: absolute;
+	bottom: 122px;
+	right: 114px;
+`;
+
 const Wrapper = styled.div`
 	/* background: lightgreen; */
-	width: 100%;
-	height: 100%;
+	min-width: 1024px;
+	max-width: 1920px;
 `;
 
 const BlockTop = styled.div`
 	background: #e4e4e4;
-	width: 1440px;
 	height: 206px;
 	margin: 0 auto;
 `;
@@ -55,28 +91,38 @@ const TopContent = styled.div`
 const BlockBottom = styled.div`
 	background: #f7f7f7;
 	/* background: red; */
-	width: 1440px;
-	height: 652px;
 	margin: 0 auto;
 	position: relative;
+	padding-top: 39px;
+	padding-bottom: 13px;
 `;
 const BottomContent = styled.div`
+	/* background: red; */
 	width: 944px;
-	height: 652px;
 	margin: 0 auto;
+`;
+const VideoArea = styled.div`
+	width: 944px;
+	height: 458px;
+	border-radius: 2px;
+	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
+	background-color: #ffffff;
 `;
 
 const FaqBtn = styled.img`
-	position: absolute;
-	right: 30px;
-	bottom: 108px;
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
+	position: absolute;
+	top: 403px;
+	right: 30px;
 `;
 const JobsBtn = styled.img`
-	position: absolute;
-	right: 30px;
-	bottom: 30px;
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
+	position: absolute;
+	top: 481px;
+	right: 30px;
+	&:hover {
+		cursor: pointer;
+	}
 `;
 
 const TextBoxTop = styled.div`

@@ -18,7 +18,7 @@ const options = [
 	"option12",
 ];
 
-const AnswerDefault = ({ normal, correct }) => {
+const AnswerDefault = ({ normal, correct, setProcessFunction }) => {
 	const leftDropbox = {
 		position: "absolute",
 		left: "24px",
@@ -76,7 +76,6 @@ const AnswerDefault = ({ normal, correct }) => {
 				style={{
 					width: "624px",
 					height: "1px",
-
 					background: "#e4e4e4",
 				}}
 			></div>
@@ -91,12 +90,23 @@ const AnswerDefault = ({ normal, correct }) => {
 					background: "red",
 				}}
 			>
-				<Dropbox style={leftDropbox} options={options} correct={correct} />
-				<Dropbox style={rightDropbox} options={options} correct={correct} />
+				<Dropbox
+					style={leftDropbox}
+					options={options}
+					correct={correct}
+					placeholder='선택'
+				/>
+				<Dropbox
+					style={rightDropbox}
+					options={options}
+					correct={correct}
+					placeholder='선택'
+				/>
 			</div>
 			<ButtonPrimary
 				text='정답제출'
 				style={{ position: "absolute", bottom: "24px", right: "24px" }}
+				onClick={setProcessFunction}
 			/>
 			<CorrectText correct={correct} normal={normal}>
 				{correct ? "정답입니다!" : "다시 한번 생각해 볼까요?"}
@@ -119,7 +129,7 @@ const RightBox = styled.div`
 	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
 	position: absolute;
 	top: 79px;
-	right: 248px;
+	right: 0px;
 `;
 const Number = styled.div`
 	width: 304px;

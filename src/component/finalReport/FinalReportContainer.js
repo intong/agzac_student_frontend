@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import FinalReportPresenter from "./FinalReportPresenter";
 
 const FinalReportContainer = ({ history, match, location }) => {
+	const [isOpen, setIsOpen] = useState(false);
+
+	const modalFunction = {
+		openModal: () => {
+			setIsOpen(!isOpen);
+		},
+		closeModal: () => {
+			setIsOpen(!isOpen);
+		},
+	};
+
 	return (
 		<>
-			{console.log("history", history)}
-			{console.log("match", match)}
-			{console.log("location", location)}
-			<FinalReportPresenter />
+			<FinalReportPresenter isOpen={isOpen} modalFunction={modalFunction} />
 		</>
 	);
 };

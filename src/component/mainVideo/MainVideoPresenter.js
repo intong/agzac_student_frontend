@@ -4,14 +4,14 @@ import { InputDefault } from "../../ui/inputBox/Input";
 import { ButtonPrimary } from "../../ui/button/Button";
 
 const inputStyle = {
-	width: "254px",
+	width: "244px",
 	height: "42px",
 	border: "solid 1px #e4e4e4",
 	background: "#fcfcfc",
 	marginLeft: "24px",
 };
 
-const MainVideoPresenter = () => {
+const MainVideoPresenter = ({ setProcessFunction }) => {
 	return (
 		<Wrapper>
 			<BlockTop>
@@ -43,6 +43,7 @@ const MainVideoPresenter = () => {
 						<ButtonPrimary
 							text='정답제출'
 							style={{ marginTop: "84px", marginLeft: "200px" }}
+							onClick={setProcessFunction}
 						/>
 					</RightBox>
 				</BottomContent>
@@ -53,13 +54,14 @@ const MainVideoPresenter = () => {
 
 const Wrapper = styled.div`
 	/* background: lightgreen; */
-	width: 100%;
-	height: 100%;
+	min-width: 1024px;
+	max-width: 1920px;
 `;
 
 const BlockTop = styled.div`
 	background: #e4e4e4;
-	width: 1440px;
+	min-width: 1024px;
+	max-width: 1920px;
 	height: 206px;
 	margin: 0 auto;
 `;
@@ -72,15 +74,16 @@ const TopContent = styled.div`
 const BlockBottom = styled.div`
 	background: #f7f7f7;
 	/* background: red; */
-	width: 1440px;
-	height: 652px;
+	min-width: 1024px;
+	max-width: 1920px;
 	margin: 0 auto;
-	position: relative;
 `;
 const BottomContent = styled.div`
 	width: 944px;
-	height: 652px;
+	min-height: 457px;
+	max-height: 492px;
 	margin: 0 auto;
+	position: relative;
 `;
 
 const TextDivTop = styled.div`
@@ -119,7 +122,6 @@ const LeftBox = styled.div`
 	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
 	position: absolute;
 	top: 39px;
-	left: 248px;
 `;
 
 const VideoPlayArea = styled.div`
@@ -138,7 +140,7 @@ const RightBox = styled.div`
 	background-color: #ffffff;
 	position: absolute;
 	top: 39px;
-	right: 248px;
+	left: 640px;
 `;
 
 const TitleText = styled.div`

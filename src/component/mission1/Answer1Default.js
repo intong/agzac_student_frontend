@@ -12,7 +12,7 @@ const inputStyle = {
 	marginLeft: "24px",
 };
 
-const Answer1Default = () => {
+const Answer1Default = ({ setProcessFunction }) => {
 	return (
 		<RightBox>
 			<Number>
@@ -58,6 +58,7 @@ const Answer1Default = () => {
 			<ButtonPrimary
 				text='정답제출'
 				style={{ marginTop: "128px", marginLeft: "200px" }}
+				onClick={setProcessFunction}
 			/>
 		</RightBox>
 	);

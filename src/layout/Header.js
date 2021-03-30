@@ -1,49 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import devide from "../assets/icons/icn-devide.svg";
 import nextBefor from "../assets/icons/icn-next-dim.svg";
 import nextAfter from "../assets/icons/icn-next.svg";
 import leaveout from "../assets/icons/icn-leaveout.svg";
+import ProcessContext from "../contextApi/Process";
 
 const Header = () => {
+	const { state } = useContext(ProcessContext);
 	const activeStyle = {
 		color: "#ffc300",
 	};
 	return (
 		<Wrapper>
 			<Block>
-				<img
-					src={leaveout}
-					alt='나가기버튼'
-					style={{ margin: "19px 4px 23px 50px" }}
-				/>
-				<div
-					style={{
-						fontSize: "14px",
-						margin: "25px 14px 25px 0",
-						fontFamily: "NotoSansCJKkr-Medium",
-						color: "#ffffff",
-					}}
-				>
-					나가기
-				</div>
-				{/* 이미지교체부분 (임시저장이미지로 교체) */}
-				<img
-					src={leaveout}
-					alt='나가기버튼'
-					style={{ marginRight: "4px", marginTop: "-3px" }}
-				/>
-				<div
-					style={{
-						fontSize: "14px",
-						fontFamily: "NotoSansCJKkr-Medium",
-						color: "#ffffff",
-						marginRight: "37px",
-					}}
-				>
-					임시저장
-				</div>
 				<ULStyled>
 					<div
 						style={{
@@ -55,42 +26,100 @@ const Header = () => {
 					</div>
 					<img src={devide} alt='분단기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>
-						<NavLinkStyled to='/mainVideo' activeStyle={activeStyle}>
+						<NavLinkStyled1
+							to='/mainVideo'
+							activeStyle={activeStyle}
+							confirm={state.video}
+						>
 							EY한영 아그작교실 영상시청
-						</NavLinkStyled>
+						</NavLinkStyled1>
 					</LIStyled>
 					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>
-						<NavLinkStyled to='/mission1' activeStyle={activeStyle}>
+						<NavLinkStyled2
+							to='/mission1'
+							activeStyle={activeStyle}
+							confirm={state.mission1}
+						>
 							Mission01
-						</NavLinkStyled>
+						</NavLinkStyled2>
 					</LIStyled>
 					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>
-						<NavLinkStyled to='/mission2' activeStyle={activeStyle}>
+						<NavLinkStyled3
+							to='/mission2'
+							activeStyle={activeStyle}
+							confirm={state.mission2}
+						>
 							Mission02
-						</NavLinkStyled>
+						</NavLinkStyled3>
 					</LIStyled>
 					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>
-						<NavLinkStyled to='/mission3' activeStyle={activeStyle}>
+						<NavLinkStyled4
+							to='/mission3'
+							activeStyle={activeStyle}
+							confirm={state.mission3}
+						>
 							Mission03
-						</NavLinkStyled>
+						</NavLinkStyled4>
 					</LIStyled>
 					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>
-						<NavLinkStyled to='/mission4' activeStyle={activeStyle}>
+						<NavLinkStyled5
+							to='/mission4'
+							activeStyle={activeStyle}
+							confirm={state.mission4}
+						>
 							Mission04
-						</NavLinkStyled>
+						</NavLinkStyled5>
 					</LIStyled>
 					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>
-						<NavLinkStyled to='/finalreport' activeStyle={activeStyle}>
+						<NavLinkStyled6 to='/finalreport' activeStyle={activeStyle}>
 							최종보고서
-						</NavLinkStyled>
+						</NavLinkStyled6>
 					</LIStyled>
 				</ULStyled>
 			</Block>
+			<BtnsBlock>
+				<img
+					src={leaveout}
+					alt='나가기버튼'
+					style={{ width: "24px", height: "24px", marginRight: "4px" }}
+				/>
+				<div
+					style={{
+						width: "39px",
+						height: "20px",
+						fontSize: "14px",
+						lineHeight: "23px",
+						fontFamily: "NotoSansCJKkr-Medium",
+						color: "#ffffff",
+						marginRight: "12px",
+					}}
+				>
+					나가기
+				</div>
+				<img
+					src={leaveout}
+					alt='나가기버튼'
+					style={{ width: "24px", height: "24px", marginRight: "4px" }}
+				/>
+				<div
+					style={{
+						width: "52px",
+						height: "20px",
+						fontSize: "14px",
+						lineHeight: "23px",
+						fontFamily: "NotoSansCJKkr-Medium",
+						color: "#ffffff",
+						marginRight: "20px",
+					}}
+				>
+					임시저장
+				</div>
+			</BtnsBlock>
 		</Wrapper>
 	);
 };
@@ -98,17 +127,28 @@ const Header = () => {
 export default Header;
 
 const Wrapper = styled.div`
-	background: black;
-	width: 1440px;
+	background: #0f0f15;
+	width: 100%;
 	height: 70px;
 	margin: 0 auto;
+	display: flex;
 `;
 
 const Block = styled.div`
 	/* background: lightgreen; */
+	width: 944px;
 	margin: 0 auto;
 	display: flex;
 	flex-direction: row;
+	/* align-items: center; */
+	justify-content: center;
+`;
+const BtnsBlock = styled.div`
+	/* background: red; */
+	width: 179px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
 	align-items: center;
 `;
 
@@ -124,7 +164,27 @@ const LIStyled = styled.li`
 	font-size: 14px;
 `;
 
-const NavLinkStyled = styled(NavLink)`
+const NavLinkStyled1 = styled(NavLink)`
 	text-decoration: none;
-	color: grey;
+	color: ${(props) => (props.confirm === "ok" ? "#ffffff" : "grey")};
+`;
+const NavLinkStyled2 = styled(NavLink)`
+	text-decoration: none;
+	color: ${(props) => (props.confirm === "ok" ? "#ffffff" : "grey")};
+`;
+const NavLinkStyled3 = styled(NavLink)`
+	text-decoration: none;
+	color: ${(props) => (props.confirm === "ok" ? "#ffffff" : "grey")};
+`;
+const NavLinkStyled4 = styled(NavLink)`
+	text-decoration: none;
+	color: ${(props) => (props.confirm === "ok" ? "#ffffff" : "grey")};
+`;
+const NavLinkStyled5 = styled(NavLink)`
+	text-decoration: none;
+	color: ${(props) => (props.confirm === "ok" ? "#ffffff" : "grey")};
+`;
+const NavLinkStyled6 = styled(NavLink)`
+	text-decoration: none;
+	color: ${(props) => (props.confirm === "ok" ? "#ffffff" : "grey")};
 `;
