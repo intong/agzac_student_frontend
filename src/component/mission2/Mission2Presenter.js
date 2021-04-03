@@ -4,12 +4,13 @@ import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
 import Footer from "../../layout/Footer";
 import AnswerDefault from "./AnswerDefault";
-import { HelpModal } from "../../ui/modal/Modal";
+import { HelpModal, ModalBaseTwoBtn } from "../../ui/modal/Modal";
 import close from "../../assets/icons/bnt-x-24.svg";
 
 const Mission2Presenter = ({
 	isOpen,
 	faqModal,
+	modalState,
 	setProcessFunction,
 	modalFunction,
 }) => {
@@ -83,9 +84,36 @@ const Mission2Presenter = ({
 				</ModalWrapperFaq>
 			)}
 			<Footer />
+			{modalState.saveModalOpen && (
+				<ModlaWrapperSave>
+					<ModalAreaSave>
+						<ModalBaseTwoBtn
+							header='임시 저장 하기'
+							content='지금까 입력한 정보가 저장 됩니다.'
+							confirmbtntext='확인'
+							cancelbtntext='취소'
+							confirmbtnEvent={modalFunction.handleSaveModalConfirmBtn}
+							cancelbtnEvent={modalFunction.toggleSaveModal}
+						/>
+					</ModalAreaSave>
+				</ModlaWrapperSave>
+			)}
 		</Wrapper>
 	);
 };
+const ModlaWrapperSave = styled.div`
+	width: 100%;
+	height: 900px;
+	background: rgba(15, 15, 21, 0.8);
+	position: absolute;
+	top: 0px;
+	display: flex;
+	z-index: 20;
+`;
+const ModalAreaSave = styled.div`
+	margin: auto;
+`;
+
 const ModalWrapperFaq = styled.div`
 	width: 100%;
 	height: 900px;

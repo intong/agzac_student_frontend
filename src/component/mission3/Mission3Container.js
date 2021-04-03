@@ -1,9 +1,11 @@
 import React, { useState, useContext } from "react";
 import Mission3Presenter from "./Mission3Presenter";
 import ProcessContext from "../../contextApi/Process";
+import TempSaveContext from "../../contextApi/TempSave";
 
 const Mission3Container = ({ history }) => {
 	const { actions } = useContext(ProcessContext);
+	const { modalState, modalActions } = useContext(TempSaveContext);
 	const [faqModal, setFaqModal] = useState();
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectTab, setSelectTab] = useState();
@@ -93,6 +95,13 @@ const Mission3Container = ({ history }) => {
 		toggleFaqModal: () => {
 			setFaqModal(!faqModal);
 		},
+		handleSaveModalConfirmBtn: () => {
+			// 확인버튼 실행함수
+			modalActions.setSaveModalOpen(!modalState.saveModalOpen);
+		},
+		toggleSaveModal: () => {
+			modalActions.setSaveModalOpen(!modalState.saveModalOpen);
+		},
 	};
 
 	return (
@@ -110,6 +119,7 @@ const Mission3Container = ({ history }) => {
 				uiFunctionList={uiFunctionList}
 				isOpen={isOpen}
 				faqModal={faqModal}
+				modalState={modalState}
 				modalFunction={modalFunction}
 			/>
 		</>

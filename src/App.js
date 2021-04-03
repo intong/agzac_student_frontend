@@ -2,13 +2,16 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import Auth from "./router/Auth";
 import { ProcessProvider } from "./contextApi/Process";
+import { TempSaveProvider } from "./contextApi/TempSave";
 
 function App() {
 	return (
 		<ProcessProvider>
-			<BrowserRouter>
-				<Auth />
-			</BrowserRouter>
+			<TempSaveProvider>
+				<BrowserRouter>
+					<Auth />
+				</BrowserRouter>
+			</TempSaveProvider>
 		</ProcessProvider>
 	);
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { ButtonPrimary } from "../button/Button";
+import { ButtonPrimary, ButtonSecondary } from "../button/Button";
 import close from "../../assets/icons/bnt-x-24.svg";
 import prev from "../../assets/icons/btn-prev.svg";
 import next from "../../assets/icons/btn-next.svg";
@@ -85,6 +85,86 @@ const BtnPosition = styled.div`
 	height: 40px;
 	display: flex;
 	justify-content: flex-end;
+`;
+
+// Type1_버튼 내용이 짧은 경우 _ 2btn
+export const ModalBaseTwoBtn = ({
+	header,
+	content,
+	modalStyle,
+	confitmbtnStyle,
+	cancelbtnStyle,
+	confirmbtntext,
+	cancelbtntext,
+	confirmbtnEvent,
+	cancelbtnEvent,
+	closeModalEvent,
+}) => {
+	return (
+		<BlockTwoBtn style={modalStyle}>
+			<CloseImgTwoBtn src={close} alt='' onClick={closeModalEvent} />
+			<HeaderDivTwoBtn>{header}</HeaderDivTwoBtn>
+			<ContentDivTwoBtn>{content}</ContentDivTwoBtn>
+			<BtnPositionTwoBtn>
+				<ButtonSecondary
+					text={cancelbtntext}
+					style={cancelbtnStyle}
+					onClick={cancelbtnEvent}
+				/>
+				<ButtonPrimary
+					text={confirmbtntext}
+					style={confitmbtnStyle}
+					onClick={confirmbtnEvent}
+				/>
+			</BtnPositionTwoBtn>
+		</BlockTwoBtn>
+	);
+};
+
+const BlockTwoBtn = styled.div`
+	background: #ffffff;
+	width: 320px;
+	padding: 26px 24px;
+	position: relative;
+`;
+const CloseImgTwoBtn = styled.div`
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	&:hover {
+		cursor: pointer;
+	}
+`;
+const HeaderDivTwoBtn = styled.div`
+	font-family: "NotoSansCJKkr";
+	font-size: 18px;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.33;
+	letter-spacing: normal;
+	color: #0f0f15;
+`;
+const ContentDivTwoBtn = styled.div`
+	min-height: 66px;
+	font-family: "NotoSansCJKkr";
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.57;
+	letter-spacing: normal;
+	color: #0f0f15;
+	margin-top: 18px;
+	/* background: green; */
+`;
+const BtnPositionTwoBtn = styled.div`
+	/* background: red; */
+	width: 320px;
+	height: 40px;
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
 `;
 
 export const HelpModal = ({ style, modalFunction }) => {

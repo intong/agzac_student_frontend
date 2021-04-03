@@ -6,9 +6,11 @@ import nextBefor from "../assets/icons/icn-next-dim.svg";
 import nextAfter from "../assets/icons/icn-next.svg";
 import leaveout from "../assets/icons/icn-leaveout.svg";
 import ProcessContext from "../contextApi/Process";
+import TempSaveContext from "../contextApi/TempSave";
 
 const Header = () => {
 	const { state } = useContext(ProcessContext);
+	const { modalState, modalActions } = useContext(TempSaveContext);
 	const activeStyle = {
 		color: "#ffc300",
 	};
@@ -87,6 +89,7 @@ const Header = () => {
 					src={leaveout}
 					alt='나가기버튼'
 					style={{ width: "24px", height: "24px", marginRight: "4px" }}
+					onClick={() => alert("나가기버튼")}
 				/>
 				<div
 					style={{
@@ -98,6 +101,7 @@ const Header = () => {
 						color: "#ffffff",
 						marginRight: "12px",
 					}}
+					onClick={() => alert("나가기버튼")}
 				>
 					나가기
 				</div>
@@ -105,6 +109,9 @@ const Header = () => {
 					src={leaveout}
 					alt='나가기버튼'
 					style={{ width: "24px", height: "24px", marginRight: "4px" }}
+					onClick={() => {
+						modalActions.setSaveModalOpen(!modalState.saveModalOpen);
+					}}
 				/>
 				<div
 					style={{
@@ -115,6 +122,9 @@ const Header = () => {
 						fontFamily: "NotoSansCJKkr-Medium",
 						color: "#ffffff",
 						marginRight: "20px",
+					}}
+					onClick={() => {
+						modalActions.setSaveModalOpen(!modalState.saveModalOpen);
 					}}
 				>
 					임시저장
@@ -151,6 +161,9 @@ const BtnsBlock = styled.div`
 	flex-direction: row;
 	justify-content: flex-end;
 	align-items: center;
+	&:hover {
+		cursor: pointer;
+	}
 `;
 
 const ULStyled = styled.ul`

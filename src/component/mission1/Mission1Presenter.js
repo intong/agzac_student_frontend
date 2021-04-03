@@ -9,10 +9,12 @@ import close from "../../assets/icons/bnt-x-24.svg";
 import Answer1Default from "./Answer1Default";
 import Answer2Correct from "./Answer2Correct";
 import Answer3Wrong from "./Answer3Wrong";
+import { ModalBaseTwoBtn } from "../../ui/modal/Modal";
 
 const Mission1Presenter = ({
 	isOpen,
 	faqModal,
+	modalState,
 	processPercentage,
 	setProcessFunction,
 	modalFunction,
@@ -92,6 +94,7 @@ const Mission1Presenter = ({
 				</BottomContent>
 				<ProgressWrpper>
 					<Progress>
+						<ProgressBackground></ProgressBackground>
 						<ProgressValue processPercentage={processPercentage}></ProgressValue>
 					</Progress>
 					<ProcessBarLabel>
@@ -139,9 +142,36 @@ const Mission1Presenter = ({
 				</ModalWrapperFaq>
 			)}
 			<Footer />
+			{modalState.saveModalOpen && (
+				<ModalWrapperSave>
+					<ModalAreaSave>
+						<ModalBaseTwoBtn
+							header='임시 저장 하기'
+							content='지금까 입력한 정보가 저장 됩니다.'
+							confirmbtntext='확인'
+							cancelbtntext='취소'
+							confirmbtnEvent={modalFunction.handleSaveModalConfirmBtn}
+							cancelbtnEvent={modalFunction.toggleSaveModal}
+						/>
+					</ModalAreaSave>
+				</ModalWrapperSave>
+			)}
 		</Wrapper>
 	);
 };
+
+const ModalWrapperSave = styled.div`
+	width: 100%;
+	height: 900px;
+	background: rgba(15, 15, 21, 0.8);
+	position: absolute;
+	top: 0px;
+	display: flex;
+	z-index: 20;
+`;
+const ModalAreaSave = styled.div`
+	margin: auto;
+`;
 
 const ModalWrapper = styled.div`
 	width: 100%;
@@ -209,12 +239,23 @@ const Progress = styled.div`
 	display: flex;
 	width: 624px;
 `;
+const ProgressBackground = styled.div`
+	background: #e4e4e4;
+	width: 624px;
+	height: 10px;
+	border-radius: 100px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1;
+`;
 const ProgressValue = styled.div`
 	animation: load 2s normal forwards;
 	border-radius: 100px;
 	background: linear-gradient(to right, #ffd650, #ed7859);
 	height: 10px;
 	width: 0;
+	z-index: 2;
 	@keyframes load {
 		0% {
 			width: 0;
