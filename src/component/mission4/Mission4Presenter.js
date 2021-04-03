@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import Footer from "../../layout/Footer";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
+import close from "../../assets/icons/bnt-x-24.svg";
 import { ButtonSecondary } from "../../ui/button/Button";
 import SocialProblem from "./SocialProblem";
 import ProductDeveloper from "./ProductDeveloper";
@@ -18,6 +20,7 @@ const btnStyle = {
 
 const Mission4Presenter = ({
 	isOpen,
+	faqModal,
 	confirm,
 	clickFunctionList,
 	modalFunction,
@@ -79,24 +82,84 @@ const Mission4Presenter = ({
 							</RightBox>
 						</div>
 					</BottomContent>
-					<FaqBtn src={btnFaq} alt='힌트버튼' />
+					<FaqBtn
+						src={btnFaq}
+						alt='힌트버튼'
+						onClick={modalFunction.toggleFaqModal}
+					/>
 					<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 				</BlockBottom>
+				<Footer />
+				{isOpen && (
+					<ModalWrapper>
+						<ModalArea>
+							<HelpModal modalFunction={modalFunction} style={{}} />
+						</ModalArea>
+					</ModalWrapper>
+				)}
+				{faqModal && (
+					<ModalWrapperFaq>
+						<ModalAreaFaq>
+							<CloseDiv
+								src={close}
+								alt='닫기버튼'
+								onClick={modalFunction.toggleFaqModal}
+							/>
+							<TextDiv>* 이곳에 써주세요.</TextDiv>
+						</ModalAreaFaq>
+					</ModalWrapperFaq>
+				)}
 			</Wrapper>
-			{isOpen && (
-				<ModalWrapper>
-					<ModalArea>
-						<HelpModal modalFunction={modalFunction} style={{}} />
-					</ModalArea>
-				</ModalWrapper>
-			)}
 		</>
 	);
 };
 
+const ModalWrapperFaq = styled.div`
+	width: 100%;
+	height: 900px;
+	background: rgba(15, 15, 21, 0.8);
+	position: absolute;
+	top: 0;
+	z-index: 20;
+	display: flex;
+`;
+const ModalAreaFaq = styled.div`
+	width: 944px;
+	margin: 0 auto;
+	color: black;
+	position: relative;
+`;
+const CloseDiv = styled.img`
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	top: 480px;
+	right: 24px;
+	filter: invert(100%);
+	&:hover {
+		cursor: pointer;
+	}
+`;
+const TextDiv = styled.div`
+	padding-left: 10px;
+	width: 246px;
+	height: 42px;
+	line-height: 3;
+	border-radius: 2px;
+	border: solid 1px #e4e4e4;
+	font-family: "NotoSansCJKkr";
+	font-size: 14px;
+	font-style: normal;
+	color: white;
+	position: absolute;
+	top: 509px;
+	right: 24px;
+`;
+
 const ModalWrapper = styled.div`
 	width: 100%;
-	min-height: 1130px;
+	min-height: 900px;
+	max-height: 1122px;
 	background: rgba(15, 15, 21, 0.8);
 	position: absolute;
 	top: 0;
@@ -129,13 +192,11 @@ const TopContent = styled.div`
 
 const BlockBottom = styled.div`
 	background: #f7f7f7;
-	height: 100%;
 	margin: 0 auto;
 	position: relative;
 `;
 const BottomContent = styled.div`
 	width: 944px;
-	height: 100%;
 	margin: 0 auto;
 	position: relative;
 `;
@@ -151,8 +212,6 @@ const Title = styled.div`
 	letter-spacing: normal;
 	color: #0f0f15;
 	padding-top: 39px;
-	/* position: absolute;
-	top: 39px; */
 `;
 const Tabs = styled.div`
 	width: 624px;
@@ -161,9 +220,6 @@ const Tabs = styled.div`
 	flex-direction: row;
 	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
 	margin-bottom: 16px;
-	/* position: absolute;
-	top: 79px;
-	right: 0px; */
 `;
 const Text = styled.div`
 	width: 206.7px;
@@ -207,9 +263,6 @@ const LeftBox = styled.div`
 	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
 	background-color: #ffffff;
 	position: relative;
-	/* position: absolute;
-	top: 79px;
-	left: 0px; */
 `;
 const RightBox = styled.div`
 	width: 304px;
@@ -237,6 +290,9 @@ const FaqBtn = styled.img`
 	right: 30px;
 	bottom: 108px;
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
+	&:hover {
+		cursor: pointer;
+	}
 `;
 const JobsBtn = styled.img`
 	position: absolute;

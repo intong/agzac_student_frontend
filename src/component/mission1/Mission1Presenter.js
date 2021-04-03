@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { HelpModal } from "../../ui/modal/Modal";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
 import group from "../../assets/img/group@3x.png";
+import Footer from "../../layout/Footer";
+import close from "../../assets/icons/bnt-x-24.svg";
 import Answer1Default from "./Answer1Default";
 import Answer2Correct from "./Answer2Correct";
 import Answer3Wrong from "./Answer3Wrong";
+import { ModalBaseTwoBtn } from "../../ui/modal/Modal";
 
-const Mission1Presenter = ({ isOpen, setProcessFunction, modalFunction }) => {
-	const [aa, setAa] = useState(6);
+const Mission1Presenter = ({
+	isOpen,
+	faqModal,
+	modalState,
+	processPercentage,
+	setProcessFunction,
+	modalFunction,
+}) => {
 	return (
 		<Wrapper>
 			<BlockTop>
@@ -85,7 +94,8 @@ const Mission1Presenter = ({ isOpen, setProcessFunction, modalFunction }) => {
 				</BottomContent>
 				<ProgressWrpper>
 					<Progress>
-						<ProgressValue aa={aa}></ProgressValue>
+						<ProgressBackground></ProgressBackground>
+						<ProgressValue processPercentage={processPercentage}></ProgressValue>
 					</Progress>
 					<ProcessBarLabel>
 						<LabelText>미래인재 매칭 달성도</LabelText>
@@ -99,13 +109,17 @@ const Mission1Presenter = ({ isOpen, setProcessFunction, modalFunction }) => {
 									color: "#0f0f15",
 								}}
 							>
-								{aa}
+								{processPercentage}
 							</span>
 							&nbsp;%
 						</LaberPercent>
 					</ProcessBarLabel>
 				</ProgressWrpper>
-				<FaqBtn src={btnFaq} alt='힌트버튼' />
+				<FaqBtn
+					src={btnFaq}
+					alt='힌트버튼'
+					onClick={modalFunction.toggleFaqModal}
+				/>
 				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 			</BlockBottom>
 			{isOpen && (
@@ -115,9 +129,49 @@ const Mission1Presenter = ({ isOpen, setProcessFunction, modalFunction }) => {
 					</ModalArea>
 				</ModalWrapper>
 			)}
+			{faqModal && (
+				<ModalWrapperFaq>
+					<ModalAreaFaq>
+						<CloseDiv
+							src={close}
+							alt='닫기버튼'
+							onClick={modalFunction.toggleFaqModal}
+						/>
+						<TextDiv>* 이곳에 써주세요.</TextDiv>
+					</ModalAreaFaq>
+				</ModalWrapperFaq>
+			)}
+			<Footer />
+			{modalState.saveModalOpen && (
+				<ModalWrapperSave>
+					<ModalAreaSave>
+						<ModalBaseTwoBtn
+							header='임시 저장 하기'
+							content='지금까 입력한 정보가 저장 됩니다.'
+							confirmbtntext='확인'
+							cancelbtntext='취소'
+							confirmbtnEvent={modalFunction.handleSaveModalConfirmBtn}
+							cancelbtnEvent={modalFunction.toggleSaveModal}
+						/>
+					</ModalAreaSave>
+				</ModalWrapperSave>
+			)}
 		</Wrapper>
 	);
 };
+
+const ModalWrapperSave = styled.div`
+	width: 100%;
+	height: 900px;
+	background: rgba(15, 15, 21, 0.8);
+	position: absolute;
+	top: 0px;
+	display: flex;
+	z-index: 20;
+`;
+const ModalAreaSave = styled.div`
+	margin: auto;
+`;
 
 const ModalWrapper = styled.div`
 	width: 100%;
@@ -135,6 +189,47 @@ const ModalArea = styled.div`
 	bottom: 122px;
 	right: 114px;
 `;
+const ModalWrapperFaq = styled.div`
+	width: 100%;
+	height: 900px;
+	background: rgba(15, 15, 21, 0.8);
+	position: absolute;
+	top: 0;
+	z-index: 20;
+	display: flex;
+`;
+const ModalAreaFaq = styled.div`
+	width: 944px;
+	margin: 0 auto;
+	color: black;
+	position: relative;
+`;
+const CloseDiv = styled.img`
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	top: 480px;
+	right: 24px;
+	filter: invert(100%);
+	&:hover {
+		cursor: pointer;
+	}
+`;
+const TextDiv = styled.div`
+	padding-left: 10px;
+	width: 246px;
+	height: 42px;
+	line-height: 3;
+	border-radius: 2px;
+	border: solid 1px #e4e4e4;
+	font-family: "NotoSansCJKkr";
+	font-size: 14px;
+	font-style: normal;
+	color: white;
+	position: absolute;
+	top: 509px;
+	right: 24px;
+`;
 
 const Progress = styled.div`
 	justify-content: flex-start;
@@ -144,18 +239,30 @@ const Progress = styled.div`
 	display: flex;
 	width: 624px;
 `;
+const ProgressBackground = styled.div`
+	background: #e4e4e4;
+	width: 624px;
+	height: 10px;
+	border-radius: 100px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1;
+`;
 const ProgressValue = styled.div`
 	animation: load 2s normal forwards;
 	border-radius: 100px;
 	background: linear-gradient(to right, #ffd650, #ed7859);
 	height: 10px;
 	width: 0;
+	z-index: 2;
 	@keyframes load {
 		0% {
 			width: 0;
 		}
 		100% {
-			width: ${(props) => props.aa && `${props.aa}%`};
+			width: ${(props) =>
+				props.processPercentage && `${props.processPercentage}%`};
 		}
 	}
 `;
@@ -307,6 +414,9 @@ const FaqBtn = styled.img`
 	position: absolute;
 	top: 668px;
 	right: 30px;
+	&:hover {
+		cursor: pointer;
+	}
 `;
 const JobsBtn = styled.img`
 	position: absolute;

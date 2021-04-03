@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import Footer from "../../layout/Footer";
 import { InputDefault } from "../../ui/inputBox/Input";
 import { ButtonPrimary } from "../../ui/button/Button";
+import { ModalBaseTwoBtn } from "../../ui/modal/Modal";
 
 const inputStyle = {
 	width: "244px",
@@ -11,7 +13,11 @@ const inputStyle = {
 	marginLeft: "24px",
 };
 
-const MainVideoPresenter = ({ setProcessFunction }) => {
+const MainVideoPresenter = ({
+	isModalOpen,
+	setProcessFunction,
+	modalFunction,
+}) => {
 	return (
 		<Wrapper>
 			<BlockTop>
@@ -48,9 +54,38 @@ const MainVideoPresenter = ({ setProcessFunction }) => {
 					</RightBox>
 				</BottomContent>
 			</BlockBottom>
+			<Footer />
+			{/* alert 메세지 모달 */}
+			{isModalOpen && (
+				<ModalWrapper>
+					<ModalArea>
+						<ModalBaseTwoBtn
+							header='임시 저장 하기'
+							content='지금까 입력한 정보가 저장 됩니다.'
+							confirmbtntext='확인'
+							cancelbtntext='취소'
+							confirmbtnEvent={modalFunction.handleConfirmBtn}
+							cancelbtnEvent={modalFunction.toggleModal}
+						/>
+					</ModalArea>
+				</ModalWrapper>
+			)}
 		</Wrapper>
 	);
 };
+
+const ModalWrapper = styled.div`
+	width: 100%;
+	height: 900px;
+	background: rgba(15, 15, 21, 0.8);
+	position: absolute;
+	top: 0px;
+	display: flex;
+	z-index: 20;
+`;
+const ModalArea = styled.div`
+	margin: auto;
+`;
 
 const Wrapper = styled.div`
 	/* background: lightgreen; */

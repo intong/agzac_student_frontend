@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { ButtonPrimary } from "../button/Button";
+import { ButtonPrimary, ButtonSecondary } from "../button/Button";
 import close from "../../assets/icons/bnt-x-24.svg";
 import prev from "../../assets/icons/btn-prev.svg";
 import next from "../../assets/icons/btn-next.svg";
@@ -85,6 +85,86 @@ const BtnPosition = styled.div`
 	height: 40px;
 	display: flex;
 	justify-content: flex-end;
+`;
+
+// Type1_버튼 내용이 짧은 경우 _ 2btn
+export const ModalBaseTwoBtn = ({
+	header,
+	content,
+	modalStyle,
+	confitmbtnStyle,
+	cancelbtnStyle,
+	confirmbtntext,
+	cancelbtntext,
+	confirmbtnEvent,
+	cancelbtnEvent,
+	closeModalEvent,
+}) => {
+	return (
+		<BlockTwoBtn style={modalStyle}>
+			<CloseImgTwoBtn src={close} alt='' onClick={closeModalEvent} />
+			<HeaderDivTwoBtn>{header}</HeaderDivTwoBtn>
+			<ContentDivTwoBtn>{content}</ContentDivTwoBtn>
+			<BtnPositionTwoBtn>
+				<ButtonSecondary
+					text={cancelbtntext}
+					style={cancelbtnStyle}
+					onClick={cancelbtnEvent}
+				/>
+				<ButtonPrimary
+					text={confirmbtntext}
+					style={confitmbtnStyle}
+					onClick={confirmbtnEvent}
+				/>
+			</BtnPositionTwoBtn>
+		</BlockTwoBtn>
+	);
+};
+
+const BlockTwoBtn = styled.div`
+	background: #ffffff;
+	width: 320px;
+	padding: 26px 24px;
+	position: relative;
+`;
+const CloseImgTwoBtn = styled.div`
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	&:hover {
+		cursor: pointer;
+	}
+`;
+const HeaderDivTwoBtn = styled.div`
+	font-family: "NotoSansCJKkr";
+	font-size: 18px;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.33;
+	letter-spacing: normal;
+	color: #0f0f15;
+`;
+const ContentDivTwoBtn = styled.div`
+	min-height: 66px;
+	font-family: "NotoSansCJKkr";
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.57;
+	letter-spacing: normal;
+	color: #0f0f15;
+	margin-top: 18px;
+	/* background: green; */
+`;
+const BtnPositionTwoBtn = styled.div`
+	/* background: red; */
+	width: 320px;
+	height: 40px;
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
 `;
 
 export const HelpModal = ({ style, modalFunction }) => {
@@ -267,11 +347,13 @@ export const HelpModal = ({ style, modalFunction }) => {
 				<LeftImage src={jobCards[count - 1].imgUrl} alt='드론개발자' />
 			</LeftCard>
 			<RightCard>
-				<TitleDiv style={{ position: "absolute", top: "14px" }}>하는일</TitleDiv>
+				<TitleDiv style={{ marginBottom: "10px" }}>하는일</TitleDiv>
 				<TodoExplain>{jobCards[count - 1].todo}</TodoExplain>
-				<TitleDiv style={{ position: "absolute", top: "135px" }}>인터뷰</TitleDiv>
+				<BarUnder style={{ marginBottom: "12px" }} />
+				<TitleDiv style={{ marginBottom: "10px" }}>인터뷰</TitleDiv>
 				<InterviewExplain>{jobCards[count - 1].interview}</InterviewExplain>
-				<TitleDiv style={{ position: "absolute", top: "234px" }}>학과</TitleDiv>
+				<BarUnder style={{ marginBottom: "12px" }} />
+				<TitleDiv style={{ marginBottom: "10px" }}>학과</TitleDiv>
 				<SubjectExplain>{jobCards[count - 1].subject}</SubjectExplain>
 			</RightCard>
 			<BtnBox style={{ position: "absolute", top: "222px", left: "650px" }}>
@@ -404,6 +486,7 @@ const RightCard = styled.div`
 	border: solid 1px #e4e4e4;
 	background-color: #f8f8f8;
 	padding: 14px;
+	overflow: scroll;
 	position: absolute;
 	top: 80px;
 	left: 350px;
@@ -420,47 +503,34 @@ const TitleDiv = styled.div`
 	letter-spacing: normal;
 	color: #0f0f15;
 `;
+const BarUnder = styled.div`
+	width: 258px;
+	height: 1px;
+	opacity: 0.3;
+	background-color: #d8d8d8;
+`;
 const TodoExplain = styled.div`
 	width: 258px;
-	height: 66px;
 	font-family: "NotoSansCJKkr";
 	font-size: 14px;
-	font-weight: normal;
-	font-stretch: normal;
-	font-style: normal;
 	line-height: 1.57;
-	letter-spacing: normal;
 	color: #0f0f15;
-	position: absolute;
-	top: 44px;
+	margin-bottom: 12px;
 `;
 const InterviewExplain = styled.div`
 	width: 258px;
-	height: 44px;
 	font-family: "NotoSansCJKkr";
 	font-size: 14px;
-	font-weight: normal;
-	font-stretch: normal;
-	font-style: normal;
 	line-height: 1.57;
-	letter-spacing: normal;
 	color: #0f0f15;
-	position: absolute;
-	top: 165px;
+	margin-bottom: 12px;
 `;
 const SubjectExplain = styled.div`
 	width: 258px;
-	height: 22px;
 	font-family: "NotoSansCJKkr";
 	font-size: 14px;
-	font-weight: normal;
-	font-stretch: normal;
-	font-style: normal;
 	line-height: 1.57;
-	letter-spacing: normal;
 	color: #0f0f15;
-	position: absolute;
-	top: 264px;
 `;
 const NextBtn = styled.img`
 	&:hover {
