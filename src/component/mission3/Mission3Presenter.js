@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
+import checked from "../../assets/icons/checkedBtn.svg";
+import unchecked from "../../assets/icons/uncheckedBtn.svg";
 import close from "../../assets/icons/bnt-x-24.svg";
 import { ButtonPrimary } from "../../ui/button/Button";
 import { HelpModal, ModalBaseTwoBtn } from "../../ui/modal/Modal";
@@ -54,7 +56,6 @@ const Mission3Presenter = ({
 								style={{
 									width: "20px",
 									height: "20px",
-									background: "grey",
 									position: "absolute",
 									top: "15px",
 									left: "80px",
@@ -62,7 +63,9 @@ const Mission3Presenter = ({
 								onClick={() =>
 									choosed === false && uiFunctionList.tabSelectFunction("tab1")
 								}
-							></div>
+							>
+								<img src={selectTab === "tab1" ? checked : unchecked} alt='체크버튼' />
+							</div>
 							<Tab1Title selectTab={selectTab}>기후변화와 환경</Tab1Title>
 						</Tab1>
 						<Tab2 selectTab={selectTab}>
@@ -70,7 +73,6 @@ const Mission3Presenter = ({
 								style={{
 									width: "20px",
 									height: "20px",
-									background: "grey",
 									position: "absolute",
 									top: "15px",
 									left: "95px",
@@ -78,7 +80,9 @@ const Mission3Presenter = ({
 								onClick={() =>
 									choosed === false && uiFunctionList.tabSelectFunction("tab2")
 								}
-							></div>
+							>
+								<img src={selectTab === "tab2" ? checked : unchecked} alt='미체크' />
+							</div>
 							<Tab2Title selectTab={selectTab}>고령화 사회</Tab2Title>
 						</Tab2>
 						<Tab3 selectTab={selectTab}>
@@ -86,7 +90,6 @@ const Mission3Presenter = ({
 								style={{
 									width: "20px",
 									height: "20px",
-									background: "grey",
 									position: "absolute",
 									top: "15px",
 									left: "97px",
@@ -94,7 +97,9 @@ const Mission3Presenter = ({
 								onClick={() =>
 									choosed === false && uiFunctionList.tabSelectFunction("tab3")
 								}
-							></div>
+							>
+								<img src={selectTab === "tab3" ? checked : unchecked} alt='체크버튼' />
+							</div>
 							<Tab3Title selectTab={selectTab}>재난과 안전</Tab3Title>
 						</Tab3>
 					</Tabs>

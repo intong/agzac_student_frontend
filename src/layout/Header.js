@@ -11,6 +11,15 @@ import TempSaveContext from "../contextApi/TempSave";
 const Header = () => {
 	const { state } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
+
+	const Logout = () => {
+		const ok = window.confirm("정말 나가시겠습니까?");
+		if (ok) {
+			sessionStorage.removeItem("auth");
+			window.location.href = "/";
+		}
+	};
+
 	const activeStyle = {
 		color: "#ffc300",
 	};
@@ -89,7 +98,7 @@ const Header = () => {
 					src={leaveout}
 					alt='나가기버튼'
 					style={{ width: "24px", height: "24px", marginRight: "4px" }}
-					onClick={() => alert("나가기버튼")}
+					onClick={Logout}
 				/>
 				<div
 					style={{
@@ -101,7 +110,7 @@ const Header = () => {
 						color: "#ffffff",
 						marginRight: "12px",
 					}}
-					onClick={() => alert("나가기버튼")}
+					onClick={Logout}
 				>
 					나가기
 				</div>

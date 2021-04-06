@@ -5,15 +5,76 @@ import logoMain from "../../assets/img/img-main-logo@3x.png";
 import robot from "../../assets/img/img-main-robot@3x.png";
 import { ButtonPrimary } from "../../ui/button/Button";
 import { InputLineType } from "../../ui/inputBox/Input";
-import { DropboxLineType } from "../../ui/dropbox/Dropbox";
-import { ModalBase } from "../../ui/modal/Modal";
+import { DropboxLineTypeSmall } from "../../ui/dropbox/Dropbox";
+import {
+	ModalWithInputOneBtn,
+	ModalBaseTwoBtn,
+	ModalBase,
+} from "../../ui/modal/Modal";
 import logoEY from "../../assets/icons/img-logo-ey.svg";
 import kidsn from "../../assets/icons/logo-img-kidsnfuture.svg";
 
-const optionsClass = ["1 반", "2 반", "3 반", "4 반"];
-const optionsYear = ["1 학년", "2 학년", "3 학년"];
+const optionsYear = [
+	{ text: "1 학년", value: 1 },
+	{ text: "2 학년", value: 2 },
+	{ text: "3 학년", value: 3 },
+];
+const optionsClass = [
+	{ text: "1 반", value: 1 },
+	{ text: "2 반", value: 2 },
+	{ text: "3 반", value: 3 },
+];
+const optionsStudentNo = [
+	{ text: "1 번", value: 1 },
+	{ text: "2 번", value: 2 },
+	{ text: "3 번", value: 3 },
+	{ text: "4 번", value: 4 },
+	{ text: "5 번", value: 5 },
+	{ text: "6 번", value: 6 },
+	{ text: "7 번", value: 7 },
+	{ text: "8 번", value: 8 },
+	{ text: "9 번", value: 9 },
+	{ text: "10 번", value: 10 },
+	{ text: "11 번", value: 11 },
+	{ text: "12 번", value: 12 },
+	{ text: "13 번", value: 13 },
+	{ text: "14 번", value: 14 },
+	{ text: "15 번", value: 15 },
+	{ text: "16 번", value: 16 },
+	{ text: "17 번", value: 17 },
+	{ text: "18 번", value: 18 },
+	{ text: "19 번", value: 19 },
+	{ text: "20 번", value: 20 },
+	{ text: "21 번", value: 21 },
+	{ text: "22 번", value: 22 },
+	{ text: "23 번", value: 23 },
+	{ text: "24 번", value: 24 },
+	{ text: "25 번", value: 25 },
+	{ text: "26 번", value: 26 },
+	{ text: "27 번", value: 27 },
+	{ text: "28 번", value: 28 },
+	{ text: "29 번", value: 29 },
+	{ text: "30 번", value: 30 },
+	{ text: "31 번", value: 31 },
+	{ text: "32 번", value: 32 },
+	{ text: "33 번", value: 33 },
+	{ text: "34 번", value: 34 },
+	{ text: "35 번", value: 35 },
+	{ text: "36 번", value: 36 },
+	{ text: "37 번", value: 37 },
+	{ text: "38 번", value: 38 },
+	{ text: "39 번", value: 39 },
+	{ text: "40 번", value: 40 },
+	{ text: "41 번", value: 41 },
+];
 
-const LoginPresenter = ({ isOpenModal, modalFunction }) => {
+const LoginPresenter = ({
+	isOpenModal,
+	inputPasswordModal,
+	loginErrorModal,
+	modalFunction,
+	loginFunction,
+}) => {
 	return (
 		<>
 			<Wrapper>
@@ -34,33 +95,47 @@ const LoginPresenter = ({ isOpenModal, modalFunction }) => {
 								<InputLineType
 									placeholder='제공받은 접속코드를 입력해 주세요.'
 									style={{ width: "100%", height: "20px", marginTop: "22px" }}
+									onChange={loginFunction.onChangeConnectCode}
 								/>
 								<Title style={{ marginTop: "32px" }}>학교</Title>
 								<InputLineType
-									placeholder='학교명을 입력해 주세요. '
+									placeholder='학교명을 입력해 주세요.'
 									style={{ width: "100%", height: "20px", marginTop: "22px" }}
+									onChange={loginFunction.onChangeSchoolName}
 								/>
+								<div style={{ position: "absolute", top: "150px", right: "4px" }}>
+									학교
+								</div>
 								<div style={{ display: "flex", marginTop: "20px" }}>
-									<DropboxLineType
+									<DropboxLineTypeSmall
+										id='grade'
 										placeholder='학년'
-										style={{ width: "185px", height: "20px" }}
+										style={{ height: "20px" }}
 										options={optionsYear}
 									/>
-									<DropboxLineType
+									<DropboxLineTypeSmall
+										id='studentClass'
 										placeholder='반'
-										style={{ width: "185px", height: "20px", marginLeft: "14px" }}
+										style={{ height: "20px", marginLeft: "12px" }}
 										options={optionsClass}
+									/>
+									<DropboxLineTypeSmall
+										id='studentNo'
+										placeholder='번호'
+										style={{ height: "20px", marginLeft: "12px" }}
+										options={optionsStudentNo}
 									/>
 								</div>
 								<Title style={{ marginTop: "40px" }}>이름</Title>
 								<InputLineType
 									placeholder='이름을 입력해 주세요.'
 									style={{ width: "100%", height: "20px", marginTop: "22px" }}
+									onChange={loginFunction.onChangeStudentName}
 								/>
 								<ButtonPrimary
 									text='EY한영 아그작교실 시작하기'
 									style={{ width: "100%", marginTop: "117px" }}
-									onClick={modalFunction.openModal}
+									onClick={loginFunction.submitStudent}
 								/>
 							</LoginContent>
 						</LoginBlock>
@@ -87,12 +162,43 @@ const LoginPresenter = ({ isOpenModal, modalFunction }) => {
 				{isOpenModal && (
 					<ModalWrapper>
 						<ModalArea>
-							<ModalBase
-								header='타이틀 영역입니다.'
-								content='내용이 들어갑니다.내용이 들어갑니다.'
+							<ModalWithInputOneBtn
+								header='비밀번호 설정'
+								content='비밀번호가 없습니다. 비밀번호를 입력해 주세요.'
+								placeholder='비밀번호를 입력해주세요.'
 								btntext='확인'
-								closeModalEvent={modalFunction.closeModal}
-								btnEvent={modalFunction.closeModal}
+								onChange={loginFunction.onChangePassword}
+								closeModalEvent={modalFunction.toggleModal}
+								btnEvent={loginFunction.createPassword}
+							/>
+						</ModalArea>
+					</ModalWrapper>
+				)}
+
+				{inputPasswordModal && (
+					<ModalWrapper>
+						<ModalArea>
+							<ModalWithInputOneBtn
+								header='비밀번호 설정'
+								content='비밀번호가 있습니다. 비밀번호를 입력해 주세요.'
+								placeholder='비밀번호 입력'
+								btntext='확인'
+								onChange={loginFunction.onChangePassword}
+								closeModalEvent={modalFunction.toggleInputPasswordModal}
+								btnEvent={loginFunction.inputPassword}
+							/>
+						</ModalArea>
+					</ModalWrapper>
+				)}
+
+				{loginErrorModal && (
+					<ModalWrapper>
+						<ModalArea>
+							<ModalBase
+								header='접속에 실패하였습니다.'
+								content='학교, 학년, 반, 번호, 이름, 접속코드를 다시 한번 확인해주세요.'
+								btntext='확인'
+								btnEvent={modalFunction.toggleErrorModal}
 							/>
 						</ModalArea>
 					</ModalWrapper>
@@ -180,6 +286,7 @@ const LoginContent = styled.div`
 	height: 489px;
 	margin: 0 auto;
 	margin-top: 40px;
+	position: relative;
 `;
 const Title = styled.div`
 	width: 100%;

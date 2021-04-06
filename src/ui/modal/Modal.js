@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { ButtonPrimary, ButtonSecondary } from "../button/Button";
+import { InputLineType } from "../inputBox/Input";
 import close from "../../assets/icons/bnt-x-24.svg";
 import prev from "../../assets/icons/btn-prev.svg";
 import next from "../../assets/icons/btn-next.svg";
@@ -159,6 +160,74 @@ const ContentDivTwoBtn = styled.div`
 	/* background: green; */
 `;
 const BtnPositionTwoBtn = styled.div`
+	/* background: red; */
+	width: 320px;
+	height: 40px;
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+`;
+
+export const ModalWithInputOneBtn = ({
+	header,
+	content,
+	btnEvent,
+	placeholder,
+	btntext,
+	onChange,
+}) => {
+	return (
+		<BlockWithInput>
+			<HeaderDivWithInput>{header}</HeaderDivWithInput>
+			<ContentDivWithInput>
+				{content}
+				<InputLineType
+					placeholder={placeholder}
+					style={{ marginTop: "20px", marginBottom: "10px" }}
+					onChange={onChange}
+				/>
+			</ContentDivWithInput>
+			<BtnPositionWithInput>
+				<ButtonPrimary
+					text={btntext}
+					style={{ marginTop: "10px" }}
+					onClick={btnEvent}
+				/>
+			</BtnPositionWithInput>
+		</BlockWithInput>
+	);
+};
+
+const BlockWithInput = styled.div`
+	background: #ffffff;
+	width: 320px;
+	padding: 26px 24px;
+	position: relative;
+`;
+const HeaderDivWithInput = styled.div`
+	font-family: "NotoSansCJKkr";
+	font-size: 18px;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.33;
+	letter-spacing: normal;
+	color: #0f0f15;
+`;
+const ContentDivWithInput = styled.div`
+	min-height: 66px;
+	font-family: "NotoSansCJKkr";
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.57;
+	letter-spacing: normal;
+	color: #0f0f15;
+	margin-top: 18px;
+	/* background: green; */
+`;
+const BtnPositionWithInput = styled.div`
 	/* background: red; */
 	width: 320px;
 	height: 40px;
