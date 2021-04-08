@@ -88,6 +88,44 @@ const BTNDefault = styled.button`
 		background-color: #0f0f15;
 	}
 `;
+
+const ButtonPrimaryLong = ({ text, style, onClick }) => {
+	return (
+		<BTNDefaultLong style={style} onClick={onClick}>
+			{text}
+		</BTNDefaultLong>
+	);
+};
+const BTNDefaultLong = styled.button`
+	border: 0;
+	outline: 0;
+	width: 272px;
+	height: 40px;
+	border-radius: 2px;
+	background: #0f0f15;
+	padding: 10px 14px 10px 14px;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.43;
+	text-align: center;
+	color: #ffffff;
+
+	&:hover {
+		border-radius: 2px;
+		background: #555557;
+		cursor: pointer;
+		font-size: 14px;
+		font-weight: 500;
+		line-height: 1.43;
+		text-align: center;
+		color: rgba(255, 255, 255, 0.7);
+	}
+	&:active {
+		border-radius: 2px;
+		background-color: #0f0f15;
+	}
+`;
+
 const ButtonPrimaryDisable = ({ text, style }) => {
 	return <BtnPrimaryDisable style={style}>{text}</BtnPrimaryDisable>;
 };
@@ -115,6 +153,37 @@ const BTNSecondary = styled.button`
 	border: 0;
 	outline: 0;
 	width: 80px;
+	height: 40px;
+	padding: 10px 14px 10px 14px;
+	border-radius: 2px;
+	border: solid 1px #e4e4e4;
+	background-color: #ffffff;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.43;
+	text-align: center;
+	color: #000000;
+	&:hover {
+		cursor: pointer;
+		border: solid 1px #e4e4e4;
+		background-color: #f3f3f3;
+	}
+	&:active {
+		border: solid 1px #e4e4e4;
+		background-color: #e4e4e4;
+	}
+`;
+const ButtonSecondaryLong = ({ text, style, onClick }) => {
+	return (
+		<BTNSecondaryLong style={style} onClick={onClick}>
+			{text}
+		</BTNSecondaryLong>
+	);
+};
+const BTNSecondaryLong = styled.button`
+	border: 0;
+	outline: 0;
+	width: 272px;
 	height: 40px;
 	padding: 10px 14px 10px 14px;
 	border-radius: 2px;
@@ -181,8 +250,10 @@ const TextStyle = styled.span`
 export {
 	LoginButton,
 	ButtonPrimary,
+	ButtonPrimaryLong,
 	ButtonPrimaryDisable,
 	ButtonSecondary,
+	ButtonSecondaryLong,
 	ButtonSecondaryDisable,
 	FinalReportBtn,
 };

@@ -1,7 +1,16 @@
 import styled from "styled-components";
-const InputDefault = ({ name, style, onChange, placeholder, wrong, value }) => {
+const InputDefault = ({
+	name,
+	style,
+	onChange,
+	placeholder,
+	wrong,
+	value,
+	id,
+}) => {
 	return (
 		<Input
+			id={id}
 			name={name}
 			style={style}
 			onChange={onChange}

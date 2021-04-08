@@ -8,6 +8,7 @@ const ProcessContext = createContext({
 		mission3: "",
 		mission4: "",
 		final: "",
+		saveTempData: {},
 	},
 	actions: {
 		setVideo: () => {},
@@ -16,6 +17,7 @@ const ProcessContext = createContext({
 		setMission3: () => {},
 		setMission4: () => {},
 		setFinal: () => {},
+		setSaveTempData: () => {},
 	},
 });
 
@@ -26,8 +28,9 @@ const ProcessProvider = ({ children }) => {
 	const [mission3, setMission3] = useState("");
 	const [mission4, setMission4] = useState("");
 	const [final, setFinal] = useState("");
+	const [saveTempData, setSaveTempData] = useState({});
 	const value = {
-		state: { video, mission1, mission2, mission3, mission4, final },
+		state: { video, mission1, mission2, mission3, mission4, final, saveTempData },
 		actions: {
 			setVideo,
 			setMission1,
@@ -35,6 +38,7 @@ const ProcessProvider = ({ children }) => {
 			setMission3,
 			setMission4,
 			setFinal,
+			setSaveTempData,
 		},
 	};
 	return (

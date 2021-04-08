@@ -6,11 +6,7 @@ import robot from "../../assets/img/img-main-robot@3x.png";
 import { ButtonPrimary } from "../../ui/button/Button";
 import { InputLineType } from "../../ui/inputBox/Input";
 import { DropboxLineTypeSmall } from "../../ui/dropbox/Dropbox";
-import {
-	ModalWithInputOneBtn,
-	ModalBaseTwoBtn,
-	ModalBase,
-} from "../../ui/modal/Modal";
+import { ModalWithInputOneBtn, ModalBase } from "../../ui/modal/Modal";
 import logoEY from "../../assets/icons/img-logo-ey.svg";
 import kidsn from "../../assets/icons/logo-img-kidsnfuture.svg";
 
@@ -158,52 +154,51 @@ const LoginPresenter = ({
 						style={{ marginTop: "22px", marginBottom: "14px" }}
 					/>
 				</Footer>
-
-				{isOpenModal && (
-					<ModalWrapper>
-						<ModalArea>
-							<ModalWithInputOneBtn
-								header='비밀번호 설정'
-								content='비밀번호가 없습니다. 비밀번호를 입력해 주세요.'
-								placeholder='비밀번호를 입력해주세요.'
-								btntext='확인'
-								onChange={loginFunction.onChangePassword}
-								closeModalEvent={modalFunction.toggleModal}
-								btnEvent={loginFunction.createPassword}
-							/>
-						</ModalArea>
-					</ModalWrapper>
-				)}
-
-				{inputPasswordModal && (
-					<ModalWrapper>
-						<ModalArea>
-							<ModalWithInputOneBtn
-								header='비밀번호 설정'
-								content='비밀번호가 있습니다. 비밀번호를 입력해 주세요.'
-								placeholder='비밀번호 입력'
-								btntext='확인'
-								onChange={loginFunction.onChangePassword}
-								closeModalEvent={modalFunction.toggleInputPasswordModal}
-								btnEvent={loginFunction.inputPassword}
-							/>
-						</ModalArea>
-					</ModalWrapper>
-				)}
-
-				{loginErrorModal && (
-					<ModalWrapper>
-						<ModalArea>
-							<ModalBase
-								header='접속에 실패하였습니다.'
-								content='학교, 학년, 반, 번호, 이름, 접속코드를 다시 한번 확인해주세요.'
-								btntext='확인'
-								btnEvent={modalFunction.toggleErrorModal}
-							/>
-						</ModalArea>
-					</ModalWrapper>
-				)}
 			</Wrapper>
+			{isOpenModal && (
+				<ModalWrapper>
+					<ModalArea>
+						<ModalWithInputOneBtn
+							header='비밀번호 설정'
+							content='비밀번호가 없습니다. 비밀번호를 입력해 주세요.'
+							placeholder='비밀번호를 입력해주세요.'
+							btntext='확인'
+							onChange={loginFunction.onChangePassword}
+							closeModalEvent={modalFunction.toggleModal}
+							btnEvent={loginFunction.createPassword}
+						/>
+					</ModalArea>
+				</ModalWrapper>
+			)}
+
+			{inputPasswordModal && (
+				<ModalWrapper>
+					<ModalArea>
+						<ModalWithInputOneBtn
+							header='비밀번호 설정'
+							content='비밀번호가 있습니다. 비밀번호를 입력해 주세요.'
+							placeholder='비밀번호 입력'
+							btntext='확인'
+							onChange={loginFunction.onChangePassword}
+							closeModalEvent={modalFunction.toggleInputPasswordModal}
+							btnEvent={loginFunction.inputPassword}
+						/>
+					</ModalArea>
+				</ModalWrapper>
+			)}
+
+			{loginErrorModal && (
+				<ModalWrapper>
+					<ModalArea>
+						<ModalBase
+							header='접속에 실패하였습니다.'
+							content='학교, 학년, 반, 번호, 이름, 접속코드를 다시 한번 확인해주세요.'
+							btntext='확인'
+							btnEvent={modalFunction.errorModalConfirmBtn}
+						/>
+					</ModalArea>
+				</ModalWrapper>
+			)}
 		</>
 	);
 };

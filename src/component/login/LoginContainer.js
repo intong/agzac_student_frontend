@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Student } from "../../api/api";
 import LoginPresenter from "./LoginPresenter";
 
-const LoginContainer = ({ history }) => {
+const LoginContainer = () => {
 	const [isOpenModal, setIsOpenModal] = useState(); // 비밀번호 없을 시 (비밀번호생성)
 	const [inputPasswordModal, setInputPasswordModal] = useState(); // 비밀번호 이미 있을시 (있는 비밀번호로 로그인)
 	const [loginErrorModal, setLoginErrorModal] = useState();
@@ -24,6 +24,10 @@ const LoginContainer = ({ history }) => {
 		// 로그인 입력값 validation 오류 시 error 모달
 		toggleErrorModal: () => {
 			setLoginErrorModal(!loginErrorModal);
+		},
+		errorModalConfirmBtn: () => {
+			modalFunction.toggleInputPasswordModal();
+			modalFunction.toggleErrorModal();
 		},
 	};
 
@@ -51,12 +55,6 @@ const LoginContainer = ({ history }) => {
 				schoolName &&
 				connectCode !== undefined
 			) {
-				// console.log("grade" + grade);
-				// console.log("studentClass", studentClass);
-				// console.log("studentNo", studentNo);
-				// console.log("studentName", studentName);
-				// console.log("schoolName", schoolName);
-				// console.log("connectCode", connectCode);
 				const result = await Student.loginStudent(
 					connectCode,
 					grade,
@@ -65,7 +63,6 @@ const LoginContainer = ({ history }) => {
 					studentName,
 					schoolName
 				);
-				// console.log(result);
 				if (result.data.ok === true && result.data.status === "비밀번호 있음") {
 					modalFunction.toggleInputPasswordModal();
 					setStudentId(result.data.studentId);
@@ -88,16 +85,25 @@ const LoginContainer = ({ history }) => {
 		inputPassword: async () => {
 			const result2 = await Student.checkPassword(studentId, password);
 			console.log(result2);
-			sessionStorage.setItem("auth", result2.data.token);
-			modalFunction.toggleInputPasswordModal();
-			window.location.href = "/";
+			if (result2.data.ok) {
+				sessionStorage.setItem("auth", result2.data.token);
+				sessionStorage.setItem("user", studentName);
+				modalFunction.toggleInputPasswordModal();
+				window.location.href = "/";
+			} else {
+				modalFunction.toggleInputPasswordModal();
+				modalFunction.toggleErrorModal();
+			}
 		},
 		createPassword: async () => {
+			// 최초접속 && 임시저장데이터 없음
 			const result3 = await Student.createPassword(studentId, password);
-			console.log(result3);
-			sessionStorage.setItem("auth", result3.data.token);
-			modalFunction.toggleModal();
-			window.location.href = "/";
+			if (result3.data.ok) {
+				sessionStorage.setItem("auth", result3.data.token);
+				sessionStorage.setItem("user", studentName);
+				modalFunction.toggleModal();
+				window.location.href = "/";
+			}
 		},
 	};
 

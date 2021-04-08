@@ -33,7 +33,7 @@ const Header = () => {
 							color: "#ffffff",
 						}}
 					>
-						홍길동님의 아그작 기업 보고서
+						{sessionStorage.getItem("user")}님의 아그작 기업 보고서
 					</div>
 					<img src={devide} alt='분단기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>

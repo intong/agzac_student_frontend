@@ -1,6 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { ButtonPrimary, ButtonSecondary } from "../button/Button";
+import {
+	ButtonPrimary,
+	ButtonPrimaryLong,
+	ButtonSecondary,
+	ButtonSecondaryLong,
+} from "../button/Button";
 import { InputLineType } from "../inputBox/Input";
 import close from "../../assets/icons/bnt-x-24.svg";
 import prev from "../../assets/icons/btn-prev.svg";
@@ -21,6 +26,28 @@ import softwareDeveloper from "../../assets/img/JobCards/softwareDeveloper2x.png
 import trafficPro from "../../assets/img/JobCards/trafficPro2x.png";
 import upcycler from "../../assets/img/JobCards/upcycler2x.png";
 import vrEngineer from "../../assets/img/JobCards/vrEngineer2x.png";
+import ReactLoading from "react-loading";
+
+export const LoadingModal = () => {
+	return (
+		<BlockLoading>
+			<Content>
+				<ReactLoading type={"spin"} color={"#fffff"} width={"50%"} height={"50%"} />
+			</Content>
+		</BlockLoading>
+	);
+};
+
+const BlockLoading = styled.div`
+	width: 320px;
+	padding: 26px 24px;
+	position: relative;
+`;
+const Content = styled.div`
+	width: 100px;
+	height: 50px;
+	margin: auto;
+`;
 
 // Type1_버튼 내용이 짧은 경우 _ 1btn
 export function ModalBase({
@@ -88,6 +115,68 @@ const BtnPosition = styled.div`
 	justify-content: flex-end;
 `;
 
+// type2_버튼 내용이 긴 경우 _ 2btn
+export const ModalTwoBtnLong = ({
+	header,
+	content,
+	closeModalEvent,
+	confirmBtnOnClick,
+	cancelBtnOnClick,
+}) => {
+	return (
+		<BlockTwoBtnLong>
+			<CloseImgTwoBtnLong src={close} alt='' onClick={closeModalEvent} />
+			<HeaderDivTwoBtnLong>{header}</HeaderDivTwoBtnLong>
+			<ContentDivTwoBtnLong>{content}</ContentDivTwoBtnLong>
+			<ButtonSecondaryLong
+				text='다시 시작하기'
+				style={{ marginBottom: "6px" }}
+				onClick={cancelBtnOnClick}
+			/>
+			<ButtonPrimaryLong text='이어서 진행하기' onClick={confirmBtnOnClick} />
+		</BlockTwoBtnLong>
+	);
+};
+
+const BlockTwoBtnLong = styled.div`
+	background: #ffffff;
+	width: 272px;
+	height: 198px;
+	padding: 26px 24px;
+	position: relative;
+`;
+const CloseImgTwoBtnLong = styled.img`
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	&:hover {
+		cursor: pointer;
+	}
+`;
+const HeaderDivTwoBtnLong = styled.div`
+	font-family: "NotoSansCJKkr";
+	font-size: 18px;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.33;
+	letter-spacing: normal;
+	color: #0f0f15;
+`;
+const ContentDivTwoBtnLong = styled.div`
+	min-height: 66px;
+	font-family: "NotoSansCJKkr";
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.57;
+	letter-spacing: normal;
+	color: #0f0f15;
+	margin-top: 18px;
+	/* background: green; */
+`;
+
 // Type1_버튼 내용이 짧은 경우 _ 2btn
 export const ModalBaseTwoBtn = ({
 	header,
@@ -128,7 +217,7 @@ const BlockTwoBtn = styled.div`
 	padding: 26px 24px;
 	position: relative;
 `;
-const CloseImgTwoBtn = styled.div`
+const CloseImgTwoBtn = styled.img`
 	position: absolute;
 	top: 10px;
 	right: 10px;
