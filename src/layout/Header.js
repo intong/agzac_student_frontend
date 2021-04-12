@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import devide from "../assets/icons/icn-devide.svg";
 import nextBefor from "../assets/icons/icn-next-dim.svg";
-import nextAfter from "../assets/icons/icn-next.svg";
+// import nextAfter from "../assets/icons/icn-next.svg";
 import leaveout from "../assets/icons/icn-leaveout.svg";
 import ProcessContext from "../contextApi/Process";
 import TempSaveContext from "../contextApi/TempSave";
@@ -16,6 +16,9 @@ const Header = () => {
 		const ok = window.confirm("정말 나가시겠습니까?");
 		if (ok) {
 			sessionStorage.removeItem("auth");
+			sessionStorage.removeItem("user");
+			sessionStorage.removeItem("missionOne");
+			sessionStorage.removeItem("missionTwo");
 			window.location.href = "/";
 		}
 	};

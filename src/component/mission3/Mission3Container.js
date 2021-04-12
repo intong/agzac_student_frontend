@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import Mission3Presenter from "./Mission3Presenter";
+import { missionThreeQandA } from "../AnswerList";
 import ProcessContext from "../../contextApi/Process";
 import TempSaveContext from "../../contextApi/TempSave";
 
@@ -9,6 +10,7 @@ const Mission3Container = ({ history }) => {
 	const [faqModal, setFaqModal] = useState();
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectTab, setSelectTab] = useState();
+	const [selectTabContent, setSelectTabContent] = useState();
 	const [choosed, setChoosed] = useState(false);
 	const [firstAnswer, setFirstAnswer] = useState();
 	const [secondAnswer, setSecondAnswer] = useState();
@@ -19,13 +21,16 @@ const Mission3Container = ({ history }) => {
 
 	const setProcessFunction = () => {
 		//validation 추가
+		console.log(11);
 		actions.setMission3("ok");
 		history.push("/mission4");
 	};
 
 	const uiFunctionList = {
 		tabSelectFunction: (tab) => {
+			const selectCategory = missionThreeQandA.find((ele) => ele.category === tab);
 			setSelectTab(tab);
+			setSelectTabContent(selectCategory);
 		},
 		clickFinalChoice: () => {
 			if (selectTab !== undefined) {
@@ -34,16 +39,18 @@ const Mission3Container = ({ history }) => {
 				alert("사회문제를 먼저 선택하세요");
 			}
 		},
+		passNext: () => {
+			alert(111);
+			if (firstAnswer === true && secondAnswer === true && thirdAnswer === true) {
+				setProcessFunction();
+			}
+		},
 		checkAnswer: () => {
 			const correct = {
 				first: "드론개발자",
 				second: "드론",
 				third: "개발자",
 			};
-			console.log("aa", aa);
-			console.log("bb", bb);
-			console.log("cc", cc);
-
 			if (aa === correct.first) {
 				setFirstAnswer(true);
 			} else {
@@ -61,26 +68,17 @@ const Mission3Container = ({ history }) => {
 			} else {
 				setThirdAnswer(false);
 			}
+			uiFunctionList.passNext();
 		},
 		onChange: (e) => {
 			const name = e.target.name;
 			const value = e.target.value;
-			console.log("name", name);
 			if (name === "first") {
 				setAa(value);
 			} else if (name === "second") {
 				setBb(value);
 			} else {
 				setCc(value);
-			}
-			if (firstAnswer === false) {
-				setAa();
-			}
-			if (secondAnswer === false) {
-				setBb();
-			}
-			if (thirdAnswer === false) {
-				setCc();
 			}
 		},
 	};
@@ -109,6 +107,7 @@ const Mission3Container = ({ history }) => {
 			<Mission3Presenter
 				setProcessFunction={setProcessFunction}
 				selectTab={selectTab}
+				selectTabContent={selectTabContent}
 				choosed={choosed}
 				firstAnswer={firstAnswer}
 				secondAnswer={secondAnswer}

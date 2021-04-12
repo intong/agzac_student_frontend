@@ -4,18 +4,22 @@ import { ButtonPrimary } from "../../ui/button/Button";
 import { Dropbox } from "../../ui/dropbox/Dropbox";
 
 const options = [
-	"option1",
-	"option2",
-	"option3",
-	"option4",
-	"option5",
-	"option6",
-	"option7",
-	"option8",
-	"option9",
-	"option10",
-	"option11",
-	"option12",
+	"드론개발자",
+	"사물인터넷전문가",
+	"인공지능과학자",
+	"3D프린터개발자",
+	"컴퓨터보안전문가",
+	"소프트웨어개발자",
+	"기능성게임기획자",
+	"VR엔지니어",
+	"지능형교통시스템전문가",
+	"프로파일러",
+	"재난대처전문가",
+	"신약개발연구원",
+	"환경공학기술자",
+	"신재생에너지전문가",
+	"업사이클러",
+	"탄소배출권거래중개인",
 ];
 
 const AnswerDefault = ({ normal, correct, setProcessFunction }) => {

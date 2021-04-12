@@ -12,7 +12,7 @@ const inputStyle = {
 	marginLeft: "24px",
 };
 
-const Answer1Default = ({ setProcessFunction }) => {
+const Answer1Default = ({ setProcessFunction, wrong }) => {
 	return (
 		<RightBox>
 			<Number>
@@ -54,12 +54,13 @@ const Answer1Default = ({ setProcessFunction }) => {
 				제시된 미래인재 정보를 확인한 후 정확한 직업이름을 맞춰 보세요!{" "}
 			</Title>
 			<SubTitle>* 띄어쓰기 없이 작성해주세요.</SubTitle>
-			<InputDefault style={inputStyle} />
+			<InputDefault style={inputStyle} wrong={wrong} />
 			<ButtonPrimary
 				text='정답제출'
 				style={{ marginTop: "128px", marginLeft: "200px" }}
 				onClick={setProcessFunction}
 			/>
+			<OneMore wrong={wrong}>한번 더 풀어보세요!</OneMore>
 		</RightBox>
 	);
 };
@@ -72,6 +73,7 @@ const RightBox = styled.div`
 	border-radius: 2px;
 	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
 	background-color: #ffffff;
+	position: relative;
 `;
 const Number = styled.div`
 	width: 304px;
@@ -96,4 +98,21 @@ const SubTitle = styled.div`
 	color: #686868;
 	margin-top: 8px;
 	margin-left: 24px;
+`;
+
+const OneMore = styled.div`
+	width: 115px;
+	height: 20px;
+	font-family: "NotoSansCJKkr";
+	font-size: 14px;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: #ff3737;
+	position: absolute;
+	left: 24px;
+	bottom: 29px;
+	display: ${(props) => (props.wrong === false ? "" : "none")};
 `;

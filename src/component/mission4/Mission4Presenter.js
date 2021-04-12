@@ -82,12 +82,6 @@ const Mission4Presenter = ({
 							</RightBox>
 						</div>
 					</BottomContent>
-					<FaqBtn
-						src={btnFaq}
-						alt='힌트버튼'
-						onClick={modalFunction.toggleFaqModal}
-					/>
-					<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 				</BlockBottom>
 				<Footer />
 				{isOpen && (
@@ -109,16 +103,22 @@ const Mission4Presenter = ({
 						</ModalAreaFaq>
 					</ModalWrapperFaq>
 				)}
+				<FaqBtn
+					src={btnFaq}
+					alt='힌트버튼'
+					onClick={modalFunction.toggleFaqModal}
+				/>
+				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 			</Wrapper>
 		</>
 	);
 };
 
 const ModalWrapperFaq = styled.div`
-	width: 100%;
-	height: 900px;
+	width: 100vw;
+	height: 100vh;
 	background: rgba(15, 15, 21, 0.8);
-	position: absolute;
+	position: fixed;
 	top: 0;
 	z-index: 20;
 	display: flex;
@@ -157,11 +157,12 @@ const TextDiv = styled.div`
 `;
 
 const ModalWrapper = styled.div`
-	width: 100%;
+	width: 100vw;
+	height: 100vh;
 	min-height: 900px;
 	max-height: 1122px;
 	background: rgba(15, 15, 21, 0.8);
-	position: absolute;
+	position: fixed;
 	top: 0;
 	z-index: 60;
 	display: flex;
@@ -286,7 +287,7 @@ const LeftTitle = styled.div`
 `;
 
 const FaqBtn = styled.img`
-	position: absolute;
+	position: fixed;
 	right: 30px;
 	bottom: 108px;
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
@@ -295,7 +296,7 @@ const FaqBtn = styled.img`
 	}
 `;
 const JobsBtn = styled.img`
-	position: absolute;
+	position: fixed;
 	right: 30px;
 	bottom: 30px;
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));

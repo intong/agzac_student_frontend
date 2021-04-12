@@ -3,14 +3,17 @@ import { BrowserRouter } from "react-router-dom";
 import Auth from "./router/Auth";
 import { ProcessProvider } from "./contextApi/Process";
 import { TempSaveProvider } from "./contextApi/TempSave";
+import { MissionQandAProvider } from "./contextApi/MissionQandA";
 
 function App() {
 	return (
 		<ProcessProvider>
 			<TempSaveProvider>
-				<BrowserRouter>
-					<Auth />
-				</BrowserRouter>
+				<MissionQandAProvider>
+					<BrowserRouter>
+						<Auth />
+					</BrowserRouter>
+				</MissionQandAProvider>
 			</TempSaveProvider>
 		</ProcessProvider>
 	);

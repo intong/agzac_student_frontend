@@ -264,9 +264,11 @@ export const ModalWithInputOneBtn = ({
 	placeholder,
 	btntext,
 	onChange,
+	closeModalEvent,
 }) => {
 	return (
 		<BlockWithInput>
+			<CloseImgTwoBtn src={close} alt='' onClick={closeModalEvent} />
 			<HeaderDivWithInput>{header}</HeaderDivWithInput>
 			<ContentDivWithInput>
 				{content}

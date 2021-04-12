@@ -8,6 +8,7 @@ import { HelpModal, ModalBaseTwoBtn } from "../../ui/modal/Modal";
 import close from "../../assets/icons/bnt-x-24.svg";
 
 const Mission2Presenter = ({
+	missionTwoQandA,
 	isOpen,
 	faqModal,
 	modalState,
@@ -16,6 +17,7 @@ const Mission2Presenter = ({
 }) => {
 	return (
 		<Wrapper>
+			{console.log(missionTwoQandA)}
 			<BlockTop>
 				<TopContent>
 					<TextBoxTop>Mission 02</TextBoxTop>
@@ -57,12 +59,6 @@ const Mission2Presenter = ({
 						setProcessFunction={setProcessFunction}
 					/>
 				</BottomContent>
-				<FaqBtn
-					src={btnFaq}
-					alt='힌트버튼'
-					onClick={modalFunction.toggleFaqModal}
-				/>
-				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 			</BlockBottom>
 			{isOpen && (
 				<ModalWrapper>
@@ -98,14 +94,16 @@ const Mission2Presenter = ({
 					</ModalAreaSave>
 				</ModlaWrapperSave>
 			)}
+			<FaqBtn src={btnFaq} alt='힌트버튼' onClick={modalFunction.toggleFaqModal} />
+			<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 		</Wrapper>
 	);
 };
 const ModlaWrapperSave = styled.div`
-	width: 100%;
-	height: 900px;
+	width: 100vw;
+	height: 100vh;
 	background: rgba(15, 15, 21, 0.8);
-	position: absolute;
+	position: fixed;
 	top: 0px;
 	display: flex;
 	z-index: 20;
@@ -115,10 +113,10 @@ const ModalAreaSave = styled.div`
 `;
 
 const ModalWrapperFaq = styled.div`
-	width: 100%;
-	height: 900px;
+	width: 100vw;
+	height: 100vh;
 	background: rgba(15, 15, 21, 0.8);
-	position: absolute;
+	position: fixed;
 	top: 0;
 	z-index: 20;
 	display: flex;
@@ -160,12 +158,13 @@ const Wrapper = styled.div`
 	/* background: lightgreen; */
 	min-width: 1024px;
 	max-width: 1920px;
+	height: 100vh;
 `;
 const ModalWrapper = styled.div`
-	width: 100%;
-	height: 900px;
+	width: 100vw;
+	height: 100vh;
 	background: rgba(15, 15, 21, 0.8);
-	position: absolute;
+	position: fixed;
 	top: 0;
 	z-index: 20;
 	display: flex;
@@ -203,8 +202,8 @@ const BottomContent = styled.div`
 `;
 
 const FaqBtn = styled.img`
-	position: absolute;
-	top: 668px;
+	position: fixed;
+	bottom: 108px;
 	right: 30px;
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
 	&:hover {
@@ -212,8 +211,8 @@ const FaqBtn = styled.img`
 	}
 `;
 const JobsBtn = styled.img`
-	position: absolute;
-	top: 746px;
+	position: fixed;
+	bottom: 30px;
 	right: 30px;
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
 	&:hover {

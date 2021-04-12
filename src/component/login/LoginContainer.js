@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Student } from "../../api/api";
 import LoginPresenter from "./LoginPresenter";
+import MissionQandAContext from "../../contextApi/MissionQandA";
 
 const LoginContainer = () => {
 	const [isOpenModal, setIsOpenModal] = useState(); // 비밀번호 없을 시 (비밀번호생성)
@@ -26,7 +27,7 @@ const LoginContainer = () => {
 			setLoginErrorModal(!loginErrorModal);
 		},
 		errorModalConfirmBtn: () => {
-			modalFunction.toggleInputPasswordModal();
+			// modalFunction.toggleInputPasswordModal();
 			modalFunction.toggleErrorModal();
 		},
 	};
@@ -66,12 +67,28 @@ const LoginContainer = () => {
 				if (result.data.ok === true && result.data.status === "비밀번호 있음") {
 					modalFunction.toggleInputPasswordModal();
 					setStudentId(result.data.studentId);
+					sessionStorage.setItem(
+						"missionOne",
+						JSON.stringify(result.data.missionOneQandA)
+					);
+					sessionStorage.setItem(
+						"missionTwo",
+						JSON.stringify(result.data.missionTwoQandA)
+					);
 				} else if (
 					result.data.ok === true &&
 					result.data.status === "비밀번호 없음"
 				) {
 					modalFunction.toggleModal();
 					setStudentId(result.data.studentId);
+					sessionStorage.setItem(
+						"missionOne",
+						JSON.stringify(result.data.missionOneQandA)
+					);
+					sessionStorage.setItem(
+						"missionTwo",
+						JSON.stringify(result.data.missionTwoQandA)
+					);
 				} else {
 					setLoginErrorModal(!loginErrorModal);
 				}
@@ -84,7 +101,6 @@ const LoginContainer = () => {
 		},
 		inputPassword: async () => {
 			const result2 = await Student.checkPassword(studentId, password);
-			console.log(result2);
 			if (result2.data.ok) {
 				sessionStorage.setItem("auth", result2.data.token);
 				sessionStorage.setItem("user", studentName);

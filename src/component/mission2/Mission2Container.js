@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Mission2Presenter from "./Mission2Presenter";
 import ProcessContext from "../../contextApi/Process";
 import TempSaveContext from "../../contextApi/TempSave";
@@ -6,6 +6,7 @@ import TempSaveContext from "../../contextApi/TempSave";
 const Mission2Container = ({ history }) => {
 	const { actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
+	const [missionTwoQandA, setMissionTwoQandA] = useState();
 	const [faqModal, setFaqModal] = useState();
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -33,8 +34,17 @@ const Mission2Container = ({ history }) => {
 			modalActions.setSaveModalOpen(!modalState.saveModalOpen);
 		},
 	};
+
+	useEffect(() => {
+		// missionOne 셋팅
+		const settingMission = () => {
+			setMissionTwoQandA(JSON.parse(sessionStorage.getItem("missionTwo")));
+		};
+		settingMission();
+	}, []);
 	return (
 		<Mission2Presenter
+			missionTwoQandA={missionTwoQandA}
 			isOpen={isOpen}
 			faqModal={faqModal}
 			modalState={modalState}

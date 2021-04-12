@@ -19,6 +19,12 @@ const optionsClass = [
 	{ text: "1 반", value: 1 },
 	{ text: "2 반", value: 2 },
 	{ text: "3 반", value: 3 },
+	{ text: "4 반", value: 4 },
+	{ text: "5 반", value: 5 },
+	{ text: "6 반", value: 6 },
+	{ text: "7 반", value: 7 },
+	{ text: "8 반", value: 8 },
+	{ text: "9 반", value: 9 },
 ];
 const optionsStudentNo = [
 	{ text: "1 번", value: 1 },
@@ -72,89 +78,87 @@ const LoginPresenter = ({
 	loginFunction,
 }) => {
 	return (
-		<>
-			<Wrapper>
-				<Container>
-					<LogoBlock src={logoMain} alt='메인로고' />
-					<Content style={{ display: "flex" }}>
-						<div>
-							<TextContainer>
-								아그작교실에
-								<p />
-								오신 것을 환영합니다!
-							</TextContainer>
-							<RobotContainer src={robot} alt='로봇이미지' />
-						</div>
-						<LoginBlock>
-							<LoginContent>
-								<Title>접속코드</Title>
-								<InputLineType
-									placeholder='제공받은 접속코드를 입력해 주세요.'
-									style={{ width: "100%", height: "20px", marginTop: "22px" }}
-									onChange={loginFunction.onChangeConnectCode}
+		<Wrapper>
+			<Container>
+				<LogoBlock src={logoMain} alt='메인로고' />
+				<Content style={{ display: "flex" }}>
+					<div>
+						<TextContainer>
+							아그작교실에
+							<p />
+							오신 것을 환영합니다!
+						</TextContainer>
+						<RobotContainer src={robot} alt='로봇이미지' />
+					</div>
+					<LoginBlock>
+						<LoginContent>
+							<Title>접속코드</Title>
+							<InputLineType
+								placeholder='제공받은 접속코드를 입력해 주세요.'
+								style={{ width: "100%", height: "20px", marginTop: "22px" }}
+								onChange={loginFunction.onChangeConnectCode}
+							/>
+							<Title style={{ marginTop: "32px" }}>학교</Title>
+							<InputLineType
+								placeholder='학교명을 입력해 주세요.'
+								style={{ width: "100%", height: "20px", marginTop: "22px" }}
+								onChange={loginFunction.onChangeSchoolName}
+							/>
+							<div style={{ position: "absolute", top: "150px", right: "4px" }}>
+								학교
+							</div>
+							<div style={{ display: "flex", marginTop: "20px" }}>
+								<DropboxLineTypeSmall
+									id='grade'
+									placeholder='학년'
+									style={{ height: "20px" }}
+									options={optionsYear}
 								/>
-								<Title style={{ marginTop: "32px" }}>학교</Title>
-								<InputLineType
-									placeholder='학교명을 입력해 주세요.'
-									style={{ width: "100%", height: "20px", marginTop: "22px" }}
-									onChange={loginFunction.onChangeSchoolName}
+								<DropboxLineTypeSmall
+									id='studentClass'
+									placeholder='반'
+									style={{ height: "20px", marginLeft: "12px" }}
+									options={optionsClass}
 								/>
-								<div style={{ position: "absolute", top: "150px", right: "4px" }}>
-									학교
-								</div>
-								<div style={{ display: "flex", marginTop: "20px" }}>
-									<DropboxLineTypeSmall
-										id='grade'
-										placeholder='학년'
-										style={{ height: "20px" }}
-										options={optionsYear}
-									/>
-									<DropboxLineTypeSmall
-										id='studentClass'
-										placeholder='반'
-										style={{ height: "20px", marginLeft: "12px" }}
-										options={optionsClass}
-									/>
-									<DropboxLineTypeSmall
-										id='studentNo'
-										placeholder='번호'
-										style={{ height: "20px", marginLeft: "12px" }}
-										options={optionsStudentNo}
-									/>
-								</div>
-								<Title style={{ marginTop: "40px" }}>이름</Title>
-								<InputLineType
-									placeholder='이름을 입력해 주세요.'
-									style={{ width: "100%", height: "20px", marginTop: "22px" }}
-									onChange={loginFunction.onChangeStudentName}
+								<DropboxLineTypeSmall
+									id='studentNo'
+									placeholder='번호'
+									style={{ height: "20px", marginLeft: "12px" }}
+									options={optionsStudentNo}
 								/>
-								<ButtonPrimary
-									text='EY한영 아그작교실 시작하기'
-									style={{ width: "100%", marginTop: "117px" }}
-									onClick={loginFunction.submitStudent}
-								/>
-							</LoginContent>
-						</LoginBlock>
-					</Content>
-				</Container>
-				<Footer>
-					<img
-						src={logoEY}
-						alt=''
-						style={{
-							marginLeft: "50px",
-							marginTop: "14px",
-							marginBottom: "17px",
-							marginRight: "25px",
-						}}
-					/>
-					<img
-						src={kidsn}
-						alt=''
-						style={{ marginTop: "22px", marginBottom: "14px" }}
-					/>
-				</Footer>
-			</Wrapper>
+							</div>
+							<Title style={{ marginTop: "40px" }}>이름</Title>
+							<InputLineType
+								placeholder='이름을 입력해 주세요.'
+								style={{ width: "100%", height: "20px", marginTop: "22px" }}
+								onChange={loginFunction.onChangeStudentName}
+							/>
+							<ButtonPrimary
+								text='EY한영 아그작교실 시작하기'
+								style={{ width: "100%", marginTop: "117px" }}
+								onClick={loginFunction.submitStudent}
+							/>
+						</LoginContent>
+					</LoginBlock>
+				</Content>
+			</Container>
+			<Footer>
+				<img
+					src={logoEY}
+					alt=''
+					style={{
+						marginLeft: "50px",
+						marginTop: "14px",
+						marginBottom: "17px",
+						marginRight: "25px",
+					}}
+				/>
+				<img
+					src={kidsn}
+					alt=''
+					style={{ marginTop: "22px", marginBottom: "14px" }}
+				/>
+			</Footer>
 			{isOpenModal && (
 				<ModalWrapper>
 					<ModalArea>
@@ -195,11 +199,12 @@ const LoginPresenter = ({
 							content='학교, 학년, 반, 번호, 이름, 접속코드를 다시 한번 확인해주세요.'
 							btntext='확인'
 							btnEvent={modalFunction.errorModalConfirmBtn}
+							closeModalEvent={modalFunction.toggleErrorModal}
 						/>
 					</ModalArea>
 				</ModalWrapper>
 			)}
-		</>
+		</Wrapper>
 	);
 };
 

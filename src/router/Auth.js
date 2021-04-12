@@ -7,7 +7,7 @@ const Auth = () => {
 	const [token, setToken] = useState(null);
 
 	useEffect(() => {
-		// console.log(token);
+		// console.log(token);x
 		const settingToken = () => {
 			setToken(sessionStorage.getItem("auth"));
 		};
@@ -18,7 +18,11 @@ const Auth = () => {
 			{token !== null ? (
 				<>
 					<Route path='/' component={Layout} />
-					<Redirect to='/mainVideo' />
+					<Redirect
+						to={{
+							pathname: "/mainVideo",
+						}}
+					/>
 				</>
 			) : (
 				<>

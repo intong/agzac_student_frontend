@@ -13,6 +13,7 @@ import Footer from "../../layout/Footer";
 const Mission3Presenter = ({
 	setProcessFunction,
 	selectTab,
+	selectTabContent,
 	choosed,
 	answerText,
 	firstAnswer,
@@ -29,6 +30,7 @@ const Mission3Presenter = ({
 }) => {
 	return (
 		<Wrapper>
+			{console.log(selectTabContent)}
 			<BlockTop>
 				<TopContent>
 					<TextBoxTop>Mission 03</TextBoxTop>
@@ -105,7 +107,7 @@ const Mission3Presenter = ({
 					</Tabs>
 					<Default
 						setProcessFunction={setProcessFunction}
-						selectTab={selectTab}
+						selectTabContent={selectTabContent}
 						choosed={choosed}
 						answerText={answerText}
 						firstAnswer={firstAnswer}
@@ -130,13 +132,6 @@ const Mission3Presenter = ({
 						/>
 					)}
 				</BottomContent>
-
-				<FaqBtn
-					src={btnFaq}
-					alt='힌트버튼'
-					onClick={modalFunction.toggleFaqModal}
-				/>
-				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 			</BlockBottom>
 			{isOpen && (
 				<ModalWrapper>
@@ -172,15 +167,17 @@ const Mission3Presenter = ({
 				</ModalWrapperSave>
 			)}
 			<Footer />
+			<FaqBtn src={btnFaq} alt='힌트버튼' onClick={modalFunction.toggleFaqModal} />
+			<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 		</Wrapper>
 	);
 };
 
 const ModalWrapperSave = styled.div`
-	width: 100%;
-	height: 900px;
+	width: 100vw;
+	height: 100vh;
 	background: rgba(15, 15, 21, 0.8);
-	position: absolute;
+	position: fixed;
 	top: 0px;
 	display: flex;
 	z-index: 20;
@@ -190,10 +187,10 @@ const ModalAreaSave = styled.div`
 `;
 
 const ModalWrapperFaq = styled.div`
-	width: 100%;
-	height: 988px;
+	width: 100vw;
+	height: 100vh;
 	background: rgba(15, 15, 21, 0.8);
-	position: absolute;
+	position: fixed;
 	top: 0;
 	z-index: 20;
 	display: flex;
@@ -232,10 +229,10 @@ const TextDiv = styled.div`
 `;
 
 const ModalWrapper = styled.div`
-	width: 100%;
-	height: 988px;
+	width: 100vw;
+	height: 100vh;
 	background: rgba(15, 15, 21, 0.8);
-	position: absolute;
+	position: fixed;
 	top: 0;
 	z-index: 20;
 	display: flex;
@@ -280,16 +277,16 @@ const BottomContent = styled.div`
 `;
 
 const FaqBtn = styled.img`
-	position: absolute;
-	right: 30px;
+	position: fixed;
 	bottom: 108px;
+	right: 30px;
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
 	&:hover {
 		cursor: pointer;
 	}
 `;
 const JobsBtn = styled.img`
-	position: absolute;
+	position: fixed;
 	right: 30px;
 	bottom: 30px;
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));

@@ -74,10 +74,10 @@ const FinalReportPresenter = ({ isOpen, faqModal, modalFunction }) => {
 };
 
 const ModalWrapperFaq = styled.div`
-	width: 100%;
-	height: 900px;
+	width: 100vw;
+	height: 100vh;
 	background: rgba(15, 15, 21, 0.8);
-	position: absolute;
+	position: fixed;
 	top: 0;
 	z-index: 20;
 	display: flex;
@@ -116,10 +116,10 @@ const TextDiv = styled.div`
 `;
 
 const ModalWrapper = styled.div`
-	width: 100%;
-	height: 900px;
+	width: 100vw;
+	height: 100vh;
 	background: rgba(15, 15, 21, 0.8);
-	position: absolute;
+	position: fixed;
 	top: 0;
 	z-index: 20;
 	display: flex;

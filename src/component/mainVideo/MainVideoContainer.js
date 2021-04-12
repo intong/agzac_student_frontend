@@ -9,7 +9,8 @@ const MainVideoContainer = ({ history }) => {
 	const { state, actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
 	const [hasDataModal, setHasDataModal] = useState(); // 저장된 데어터가 있을 때 데이터 불러오기 모달
-	const [answerFalseModal, setAnswerFalseModal] = useState();
+	const [answerCorrectModal, setAnswerCorrectModal] = useState(); // 정답 모달
+	const [answerFalseModal, setAnswerFalseModal] = useState(); // 오답 모달
 	const [mediaAndSecretCode, setMediaAndSecretCode] = useState(); // 영상과 답안지 useEffect 안에서 랜덤으로 한개 뽑아서 저장시키는 state
 	const [companyName, setCompanyName] = useState();
 	const [secretCode, setSecretCode] = useState();
@@ -23,6 +24,9 @@ const MainVideoContainer = ({ history }) => {
 	const modalFunction = {
 		toggleModal: () => {
 			modalActions.setSaveModalOpen(!modalState.saveModalOpen);
+		},
+		toggleAnswerTrueModal: () => {
+			setAnswerCorrectModal(!answerCorrectModal);
 		},
 		toggleAnswerFalseModal: () => {
 			setAnswerFalseModal(!answerFalseModal);
@@ -45,6 +49,7 @@ const MainVideoContainer = ({ history }) => {
 			const code = state.saveTempData[1];
 			setCompanyName(name);
 			setSecretCode(code);
+			actions.setUseDataConfirm(true); // 임시저장 데이터 사용하겠다는 글로벌 (context) 변수
 			modalFunction.toggleHasDataModal();
 		},
 	};
@@ -85,6 +90,7 @@ const MainVideoContainer = ({ history }) => {
 			actions.setSaveTempData(JSON.parse(result3.data.writtenData[2]));
 		} else {
 			setHasDataModal(false);
+			actions.setUseDataConfirm(false);
 		}
 	}, [actions]);
 
@@ -99,6 +105,7 @@ const MainVideoContainer = ({ history }) => {
 		};
 		randomChoice();
 		getTempData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (

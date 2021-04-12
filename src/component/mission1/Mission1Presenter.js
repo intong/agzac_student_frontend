@@ -4,14 +4,17 @@ import { HelpModal } from "../../ui/modal/Modal";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
 import group from "../../assets/img/group@3x.png";
+import test from "../../assets/img/JobCards/aiScientist2x.png";
+import test1 from "../../assets/img/JobCards/carbonTrader2x.png";
 import Footer from "../../layout/Footer";
 import close from "../../assets/icons/bnt-x-24.svg";
 import Answer1Default from "./Answer1Default";
 import Answer2Correct from "./Answer2Correct";
-import Answer3Wrong from "./Answer3Wrong";
 import { ModalBaseTwoBtn } from "../../ui/modal/Modal";
 
 const Mission1Presenter = ({
+	missionOneQandA,
+	answerResult,
 	isOpen,
 	faqModal,
 	modalState,
@@ -21,6 +24,7 @@ const Mission1Presenter = ({
 }) => {
 	return (
 		<Wrapper>
+			{console.log(missionOneQandA)}
 			<BlockTop>
 				<TopContent>
 					<TextBoxTop>Mission 01</TextBoxTop>
@@ -43,42 +47,20 @@ const Mission1Presenter = ({
 						<CardBlock>
 							<CardContainer>
 								<img
-									src={group}
+									src={test1}
 									alt=''
 									style={{ widht: "270px", height: "336px", objectFit: "cover" }}
 								/>
 							</CardContainer>
 							<ExplainContainer>
 								<TitleTodo>하는일</TitleTodo>
-								<ExplainTodo>
-									드론에 카메라, 센서, 통신장비 등을 탑재하여 정보를 수집하거나 사람을
-									대신하여 배송하는 드론을 설계 및 개발
-								</ExplainTodo>
-								<div
-									style={{
-										width: "258px",
-										height: "1px",
-										background: "#d8d8d8",
-										opacity: "0.3",
-										marginBottom: "12px",
-									}}
-								></div>
+								<ExplainTodo>asdasd</ExplainTodo>
+								<BarUnder />
 								<TitleInterview>인터뷰</TitleInterview>
-								<ExplainInterview>
-									사람이 들어가기 힘든 재난 현장에 드론을 보 내거나, 드론 택배를 개발할
-									수 있어요.
-								</ExplainInterview>
-								<div
-									style={{
-										width: "258px",
-										height: "1px",
-										background: "#d8d8d8",
-										opacity: "0.3",
-										marginBottom: "12px",
-									}}
-								></div>
+								<ExplainInterview>asdasd</ExplainInterview>
+								<BarUnder />
 								<TitleSubject>학과</TitleSubject>
-								<ExplainSubject>기계공학, 항공우주공학, 전기전자 등</ExplainSubject>
+								<ExplainSubject>asdasd</ExplainSubject>
 							</ExplainContainer>
 						</CardBlock>
 					</LeftBlock>
@@ -86,9 +68,14 @@ const Mission1Presenter = ({
 						<TextBoxBottomTitle>직업이름 매칭</TextBoxBottomTitle>
 						<RightBox>
 							{/*정답화면 교체*/}
-							<Answer1Default setProcessFunction={setProcessFunction} />
-							{/* <Answer2Correct /> */}
-							{/* <Answer3Wrong /> */}
+							{answerResult === true ? (
+								<Answer2Correct />
+							) : (
+								<Answer1Default
+									setProcessFunction={setProcessFunction}
+									wrong={answerResult}
+								/>
+							)}
 						</RightBox>
 					</RightBlock>
 				</BottomContent>
@@ -115,12 +102,6 @@ const Mission1Presenter = ({
 						</LaberPercent>
 					</ProcessBarLabel>
 				</ProgressWrpper>
-				<FaqBtn
-					src={btnFaq}
-					alt='힌트버튼'
-					onClick={modalFunction.toggleFaqModal}
-				/>
-				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 			</BlockBottom>
 			{isOpen && (
 				<ModalWrapper>
@@ -156,15 +137,17 @@ const Mission1Presenter = ({
 					</ModalAreaSave>
 				</ModalWrapperSave>
 			)}
+			<FaqBtn src={btnFaq} alt='힌트버튼' onClick={modalFunction.toggleFaqModal} />
+			<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 		</Wrapper>
 	);
 };
 
 const ModalWrapperSave = styled.div`
-	width: 100%;
-	height: 900px;
+	width: 100vw;
+	height: 100vh;
 	background: rgba(15, 15, 21, 0.8);
-	position: absolute;
+	position: fixed;
 	top: 0px;
 	display: flex;
 	z-index: 20;
@@ -174,10 +157,10 @@ const ModalAreaSave = styled.div`
 `;
 
 const ModalWrapper = styled.div`
-	width: 100%;
-	height: 900px;
+	width: 100vw;
+	height: 100vh;
 	background: rgba(15, 15, 21, 0.8);
-	position: absolute;
+	position: fixed;
 	top: 0;
 	z-index: 20;
 	display: flex;
@@ -190,10 +173,10 @@ const ModalArea = styled.div`
 	right: 114px;
 `;
 const ModalWrapperFaq = styled.div`
-	width: 100%;
-	height: 900px;
+	width: 100vw;
+	height: 100vh;
 	background: rgba(15, 15, 21, 0.8);
-	position: absolute;
+	position: fixed;
 	top: 0;
 	z-index: 20;
 	display: flex;
@@ -292,6 +275,7 @@ const LaberPercent = styled.div``;
 const Wrapper = styled.div`
 	min-width: 1024px;
 	max-width: 1920px;
+	height: 100vh;
 `;
 
 const BlockTop = styled.div`
@@ -338,14 +322,15 @@ const CardContainer = styled.div`
 	/* margin-right: 16px; */
 `;
 const ExplainContainer = styled.div`
-	/* width: 286px;
-	height: 336px; */
+	width: 258px;
+	height: 308px;
 	border-radius: 2px;
 	border: solid 1px #e4e4e4;
 	background-color: #f8f8f8;
 	/* background: red; */
+	padding: 14px;
 	margin-left: 16px;
-
+	overflow: scroll;
 	padding: 14px;
 `;
 const TitleTodo = styled.div`
@@ -360,11 +345,17 @@ const TitleTodo = styled.div`
 `;
 const ExplainTodo = styled.div`
 	width: 258px;
-	height: 66px;
 	font-family: "NotoSansCJKkr";
 	font-size: 14px;
 	line-height: 1.57;
 	color: #0f0f15;
+	margin-bottom: 12px;
+`;
+const BarUnder = styled.div`
+	width: 258px;
+	height: 1px;
+	opacity: 0.3;
+	background-color: #d8d8d8;
 	margin-bottom: 12px;
 `;
 const TitleInterview = styled.div`
@@ -379,7 +370,6 @@ const TitleInterview = styled.div`
 `;
 const ExplainInterview = styled.div`
 	width: 258px;
-	height: 44px;
 	font-family: "NotoSansCJKkr";
 	font-size: 14px;
 	line-height: 1.57;
@@ -398,7 +388,6 @@ const TitleSubject = styled.div`
 `;
 const ExplainSubject = styled.div`
 	width: 258px;
-	height: 22px;
 	font-family: "NotoSansCJKkr";
 	font-size: 14px;
 	line-height: 1.57;
@@ -411,16 +400,16 @@ const RightBlock = styled.div`
 const FaqBtn = styled.img`
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
 	vertical-align: text-top;
-	position: absolute;
-	top: 668px;
+	position: fixed;
+	bottom: 108px;
 	right: 30px;
 	&:hover {
 		cursor: pointer;
 	}
 `;
 const JobsBtn = styled.img`
-	position: absolute;
-	top: 746px;
+	position: fixed;
+	bottom: 30px;
 	right: 30px;
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
 	&:hover {
