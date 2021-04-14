@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import btnDropdown from "../../assets/icons/btn-dropdown.svg";
 
-export function Dropbox({ style, options, correct, placeholder }) {
+export function Dropbox({ style, options, correct, placeholder, id }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedOption, setSelectedOption] = useState(null);
 	const toggling = () => setIsOpen(!isOpen);
 	const onOptionClicked = (value) => () => {
 		setSelectedOption(value);
 		setIsOpen(false);
-		console.log(selectedOption);
 	};
 
 	return (
 		<DropDownContainer style={style}>
 			<DropDownHeader onClick={toggling} open={isOpen} correct={correct}>
-				<Text selectedOption={selectedOption}>{selectedOption || placeholder}</Text>
+				<Text id={id} selectedOption={selectedOption}>
+					{selectedOption || placeholder}
+				</Text>
 				<Image isOpen={isOpen} src={btnDropdown} alt='화살표' />
 			</DropDownHeader>
 			{isOpen && (

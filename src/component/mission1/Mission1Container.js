@@ -5,7 +5,7 @@ import TempSaveContext from "../../contextApi/TempSave";
 import { jobCards } from "../JobCards";
 
 const Mission1Container = ({ history }) => {
-	const { state, actions } = useContext(ProcessContext);
+	const { actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
 	const [answerInputText, setAnswerInputText] = useState(""); // onChang 인풋 텍스트 저장하는 state
 	const [answerInputArray, setAnswerInputArray] = useState([
@@ -61,9 +61,7 @@ const Mission1Container = ({ history }) => {
 	// 문제출제 세팅 함수
 	const selectExamQuestion = (i) => {
 		const question = JSON.parse(sessionStorage.getItem("missionOne"));
-		// console.log(question);
 		if (i === undefined) {
-			// console.log("question", question);
 			setMissionQuestion(question[0]);
 		} else {
 			setMissionQuestion(question[i]);

@@ -8,16 +8,21 @@ import { HelpModal, ModalBaseTwoBtn } from "../../ui/modal/Modal";
 import close from "../../assets/icons/bnt-x-24.svg";
 
 const Mission2Presenter = ({
-	missionTwoQandA,
+	test,
+	index,
+	normal,
+	correctFirst,
+	correctSeconds,
 	isOpen,
 	faqModal,
+	missionQuestion,
 	modalState,
 	setProcessFunction,
 	modalFunction,
+	answerFunctionList,
 }) => {
 	return (
 		<Wrapper>
-			{console.log(missionTwoQandA)}
 			<BlockTop>
 				<TopContent>
 					<TextBoxTop>Mission 02</TextBoxTop>
@@ -40,23 +45,29 @@ const Mission2Presenter = ({
 				<BottomContent>
 					<LeftTextBox>상품소개</LeftTextBox>
 					<RightTextBox>4차산업기술을 보유한 미래인재</RightTextBox>
-					<LeftBox>
-						<Title>상품명</Title>
-						<TextContent>재활치료게임</TextContent>
-						<Title>상품명</Title>
-						<TextContentBox>
-							교통사고로 인한 환자의 재활치료를 돕는 의료용 스포츠게임 등으로 훈련함
-						</TextContentBox>
-					</LeftBox>
+					{missionQuestion && (
+						<LeftBox>
+							<Title>상품명</Title>
+							<TextContent>{missionQuestion.proName}</TextContent>
+							<Title>상품설명</Title>
+							<TextContentBox>{missionQuestion.proDescription}</TextContentBox>
+						</LeftBox>
+					)}
+
 					{/* 정답화면 교체 부분 
-						normal=true && correct={true}  : default 화면
-						normal=false && correct={true} : 정답화면
-						normal=false && correct={false} : 오답화면
+						normal=true && correctFirst={true} && correctSeconds={true}  : default 화면
+						normal=false && correctFirst={true} && correctSeconds={true}  : 정답화면
+						normal=false && correctFirst={false or true} && correctSeconds={false or true}  : 오답화면
 					*/}
 					<AnswerDefault
-						normal={true}
-						correct={true}
+						test={test}
+						index={index}
+						missionQuestion={missionQuestion}
+						normal={normal}
+						correctFirst={correctFirst}
+						correctSeconds={correctSeconds}
 						setProcessFunction={setProcessFunction}
+						answerFunctionList={answerFunctionList}
 					/>
 				</BottomContent>
 			</BlockBottom>
@@ -282,7 +293,7 @@ const LeftBox = styled.div`
 `;
 
 const Title = styled.div`
-	width: 50px;
+	width: 80px;
 	height: 24px;
 	margin: 0 206px 18px 0;
 	font-family: "NotoSansCJKkr";
@@ -320,6 +331,7 @@ const TextContentBox = styled.div`
 	letter-spacing: normal;
 	color: #0f0f15;
 	margin-left: 24px;
+	text-align: justify;
 `;
 
 export default Mission2Presenter;

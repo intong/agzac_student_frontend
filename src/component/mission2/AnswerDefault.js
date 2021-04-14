@@ -22,19 +22,32 @@ const options = [
 	"탄소배출권거래중개인",
 ];
 
-const AnswerDefault = ({ normal, correct, setProcessFunction }) => {
+const AnswerDefault = ({
+	test,
+	index,
+	missionQuestion,
+	normal,
+	correctFirst,
+	correctSeconds,
+	answerFunctionList,
+}) => {
 	const leftDropbox = {
 		position: "absolute",
 		left: "24px",
-		// border: normal === false && correct === false ? "1px solid #ff3737" : "",
+		border: normal === false && correctFirst === false ? "1px solid #ff3737" : "",
 	};
 	const rightDropbox = {
 		position: "absolute",
 		left: "320px",
-		// border: normal === false && correct === false ? "1px solid #ff3737" : "",
+		border:
+			normal === false && correctSeconds === false ? "1px solid #ff3737" : "",
 	};
 	return (
-		<RightBox normal={normal} correct={correct}>
+		<RightBox
+			normal={normal}
+			correctFirst={correctFirst}
+			correctSeconds={correctSeconds}
+		>
 			<Number>
 				<span
 					style={{
@@ -45,7 +58,7 @@ const AnswerDefault = ({ normal, correct, setProcessFunction }) => {
 						color: "#0f0f15",
 					}}
 				>
-					1
+					{index}
 				</span>{" "}
 				<span
 					style={{
@@ -95,25 +108,55 @@ const AnswerDefault = ({ normal, correct, setProcessFunction }) => {
 				}}
 			>
 				<Dropbox
+					id='futureOne'
 					style={leftDropbox}
 					options={options}
-					correct={correct}
+					// correct={correct}
 					placeholder='선택'
 				/>
 				<Dropbox
+					id='futureTwo'
 					style={rightDropbox}
 					options={options}
-					correct={correct}
+					// correct={correct}
 					placeholder='선택'
 				/>
 			</div>
-			<ButtonPrimary
-				text='정답제출'
-				style={{ position: "absolute", bottom: "24px", right: "24px" }}
-				onClick={setProcessFunction}
-			/>
-			<CorrectText correct={correct} normal={normal}>
-				{correct ? "정답입니다!" : "다시 한번 생각해 볼까요?"}
+			<FeedbackSection>
+				<LeftFeedback normal={normal} correctFirst={correctFirst}>
+					{missionQuestion && missionQuestion.answerOneFeedback}
+				</LeftFeedback>
+				<RightFeedback normal={normal} correctSeconds={correctSeconds}>
+					{missionQuestion && missionQuestion.answerTwoFeedback}
+				</RightFeedback>
+			</FeedbackSection>
+			{normal ? (
+				<ButtonPrimary
+					text='정답제출'
+					style={{ position: "absolute", bottom: "24px", right: "24px" }}
+					onClick={answerFunctionList.checkAnswer}
+				/>
+			) : correctFirst && correctSeconds ? (
+				<ButtonPrimary
+					text='다음'
+					style={{ position: "absolute", bottom: "24px", right: "24px" }}
+					onClick={answerFunctionList.addIndex}
+				/>
+			) : (
+				<ButtonPrimary
+					text='다음'
+					style={{ position: "absolute", bottom: "24px", right: "24px" }}
+					onClick={answerFunctionList.checkAnswer}
+				/>
+			)}
+			<CorrectText
+				correctFirst={correctFirst}
+				correctSeconds={correctSeconds}
+				normal={normal}
+			>
+				{correctFirst && correctSeconds
+					? "정답입니다!"
+					: "다시 한번 생각해 볼까요?"}
 			</CorrectText>
 		</RightBox>
 	);
@@ -127,7 +170,9 @@ const RightBox = styled.div`
 	background: #ffffff;
 	border-radius: 2px;
 	border: ${(props) =>
-		props.correct === true && props.normal === false
+		props.correctFirst === true &&
+		props.correctSeconds === true &&
+		props.normal === false
 			? "1px solid #ffc300"
 			: "none"};
 	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
@@ -215,8 +260,53 @@ const CorrectText = styled.div`
 	line-height: normal;
 	letter-spacing: normal;
 	color: ${(props) =>
-		props.normal === false && props.correct === true ? "#ffc300" : "#ff3737"};
+		props.normal === false &&
+		props.correctFirst === true &&
+		props.correctSeconds === true
+			? "#ffc300"
+			: "#ff3737"};
 	position: absolute;
 	top: 335px;
 	left: 24px;
+`;
+const FeedbackSection = styled.div`
+	margin-top: 65px;
+	margin-left: 24px;
+	position: relative;
+`;
+const LeftFeedback = styled.div`
+	display: ${(props) =>
+		props.normal === false && props.correctFirst === true ? "show" : "none"};
+	width: 270px;
+	height: 50px;
+	font-family: "NotoSansCJKkr";
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.57;
+	letter-spacing: normal;
+	color: #0f0f15;
+	text-align: justify;
+	position: absolute;
+	top: 0px;
+	left: 5px;
+`;
+const RightFeedback = styled.div`
+	display: ${(props) =>
+		props.normal === false && props.correctSeconds === true ? "show" : "none"};
+	width: 270px;
+	height: 50px;
+	font-family: "NotoSansCJKkr";
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.57;
+	letter-spacing: normal;
+	color: #0f0f15;
+	text-align: justify;
+	position: absolute;
+	top: 0px;
+	left: 300px;
 `;
