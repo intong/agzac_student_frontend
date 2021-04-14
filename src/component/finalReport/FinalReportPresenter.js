@@ -42,12 +42,6 @@ const FinalReportPresenter = ({ isOpen, faqModal, modalFunction }) => {
 						}}
 					/>
 				</BottomContent>
-				<FaqBtn
-					src={btnFaq}
-					alt='힌트버튼'
-					onClick={modalFunction.toggleFaqModal}
-				/>
-				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 			</BlockBottom>
 			{isOpen && (
 				<ModalWrapper>
@@ -69,6 +63,8 @@ const FinalReportPresenter = ({ isOpen, faqModal, modalFunction }) => {
 				</ModalWrapperFaq>
 			)}
 			<Footer />
+			<FaqBtn src={btnFaq} alt='힌트버튼' onClick={modalFunction.toggleFaqModal} />
+			<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 		</Wrapper>
 	);
 };
@@ -172,8 +168,8 @@ const VideoArea = styled.div`
 
 const FaqBtn = styled.img`
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
-	position: absolute;
-	top: 403px;
+	position: fixed;
+	bottom: 108px;
 	right: 30px;
 	&:hover {
 		cursor: pointer;
@@ -181,8 +177,8 @@ const FaqBtn = styled.img`
 `;
 const JobsBtn = styled.img`
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
-	position: absolute;
-	top: 481px;
+	position: fixed;
+	bottom: 30px;
 	right: 30px;
 	&:hover {
 		cursor: pointer;

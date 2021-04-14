@@ -4,16 +4,18 @@ import { HelpModal } from "../../ui/modal/Modal";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
 import group from "../../assets/img/group@3x.png";
-import test from "../../assets/img/JobCards/aiScientist2x.png";
-import test1 from "../../assets/img/JobCards/carbonTrader2x.png";
 import Footer from "../../layout/Footer";
 import close from "../../assets/icons/bnt-x-24.svg";
 import Answer1Default from "./Answer1Default";
 import Answer2Correct from "./Answer2Correct";
 import { ModalBaseTwoBtn } from "../../ui/modal/Modal";
+import { jobCards } from "../JobCards";
 
 const Mission1Presenter = ({
-	missionOneQandA,
+	answerMissionCards,
+	answerInputText,
+	index,
+	missionQuestion,
 	answerResult,
 	isOpen,
 	faqModal,
@@ -21,10 +23,10 @@ const Mission1Presenter = ({
 	processPercentage,
 	setProcessFunction,
 	modalFunction,
+	answerFunctionList,
 }) => {
 	return (
 		<Wrapper>
-			{console.log(missionOneQandA)}
 			<BlockTop>
 				<TopContent>
 					<TextBoxTop>Mission 01</TextBoxTop>
@@ -45,34 +47,49 @@ const Mission1Presenter = ({
 					<LeftBlock>
 						<TextBoxBottomTitle>미래인재 정보</TextBoxBottomTitle>
 						<CardBlock>
-							<CardContainer>
-								<img
-									src={test1}
-									alt=''
-									style={{ widht: "270px", height: "336px", objectFit: "cover" }}
-								/>
-							</CardContainer>
-							<ExplainContainer>
-								<TitleTodo>하는일</TitleTodo>
-								<ExplainTodo>asdasd</ExplainTodo>
-								<BarUnder />
-								<TitleInterview>인터뷰</TitleInterview>
-								<ExplainInterview>asdasd</ExplainInterview>
-								<BarUnder />
-								<TitleSubject>학과</TitleSubject>
-								<ExplainSubject>asdasd</ExplainSubject>
-							</ExplainContainer>
+							{missionQuestion && (
+								<>
+									<CardContainer>
+										{answerResult ? (
+											<img
+												src={jobCards[answerMissionCards].imgUrl}
+												alt=''
+												style={{ widht: "270px", height: "336px", objectFit: "cover" }}
+											/>
+										) : (
+											<img
+												src={group}
+												alt=''
+												style={{ widht: "270px", height: "336px", objectFit: "cover" }}
+											/>
+										)}
+									</CardContainer>
+									<ExplainContainer>
+										<TitleTodo>하는일</TitleTodo>
+										<ExplainTodo>{missionQuestion.todo}</ExplainTodo>
+										<BarUnder />
+										<TitleInterview>인터뷰</TitleInterview>
+										<ExplainInterview>{missionQuestion.interview}</ExplainInterview>
+										<BarUnder />
+										<TitleSubject>학과</TitleSubject>
+										<ExplainSubject>{missionQuestion.subject}</ExplainSubject>
+									</ExplainContainer>
+								</>
+							)}
 						</CardBlock>
 					</LeftBlock>
 					<RightBlock>
 						<TextBoxBottomTitle>직업이름 매칭</TextBoxBottomTitle>
 						<RightBox>
-							{/*정답화면 교체*/}
+							{/*오른쪽 정답화면 교체*/}
 							{answerResult === true ? (
-								<Answer2Correct />
+								<Answer2Correct index={index} answerFunctionList={answerFunctionList} />
 							) : (
 								<Answer1Default
+									answerInputText={answerInputText}
+									index={index}
 									setProcessFunction={setProcessFunction}
+									answerFunctionList={answerFunctionList}
 									wrong={answerResult}
 								/>
 							)}
@@ -82,7 +99,10 @@ const Mission1Presenter = ({
 				<ProgressWrpper>
 					<Progress>
 						<ProgressBackground></ProgressBackground>
-						<ProgressValue processPercentage={processPercentage}></ProgressValue>
+						{/* {console.log("processPercentage", processPercentage)} */}
+						<ProgressValue
+							processPercentage={Math.floor((index / 16) * 100)}
+						></ProgressValue>
 					</Progress>
 					<ProcessBarLabel>
 						<LabelText>미래인재 매칭 달성도</LabelText>
@@ -96,7 +116,7 @@ const Mission1Presenter = ({
 									color: "#0f0f15",
 								}}
 							>
-								{processPercentage}
+								{Math.floor((index / 16) * 100)}
 							</span>
 							&nbsp;%
 						</LaberPercent>
@@ -240,12 +260,11 @@ const ProgressValue = styled.div`
 	width: 0;
 	z-index: 2;
 	@keyframes load {
-		0% {
+		from {
 			width: 0;
 		}
-		100% {
-			width: ${(props) =>
-				props.processPercentage && `${props.processPercentage}%`};
+		to {
+			width: ${(props) => `${props.processPercentage}%`};
 		}
 	}
 `;
@@ -349,6 +368,7 @@ const ExplainTodo = styled.div`
 	font-size: 14px;
 	line-height: 1.57;
 	color: #0f0f15;
+	text-align: justify;
 	margin-bottom: 12px;
 `;
 const BarUnder = styled.div`
@@ -374,6 +394,7 @@ const ExplainInterview = styled.div`
 	font-size: 14px;
 	line-height: 1.57;
 	color: #0f0f15;
+	text-align: justify;
 	margin-bottom: 12px;
 `;
 const TitleSubject = styled.div`
@@ -392,6 +413,7 @@ const ExplainSubject = styled.div`
 	font-size: 14px;
 	line-height: 1.57;
 	color: #0f0f15;
+	text-align: justify;
 `;
 const RightBlock = styled.div`
 	margin-top: 39px;

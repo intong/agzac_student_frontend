@@ -1,16 +1,16 @@
 import React, { createContext, useState } from "react";
 
 const MissionQandAContext = createContext({
-	missionState: { missionOne: "", missionTwo: "" },
-	missionActions: { setMissionOne: () => {}, setMissionTwo: () => {} },
+	missionState: { missionOneIndex: 1, missionTwoIndex: "" },
+	missionActions: { setMissionOneIndex: () => {}, setMissionTwoIndex: () => {} },
 });
 
 const MissionQandAProvider = ({ children }) => {
-	const [missionOne, setMissionOne] = useState();
-	const [missionTwo, setMissionTwo] = useState();
+	const [missionOneIndex, setMissionOneIndex] = useState();
+	const [missionTwoIndex, setMissionTwoIndex] = useState();
 	const value = {
-		missionState: { missionOne, missionTwo },
-		missionActions: { setMissionOne, setMissionTwo },
+		missionState: { missionOneIndex, missionTwoIndex },
+		missionActions: { setMissionOneIndex, setMissionTwoIndex },
 	};
 	return (
 		<MissionQandAContext.Provider value={value}>

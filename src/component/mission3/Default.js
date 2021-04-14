@@ -367,6 +367,7 @@ const ContentContainer = styled.div`
 	margin-left: 24px;
 	margin-top: 18px;
 	margin-bottom: 7px;
+	text-align: justify;
 `;
 const AnwerText = styled.div`
 	display: ${(props) =>

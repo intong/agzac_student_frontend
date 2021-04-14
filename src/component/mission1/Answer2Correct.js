@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { ButtonPrimary, ButtonSecondary } from "../../ui/button/Button";
 
-const Answer2Correct = () => {
+const Answer2Correct = ({ index, answerFunctionList }) => {
 	return (
 		<RightBox>
 			<Number>
@@ -24,7 +24,7 @@ const Answer2Correct = () => {
 							color: "#0f0f15",
 						}}
 					>
-						1
+						{index}
 					</span>{" "}
 					<span
 						style={{
@@ -66,6 +66,7 @@ const Answer2Correct = () => {
 			<ButtonPrimary
 				text='다음'
 				style={{ marginTop: "150px", marginLeft: "200px" }}
+				onClick={answerFunctionList.addIndex}
 			/>
 		</RightBox>
 	);

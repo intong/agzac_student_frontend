@@ -12,7 +12,13 @@ const inputStyle = {
 	marginLeft: "24px",
 };
 
-const Answer1Default = ({ setProcessFunction, wrong }) => {
+const Answer1Default = ({
+	answerInputText,
+	index,
+	setProcessFunction,
+	answerFunctionList,
+	wrong,
+}) => {
 	return (
 		<RightBox>
 			<Number>
@@ -25,7 +31,7 @@ const Answer1Default = ({ setProcessFunction, wrong }) => {
 						color: "#0f0f15",
 					}}
 				>
-					1
+					{index}
 				</span>{" "}
 				<span
 					style={{
@@ -54,11 +60,16 @@ const Answer1Default = ({ setProcessFunction, wrong }) => {
 				제시된 미래인재 정보를 확인한 후 정확한 직업이름을 맞춰 보세요!{" "}
 			</Title>
 			<SubTitle>* 띄어쓰기 없이 작성해주세요.</SubTitle>
-			<InputDefault style={inputStyle} wrong={wrong} />
+			<InputDefault
+				style={inputStyle}
+				wrong={wrong}
+				value={answerInputText ? answerInputText : ""}
+				onChange={answerFunctionList.onChangeAnswer}
+			/>
 			<ButtonPrimary
 				text='정답제출'
 				style={{ marginTop: "128px", marginLeft: "200px" }}
-				onClick={setProcessFunction}
+				onClick={() => answerFunctionList.checkAnswer()}
 			/>
 			<OneMore wrong={wrong}>한번 더 풀어보세요!</OneMore>
 		</RightBox>

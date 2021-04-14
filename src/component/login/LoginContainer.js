@@ -1,7 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Student } from "../../api/api";
 import LoginPresenter from "./LoginPresenter";
-import MissionQandAContext from "../../contextApi/MissionQandA";
 
 const LoginContainer = () => {
 	const [isOpenModal, setIsOpenModal] = useState(); // 비밀번호 없을 시 (비밀번호생성)
