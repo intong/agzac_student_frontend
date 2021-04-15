@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Footer from "../../layout/Footer";
+import ReactPlayer from "react-player";
 import { InputDefault } from "../../ui/inputBox/Input";
 import { ButtonPrimary } from "../../ui/button/Button";
 import {
@@ -48,7 +49,13 @@ const MainVideoPresenter = ({
 					<BlockBottom>
 						<BottomContent>
 							<LeftBox>
-								<VideoPlayArea>{mediaAndSecretCode.media}</VideoPlayArea>
+								<VideoPlayArea>
+									<ReactPlayer
+										url={mediaAndSecretCode.openingMedia}
+										width='100%'
+										height='100%'
+									/>
+								</VideoPlayArea>
 							</LeftBox>
 							<RightBox>
 								<TitleText>기업이름과 비밀코드 입력</TitleText>

@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import ReactPlayer from "react-player";
+import { missionOneMedia } from "../AnswerList";
 import { HelpModal } from "../../ui/modal/Modal";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
@@ -12,6 +14,8 @@ import { ModalBaseTwoBtn } from "../../ui/modal/Modal";
 import { jobCards } from "../JobCards";
 
 const Mission1Presenter = ({
+	prevMedia,
+	nextMedia,
 	answerMissionCards,
 	answerInputText,
 	index,
@@ -83,7 +87,11 @@ const Mission1Presenter = ({
 						<RightBox>
 							{/*오른쪽 정답화면 교체*/}
 							{answerResult === true ? (
-								<Answer2Correct index={index} answerFunctionList={answerFunctionList} />
+								<Answer2Correct
+									index={index}
+									modalFunction={modalFunction}
+									answerFunctionList={answerFunctionList}
+								/>
 							) : (
 								<Answer1Default
 									answerInputText={answerInputText}
@@ -99,7 +107,6 @@ const Mission1Presenter = ({
 				<ProgressWrpper>
 					<Progress>
 						<ProgressBackground></ProgressBackground>
-						{/* {console.log("processPercentage", processPercentage)} */}
 						<ProgressValue
 							processPercentage={Math.floor((index / 16) * 100)}
 						></ProgressValue>
@@ -131,7 +138,7 @@ const Mission1Presenter = ({
 				</ModalWrapper>
 			)}
 			{faqModal && (
-				<ModalWrapperFaq>
+				<ModalWrapper>
 					<ModalAreaFaq>
 						<CloseDiv
 							src={close}
@@ -140,11 +147,11 @@ const Mission1Presenter = ({
 						/>
 						<TextDiv>* 이곳에 써주세요.</TextDiv>
 					</ModalAreaFaq>
-				</ModalWrapperFaq>
+				</ModalWrapper>
 			)}
 			<Footer />
 			{modalState.saveModalOpen && (
-				<ModalWrapperSave>
+				<ModalWrapper>
 					<ModalAreaSave>
 						<ModalBaseTwoBtn
 							header='임시 저장 하기'
@@ -155,26 +162,43 @@ const Mission1Presenter = ({
 							cancelbtnEvent={modalFunction.toggleSaveModal}
 						/>
 					</ModalAreaSave>
-				</ModalWrapperSave>
+				</ModalWrapper>
+			)}
+			{/* 문제 풀기 전 영상 플레이 모달 */}
+			{prevMedia && (
+				<ModalWrapper>
+					{console.log(index)}
+					<ModalPrevNextMediaArea>
+						<CloseBtn src={close} onClick={modalFunction.togglePrevMediaModal} />
+						{missionOneMedia[index - 1].prev}
+						{/* <ReactPlayer
+							url={missionOneMedia[index - 1].prev}
+							width='100%'
+							height='100%'
+						/> */}
+					</ModalPrevNextMediaArea>
+				</ModalWrapper>
+			)}
+
+			{/* 문제 푼 후 영상 플레이 모달 */}
+			{nextMedia && (
+				<ModalWrapper>
+					<ModalPrevNextMediaArea>
+						<CloseBtn src={close} onClick={modalFunction.toggleNextMediaModal} />
+						{missionOneMedia[index - 1].next}
+						{/* <ReactPlayer
+							url={missionOneMedia[index - 1].next}
+							width='100%'
+							height='100%'
+						/> */}
+					</ModalPrevNextMediaArea>
+				</ModalWrapper>
 			)}
 			<FaqBtn src={btnFaq} alt='힌트버튼' onClick={modalFunction.toggleFaqModal} />
 			<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 		</Wrapper>
 	);
 };
-
-const ModalWrapperSave = styled.div`
-	width: 100vw;
-	height: 100vh;
-	background: rgba(15, 15, 21, 0.8);
-	position: fixed;
-	top: 0px;
-	display: flex;
-	z-index: 20;
-`;
-const ModalAreaSave = styled.div`
-	margin: auto;
-`;
 
 const ModalWrapper = styled.div`
 	width: 100vw;
@@ -185,21 +209,35 @@ const ModalWrapper = styled.div`
 	z-index: 20;
 	display: flex;
 `;
+const ModalPrevNextMediaArea = styled.div`
+	width: 944px;
+	height: 458px;
+	border-radius: 2px;
+	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
+	background: #ffffff;
+	margin: auto;
+	position: relative;
+`;
+const CloseBtn = styled.img`
+	width: 24px;
+	height: 24px;
+	filter: invert(100%);
+	position: absolute;
+	top: -30px;
+	right: 0px;
+	&:hover {
+		cursor: pointer;
+	}
+`;
+const ModalAreaSave = styled.div`
+	margin: auto;
+`;
 const ModalArea = styled.div`
 	width: 700px;
 	height: 503px;
 	position: absolute;
 	bottom: 122px;
 	right: 114px;
-`;
-const ModalWrapperFaq = styled.div`
-	width: 100vw;
-	height: 100vh;
-	background: rgba(15, 15, 21, 0.8);
-	position: fixed;
-	top: 0;
-	z-index: 20;
-	display: flex;
 `;
 const ModalAreaFaq = styled.div`
 	width: 944px;

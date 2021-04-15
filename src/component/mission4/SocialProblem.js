@@ -4,9 +4,8 @@ import { ButtonPrimary } from "../../ui/button/Button";
 import { TextArea } from "../../ui/inputBox/Input";
 import { Dropbox } from "../../ui/dropbox/Dropbox";
 
-const options = ["1", "6", "5", "4", "3", "2"];
-
-const SocialProblem = ({ clickFunctionList }) => {
+const SocialProblem = ({ prevSelect, clickFunctionList }) => {
+	const options = prevSelect && prevSelect.studentAnswerList;
 	return (
 		<>
 			<RightBox>

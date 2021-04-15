@@ -7,6 +7,8 @@ import { jobCards } from "../JobCards";
 const Mission1Container = ({ history }) => {
 	const { actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
+	const [prevMedia, setPrevMedia] = useState(true);
+	const [nextMedia, setNextMedia] = useState(false);
 	const [answerInputText, setAnswerInputText] = useState(""); // onChang 인풋 텍스트 저장하는 state
 	const [answerInputArray, setAnswerInputArray] = useState([
 		{ question1: { answer: "", wrongAnswer: "" } },
@@ -55,6 +57,12 @@ const Mission1Container = ({ history }) => {
 		},
 		toggleSaveModal: () => {
 			modalActions.setSaveModalOpen(!modalState.saveModalOpen);
+		},
+		togglePrevMediaModal: () => {
+			setPrevMedia(!prevMedia);
+		},
+		toggleNextMediaModal: () => {
+			setNextMedia(!nextMedia);
 		},
 	};
 
@@ -108,6 +116,7 @@ const Mission1Container = ({ history }) => {
 			} else {
 				selectExamQuestion(index);
 				setIndex(index + 1);
+				modalFunction.togglePrevMediaModal();
 				setAnswerResult(undefined);
 			}
 		},
@@ -119,6 +128,8 @@ const Mission1Container = ({ history }) => {
 
 	return (
 		<Mission1Presenter
+			prevMedia={prevMedia}
+			nextMedia={nextMedia}
 			answerMissionCards={answerMissionCards}
 			answerInputText={answerInputText}
 			index={index}

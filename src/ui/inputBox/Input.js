@@ -46,6 +46,7 @@ const InputLineType = ({ style, onChange, placeholder }) => {
 	);
 };
 const InputStyle = styled.input`
+	width: 200px;
 	outline: none;
 	border: 0;
 	border-bottom: 1px solid #e4e4e4;

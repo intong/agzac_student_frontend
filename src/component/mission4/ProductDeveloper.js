@@ -11,7 +11,7 @@ const inputStyle = {
 	top: "88px",
 };
 
-const ProductDeveloper = ({ clickFunctionList }) => {
+const ProductDeveloper = ({ modalFunction, clickFunctionList }) => {
 	return (
 		<RightBox>
 			<Question>
@@ -60,7 +60,7 @@ const ProductDeveloper = ({ clickFunctionList }) => {
 			<ButtonPrimary
 				text='다음'
 				style={{ position: "absolute", bottom: "24px", right: "24px" }}
-				onClick={() => clickFunctionList.onClickNextFuction("developer")}
+				onClick={modalFunction.togglePriceSettingModal}
 			/>
 		</RightBox>
 	);

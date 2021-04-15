@@ -15,13 +15,12 @@ const Mission3Presenter = ({
 	selectTab,
 	selectTabContent,
 	choosed,
-	answerText,
 	firstAnswer,
 	secondAnswer,
 	thirdAnswer,
-	aa,
-	bb,
-	cc,
+	firstInputText,
+	secondsInputText,
+	thirdInputText,
 	uiFunctionList,
 	isOpen,
 	faqModal,
@@ -30,7 +29,6 @@ const Mission3Presenter = ({
 }) => {
 	return (
 		<Wrapper>
-			{console.log(selectTabContent)}
 			<BlockTop>
 				<TopContent>
 					<TextBoxTop>Mission 03</TextBoxTop>
@@ -109,13 +107,12 @@ const Mission3Presenter = ({
 						setProcessFunction={setProcessFunction}
 						selectTabContent={selectTabContent}
 						choosed={choosed}
-						answerText={answerText}
 						firstAnswer={firstAnswer}
 						secondAnswer={secondAnswer}
 						thirdAnswer={thirdAnswer}
-						aa={aa}
-						bb={bb}
-						cc={cc}
+						firstInputText={firstInputText}
+						secondsInputText={secondsInputText}
+						thirdInputText={thirdInputText}
 						uiFunctionList={uiFunctionList}
 					/>
 					{choosed === false && (

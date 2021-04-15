@@ -11,7 +11,9 @@ const MainVideoContainer = ({ history }) => {
 	const [hasDataModal, setHasDataModal] = useState(); // 저장된 데어터가 있을 때 데이터 불러오기 모달
 	const [answerCorrectModal, setAnswerCorrectModal] = useState(); // 정답 모달
 	const [answerFalseModal, setAnswerFalseModal] = useState(); // 오답 모달
-	const [mediaAndSecretCode, setMediaAndSecretCode] = useState(); // 영상과 답안지 useEffect 안에서 랜덤으로 한개 뽑아서 저장시키는 state
+	const [mediaAndSecretCode, setMediaAndSecretCode] = useState(
+		MediaSecretCodeAnswer
+	); // 영상과 답안지 useEffect 안에서 랜덤으로 한개 뽑아서 저장시키는 state
 	const [companyName, setCompanyName] = useState();
 	const [secretCode, setSecretCode] = useState();
 
@@ -95,13 +97,9 @@ const MainVideoContainer = ({ history }) => {
 	}, [actions]);
 
 	useEffect(() => {
-		// 배열랜덤 요소 선택 함수
-		const randomItem = (arr) => {
-			return arr[Math.floor(Math.random() * arr.length)];
-		};
-		// 랜덤영상 선택 함수
+		// 영상 시크릿코드
 		const randomChoice = () => {
-			setMediaAndSecretCode(randomItem(MediaSecretCodeAnswer));
+			setMediaAndSecretCode(MediaSecretCodeAnswer);
 		};
 		randomChoice();
 		getTempData();

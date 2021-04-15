@@ -1,9 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Mission4Presenter from "./Mission4Presenter";
 import ProcessContext from "../../contextApi/Process";
 
-const Mission4Container = ({ history }) => {
+const Mission4Container = ({ history, location }) => {
 	const { actions } = useContext(ProcessContext);
+	const [priceSettingModal, setPriceSettingModal] = useState(false); // 상품가격 세팅 모달 오픈
+	const [completeModal, setCompleteModal] = useState(false);
+	const [prevSelect, setPrevSelect] = useState(); // mission3에서 선택한 사회문제 및 키워드 3개
 	const [faqModal, setFaqModal] = useState();
 	const [isOpen, setIsOpen] = useState(false);
 	const [confirm, setConfirm] = useState({
@@ -13,6 +16,12 @@ const Mission4Container = ({ history }) => {
 	});
 
 	const clickFunctionList = {
+		choiceOtherSocialProblem: () => {
+			const ok = window.confirm("다른 사회 문제를 선택하겠습니까?");
+			if (ok) {
+				history.push("/mission3");
+			}
+		},
 		onClickNextFuction: (tab) => {
 			if (tab === "social") {
 				// validation 체크 후 컨펌
@@ -23,9 +32,12 @@ const Mission4Container = ({ history }) => {
 			} else {
 				// validation 체크 후 컨펌
 				alert("developer 버튼 클릭");
-				actions.setMission4("ok");
-				history.push("/finalreport");
 			}
+		},
+		// 파이널로 가기
+		goToFinalReport: () => {
+			actions.setMission4("ok");
+			history.push("/finalreport");
 		},
 	};
 
@@ -39,10 +51,27 @@ const Mission4Container = ({ history }) => {
 		toggleFaqModal: () => {
 			setFaqModal(!faqModal);
 		},
+		togglePriceSettingModal: () => {
+			setPriceSettingModal(!priceSettingModal);
+		},
+		toggleCompleteModal: () => {
+			modalFunction.togglePriceSettingModal();
+			setCompleteModal(!completeModal);
+		},
+		cancelCompleteModal: () => {
+			setCompleteModal(!completeModal);
+		},
 	};
+
+	useEffect(() => {
+		setPrevSelect(location.state);
+	}, [location.state]);
 
 	return (
 		<Mission4Presenter
+			priceSettingModal={priceSettingModal}
+			completeModal={completeModal}
+			prevSelect={prevSelect}
 			isOpen={isOpen}
 			faqModal={faqModal}
 			confirm={confirm}

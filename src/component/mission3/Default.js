@@ -19,11 +19,12 @@ const Default = ({
 	firstAnswer,
 	secondAnswer,
 	thirdAnswer,
-	aa,
-	bb,
-	cc,
+	firstInputText,
+	secondsInputText,
+	thirdInputText,
 	uiFunctionList,
 }) => {
+	// 화면 왼쪽 카드 텍스트 랜덤값 텍스트 배치
 	const arrayPosition = [
 		{ left: "382px", top: "57px" },
 		{ left: "324px", top: "128px" },
@@ -214,9 +215,6 @@ const Default = ({
 							</LeftInsideText>
 						</LeftInsideBox>
 					</LeftBox>
-					{console.log("firstAnswer", firstAnswer)}
-					{console.log("secondAnswer", secondAnswer)}
-					{console.log("thirdAnswer", thirdAnswer)}
 					<RightBox
 						firstAnswer={firstAnswer}
 						secondAnswer={secondAnswer}
@@ -231,28 +229,36 @@ const Default = ({
 							name='first'
 							style={inputStyle}
 							wrong={firstAnswer}
-							value={aa ? aa : ""}
+							value={firstInputText ? firstInputText : ""}
 							onChange={uiFunctionList.onChange}
 						/>
 						<InputDefault
 							name='second'
 							style={inputStyle}
 							wrong={secondAnswer}
-							value={bb ? bb : ""}
+							value={secondsInputText ? secondsInputText : ""}
 							onChange={uiFunctionList.onChange}
 						/>
 						<InputDefault
 							name='third'
 							style={inputStyle}
 							wrong={thirdAnswer}
-							value={cc ? cc : ""}
+							value={thirdInputText ? thirdInputText : ""}
 							onChange={uiFunctionList.onChange}
 						/>
-						<ButtonPrimary
-							text='정답제출'
-							style={{ marginLeft: "202px", marginTop: "15px" }}
-							onClick={uiFunctionList.checkAnswer}
-						/>
+						{firstAnswer && secondAnswer && thirdAnswer ? (
+							<ButtonPrimary
+								text='다음단계'
+								style={{ marginLeft: "202px", marginTop: "15px" }}
+								onClick={setProcessFunction}
+							/>
+						) : (
+							<ButtonPrimary
+								text='정답제출'
+								style={{ marginLeft: "202px", marginTop: "15px" }}
+								onClick={uiFunctionList.checkAnswer}
+							/>
+						)}
 						<AnwerText
 							firstAnswer={firstAnswer}
 							secondAnswer={secondAnswer}
@@ -323,15 +329,11 @@ const RightBox = styled.div`
 	width: 304px;
 	height: 388px;
 	border: ${(props) =>
-		props.firstAnswer !== undefined &&
-		props.secondAnswer !== undefined &&
-		props.thirdAnswer !== undefined
-			? props.firstAnswer === false ||
-			  props.secondAnswer === false ||
-			  props.thirdAnswer === false
-				? "1px solid red"
-				: "1px solid yellow"
-			: "1px solid white"};
+		props.firstAnswer === true &&
+		props.secondAnswer === true &&
+		props.thirdAnswer === true
+			? "1px solid #ffc300"
+			: ""};
 	border-radius: 2px;
 	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
 	background-color: #ffffff;
@@ -370,12 +372,28 @@ const ContentContainer = styled.div`
 	text-align: justify;
 `;
 const AnwerText = styled.div`
+	position: absolute;
+	bottom: 33px;
+	left: 24px;
+	font-family: "NotoSansCJKkr";
+	font-size: 14px;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
 	display: ${(props) =>
 		props.firstAnswer === undefined &&
 		props.secondAnswer === undefined &&
 		props.thirdAnswer === undefined
 			? "none"
 			: "show"};
+	color: ${(props) =>
+		props.firstAnswer === true &&
+		props.secondAnswer === true &&
+		props.thirdAnswer === true
+			? "#ffc300"
+			: "#ff3737"};
 `;
 
 export default Default;

@@ -1,4 +1,6 @@
 import React from "react";
+import ReactPlayer from "react-player";
+import { MediaSecretCodeAnswer } from "../AnswerList";
 import styled from "styled-components";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
@@ -31,7 +33,13 @@ const FinalReportPresenter = ({ isOpen, faqModal, modalFunction }) => {
 			</BlockTop>
 			<BlockBottom>
 				<BottomContent>
-					<VideoArea>영상</VideoArea>
+					<VideoArea>
+						<ReactPlayer
+							url={MediaSecretCodeAnswer.endingMedia}
+							width='100%'
+							height='100%'
+						/>
+					</VideoArea>
 					<FinalReportBtn
 						text='최종보고서 제출하기'
 						style={{

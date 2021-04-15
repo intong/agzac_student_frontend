@@ -8,7 +8,11 @@ import { ButtonSecondary } from "../../ui/button/Button";
 import SocialProblem from "./SocialProblem";
 import ProductDeveloper from "./ProductDeveloper";
 import ReasonDevelopProduct from "./ReasonDevelopProduct";
-import { HelpModal } from "../../ui/modal/Modal";
+import {
+	HelpModal,
+	ModalWithInputOneBtn,
+	CompleteModal,
+} from "../../ui/modal/Modal";
 
 const btnStyle = {
 	width: "256px",
@@ -19,6 +23,9 @@ const btnStyle = {
 };
 
 const Mission4Presenter = ({
+	priceSettingModal,
+	completeModal,
+	prevSelect,
 	isOpen,
 	faqModal,
 	confirm,
@@ -53,9 +60,15 @@ const Mission4Presenter = ({
 						>
 							<LeftBox>
 								<LeftTitle>
-									홍길동님이 선택한 사회문제의 주제는 기후변화와 환경입니다.
+									{sessionStorage.getItem("user")}&nbsp;님이 선택한 사회문제의
+									주제는&nbsp;{prevSelect && prevSelect.selectTabContent.name}
+									&nbsp;입니다.
 								</LeftTitle>
-								<ButtonSecondary text='다른 사회문제 선택' style={btnStyle} />
+								<ButtonSecondary
+									text='다른 사회문제 선택'
+									style={btnStyle}
+									onClick={clickFunctionList.choiceOtherSocialProblem}
+								/>
 							</LeftBox>
 							<RightBox>
 								<Tabs>
@@ -72,12 +85,18 @@ const Mission4Presenter = ({
 								{/* 변경 자리 */}
 								{confirm.social === "ok" ? (
 									confirm.social === "ok" && confirm.reason === "ok" ? (
-										<ProductDeveloper clickFunctionList={clickFunctionList} />
+										<ProductDeveloper
+											modalFunction={modalFunction}
+											clickFunctionList={clickFunctionList}
+										/>
 									) : (
 										<ReasonDevelopProduct clickFunctionList={clickFunctionList} />
 									)
 								) : (
-									<SocialProblem clickFunctionList={clickFunctionList} />
+									<SocialProblem
+										prevSelect={prevSelect}
+										clickFunctionList={clickFunctionList}
+									/>
 								)}
 							</RightBox>
 						</div>
@@ -103,6 +122,42 @@ const Mission4Presenter = ({
 						</ModalAreaFaq>
 					</ModalWrapperFaq>
 				)}
+
+				{/* 상품가격 세팅 모달 */}
+				{priceSettingModal && (
+					<ModalWrapper>
+						<ModalAreaPrice>
+							<ModalWithInputOneBtn
+								header='상품개발을 완료했습니다.'
+								content='상상품이름을 보고 사람들이 기능을 알아볼 수 있도록 
+								멋진 상품이름을 지어주세요!
+								'
+								placeholder='상품이름을 입력해주세요.'
+								btntext='확인'
+								closeModalEvent={modalFunction.togglePriceSettingModal}
+								btnEvent={modalFunction.toggleCompleteModal}
+								// onChange={}
+							/>
+						</ModalAreaPrice>
+					</ModalWrapper>
+				)}
+
+				{/* 모든 미션 완료 및 가격 설정까지 완료 후 모달 */}
+				{completeModal && (
+					<ModalWrapper>
+						<ModalCompleteArea>
+							<CompleteModal
+								headerText={`${sessionStorage.getItem(
+									"user"
+								)}님 축하합니다! 모든 미션을 완료해주셨네요.`}
+								contentText='사회문제를 해결하는 상품을 개발해 주셔서 감사합니다. 사회문제로 어려움을 겪고 있는 사람들의 문제가 해결될 수 있을 것 같습니다. 모든 미션을 성공적으로 완료하였으니, 
+								최종 보고서를 작성하러 이동해 볼까요?'
+								handleCancel={modalFunction.cancelCompleteModal}
+								onClickBtn={clickFunctionList.goToFinalReport}
+							/>
+						</ModalCompleteArea>
+					</ModalWrapper>
+				)}
 				<FaqBtn
 					src={btnFaq}
 					alt='힌트버튼'
@@ -122,6 +177,27 @@ const ModalWrapperFaq = styled.div`
 	top: 0;
 	z-index: 20;
 	display: flex;
+`;
+const ModalWrapper = styled.div`
+	width: 100vw;
+	height: 100vh;
+	min-height: 900px;
+	max-height: 1122px;
+	background: rgba(15, 15, 21, 0.8);
+	position: fixed;
+	top: 0;
+	z-index: 60;
+	display: flex;
+`;
+const ModalAreaPrice = styled.div`
+	width: 320px;
+	height: 304px;
+	margin: auto;
+`;
+const ModalCompleteArea = styled.div`
+	width: 387px;
+	height: 486px;
+	margin: auto;
 `;
 const ModalAreaFaq = styled.div`
 	width: 944px;
@@ -156,17 +232,6 @@ const TextDiv = styled.div`
 	right: 24px;
 `;
 
-const ModalWrapper = styled.div`
-	width: 100vw;
-	height: 100vh;
-	min-height: 900px;
-	max-height: 1122px;
-	background: rgba(15, 15, 21, 0.8);
-	position: fixed;
-	top: 0;
-	z-index: 60;
-	display: flex;
-`;
 const ModalArea = styled.div`
 	width: 700px;
 	height: 503px;
@@ -281,6 +346,7 @@ const LeftTitle = styled.div`
 	line-height: 1.33;
 	letter-spacing: normal;
 	color: #0f0f15;
+	text-align: justify;
 	position: absolute;
 	top: 26px;
 	left: 24px;

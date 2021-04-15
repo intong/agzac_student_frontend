@@ -12,20 +12,27 @@ const Mission3Container = ({ history }) => {
 	const [selectTab, setSelectTab] = useState();
 	const [selectTabContent, setSelectTabContent] = useState();
 	const [choosed, setChoosed] = useState(false);
+	const [studentAnswerList, setStudentAnswerList] = useState([]); // 학생이 고른 키워드 세개 (미션4로 전달)
 	const [firstAnswer, setFirstAnswer] = useState();
 	const [secondAnswer, setSecondAnswer] = useState();
 	const [thirdAnswer, setThirdAnswer] = useState();
-	const [aa, setAa] = useState();
-	const [bb, setBb] = useState();
-	const [cc, setCc] = useState();
+	const [firstInputText, setFirstInputText] = useState();
+	const [secondsInputText, setSecondsInputText] = useState();
+	const [thirdInputText, setThirdInputText] = useState();
 
 	const setProcessFunction = () => {
 		//validation 추가
-		console.log(11);
 		actions.setMission3("ok");
-		history.push("/mission4");
+		history.push({
+			pathname: "/mission4",
+			state: {
+				selectTabContent: selectTabContent,
+				studentAnswerList: studentAnswerList,
+			},
+		});
 	};
 
+	let tempArr = [];
 	const uiFunctionList = {
 		tabSelectFunction: (tab) => {
 			const selectCategory = missionThreeQandA.find((ele) => ele.category === tab);
@@ -39,46 +46,44 @@ const Mission3Container = ({ history }) => {
 				alert("사회문제를 먼저 선택하세요");
 			}
 		},
-		passNext: () => {
-			alert(111);
-			if (firstAnswer === true && secondAnswer === true && thirdAnswer === true) {
-				setProcessFunction();
-			}
+		hasAnswerList: (answer) => {
+			const result = selectTabContent.answer.includes(answer);
+			return result;
 		},
 		checkAnswer: () => {
-			const correct = {
-				first: "드론개발자",
-				second: "드론",
-				third: "개발자",
-			};
-			if (aa === correct.first) {
-				setFirstAnswer(true);
+			if (firstInputText && secondsInputText && thirdInputText !== undefined) {
+				if (uiFunctionList.hasAnswerList(firstInputText)) {
+					setFirstAnswer(true);
+					tempArr.push(firstInputText);
+				} else {
+					setFirstAnswer(false);
+				}
+				if (uiFunctionList.hasAnswerList(secondsInputText)) {
+					setSecondAnswer(true);
+					tempArr.push(secondsInputText);
+				} else {
+					setSecondAnswer(false);
+				}
+				if (uiFunctionList.hasAnswerList(thirdInputText)) {
+					setThirdAnswer(true);
+					tempArr.push(thirdInputText);
+				} else {
+					setThirdAnswer(false);
+				}
+				setStudentAnswerList(tempArr);
 			} else {
-				setFirstAnswer(false);
+				alert("세 가지 키워드를 찾아주세요.");
 			}
-
-			if (bb === correct.second) {
-				setSecondAnswer(true);
-			} else {
-				setSecondAnswer(false);
-			}
-
-			if (cc === correct.third) {
-				setThirdAnswer(true);
-			} else {
-				setThirdAnswer(false);
-			}
-			uiFunctionList.passNext();
 		},
 		onChange: (e) => {
 			const name = e.target.name;
 			const value = e.target.value;
 			if (name === "first") {
-				setAa(value);
+				setFirstInputText(value);
 			} else if (name === "second") {
-				setBb(value);
+				setSecondsInputText(value);
 			} else {
-				setCc(value);
+				setThirdInputText(value);
 			}
 		},
 	};
@@ -112,9 +117,9 @@ const Mission3Container = ({ history }) => {
 				firstAnswer={firstAnswer}
 				secondAnswer={secondAnswer}
 				thirdAnswer={thirdAnswer}
-				aa={aa}
-				bb={bb}
-				cc={cc}
+				firstInputText={firstInputText}
+				secondsInputText={secondsInputText}
+				thirdInputText={thirdInputText}
 				uiFunctionList={uiFunctionList}
 				isOpen={isOpen}
 				faqModal={faqModal}

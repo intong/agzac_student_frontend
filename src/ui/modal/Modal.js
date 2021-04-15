@@ -11,6 +11,7 @@ import close from "../../assets/icons/bnt-x-24.svg";
 import prev from "../../assets/icons/btn-prev.svg";
 import next from "../../assets/icons/btn-next.svg";
 import { jobCards } from "../../component/JobCards";
+import Robot from "../../assets/img/img-robot-confirmpopup@2x.png";
 import ReactLoading from "react-loading";
 
 export const LoadingModal = () => {
@@ -255,14 +256,12 @@ export const ModalWithInputOneBtn = ({
 		<BlockWithInput>
 			<CloseImgTwoBtn src={close} alt='' onClick={closeModalEvent} />
 			<HeaderDivWithInput>{header}</HeaderDivWithInput>
-			<ContentDivWithInput>
-				{content}
-				<InputLineType
-					placeholder={placeholder}
-					style={{ marginTop: "20px", marginBottom: "10px" }}
-					onChange={onChange}
-				/>
-			</ContentDivWithInput>
+			<ContentDivWithInput>{content}</ContentDivWithInput>
+			<InputLineType
+				placeholder={placeholder}
+				style={{ marginTop: "20px", marginBottom: "10px" }}
+				onChange={onChange}
+			/>
 			<BtnPositionWithInput>
 				<ButtonPrimary
 					text={btntext}
@@ -291,7 +290,6 @@ const HeaderDivWithInput = styled.div`
 	color: #0f0f15;
 `;
 const ContentDivWithInput = styled.div`
-	min-height: 66px;
 	font-family: "NotoSansCJKkr";
 	font-size: 14px;
 	font-weight: normal;
@@ -301,7 +299,6 @@ const ContentDivWithInput = styled.div`
 	letter-spacing: normal;
 	color: #0f0f15;
 	margin-top: 18px;
-	/* background: green; */
 `;
 const BtnPositionWithInput = styled.div`
 	/* background: red; */
@@ -541,4 +538,72 @@ const BottomNo = styled.div`
 	position: absolute;
 	bottom: 26px;
 	left: 297px;
+`;
+
+export const CompleteModal = ({
+	handleCancel,
+	headerText,
+	contentText,
+	onClickBtn,
+}) => {
+	return (
+		<WrapperComplete>
+			<CloseBtnComplete src={close} onClick={handleCancel} />
+			<HeaderComplete>{headerText}</HeaderComplete>
+			<ContentComplete>{contentText}</ContentComplete>
+			<RobotImg src={Robot} />
+			<ButtonPrimaryLong
+				style={{ width: "339px", marginBottom: "26px" }}
+				text='최종보고서 작성'
+				onClick={onClickBtn}
+			/>
+		</WrapperComplete>
+	);
+};
+
+const WrapperComplete = styled.div`
+	width: 339px;
+	height: 460px;
+	padding: 26px 24px;
+	border-radius: 2px;
+	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
+	background: #ffffff;
+	position: relative;
+`;
+const CloseBtnComplete = styled.img`
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	&:hover {
+		cursor: pointer;
+	}
+`;
+const HeaderComplete = styled.div`
+	font-family: "NotoSansCJKkr";
+	font-size: 18px;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.33;
+	letter-spacing: normal;
+	color: #0f0f15;
+	margin-bottom: 18px;
+`;
+const ContentComplete = styled.div`
+	width: 339px;
+	height: 88px;
+	font-family: "NotoSansCJKkr";
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.57;
+	letter-spacing: normal;
+	color: #0f0f15;
+	text-align: justify;
+`;
+const RobotImg = styled.img`
+	width: 339px;
+	height: 248px;
+	margin-bottom: 12px;
 `;

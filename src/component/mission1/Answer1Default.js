@@ -15,7 +15,6 @@ const inputStyle = {
 const Answer1Default = ({
 	answerInputText,
 	index,
-	setProcessFunction,
 	answerFunctionList,
 	wrong,
 }) => {
