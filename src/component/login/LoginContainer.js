@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Student } from "../../api/api";
 import LoginPresenter from "./LoginPresenter";
 import LoginMobilePresenter from "./mobileVersion/LoginMobilePresenter";
