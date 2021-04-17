@@ -3,9 +3,11 @@ import styled from "styled-components";
 import ReactPlayer from "react-player";
 import nextIcon from "../../../assets/mobileImage/icn-next-dim@2x.png";
 import { ButtonSecondary } from "../../../ui/button/Button";
+import { LoadingModal, ModalTwoBtnLong } from "../../../ui/modal/Modal";
 
 const MainVideoMobilePresenter = ({
-	video,
+	hasDataModal,
+	modalFunction,
 	mediaAndSecretCode,
 	mobileFunctionList,
 }) => {
@@ -67,6 +69,28 @@ const MainVideoMobilePresenter = ({
 					<NextIcon src={nextIcon} />
 				</ButtonDiv>
 			</BottomContent>
+			{/* 임시저장 데이터가 있는 지 확인하고 있으면 띄우는 모달 */}
+			{hasDataModal === undefined ? (
+				<ModalWrapper>
+					<ModalArea>
+						<LoadingModal />
+					</ModalArea>
+				</ModalWrapper>
+			) : hasDataModal === true ? (
+				<ModalWrapper>
+					<ModalArea>
+						<ModalTwoBtnLong
+							header='저장된 데이터 불러오기'
+							content='이미 작성된 데이터가 있습니다. 저장된 데이터를 불러올까요?'
+							closeModalEvent={modalFunction.toggleHasDataModal}
+							confirmBtnOnClick={modalFunction.useTempData}
+							cancelBtnOnClick={modalFunction.toggleHasDataModal}
+						/>
+					</ModalArea>
+				</ModalWrapper>
+			) : (
+				<></>
+			)}
 		</Wrapper>
 	);
 };
@@ -150,7 +174,7 @@ const BottomContent = styled.div`
 const VideoPlayArea = styled.div`
 	border-radius: 2px;
 	border: solid 1px #e4e4e4;
-	width: 300px;
+	width: 80vw;
 	height: 25vh;
 	margin: auto;
 `;
@@ -165,6 +189,20 @@ const NextIcon = styled.img`
 	right: 24%;
 	width: 24px;
 	height: 24px;
+`;
+
+const ModalWrapper = styled.div`
+	width: 100vw;
+	height: 100vh;
+	background: rgba(15, 15, 21, 0.8);
+	position: fixed;
+	top: 0px;
+	display: flex;
+	z-index: 20;
+`;
+
+const ModalArea = styled.div`
+	margin: auto;
 `;
 
 export default MainVideoMobilePresenter;

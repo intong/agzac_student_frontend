@@ -126,6 +126,7 @@ const MainVideoContainer = ({ history, location, match }) => {
 			{dimension.width < 415 ? (
 				mainVideoInput ? (
 					<MainVideoMobileInputPresenter
+						isModalOpen={modalState.saveModalOpen}
 						companyName={companyName}
 						secretCode={secretCode}
 						answerFalseModal={answerFalseModal}
@@ -135,7 +136,8 @@ const MainVideoContainer = ({ history, location, match }) => {
 					/>
 				) : (
 					<MainVideoMobilePresenter
-						video={state.video}
+						hasDataModal={hasDataModal}
+						modalFunction={modalFunction}
 						mediaAndSecretCode={mediaAndSecretCode}
 						mobileFunctionList={mobileFunctionList}
 					/>

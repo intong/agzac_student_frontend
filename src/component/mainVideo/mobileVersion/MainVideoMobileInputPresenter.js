@@ -2,10 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { InputDefault } from "../../../ui/inputBox/Input";
 import { ButtonPrimary } from "../../../ui/button/Button";
-import { ModalBase } from "../../../ui/modal/Modal";
+import { ModalBase, ModalBaseTwoBtn } from "../../../ui/modal/Modal";
 import close from "../../../assets/icons/bnt-x-24.svg";
 
 const MainVideoMobileInputPresenter = ({
+	isModalOpen,
 	companyName,
 	secretCode,
 	answerFalseModal,
@@ -25,7 +26,7 @@ const MainVideoMobileInputPresenter = ({
 						borderRadius: "2px",
 						border: "1px solid #e4e4e4",
 						background: "#fcfcfc",
-						width: "300px",
+						width: "80vw",
 						height: "42px",
 						marginTop: "14px",
 					}}
@@ -39,7 +40,7 @@ const MainVideoMobileInputPresenter = ({
 						borderRadius: "2px",
 						border: "1px solid #e4e4e4",
 						background: "#fcfcfc",
-						width: "300px",
+						width: "80vw",
 						height: "42px",
 						marginTop: "14px",
 					}}
@@ -66,6 +67,21 @@ const MainVideoMobileInputPresenter = ({
 					</ModalArea>
 				</ModalWrapper>
 			)}
+			{/* 임시저장모달 */}
+			{isModalOpen && (
+				<ModalWrapper>
+					<ModalArea>
+						<ModalBaseTwoBtn
+							header='임시 저장 하기'
+							content='지금까 입력한 정보가 저장 됩니다.'
+							confirmbtntext='확인'
+							cancelbtntext='취소'
+							confirmbtnEvent={modalFunction.tempSaveSheet}
+							cancelbtnEvent={modalFunction.toggleModal}
+						/>
+					</ModalArea>
+				</ModalWrapper>
+			)}
 		</Wrapper>
 	);
 };
@@ -74,7 +90,7 @@ const Wrapper = styled.div`
 	width: 100vw;
 	height: 100vh;
 	position: fixed;
-	top: 0vh;
+	/* top: 0vh; */
 	overflow-x: hidden;
 	overflow-y: scroll;
 	background: #ffffff;
@@ -87,7 +103,7 @@ const CloseImg = styled.img`
 	padding-right: 16px;
 `;
 const RightBox = styled.div`
-	padding-left: 30px;
+	padding-left: 9vw;
 `;
 const TitleText = styled.div`
 	font-family: "NotoSansCJKkr";

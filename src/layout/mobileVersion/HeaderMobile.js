@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import TempSaveContext from "../../contextApi/TempSave";
 import logo from "../../assets/mobileImage/img-main-logo@2x.png";
 import drawer from "../../assets/mobileImage/icn-drawer@2x.png";
 import tempSave from "../../assets/icons/icn-save@2x.png";
 
 const HeaderMobile = () => {
+	const { modalState, modalActions } = useContext(TempSaveContext);
 	return (
 		<Wrapper>
 			<MenuDiv>
@@ -13,7 +15,11 @@ const HeaderMobile = () => {
 			<LogoDiv>
 				<LogoImg src={logo} />
 			</LogoDiv>
-			<TempSaveIconDiv>
+			<TempSaveIconDiv
+				onClick={() => {
+					modalActions.setSaveModalOpen(!modalState.saveModalOpen);
+				}}
+			>
 				<TempSave src={tempSave} />
 			</TempSaveIconDiv>
 		</Wrapper>
