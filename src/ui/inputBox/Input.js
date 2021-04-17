@@ -48,7 +48,6 @@ const InputLineType = ({ style, onChange, placeholder }) => {
 const InputStyle = styled.input`
 	width: 200px;
 	outline: none;
-	border: 0;
 	border-bottom: 1px solid #e4e4e4;
 	padding-bottom: 8px;
 	::placeholder {
@@ -57,7 +56,7 @@ const InputStyle = styled.input`
 		color: #d8d8d8;
 	}
 	&:focus {
-		border-bottom: solid 1px #0f0f15;
+		border-bottom: 1px solid #0f0f15;
 		font-family: "NotoSansCJKkr";
 		font-size: 14px;
 		color: #0f0f15;

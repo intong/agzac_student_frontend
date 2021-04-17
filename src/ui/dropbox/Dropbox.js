@@ -285,7 +285,6 @@ const TextLineSmall = styled.div`
 	line-height: 1.57;
 	width: 185px;
 	height: 22px;
-	/* margin: 10px; */
 	text-align: left;
 	color: ${(props) => (props.selectedOption ? "#0f0f15" : "#d8d8d8")};
 `;
@@ -345,6 +344,267 @@ const ListItemLineSmall = styled.li`
 
 const ListTextLineSmall = styled.div`
 	width: 185px;
+	height: 22px;
+	font-family: "NotoSansCJKkr";
+	font-size: 14px;
+	line-height: 1.57;
+	color: #686868;
+	margin-left: 18px;
+	padding-top: 10px;
+	&:hover {
+		color: #0f0f15;
+	}
+`;
+
+export const DropboxLineTypeMobileLogin = ({
+	style,
+	options,
+	correct,
+	placeholder,
+	id,
+	value,
+}) => {
+	const [isOpen, setIsOpen] = useState(false);
+	const [selectedValue, setSelectedValue] = useState(null);
+	const [selectedOption, setSelectedOption] = useState(null);
+	const toggling = () => setIsOpen(!isOpen);
+	const onOptionClicked = (selected, value) => () => {
+		setSelectedOption(selected);
+		setSelectedValue(value);
+		setIsOpen(false);
+	};
+
+	return (
+		<DropDownContainerLineSmallMobile style={style}>
+			<DropDownHeaderLineSmallMobile
+				onClick={toggling}
+				open={isOpen}
+				correct={correct}
+			>
+				<TextLineSmallMobile
+					selectedOption={selectedOption}
+					id={id}
+					value={selectedValue}
+				>
+					{selectedOption || placeholder}
+				</TextLineSmallMobile>
+				<ImageLineSmallMobile isOpen={isOpen} src={btnDropdown} alt='화살표' />
+			</DropDownHeaderLineSmallMobile>
+			{isOpen && (
+				<DropDownListContainerLineSmallMobile>
+					<DropDownListLineSmallMobile>
+						{options &&
+							options.map((option, i) => (
+								<ListItemLineSmallMobile
+									onClick={onOptionClicked(option.text, option.value)}
+									key={i}
+								>
+									<ListTextLineSmallMobile>{option.text}</ListTextLineSmallMobile>
+								</ListItemLineSmallMobile>
+							))}
+					</DropDownListLineSmallMobile>
+				</DropDownListContainerLineSmallMobile>
+			)}
+		</DropDownContainerLineSmallMobile>
+	);
+};
+
+const DropDownContainerLineSmallMobile = styled.div`
+	z-index: 50;
+`;
+const TextLineSmallMobile = styled.div`
+	font-size: 14px;
+	line-height: 1.57;
+	width: 185px;
+	height: 22px;
+	text-align: left;
+	color: ${(props) => (props.selectedOption ? "#0f0f15" : "#d8d8d8")};
+`;
+
+const ImageLineSmallMobile = styled.img`
+	transform: ${(props) => props.isOpen && "rotate(180deg)"};
+	position: absolute;
+	bottom: 8px;
+	right: 10px;
+	&:hover {
+		cursor: pointer;
+	}
+`;
+
+const DropDownHeaderLineSmallMobile = styled.div`
+	width: 42vw;
+	height: 22px;
+	padding-bottom: 8px;
+	border-bottom: ${(props) =>
+		props.open === false ? "solid 1px #e4e4e4" : "solid 1px #686868"};
+	background-color: #f4f5f6;
+	position: relative;
+`;
+
+const DropDownListContainerLineSmallMobile = styled.div`
+	margin-top: 8px;
+	background: #f4f5f6;
+	&:hover {
+		cursor: pointer;
+	}
+	width: 30vw;
+`;
+
+const DropDownListLineSmallMobile = styled.ul`
+	padding: 0;
+	margin: 0;
+	width: 42vw;
+	height: 231px;
+	border-radius: 2px;
+	border: solid 1px #686868;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	background: #f4f5f6;
+`;
+
+const ListItemLineSmallMobile = styled.li`
+	width: 42vw;
+	height: 42px;
+	list-style: none;
+	&:hover {
+		background: #f5f5f5;
+	}
+	background: #f4f5f6;
+`;
+
+const ListTextLineSmallMobile = styled.div`
+	width: 185px;
+	height: 22px;
+	font-family: "NotoSansCJKkr";
+	font-size: 14px;
+	line-height: 1.57;
+	color: #686868;
+	padding-top: 10px;
+	&:hover {
+		color: #0f0f15;
+	}
+`;
+
+export const DropboxLineTypeMobileLoginLong = ({
+	style,
+	options,
+	correct,
+	placeholder,
+	id,
+	value,
+}) => {
+	const [isOpen, setIsOpen] = useState(false);
+	const [selectedValue, setSelectedValue] = useState(null);
+	const [selectedOption, setSelectedOption] = useState(null);
+	const toggling = () => setIsOpen(!isOpen);
+	const onOptionClicked = (selected, value) => () => {
+		setSelectedOption(selected);
+		setSelectedValue(value);
+		setIsOpen(false);
+	};
+
+	return (
+		<DropDownContainerLineSmallMobileLong style={style}>
+			<DropDownHeaderLineSmallMobileLong
+				onClick={toggling}
+				open={isOpen}
+				correct={correct}
+			>
+				<TextLineSmallMobileLong
+					selectedOption={selectedOption}
+					id={id}
+					value={selectedValue}
+				>
+					{selectedOption || placeholder}
+				</TextLineSmallMobileLong>
+				<ImageLineSmallMobileLong isOpen={isOpen} src={btnDropdown} alt='화살표' />
+			</DropDownHeaderLineSmallMobileLong>
+			{isOpen && (
+				<DropDownListContainerLineSmallMobileLong>
+					<DropDownListLineSmallMobileLong>
+						{options &&
+							options.map((option, i) => (
+								<ListItemLineSmallMobileLong
+									onClick={onOptionClicked(option.text, option.value)}
+									key={i}
+								>
+									<ListTextLineSmallMobileLong>
+										{option.text}
+									</ListTextLineSmallMobileLong>
+								</ListItemLineSmallMobileLong>
+							))}
+					</DropDownListLineSmallMobileLong>
+				</DropDownListContainerLineSmallMobileLong>
+			)}
+		</DropDownContainerLineSmallMobileLong>
+	);
+};
+
+const DropDownContainerLineSmallMobileLong = styled.div`
+	z-index: 80;
+`;
+const TextLineSmallMobileLong = styled.div`
+	font-size: 14px;
+	line-height: 1.57;
+	width: 87vw;
+	height: 22px;
+	text-align: left;
+	color: ${(props) => (props.selectedOption ? "#0f0f15" : "#d8d8d8")};
+`;
+
+const ImageLineSmallMobileLong = styled.img`
+	transform: ${(props) => props.isOpen && "rotate(180deg)"};
+	position: absolute;
+	bottom: 8px;
+	right: 10px;
+	&:hover {
+		cursor: pointer;
+	}
+`;
+
+const DropDownHeaderLineSmallMobileLong = styled.div`
+	width: 87vw;
+	height: 22px;
+	padding-bottom: 8px;
+	border-bottom: ${(props) =>
+		props.open === false ? "solid 1px #e4e4e4" : "solid 1px #686868"};
+	background-color: #f4f5f6;
+	position: relative;
+`;
+
+const DropDownListContainerLineSmallMobileLong = styled.div`
+	width: 87vw;
+	margin-top: 8px;
+	background: #f4f5f6;
+	&:hover {
+		cursor: pointer;
+	}
+`;
+
+const DropDownListLineSmallMobileLong = styled.ul`
+	padding: 0;
+	margin: 0;
+	width: 87vw;
+	border-radius: 2px;
+	border: solid 1px #686868;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	background: #f4f5f6;
+`;
+
+const ListItemLineSmallMobileLong = styled.li`
+	width: 87vw;
+	height: 42px;
+	border-radius: 2px;
+	list-style: none;
+	&:hover {
+		background: #f5f5f5;
+	}
+	background: #f4f5f6;
+`;
+
+const ListTextLineSmallMobileLong = styled.div`
+	width: 87vw;
 	height: 22px;
 	font-family: "NotoSansCJKkr";
 	font-size: 14px;
