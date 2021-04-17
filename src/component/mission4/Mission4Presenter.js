@@ -7,6 +7,7 @@ import close from "../../assets/icons/bnt-x-24.svg";
 import { ButtonSecondary } from "../../ui/button/Button";
 import SocialProblem from "./SocialProblem";
 import ProductDeveloper from "./ProductDeveloper";
+import { missionFourImage } from "../AnswerList";
 import ReasonDevelopProduct from "./ReasonDevelopProduct";
 import {
 	HelpModal,
@@ -51,6 +52,7 @@ const Mission4Presenter = ({
 				</BlockTop>
 				<BlockBottom>
 					<BottomContent>
+						{console.log(prevSelect)}
 						<Title>사회문제를 해결하는 상품개발 기획서</Title>
 						<div
 							style={{
@@ -59,11 +61,24 @@ const Mission4Presenter = ({
 							}}
 						>
 							<LeftBox>
-								<LeftTitle>
-									{sessionStorage.getItem("user")}&nbsp;님이 선택한 사회문제의
-									주제는&nbsp;{prevSelect && prevSelect.selectTabContent.name}
-									&nbsp;입니다.
-								</LeftTitle>
+								{prevSelect && (
+									<>
+										<LeftTitle>
+											{sessionStorage.getItem("user")}&nbsp;님이 선택한 사회문제의
+											주제는&nbsp;{prevSelect.selectTabContent.name}
+											&nbsp;입니다.
+										</LeftTitle>
+										<LeftImage
+											src={
+												prevSelect.selectTabContent.name === "고령화 사회"
+													? missionFourImage[2].imgUrl
+													: prevSelect.selectTabContent.name === "재난과 안전"
+													? missionFourImage[1].imgUrl
+													: missionFourImage[0].imgUrl
+											}
+										/>
+									</>
+								)}
 								<ButtonSecondary
 									text='다른 사회문제 선택'
 									style={btnStyle}
@@ -147,9 +162,8 @@ const Mission4Presenter = ({
 					<ModalWrapper>
 						<ModalCompleteArea>
 							<CompleteModal
-								headerText={`${sessionStorage.getItem(
-									"user"
-								)}님 축하합니다! 모든 미션을 완료해주셨네요.`}
+								headerText={`${sessionStorage.getItem("user")}님 축하합니다! 
+								\n모든 미션을 완료해주셨네요.`}
 								contentText='사회문제를 해결하는 상품을 개발해 주셔서 감사합니다. 사회문제로 어려움을 겪고 있는 사람들의 문제가 해결될 수 있을 것 같습니다. 모든 미션을 성공적으로 완료하였으니, 
 								최종 보고서를 작성하러 이동해 볼까요?'
 								handleCancel={modalFunction.cancelCompleteModal}
@@ -350,6 +364,12 @@ const LeftTitle = styled.div`
 	position: absolute;
 	top: 26px;
 	left: 24px;
+`;
+const LeftImage = styled.img`
+	width: 304px;
+	height: 364px;
+	position: absolute;
+	bottom: 0px;
 `;
 
 const FaqBtn = styled.img`

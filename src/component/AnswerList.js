@@ -1,3 +1,7 @@
+import polar from "../assets/img/img-mission-4-polarbear@2x.png";
+import disaster from "../assets/img/img-mission-4-disaster@2x.png";
+import senior from "../assets/img/img-mission-4-senior@2x.png";
+
 const MediaSecretCodeAnswer = {
 	openingMedia: "https://youtu.be/F9SwDvsn6lE",
 	code: "아그작교실",
@@ -67,4 +71,15 @@ const missionThreeQandA = [
 	},
 ];
 
-export { MediaSecretCodeAnswer, missionOneMedia, missionThreeQandA };
+const missionFourImage = [
+	{ name: "기후변화와 환경", imgUrl: polar },
+	{ name: "재난과 안전", imgUrl: disaster },
+	{ name: "고령화 사회", imgUrl: senior },
+];
+
+export {
+	MediaSecretCodeAnswer,
+	missionOneMedia,
+	missionThreeQandA,
+	missionFourImage,
+};

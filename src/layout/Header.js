@@ -5,10 +5,11 @@ import devide from "../assets/icons/icn-devide.svg";
 import nextBefor from "../assets/icons/icn-next-dim.svg";
 // import nextAfter from "../assets/icons/icn-next.svg";
 import leaveout from "../assets/icons/icn-leaveout.svg";
+import tempSave from "../assets/icons/icn-save@2x.png";
 import ProcessContext from "../contextApi/Process";
 import TempSaveContext from "../contextApi/TempSave";
 
-const Header = () => {
+const Header = ({ match, history, location }) => {
 	const { state } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
 
@@ -43,7 +44,7 @@ const Header = () => {
 						<NavLinkStyled1
 							to='/mainVideo'
 							activeStyle={activeStyle}
-							confirm={state.video}
+							confirm={state.video} // css 글자색상 변경 state
 						>
 							EY한영 아그작교실 영상시청
 						</NavLinkStyled1>
@@ -53,7 +54,13 @@ const Header = () => {
 						<NavLinkStyled2
 							to='/mission1'
 							activeStyle={activeStyle}
-							confirm={state.mission1}
+							confirm={state.mission1} // css 글자색상 변경 state
+							onClick={(e) => {
+								if (state.video !== "ok") {
+									e.preventDefault();
+									alert("EY한영 아그작교실 영상시청을 완료해 주세요");
+								}
+							}}
 						>
 							Mission01
 						</NavLinkStyled2>
@@ -63,7 +70,13 @@ const Header = () => {
 						<NavLinkStyled3
 							to='/mission2'
 							activeStyle={activeStyle}
-							confirm={state.mission2}
+							confirm={state.mission2} // css 글자색상 변경 state
+							onClick={(e) => {
+								if (state.mission1 !== "ok") {
+									e.preventDefault();
+									alert("Mission1 을 완료해 주세요");
+								}
+							}}
 						>
 							Mission02
 						</NavLinkStyled3>
@@ -73,7 +86,13 @@ const Header = () => {
 						<NavLinkStyled4
 							to='/mission3'
 							activeStyle={activeStyle}
-							confirm={state.mission3}
+							confirm={state.mission3} // css 글자색상 변경 state
+							onClick={(e) => {
+								if (state.mission2 !== "ok") {
+									e.preventDefault();
+									alert("Mission2 을 완료해 주세요");
+								}
+							}}
 						>
 							Mission03
 						</NavLinkStyled4>
@@ -83,14 +102,29 @@ const Header = () => {
 						<NavLinkStyled5
 							to='/mission4'
 							activeStyle={activeStyle}
-							confirm={state.mission4}
+							confirm={state.mission4} // css 글자색상 변경 state
+							onClick={(e) => {
+								if (state.mission3 !== "ok") {
+									e.preventDefault();
+									alert("Mission3 을 완료해 주세요");
+								}
+							}}
 						>
 							Mission04
 						</NavLinkStyled5>
 					</LIStyled>
 					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>
-						<NavLinkStyled6 to='/finalreport' activeStyle={activeStyle}>
+						<NavLinkStyled6
+							to='/finalreport'
+							activeStyle={activeStyle}
+							onClick={(e) => {
+								if (state.mission4 !== "ok") {
+									e.preventDefault();
+									alert("Mission4 을 완료해 주세요");
+								}
+							}}
+						>
 							최종보고서
 						</NavLinkStyled6>
 					</LIStyled>
@@ -98,28 +132,8 @@ const Header = () => {
 			</Block>
 			<BtnsBlock>
 				<img
-					src={leaveout}
-					alt='나가기버튼'
-					style={{ width: "24px", height: "24px", marginRight: "4px" }}
-					onClick={Logout}
-				/>
-				<div
-					style={{
-						width: "39px",
-						height: "20px",
-						fontSize: "14px",
-						lineHeight: "23px",
-						fontFamily: "NotoSansCJKkr-Medium",
-						color: "#ffffff",
-						marginRight: "12px",
-					}}
-					onClick={Logout}
-				>
-					나가기
-				</div>
-				<img
-					src={leaveout}
-					alt='나가기버튼'
+					src={tempSave}
+					alt='임시저장'
 					style={{ width: "24px", height: "24px", marginRight: "4px" }}
 					onClick={() => {
 						modalActions.setSaveModalOpen(!modalState.saveModalOpen);
@@ -140,6 +154,26 @@ const Header = () => {
 					}}
 				>
 					임시저장
+				</div>
+				<img
+					src={leaveout}
+					alt='나가기버튼'
+					style={{ width: "24px", height: "24px", marginRight: "4px" }}
+					onClick={Logout}
+				/>
+				<div
+					style={{
+						width: "39px",
+						height: "20px",
+						fontSize: "14px",
+						lineHeight: "23px",
+						fontFamily: "NotoSansCJKkr-Medium",
+						color: "#ffffff",
+						marginRight: "12px",
+					}}
+					onClick={Logout}
+				>
+					나가기
 				</div>
 			</BtnsBlock>
 		</Wrapper>

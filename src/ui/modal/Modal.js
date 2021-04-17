@@ -549,7 +549,16 @@ export const CompleteModal = ({
 	return (
 		<WrapperComplete>
 			<CloseBtnComplete src={close} onClick={handleCancel} />
-			<HeaderComplete>{headerText}</HeaderComplete>
+			<HeaderComplete>
+				{headerText.split("\n").map((line) => {
+					return (
+						<>
+							{line}
+							<br />
+						</>
+					);
+				})}
+			</HeaderComplete>
 			<ContentComplete>{contentText}</ContentComplete>
 			<RobotImg src={Robot} />
 			<ButtonPrimaryLong
@@ -584,7 +593,6 @@ const HeaderComplete = styled.div`
 	font-weight: 500;
 	font-stretch: normal;
 	font-style: normal;
-	line-height: 1.33;
 	letter-spacing: normal;
 	color: #0f0f15;
 	margin-bottom: 18px;

@@ -5,7 +5,7 @@ import { missionOneMedia } from "../AnswerList";
 import { HelpModal } from "../../ui/modal/Modal";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
-import group from "../../assets/img/group@3x.png";
+import group from "../../assets/img/img-jobs-default@2x.png";
 import Footer from "../../layout/Footer";
 import close from "../../assets/icons/bnt-x-24.svg";
 import Answer1Default from "./Answer1Default";

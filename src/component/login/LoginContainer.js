@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Student } from "../../api/api";
 import LoginPresenter from "./LoginPresenter";
+import LoginMobilePresenter from "./mobileVersion/LoginMobilePresenter";
 
 const LoginContainer = () => {
 	const [isOpenModal, setIsOpenModal] = useState(); // 비밀번호 없을 시 (비밀번호생성)
@@ -11,6 +12,10 @@ const LoginContainer = () => {
 	const [studentName, setStudentName] = useState();
 	const [studentId, setStudentId] = useState(); // 학교 및 이름 정보 입력 후 result.data.studentId
 	const [password, setPassword] = useState();
+	const [dimension, setDimension] = useState({
+		width: window.innerWidth,
+		height: window.innerHeight,
+	});
 
 	const modalFunction = {
 		// 비밀번호 없을 시, 비밀번호 생성모달
@@ -121,16 +126,25 @@ const LoginContainer = () => {
 			}
 		},
 	};
+	// useEffect(() => {
+	// 	console.log(dimension);
+	// 	window.alert(dimension.width);
+	// 	window.alert(dimension.height);
+	// }, []);
 
 	return (
 		<>
-			<LoginPresenter
-				isOpenModal={isOpenModal}
-				inputPasswordModal={inputPasswordModal}
-				loginErrorModal={loginErrorModal}
-				modalFunction={modalFunction}
-				loginFunction={loginFunction}
-			/>
+			{dimension.width < 415 ? (
+				<LoginMobilePresenter />
+			) : (
+				<LoginPresenter
+					isOpenModal={isOpenModal}
+					inputPasswordModal={inputPasswordModal}
+					loginErrorModal={loginErrorModal}
+					modalFunction={modalFunction}
+					loginFunction={loginFunction}
+				/>
+			)}
 		</>
 	);
 };

@@ -5,7 +5,7 @@ import MainVideoPresenter from "./MainVideoPresenter";
 import ProcessContext from "../../contextApi/Process";
 import TempSaveContext from "../../contextApi/TempSave";
 
-const MainVideoContainer = ({ history }) => {
+const MainVideoContainer = ({ history, location, match }) => {
 	const { state, actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
 	const [hasDataModal, setHasDataModal] = useState(); // 저장된 데어터가 있을 때 데이터 불러오기 모달
@@ -101,6 +101,9 @@ const MainVideoContainer = ({ history }) => {
 		const randomChoice = () => {
 			setMediaAndSecretCode(MediaSecretCodeAnswer);
 		};
+		console.log("history", history);
+		console.log("location", location);
+		console.log("match", match);
 		randomChoice();
 		getTempData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps

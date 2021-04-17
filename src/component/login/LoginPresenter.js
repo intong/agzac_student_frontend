@@ -78,87 +78,89 @@ const LoginPresenter = ({
 	loginFunction,
 }) => {
 	return (
-		<Wrapper>
+		<>
 			<Container>
 				<LogoBlock src={logoMain} alt='메인로고' />
-				<Content style={{ display: "flex" }}>
-					<div>
-						<TextContainer>
-							아그작교실에
-							<p />
-							오신 것을 환영합니다!
-						</TextContainer>
-						<RobotContainer src={robot} alt='로봇이미지' />
-					</div>
-					<LoginBlock>
-						<LoginContent>
-							<Title>접속코드</Title>
-							<InputLineType
-								placeholder='제공받은 접속코드를 입력해 주세요.'
-								style={{ width: "100%", height: "20px", marginTop: "22px" }}
-								onChange={loginFunction.onChangeConnectCode}
-							/>
-							<Title style={{ marginTop: "32px" }}>학교</Title>
-							<InputLineType
-								placeholder='학교명을 입력해 주세요.'
-								style={{ width: "100%", height: "20px", marginTop: "22px" }}
-								onChange={loginFunction.onChangeSchoolName}
-							/>
-							<div style={{ position: "absolute", top: "150px", right: "4px" }}>
-								학교
-							</div>
-							<div style={{ display: "flex", marginTop: "20px" }}>
-								<DropboxLineTypeSmall
-									id='grade'
-									placeholder='학년'
-									style={{ height: "20px" }}
-									options={optionsYear}
+				<ContentBackground>
+					<Content>
+						<LeftImageBlock>
+							<TextContainer>
+								아그작교실에
+								<p />
+								오신 것을 환영합니다!
+							</TextContainer>
+							<RobotContainer src={robot} alt='로봇이미지' />
+						</LeftImageBlock>
+						<LoginBlock>
+							<LoginContent>
+								<Title>접속코드</Title>
+								<InputLineType
+									placeholder='제공받은 접속코드를 입력해 주세요.'
+									style={{ width: "100%", height: "20px", marginTop: "22px" }}
+									onChange={loginFunction.onChangeConnectCode}
 								/>
-								<DropboxLineTypeSmall
-									id='studentClass'
-									placeholder='반'
-									style={{ height: "20px", marginLeft: "12px" }}
-									options={optionsClass}
+								<Title style={{ marginTop: "32px" }}>학교</Title>
+								<InputLineType
+									placeholder='학교명을 입력해 주세요.'
+									style={{ width: "100%", height: "20px", marginTop: "22px" }}
+									onChange={loginFunction.onChangeSchoolName}
 								/>
-								<DropboxLineTypeSmall
-									id='studentNo'
-									placeholder='번호'
-									style={{ height: "20px", marginLeft: "12px" }}
-									options={optionsStudentNo}
+								<div style={{ position: "absolute", top: "150px", right: "4px" }}>
+									학교
+								</div>
+								<div style={{ display: "flex", marginTop: "20px" }}>
+									<DropboxLineTypeSmall
+										id='grade'
+										placeholder='학년'
+										style={{ height: "20px" }}
+										options={optionsYear}
+									/>
+									<DropboxLineTypeSmall
+										id='studentClass'
+										placeholder='반'
+										style={{ height: "20px", marginLeft: "12px" }}
+										options={optionsClass}
+									/>
+									<DropboxLineTypeSmall
+										id='studentNo'
+										placeholder='번호'
+										style={{ height: "20px", marginLeft: "12px" }}
+										options={optionsStudentNo}
+									/>
+								</div>
+								<Title style={{ marginTop: "40px" }}>이름</Title>
+								<InputLineType
+									placeholder='이름을 입력해 주세요.'
+									style={{ width: "100%", height: "20px", marginTop: "22px" }}
+									onChange={loginFunction.onChangeStudentName}
 								/>
-							</div>
-							<Title style={{ marginTop: "40px" }}>이름</Title>
-							<InputLineType
-								placeholder='이름을 입력해 주세요.'
-								style={{ width: "100%", height: "20px", marginTop: "22px" }}
-								onChange={loginFunction.onChangeStudentName}
-							/>
-							<ButtonPrimary
-								text='EY한영 아그작교실 시작하기'
-								style={{ width: "100%", marginTop: "117px" }}
-								onClick={loginFunction.submitStudent}
-							/>
-						</LoginContent>
-					</LoginBlock>
-				</Content>
+								<ButtonPrimary
+									text='EY한영 아그작교실 시작하기'
+									style={{ width: "100%", marginTop: "117px" }}
+									onClick={loginFunction.submitStudent}
+								/>
+							</LoginContent>
+						</LoginBlock>
+					</Content>
+				</ContentBackground>
+				<Footer>
+					<img
+						src={logoEY}
+						alt=''
+						style={{
+							marginLeft: "50px",
+							marginTop: "14px",
+							marginBottom: "17px",
+							marginRight: "25px",
+						}}
+					/>
+					<img
+						src={kidsn}
+						alt=''
+						style={{ marginTop: "22px", marginBottom: "14px" }}
+					/>
+				</Footer>
 			</Container>
-			<Footer>
-				<img
-					src={logoEY}
-					alt=''
-					style={{
-						marginLeft: "50px",
-						marginTop: "14px",
-						marginBottom: "17px",
-						marginRight: "25px",
-					}}
-				/>
-				<img
-					src={kidsn}
-					alt=''
-					style={{ marginTop: "22px", marginBottom: "14px" }}
-				/>
-			</Footer>
 			{isOpenModal && (
 				<ModalWrapper>
 					<ModalArea>
@@ -204,16 +206,12 @@ const LoginPresenter = ({
 					</ModalArea>
 				</ModalWrapper>
 			)}
-		</Wrapper>
+		</>
 	);
 };
 
 export default LoginPresenter;
 
-const Wrapper = styled.div`
-	width: 100%;
-	/* height: 988px; */
-`;
 const ModalWrapper = styled.div`
 	width: 100%;
 	height: 988px;
@@ -230,12 +228,9 @@ const ModalArea = styled.div`
 `;
 
 const Container = styled.div`
-	min-width: 1024px;
 	max-width: 1920px;
-	min-height: 900px;
-	max-height: 988px;
-	background: url(${imgmainbackground});
-	background-size: cover;
+	height: 100vh;
+
 	display: flex;
 	flex-direction: column;
 	position: relative;
@@ -246,14 +241,18 @@ const LogoBlock = styled.img`
 	top: 25.5px;
 	left: 50px;
 `;
+const ContentBackground = styled.div`
+	background: url(${imgmainbackground});
+	background-size: cover;
+`;
 const Content = styled.div`
-	/* background: red; */
 	margin: 0 auto;
 	width: 944px;
-	height: 928px;
+	height: 94vh;
 	position: relative;
 	top: 0px;
 	left: 0px;
+	display: flex;
 `;
 
 const RobotContainer = styled.img`
@@ -273,6 +272,7 @@ const TextContainer = styled.div`
 	color: #ffffff;
 	margin-top: 195px;
 `;
+const LeftImageBlock = styled.div``;
 const LoginBlock = styled.div`
 	background: #ffffff;
 	width: 464px;
@@ -301,7 +301,6 @@ const Title = styled.div`
 	color: #0f0f15;
 `;
 const Footer = styled.div`
-	min-width: 1024px;
 	max-width: 1920px;
 	height: 60px;
 	display: flex;

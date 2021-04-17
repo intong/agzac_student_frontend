@@ -4,7 +4,7 @@ import ProcessContext from "../../contextApi/Process";
 import TempSaveContext from "../../contextApi/TempSave";
 import { jobCards } from "../JobCards";
 
-const Mission1Container = ({ history }) => {
+const Mission1Container = ({ history, location, match }) => {
 	const { actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
 	const [prevMedia, setPrevMedia] = useState(true);
@@ -124,6 +124,9 @@ const Mission1Container = ({ history }) => {
 
 	useEffect(() => {
 		selectExamQuestion();
+		console.log("history", history);
+		console.log("location", location);
+		console.log("match", match);
 	}, []);
 
 	return (
