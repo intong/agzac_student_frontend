@@ -40,8 +40,7 @@ const MainVideoPresenter = ({
 								기업을 설립하고 운영하기 위해 영상을 반드시 시청해주세요.
 							</TextDivMiddle>
 							<TextDivBottom>
-								영상을 시청한 후 나만의 기업 이름을 만들고,
-								<br />
+								영상을 시청한 후 나만의 기업 이름을 만들고, <br />
 								영상 속에서 제시한 비밀코드를 입력한 후 정답 제출을 진행해 주세요!
 							</TextDivBottom>
 						</TopContent>
@@ -101,9 +100,6 @@ const MainVideoPresenter = ({
 					</ModalArea>
 				</ModalWrapper>
 			)}
-
-			{/* 정답 알림 모달 */}
-			{}
 
 			{/* 오답 알림 모달 */}
 			{answerFalseModal && (

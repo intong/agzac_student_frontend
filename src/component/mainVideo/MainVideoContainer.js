@@ -2,10 +2,19 @@ import React, { useContext, useEffect, useState, useCallback } from "react";
 import { SaveData } from "../../api/api";
 import { MediaSecretCodeAnswer } from "../AnswerList";
 import MainVideoPresenter from "./MainVideoPresenter";
+import MainVideoMobilePresenter from "./mobileVersion/MainVideoMobilePresenter";
+import MainVideoMobileInputPresenter from "./mobileVersion/MainVideoMobileInputPresenter";
 import ProcessContext from "../../contextApi/Process";
 import TempSaveContext from "../../contextApi/TempSave";
 
 const MainVideoContainer = ({ history, location, match }) => {
+	//////////////// 모바일 state 시작 ///////////////////////////
+	const [dimension] = useState({
+		width: window.innerWidth,
+		height: window.innerHeight,
+	});
+	const [mainVideoInput, setMainVideoInput] = useState(false);
+	//////////////// 모바일 state 끝 ///////////////////////////
 	const { state, actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
 	const [hasDataModal, setHasDataModal] = useState(); // 저장된 데어터가 있을 때 데이터 불러오기 모달
@@ -96,14 +105,17 @@ const MainVideoContainer = ({ history, location, match }) => {
 		}
 	}, [actions]);
 
+	const mobileFunctionList = {
+		inputPageHandler: () => {
+			setMainVideoInput(!mainVideoInput);
+		},
+	};
+
 	useEffect(() => {
 		// 영상 시크릿코드
 		const randomChoice = () => {
 			setMediaAndSecretCode(MediaSecretCodeAnswer);
 		};
-		console.log("history", history);
-		console.log("location", location);
-		console.log("match", match);
 		randomChoice();
 		getTempData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -111,16 +123,35 @@ const MainVideoContainer = ({ history, location, match }) => {
 
 	return (
 		<>
-			<MainVideoPresenter
-				companyName={companyName}
-				secretCode={secretCode}
-				hasDataModal={hasDataModal}
-				isModalOpen={modalState.saveModalOpen}
-				answerFalseModal={answerFalseModal}
-				mediaAndSecretCode={mediaAndSecretCode}
-				modalFunction={modalFunction}
-				functionList={functionList}
-			/>
+			{dimension.width < 415 ? (
+				mainVideoInput ? (
+					<MainVideoMobileInputPresenter
+						companyName={companyName}
+						secretCode={secretCode}
+						answerFalseModal={answerFalseModal}
+						mobileFunctionList={mobileFunctionList}
+						functionList={functionList}
+						modalFunction={modalFunction}
+					/>
+				) : (
+					<MainVideoMobilePresenter
+						video={state.video}
+						mediaAndSecretCode={mediaAndSecretCode}
+						mobileFunctionList={mobileFunctionList}
+					/>
+				)
+			) : (
+				<MainVideoPresenter
+					companyName={companyName}
+					secretCode={secretCode}
+					hasDataModal={hasDataModal}
+					isModalOpen={modalState.saveModalOpen}
+					answerFalseModal={answerFalseModal}
+					mediaAndSecretCode={mediaAndSecretCode}
+					modalFunction={modalFunction}
+					functionList={functionList}
+				/>
+			)}
 		</>
 	);
 };
