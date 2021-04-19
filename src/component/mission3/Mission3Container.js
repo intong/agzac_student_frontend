@@ -1,11 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Mission3Presenter from "./Mission3Presenter";
 import { missionThreeQandA } from "../AnswerList";
 import ProcessContext from "../../contextApi/Process";
 import TempSaveContext from "../../contextApi/TempSave";
 
 const Mission3Container = ({ history }) => {
-	const { actions } = useContext(ProcessContext);
+	const { state, actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
 	const [faqModal, setFaqModal] = useState();
 	const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +24,7 @@ const Mission3Container = ({ history }) => {
 		//validation 추가
 		actions.setMission3("ok");
 		history.push({
-			pathname: "/mission4",
+			pathname: `/mission4/${state.mission4Index}`,
 			state: {
 				selectTabContent: selectTabContent,
 				studentAnswerList: studentAnswerList,

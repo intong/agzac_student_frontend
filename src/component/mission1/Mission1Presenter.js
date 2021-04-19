@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import ReactPlayer from "react-player";
 import { missionOneMedia } from "../AnswerList";
 import { HelpModal } from "../../ui/modal/Modal";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
@@ -31,6 +30,7 @@ const Mission1Presenter = ({
 }) => {
 	return (
 		<Wrapper>
+			{/* {console.log("Mission1Presenter", index)} */}
 			<BlockTop>
 				<TopContent>
 					<TextBoxTop>Mission 01</TextBoxTop>
@@ -70,13 +70,15 @@ const Mission1Presenter = ({
 									</CardContainer>
 									<ExplainContainer>
 										<TitleTodo>하는일</TitleTodo>
-										<ExplainTodo>{missionQuestion.todo}</ExplainTodo>
+										<ExplainTodo>{missionQuestion[index - 1].todo}</ExplainTodo>
 										<BarUnder />
 										<TitleInterview>인터뷰</TitleInterview>
-										<ExplainInterview>{missionQuestion.interview}</ExplainInterview>
+										<ExplainInterview>
+											{missionQuestion[index - 1].interview}
+										</ExplainInterview>
 										<BarUnder />
 										<TitleSubject>학과</TitleSubject>
-										<ExplainSubject>{missionQuestion.subject}</ExplainSubject>
+										<ExplainSubject>{missionQuestion[index - 1].subject}</ExplainSubject>
 									</ExplainContainer>
 								</>
 							)}
@@ -94,8 +96,8 @@ const Mission1Presenter = ({
 								/>
 							) : (
 								<Answer1Default
-									answerInputText={answerInputText}
 									index={index}
+									answerInputText={answerInputText}
 									setProcessFunction={setProcessFunction}
 									answerFunctionList={answerFunctionList}
 									wrong={answerResult}
@@ -167,7 +169,6 @@ const Mission1Presenter = ({
 			{/* 문제 풀기 전 영상 플레이 모달 */}
 			{prevMedia && (
 				<ModalWrapper>
-					{console.log(index)}
 					<ModalPrevNextMediaArea>
 						<CloseBtn src={close} onClick={modalFunction.togglePrevMediaModal} />
 						{missionOneMedia[index - 1].prev}
@@ -333,6 +334,8 @@ const Wrapper = styled.div`
 	min-width: 1024px;
 	max-width: 1920px;
 	height: 100vh;
+	overflow-x: hidden;
+	overflow-y: scroll;
 `;
 
 const BlockTop = styled.div`

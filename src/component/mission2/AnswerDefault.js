@@ -124,10 +124,10 @@ const AnswerDefault = ({
 			</div>
 			<FeedbackSection>
 				<LeftFeedback normal={normal} correctFirst={correctFirst}>
-					{missionQuestion && missionQuestion.answerOneFeedback}
+					{missionQuestion && missionQuestion[index - 1].answerOneFeedback}
 				</LeftFeedback>
 				<RightFeedback normal={normal} correctSeconds={correctSeconds}>
-					{missionQuestion && missionQuestion.answerTwoFeedback}
+					{missionQuestion && missionQuestion[index - 1].answerTwoFeedback}
 				</RightFeedback>
 			</FeedbackSection>
 			{normal ? (

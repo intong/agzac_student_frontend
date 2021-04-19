@@ -47,10 +47,13 @@ const Mission2Presenter = ({
 					<RightTextBox>4차산업기술을 보유한 미래인재</RightTextBox>
 					{missionQuestion && (
 						<LeftBox>
+							{console.log("index", index)}
 							<Title>상품명</Title>
-							<TextContent>{missionQuestion.proName}</TextContent>
+							<TextContent>{missionQuestion[index - 1].proName}</TextContent>
 							<Title>상품설명</Title>
-							<TextContentBox>{missionQuestion.proDescription}</TextContentBox>
+							<TextContentBox>
+								{missionQuestion[index - 1].proDescription}
+							</TextContentBox>
 						</LeftBox>
 					)}
 
@@ -170,6 +173,8 @@ const Wrapper = styled.div`
 	min-width: 1024px;
 	max-width: 1920px;
 	height: 100vh;
+	overflow-x: hidden;
+	overflow-y: scroll;
 `;
 const ModalWrapper = styled.div`
 	width: 100vw;

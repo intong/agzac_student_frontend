@@ -3,9 +3,9 @@ import disaster from "../assets/img/img-mission-4-disaster@2x.png";
 import senior from "../assets/img/img-mission-4-senior@2x.png";
 
 const MediaSecretCodeAnswer = {
-	openingMedia: "https://youtu.be/F9SwDvsn6lE",
+	openingMedia: "https://youtu.be/-e6txFzO-9Q",
 	code: "아그작교실",
-	endingMedia: "https://youtu.be/VrFGrKIzpmI",
+	endingMedia: "https://youtu.be/lJStLu78Ff4",
 };
 
 // missionOne 과 missionTwo 는 Mission1Container 와 Mission2Container 에 따로 설정 되어있음

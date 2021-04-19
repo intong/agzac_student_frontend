@@ -51,7 +51,12 @@ const Mission3Presenter = ({
 							: "사회문제 설명영상을 시청한 후 우리 기업이 해결하고 싶은 사회문제 테마 1가지를 최종 선택해주세요."}
 					</SubTitle>
 					<Tabs>
-						<Tab1 selectTab={selectTab}>
+						<Tab1
+							selectTab={selectTab}
+							onClick={() =>
+								choosed === false && uiFunctionList.tabSelectFunction("tab1")
+							}
+						>
 							<div
 								style={{
 									width: "20px",
@@ -60,15 +65,17 @@ const Mission3Presenter = ({
 									top: "15px",
 									left: "80px",
 								}}
-								onClick={() =>
-									choosed === false && uiFunctionList.tabSelectFunction("tab1")
-								}
 							>
 								<img src={selectTab === "tab1" ? checked : unchecked} alt='체크버튼' />
 							</div>
 							<Tab1Title selectTab={selectTab}>기후변화와 환경</Tab1Title>
 						</Tab1>
-						<Tab2 selectTab={selectTab}>
+						<Tab2
+							selectTab={selectTab}
+							onClick={() =>
+								choosed === false && uiFunctionList.tabSelectFunction("tab2")
+							}
+						>
 							<div
 								style={{
 									width: "20px",
@@ -77,15 +84,17 @@ const Mission3Presenter = ({
 									top: "15px",
 									left: "95px",
 								}}
-								onClick={() =>
-									choosed === false && uiFunctionList.tabSelectFunction("tab2")
-								}
 							>
 								<img src={selectTab === "tab2" ? checked : unchecked} alt='미체크' />
 							</div>
 							<Tab2Title selectTab={selectTab}>고령화 사회</Tab2Title>
 						</Tab2>
-						<Tab3 selectTab={selectTab}>
+						<Tab3
+							selectTab={selectTab}
+							onClick={() =>
+								choosed === false && uiFunctionList.tabSelectFunction("tab3")
+							}
+						>
 							<div
 								style={{
 									width: "20px",
@@ -94,9 +103,6 @@ const Mission3Presenter = ({
 									top: "15px",
 									left: "97px",
 								}}
-								onClick={() =>
-									choosed === false && uiFunctionList.tabSelectFunction("tab3")
-								}
 							>
 								<img src={selectTab === "tab3" ? checked : unchecked} alt='체크버튼' />
 							</div>
@@ -246,6 +252,8 @@ const Wrapper = styled.div`
 	/* background: lightgreen; */
 	min-width: 1024px;
 	max-width: 1920px;
+	overflow-x: hidden;
+	overflow-y: scroll;
 `;
 
 const BlockTop = styled.div`
@@ -356,6 +364,9 @@ const Tab1 = styled.div`
 	background-color: ${(props) =>
 		props.selectTab === "tab1" ? "#ffffff" : "rgba(255, 255, 255, 0.5)"};
 	position: relative;
+	&:hover {
+		cursor: pointer;
+	}
 `;
 const Tab1Title = styled.div`
 	width: 94px;
@@ -384,6 +395,9 @@ const Tab2 = styled.div`
 	background-color: ${(props) =>
 		props.selectTab === "tab2" ? "#ffffff" : "rgba(255, 255, 255, 0.5)"};
 	position: relative;
+	&:hover {
+		cursor: pointer;
+	}
 `;
 const Tab2Title = styled.div`
 	width: 68px;
@@ -412,6 +426,9 @@ const Tab3 = styled.div`
 	background-color: ${(props) =>
 		props.selectTab === "tab3" ? "#ffffff" : "rgba(255, 255, 255, 0.5)"};
 	position: relative;
+	&:hover {
+		cursor: pointer;
+	}
 `;
 const Tab3Title = styled.div`
 	width: 68px;

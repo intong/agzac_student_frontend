@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { ButtonPrimary } from "../../ui/button/Button";
 import { InputDefault } from "../../ui/inputBox/Input";
+import ProcessContext from "../../contextApi/Process";
 
 const inputStyle = {
 	width: "246px",

@@ -29,7 +29,7 @@ const MainVideoContainer = ({ history, location, match }) => {
 	const setProcessFunction = () => {
 		//validation 추가
 		actions.setVideo("ok");
-		history.push("/mission1");
+		history.push(`/mission1/${state.index}`);
 	};
 
 	const modalFunction = {

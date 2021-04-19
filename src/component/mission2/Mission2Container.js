@@ -3,10 +3,10 @@ import Mission2Presenter from "./Mission2Presenter";
 import ProcessContext from "../../contextApi/Process";
 import TempSaveContext from "../../contextApi/TempSave";
 
-const Mission2Container = ({ history }) => {
-	const { actions } = useContext(ProcessContext);
+const Mission2Container = ({ history, match }) => {
+	const { state, actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
-	const [index, setIndex] = useState(1); // 정답제출 시 +1 을 시키면 배열의 index 를 넘김
+	const [index, setIndex] = useState(); // 정답제출 시 +1 을 시키면 배열의 index 를 넘김
 	const [missionQuestion, setMissionQuestion] = useState(); // 미션 배열 중 한개의 문제만 보내는 state
 	const [answerList, setAnswerList] = useState();
 	const [normal, setNormal] = useState(true);
@@ -18,7 +18,7 @@ const Mission2Container = ({ history }) => {
 	const setProcessFunction = () => {
 		//validation 추가
 		actions.setMission2("ok");
-		history.push("/mission3");
+		history.push(`/mission3/${state.mission3Index}`);
 	};
 
 	const modalFunction = {
@@ -41,27 +41,25 @@ const Mission2Container = ({ history }) => {
 	};
 
 	// missionTwo 셋팅
-	const selectExamQuestion = (i) => {
+	const selectExamQuestion = () => {
 		const question = JSON.parse(sessionStorage.getItem("missionTwo"));
-		if (i === undefined) {
-			setMissionQuestion(question[0]);
-		} else {
-			setMissionQuestion(question[i]);
-		}
+		setMissionQuestion(question);
 	};
 
 	// 정답 입력 및 확인 이벤트
 	const answerFunctionList = {
 		// 정답 2개 중 답안이 포함하는지 확인하는 함수
 		hasAnswerOne: (one) => {
-			if (one === missionQuestion.answerOne) {
+			console.log("1", missionQuestion[index - 1]);
+			// console.log("2",)
+			if (one === missionQuestion[index - 1].answerOne) {
 				return true;
 			} else {
 				return false;
 			}
 		},
 		hasAnswerTwo: (two) => {
-			if (two === missionQuestion.answerTwo) {
+			if (two === missionQuestion[index - 1].answerTwo) {
 				return true;
 			} else {
 				return false;
@@ -98,15 +96,16 @@ const Mission2Container = ({ history }) => {
 				setNormal(true);
 				setCorrectFirst(true);
 				setCorrectSeconds(true);
-				selectExamQuestion(index);
 				setIndex(index + 1);
+				history.push(`/mission2/${parseInt(match.params.id) + 1}`);
 			}
 		},
 	};
 
 	useEffect(() => {
 		selectExamQuestion();
-	}, []);
+		setIndex(parseInt(match.params.id));
+	}, [match.params.id]);
 	return (
 		<Mission2Presenter
 			index={index}

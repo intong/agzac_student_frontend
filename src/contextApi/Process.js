@@ -10,6 +10,10 @@ const ProcessContext = createContext({
 		final: "",
 		useDataConfirm: "",
 		saveTempData: {},
+		index: 1,
+		mission2Index: 1,
+		mission3Index: 1,
+		mission4Index: 1,
 	},
 	actions: {
 		setVideo: () => {},
@@ -20,6 +24,10 @@ const ProcessContext = createContext({
 		setFinal: () => {},
 		setUseDataConfirm: () => {},
 		setSaveTempData: () => {},
+		setIndex: () => {},
+		setMission2Index: () => {},
+		setMission3Index: () => {},
+		setMission4Index: () => {},
 	},
 });
 
@@ -32,6 +40,10 @@ const ProcessProvider = ({ children }) => {
 	const [final, setFinal] = useState("");
 	const [useDataConfirm, setUseDataConfirm] = useState(""); // MainVideoContainer.js 에서 최초 한번 설정 (true: 저장된 데이터 사용함 / false: 저장된 데이터 사용하지 않음 / undefined: defualt)
 	const [saveTempData, setSaveTempData] = useState({});
+	const [index, setIndex] = useState(1);
+	const [mission2Index, setMission2Index] = useState(1);
+	const [mission3Index, setMission3Index] = useState(1);
+	const [mission4Index, setMission4Index] = useState(1);
 	const value = {
 		state: {
 			video,
@@ -42,6 +54,10 @@ const ProcessProvider = ({ children }) => {
 			final,
 			useDataConfirm,
 			saveTempData,
+			index,
+			mission2Index,
+			mission3Index,
+			mission4Index,
 		},
 		actions: {
 			setVideo,
@@ -52,6 +68,10 @@ const ProcessProvider = ({ children }) => {
 			setFinal,
 			setUseDataConfirm,
 			setSaveTempData,
+			setIndex,
+			setMission2Index,
+			setMission3Index,
+			setMission4Index,
 		},
 	};
 	return (

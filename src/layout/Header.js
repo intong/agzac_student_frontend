@@ -9,7 +9,7 @@ import tempSave from "../assets/icons/icn-save@2x.png";
 import ProcessContext from "../contextApi/Process";
 import TempSaveContext from "../contextApi/TempSave";
 
-const Header = ({ match, history, location }) => {
+const Header = ({ match }) => {
 	const { state } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
 
@@ -29,6 +29,7 @@ const Header = ({ match, history, location }) => {
 	};
 	return (
 		<Wrapper>
+			{/* {console.log("header", state.index)} */}
 			<Block>
 				<ULStyled>
 					<div
@@ -42,7 +43,8 @@ const Header = ({ match, history, location }) => {
 					<img src={devide} alt='분단기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>
 						<NavLinkStyled1
-							to='/mainVideo'
+							to='/'
+							exact={true}
 							activeStyle={activeStyle}
 							confirm={state.video} // css 글자색상 변경 state
 						>
@@ -52,7 +54,9 @@ const Header = ({ match, history, location }) => {
 					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>
 						<NavLinkStyled2
-							to='/mission1'
+							// to='/mission1/1'
+							to={`/mission1/${state.index}`}
+							exact={true}
 							activeStyle={activeStyle}
 							confirm={state.mission1} // css 글자색상 변경 state
 							// onClick={(e) => {
@@ -68,7 +72,8 @@ const Header = ({ match, history, location }) => {
 					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>
 						<NavLinkStyled3
-							to='/mission2'
+							to={`/mission2/${state.mission2Index}`}
+							exact={true}
 							activeStyle={activeStyle}
 							confirm={state.mission2} // css 글자색상 변경 state
 							// onClick={(e) => {
@@ -84,7 +89,8 @@ const Header = ({ match, history, location }) => {
 					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>
 						<NavLinkStyled4
-							to='/mission3'
+							to={`/mission3/${state.mission3Index}`}
+							exact={true}
 							activeStyle={activeStyle}
 							confirm={state.mission3} // css 글자색상 변경 state
 							// onClick={(e) => {
@@ -100,7 +106,8 @@ const Header = ({ match, history, location }) => {
 					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>
 						<NavLinkStyled5
-							to='/mission4'
+							to={`/mission4/${state.mission4Index}`}
+							exact={true}
 							activeStyle={activeStyle}
 							confirm={state.mission4} // css 글자색상 변경 state
 							// onClick={(e) => {
@@ -117,6 +124,7 @@ const Header = ({ match, history, location }) => {
 					<LIStyled>
 						<NavLinkStyled6
 							to='/finalreport'
+							exact={true}
 							activeStyle={activeStyle}
 							// onClick={(e) => {
 							// 	if (state.mission4 !== "ok") {

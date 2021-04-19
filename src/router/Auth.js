@@ -26,11 +26,11 @@ const Auth = () => {
 						path='/'
 						component={dimension.width < 415 ? LayoutMobile : Layout}
 					/>
-					<Redirect
+					{/* <Redirect
 						to={{
 							pathname: "/mainVideo",
 						}}
-					/>
+					/> */}
 				</>
 			) : (
 				<>

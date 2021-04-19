@@ -257,6 +257,8 @@ const ModalArea = styled.div`
 const Wrapper = styled.div`
 	min-width: 1024px;
 	max-width: 1920px;
+	overflow-x: hidden;
+	overflow-y: scroll;
 `;
 
 const BlockTop = styled.div`
