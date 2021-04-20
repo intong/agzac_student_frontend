@@ -1,10 +1,8 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { ButtonPrimary, ButtonSecondary } from "../../ui/button/Button";
-import ProcessContext from "../../contextApi/Process";
 
 const Answer2Correct = ({ index, modalFunction, answerFunctionList }) => {
-	const { state } = useContext(ProcessContext);
 	return (
 		<RightBox>
 			<Number>

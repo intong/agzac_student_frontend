@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Activity } from "../../api/api";
 import Mission2Presenter from "./Mission2Presenter";
 import ProcessContext from "../../contextApi/Process";
 import TempSaveContext from "../../contextApi/TempSave";
@@ -15,9 +16,11 @@ const Mission2Container = ({ history, match }) => {
 	const [faqModal, setFaqModal] = useState();
 	const [isOpen, setIsOpen] = useState(false);
 
-	const setProcessFunction = () => {
+	const setProcessFunction = async () => {
 		//validation 추가
 		actions.setMission2("ok");
+		const result = await Activity.mission2EndStart();
+		console.log("mission2EndStart", result);
 		history.push(`/mission3/${state.mission3Index}`);
 	};
 
@@ -50,8 +53,6 @@ const Mission2Container = ({ history, match }) => {
 	const answerFunctionList = {
 		// 정답 2개 중 답안이 포함하는지 확인하는 함수
 		hasAnswerOne: (one) => {
-			console.log("1", missionQuestion[index - 1]);
-			// console.log("2",)
 			if (one === missionQuestion[index - 1].answerOne) {
 				return true;
 			} else {
@@ -87,7 +88,7 @@ const Mission2Container = ({ history, match }) => {
 			}
 		},
 		// 정답화면 오른쪽카드 다음 버튼 이벤트
-		addIndex: () => {
+		addIndex: async () => {
 			// index +1 해서 다음문제 넘기기
 			if (index === 4) {
 				setIndex(index);

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Activity, SaveData } from "../../api/api";
 import Mission1Presenter from "./Mission1Presenter";
 import Mission1MobilePresenter from "./mobileVersion/Mission1MobilePresenter";
 import Mission1MobileInputPresenter from "./mobileVersion/Mission1MobileInputPresenter";
@@ -14,12 +14,14 @@ const Mission1Container = ({ history, match }) => {
 		height: window.innerHeight,
 	});
 	const [missionInput, setMissionInput] = useState(false);
+	const [correctCard, setCorrectCard] = useState(false);
 	//////////////// 모바일 state 끝 ///////////////////////////
 	const { state, actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
 	const [prevMedia, setPrevMedia] = useState(true);
 	const [nextMedia, setNextMedia] = useState(false);
 	const [answerInputText, setAnswerInputText] = useState(""); // onChang 인풋 텍스트 저장하는 state
+	const [inputArray, setInputArray] = useState([]);
 	const [answerInputArray, setAnswerInputArray] = useState([
 		{ question1: { answer: "", wrongAnswer: "" } },
 		{ question2: { answer: "", wrongAnswer: "" } },
@@ -46,9 +48,11 @@ const Mission1Container = ({ history, match }) => {
 	const [faqModal, setFaqModal] = useState();
 	const [isOpen, setIsOpen] = useState(false);
 
-	const setProcessFunction = () => {
+	const setProcessFunction = async () => {
 		//validation 추가
 		actions.setMission1("ok");
+		const result = await Activity.mission1EndStart();
+		console.log("mission1", result);
 		history.push(`/mission2/${state.index}`);
 	};
 	const modalFunction = {
@@ -61,10 +65,6 @@ const Mission1Container = ({ history, match }) => {
 		toggleFaqModal: () => {
 			setFaqModal(!faqModal);
 		},
-		handleSaveModalConfirmBtn: () => {
-			// 확인버튼 실행함수
-			modalActions.setSaveModalOpen(!modalState.saveModalOpen);
-		},
 		toggleSaveModal: () => {
 			modalActions.setSaveModalOpen(!modalState.saveModalOpen);
 		},
@@ -73,6 +73,10 @@ const Mission1Container = ({ history, match }) => {
 		},
 		toggleNextMediaModal: () => {
 			setNextMedia(!nextMedia);
+		},
+		modalConfimBtnEvent: () => {
+			console.log(inputArray);
+			modalActions.setSaveModalOpen(!modalState.saveModalOpen);
 		},
 	};
 
@@ -93,13 +97,24 @@ const Mission1Container = ({ history, match }) => {
 		onChangeAnswer: (e) => {
 			setAnswerInputText(e.target.value);
 		},
+		// 임시저장 할 배열만들기 함수
+		makeInputArray: async () => {
+			// 확인버튼 실행함수
+			const answer = { id: match.params.id, text: answerInputText };
+			console.log(answer);
+			setInputArray([...inputArray, answer]);
+		},
+		// 임시저장 api 연결
+		tempSaveSheet: async () => {
+			const result = await SaveData.save(1, "[companyNameSave]");
+			console.log(result);
+		},
 		// 정답제출 버튼 클릭이벤트
 		checkAnswer: () => {
 			const question = JSON.parse(sessionStorage.getItem("missionOne"));
 			if (answerInputText === "") {
-				alert("직업이름을 입력해 주세요.");
+				// alert("직업이름을 입력해 주세요.");
 			} else {
-				// if (answerInputText === question[index - 1].title) {
 				if (answerInputText === question[match.params.id - 1].title) {
 					// 정답일때,
 					answerFunctionList.findJobCards(answerInputText); // 카드 이미지 찾아오기
@@ -113,7 +128,7 @@ const Mission1Container = ({ history, match }) => {
 			}
 		},
 		// 정답화면 오른쪽카드 다음 버튼 이벤트
-		addIndex: () => {
+		addIndex: async () => {
 			// index +1 해서 다음문제 넘기기
 			// if (index === 16) {
 			// 	setIndex(index);
@@ -135,8 +150,26 @@ const Mission1Container = ({ history, match }) => {
 	};
 
 	const mobileFunctionList = {
+		// input페이지가기
 		inputPageHandler: () => {
 			setMissionInput(!missionInput);
+		},
+		// 정답화면 모달 켜기
+		ToggleCorrectModal: () => {
+			setCorrectCard(!correctCard);
+		},
+		// 정답확인 함수
+		checkAnswer: () => {
+			answerFunctionList.checkAnswer();
+			if (answerResult === false) {
+				mobileFunctionList.inputPageHandler();
+				mobileFunctionList.ToggleCorrectModal(); // 정답 끄기
+			}
+		},
+		// 다음버튼 함수
+		addIndex: () => {
+			mobileFunctionList.ToggleCorrectModal(); // 정답 모달끄기
+			answerFunctionList.addIndex(); // 다음 문제 보내기
 		},
 	};
 	useEffect(() => {
@@ -155,8 +188,16 @@ const Mission1Container = ({ history, match }) => {
 					/>
 				) : (
 					<Mission1MobilePresenter
+						index={match.params.id}
+						prevMedia={prevMedia}
+						nextMedia={nextMedia}
+						modalFunction={modalFunction}
+						correctCard={correctCard}
 						missionQuestion={missionQuestion}
+						answerResult={answerResult}
+						answerMissionCards={answerMissionCards}
 						mobileFunctionList={mobileFunctionList}
+						answerFunctionList={answerFunctionList}
 					/>
 				)
 			) : (

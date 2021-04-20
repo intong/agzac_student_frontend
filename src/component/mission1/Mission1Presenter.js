@@ -30,7 +30,6 @@ const Mission1Presenter = ({
 }) => {
 	return (
 		<Wrapper>
-			{/* {console.log("Mission1Presenter", index)} */}
 			<BlockTop>
 				<TopContent>
 					<TextBoxTop>Mission 01</TextBoxTop>
@@ -152,6 +151,8 @@ const Mission1Presenter = ({
 				</ModalWrapper>
 			)}
 			<Footer />
+
+			{/* 임시저장하기 모달 */}
 			{modalState.saveModalOpen && (
 				<ModalWrapper>
 					<ModalAreaSave>
@@ -160,8 +161,9 @@ const Mission1Presenter = ({
 							content='지금까 입력한 정보가 저장 됩니다.'
 							confirmbtntext='확인'
 							cancelbtntext='취소'
-							confirmbtnEvent={modalFunction.handleSaveModalConfirmBtn}
+							confirmbtnEvent={modalFunction.modalConfimBtnEvent}
 							cancelbtnEvent={modalFunction.toggleSaveModal}
+							closeModalEvent={modalFunction.toggleSaveModal}
 						/>
 					</ModalAreaSave>
 				</ModalWrapper>

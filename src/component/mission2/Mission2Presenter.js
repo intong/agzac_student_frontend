@@ -47,7 +47,6 @@ const Mission2Presenter = ({
 					<RightTextBox>4차산업기술을 보유한 미래인재</RightTextBox>
 					{missionQuestion && (
 						<LeftBox>
-							{console.log("index", index)}
 							<Title>상품명</Title>
 							<TextContent>{missionQuestion[index - 1].proName}</TextContent>
 							<Title>상품설명</Title>

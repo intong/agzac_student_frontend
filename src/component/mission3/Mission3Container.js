@@ -1,4 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
+import { Activity } from "../../api/api";
 import Mission3Presenter from "./Mission3Presenter";
 import { missionThreeQandA } from "../AnswerList";
 import ProcessContext from "../../contextApi/Process";
@@ -20,8 +21,10 @@ const Mission3Container = ({ history }) => {
 	const [secondsInputText, setSecondsInputText] = useState();
 	const [thirdInputText, setThirdInputText] = useState();
 
-	const setProcessFunction = () => {
+	const setProcessFunction = async () => {
 		//validation 추가
+		const result = await Activity.mission3EndStart();
+		console.log("Mission3EndStart", result);
 		actions.setMission3("ok");
 		history.push({
 			pathname: `/mission4/${state.mission4Index}`,

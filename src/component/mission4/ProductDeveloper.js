@@ -10,6 +10,24 @@ const inputStyle = {
 	position: "absolute",
 	top: "88px",
 };
+const options = [
+	"드론개발자",
+	"사물인터넷전문가",
+	"인공지능과학자",
+	"3D프린터개발자",
+	"컴퓨터보안전문가",
+	"소프트웨어개발자",
+	"기능성게임기획자",
+	"VR엔지니어",
+	"지능형교통시스템전문가",
+	"프로파일러",
+	"재난대처전문가",
+	"신약개발연구원",
+	"환경공학기술자",
+	"신재생에너지전문가",
+	"업사이클러",
+	"탄소배출권거래중개인",
+];
 
 const ProductDeveloper = ({ modalFunction, clickFunctionList }) => {
 	return (
@@ -30,6 +48,7 @@ const ProductDeveloper = ({ modalFunction, clickFunctionList }) => {
 			<RepeatBlock>
 				<Label>미래인재1</Label>
 				<Dropbox
+					options={options}
 					style={{ position: "absolute", top: "36px", zIndex: "30" }}
 					placeholder='선택'
 				/>
@@ -41,6 +60,7 @@ const ProductDeveloper = ({ modalFunction, clickFunctionList }) => {
 			<RepeatBlock>
 				<Label>미래인재2</Label>
 				<Dropbox
+					options={options}
 					style={{ position: "absolute", top: "36px", zIndex: "20" }}
 					placeholder='선택'
 				/>
@@ -51,7 +71,11 @@ const ProductDeveloper = ({ modalFunction, clickFunctionList }) => {
 			</RepeatBlock>
 			<RepeatBlock>
 				<Label>미래인재3</Label>
-				<Dropbox style={{ position: "absolute", top: "36px" }} placeholder='선택' />
+				<Dropbox
+					options={options}
+					style={{ position: "absolute", top: "36px" }}
+					placeholder='선택'
+				/>
 				<InputDefault
 					placeholder='미래인재가 사회문제 해결을 위해 어떤 활동을 하는지 작성해 보세요.'
 					style={inputStyle}

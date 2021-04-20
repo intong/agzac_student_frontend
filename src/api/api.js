@@ -39,3 +39,11 @@ export const SaveData = {
 	getTempData: (tokenData) =>
 		api.get("/api/activities/data", { headers: { token: tokenData } }),
 };
+
+export const Activity = {
+	loginStart: () => apiToken.patch("/api/activities/start-page-end"),
+	mission1EndStart: () => apiToken.patch("/api/activities/mission-one-end"),
+	mission2EndStart: () => apiToken.patch("/api/activities/mission-two-end"),
+	mission3EndStart: () => apiToken.patch("/api/activities/mission-three-end"),
+	mission4EndStart: () => apiToken.patch("/api/activities/mission-four-end"),
+};

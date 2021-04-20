@@ -30,6 +30,7 @@ const Mission4Presenter = ({
 	isOpen,
 	faqModal,
 	confirm,
+	selectTab,
 	clickFunctionList,
 	modalFunction,
 }) => {
@@ -52,7 +53,6 @@ const Mission4Presenter = ({
 				</BlockTop>
 				<BlockBottom>
 					<BottomContent>
-						{console.log(prevSelect)}
 						<Title>사회문제를 해결하는 상품개발 기획서</Title>
 						<div
 							style={{
@@ -87,31 +87,43 @@ const Mission4Presenter = ({
 							</LeftBox>
 							<RightBox>
 								<Tabs>
-									<Tab1 confirm={confirm}>
+									<Tab1
+										confirm={confirm}
+										selectTab={selectTab}
+										onClick={() => clickFunctionList.selectedTabFunction("social")}
+									>
 										<Text>사회문제</Text>
 									</Tab1>
-									<Tab2 confirm={confirm}>
+									<Tab2
+										confirm={confirm}
+										selectTab={selectTab}
+										onClick={() => clickFunctionList.selectedTabFunction("reason")}
+									>
 										<Text>상품개발 이유</Text>
 									</Tab2>
-									<Tab3 confirm={confirm}>
+									<Tab3
+										confirm={confirm}
+										selectTab={selectTab}
+										onClick={() => clickFunctionList.selectedTabFunction("developer")}
+									>
 										<Text>상품 개발자</Text>
 									</Tab3>
 								</Tabs>
 								{/* 변경 자리 */}
-								{confirm.social === "ok" ? (
-									confirm.social === "ok" && confirm.reason === "ok" ? (
-										<ProductDeveloper
-											modalFunction={modalFunction}
-											clickFunctionList={clickFunctionList}
-										/>
-									) : (
-										<ReasonDevelopProduct clickFunctionList={clickFunctionList} />
-									)
-								) : (
+								{selectTab === "social" ? (
 									<SocialProblem
 										prevSelect={prevSelect}
 										clickFunctionList={clickFunctionList}
 									/>
+								) : selectTab === "reason" ? (
+									<ReasonDevelopProduct clickFunctionList={clickFunctionList} />
+								) : (
+									selectTab === "developer" && (
+										<ProductDeveloper
+											modalFunction={modalFunction}
+											clickFunctionList={clickFunctionList}
+										/>
+									)
 								)}
 							</RightBox>
 						</div>
@@ -121,7 +133,7 @@ const Mission4Presenter = ({
 				{isOpen && (
 					<ModalWrapper>
 						<ModalArea>
-							<HelpModal modalFunction={modalFunction} style={{}} />
+							<HelpModal modalFunction={modalFunction} />
 						</ModalArea>
 					</ModalWrapper>
 				)}
@@ -140,8 +152,8 @@ const Mission4Presenter = ({
 
 				{/* 상품가격 세팅 모달 */}
 				{priceSettingModal && (
-					<ModalWrapper>
-						<ModalAreaPrice>
+					<ModalWrapper key={1}>
+						<ModalAreaPrice key={1}>
 							<ModalWithInputOneBtn
 								header='상품개발을 완료했습니다.'
 								content='상상품이름을 보고 사람들이 기능을 알아볼 수 있도록 
@@ -151,7 +163,7 @@ const Mission4Presenter = ({
 								btntext='확인'
 								closeModalEvent={modalFunction.togglePriceSettingModal}
 								btnEvent={modalFunction.toggleCompleteModal}
-								// onChange={}
+								onChange={clickFunctionList.setProductName}
 							/>
 						</ModalAreaPrice>
 					</ModalWrapper>
@@ -159,7 +171,7 @@ const Mission4Presenter = ({
 
 				{/* 모든 미션 완료 및 가격 설정까지 완료 후 모달 */}
 				{completeModal && (
-					<ModalWrapper>
+					<ModalWrapper key>
 						<ModalCompleteArea>
 							<CompleteModal
 								headerText={`${sessionStorage.getItem("user")}님 축하합니다! 
@@ -315,6 +327,10 @@ const Tab1 = styled.div`
 	opacity: ${(props) => props.confirm.social === "ok" && "0.8"};
 	text-align: center;
 	line-height: 53px;
+	&:hover {
+		cursor: pointer;
+		opacity: 0.7;
+	}
 `;
 //reason
 const Tab2 = styled.div`
@@ -322,11 +338,15 @@ const Tab2 = styled.div`
 	height: 50px;
 	background-color: ${(props) =>
 		props.confirm.social === "ok" ? "#0f0f15" : "#ffffff"};
-	text-align: center;
-	line-height: 53px;
 	color: ${(props) => (props.confirm.social === "ok" ? "#ffffff" : "#686868")};
 	opacity: ${(props) =>
-		props.confirm.social === "ok" && props.confirm.reason === "ok" ? "0.8" : ""};
+		props.confirm.social === "ok" && props.confirm.reason === "ok" ? "0.8" : "1"};
+	text-align: center;
+	line-height: 53px;
+	&:hover {
+		cursor: pointer;
+		opacity: 0.7;
+	}
 `;
 // developer
 const Tab3 = styled.div`
@@ -334,9 +354,14 @@ const Tab3 = styled.div`
 	height: 50px;
 	background-color: ${(props) =>
 		props.confirm.reason === "ok" ? "#0f0f15" : "#ffffff"};
+	color: ${(props) => (props.confirm.reason === "ok" ? "#ffffff" : "#686868")};
+	opacity: ${(props) => (props.confirm.developer === "ok" ? "0.8" : "1")};
 	text-align: center;
 	line-height: 53px;
-	color: ${(props) => (props.confirm.reason === "ok" ? "#ffffff" : "#686868")};
+	&:hover {
+		cursor: pointer;
+		opacity: 0.7;
+	}
 `;
 const LeftBox = styled.div`
 	width: 304px;

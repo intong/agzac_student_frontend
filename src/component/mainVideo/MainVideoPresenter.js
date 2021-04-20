@@ -96,6 +96,7 @@ const MainVideoPresenter = ({
 							cancelbtntext='취소'
 							confirmbtnEvent={modalFunction.tempSaveSheet}
 							cancelbtnEvent={modalFunction.toggleModal}
+							closeModalEvent={modalFunction.toggleModal}
 						/>
 					</ModalArea>
 				</ModalWrapper>

@@ -32,6 +32,8 @@ const SocialProblem = ({ prevSelect, clickFunctionList }) => {
 						left: "24px",
 						width: "556px",
 						height: "86px",
+						resize: "none",
+						overflowY: "scroll",
 					}}
 				/>
 				<ButtonPrimary

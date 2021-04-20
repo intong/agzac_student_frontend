@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { InputDefault } from "../../../ui/inputBox/Input";
 import { ButtonPrimary } from "../../../ui/button/Button";
-import close from "../../../assets/icons/bnt-x-24.svg";
 import nextIcon from "../../../assets/mobileImage/icn-next-dim@2x.png";
+import close from "../../../assets/icons/bnt-x-24.svg";
 
 const inputStyle = {
 	width: "80vw",
@@ -14,43 +14,45 @@ const inputStyle = {
 };
 
 const Mission1MobileInputPresenter = ({
+	wrongModal,
 	wrong,
 	answerInputText,
 	mobileFunctionList,
 	answerFunctionList,
 }) => {
 	return (
-		<Wrapper>
-			<CloseImg src={close} onClick={mobileFunctionList.inputPageHandler} />
-			<RightBox>
-				<TitleText>직업이름 매칭</TitleText>
-				<HeaderText>
-					제시된 미래인재 정보를 확인한 후 정확한 직업이름을 맞춰 보세요!
-				</HeaderText>
-				<SubTitle>* 띄어쓰기 없이 작성해주세요.</SubTitle>
-				<InputDefault
-					style={inputStyle}
-					wrong={wrong}
-					value={answerInputText ? answerInputText : ""}
-					onChange={answerFunctionList.onChangeAnswer}
-				/>
-				<ButtonDiv>
-					<ButtonPrimary
-						text='정답 제출'
-						style={{
-							width: "100vw",
-							height: "8vh",
-							fontFamily: "NotoSansCJKkr",
-							fontSize: "14px",
-							fontWeight: "500",
-							textAlign: "center",
-							color: "#ffffff",
-						}}
-						onClick={answerFunctionList.checkAnswer()}
+		<>
+			<Wrapper>
+				<CloseImg src={close} onClick={mobileFunctionList.inputPageHandler} />
+				<RightBox>
+					<TitleText>직업이름 매칭</TitleText>
+					<HeaderText>
+						제시된 미래인재 정보를 확인한 후 정확한 직업이름을 맞춰 보세요!
+					</HeaderText>
+					<SubTitle>* 띄어쓰기 없이 작성해주세요.</SubTitle>
+					<InputDefault
+						style={inputStyle}
+						wrong={wrong}
+						onChange={answerFunctionList.onChangeAnswer}
 					/>
-				</ButtonDiv>
-			</RightBox>
-		</Wrapper>
+					<ButtonDiv>
+						<ButtonPrimary
+							text='정답 제출'
+							style={{
+								width: "100vw",
+								height: "8vh",
+								fontFamily: "NotoSansCJKkr",
+								fontSize: "14px",
+								fontWeight: "500",
+								textAlign: "center",
+								color: "#ffffff",
+							}}
+							onClick={mobileFunctionList.checkAnswer}
+						/>
+					</ButtonDiv>
+				</RightBox>
+			</Wrapper>
+		</>
 	);
 };
 
@@ -101,5 +103,27 @@ const ButtonDiv = styled.div`
 	bottom: 0px;
 	left: 0px;
 `;
+const ModalWrapper = styled.div`
+	width: 100vw;
+	height: 100vh;
+	background: rgba(15, 15, 21, 0.8);
+	position: fixed;
+	top: 0px;
+	display: flex;
+	z-index: 20;
+`;
+const ModalArea = styled.div`
+	background: red;
+	/* background: #ffffff; */
+	width: 72vw;
+	height: 56vh;
+	border-radius: 5px;
+	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
+	margin: 0 auto;
+	margin-top: 15vh;
+	padding: 2vh 4vw;
+	position: relative;
+`;
+const CloseBtn = styled.img``;
 
 export default Mission1MobileInputPresenter;

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
-import { SaveData } from "../../api/api";
+import { SaveData, Activity } from "../../api/api";
 import { MediaSecretCodeAnswer } from "../AnswerList";
 import MainVideoPresenter from "./MainVideoPresenter";
 import MainVideoMobilePresenter from "./mobileVersion/MainVideoMobilePresenter";
@@ -26,9 +26,10 @@ const MainVideoContainer = ({ history, location, match }) => {
 	const [companyName, setCompanyName] = useState();
 	const [secretCode, setSecretCode] = useState();
 
-	const setProcessFunction = () => {
+	const setProcessFunction = async () => {
 		//validation 추가
 		actions.setVideo("ok");
+		timeStartCheck();
 		history.push(`/mission1/${state.index}`);
 	};
 
@@ -47,8 +48,7 @@ const MainVideoContainer = ({ history, location, match }) => {
 		},
 		tempSaveSheet: async () => {
 			const companyNameSave = document.getElementById("companyName").value;
-			const secretCodeSave = document.getElementById("secretCode").value;
-			await SaveData.save(1, [companyNameSave, secretCodeSave]);
+			await SaveData.save(1, [companyNameSave]);
 			modalFunction.toggleModal();
 		},
 		handleConfirmBtn: () => {
@@ -111,6 +111,12 @@ const MainVideoContainer = ({ history, location, match }) => {
 		},
 	};
 
+	// start 시간 저장 (useEffect에서 실행)
+	const timeStartCheck = async () => {
+		const result = await Activity.loginStart();
+		console.log(result);
+	};
+
 	useEffect(() => {
 		// 영상 시크릿코드
 		const randomChoice = () => {
@@ -118,6 +124,7 @@ const MainVideoContainer = ({ history, location, match }) => {
 		};
 		randomChoice();
 		getTempData();
+		// timeStartCheck();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
