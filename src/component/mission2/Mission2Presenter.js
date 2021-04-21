@@ -62,7 +62,6 @@ const Mission2Presenter = ({
 						normal=false && correctFirst={false or true} && correctSeconds={false or true}  : 오답화면
 					*/}
 					<AnswerDefault
-						test={test}
 						index={index}
 						missionQuestion={missionQuestion}
 						normal={normal}

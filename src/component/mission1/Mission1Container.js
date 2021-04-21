@@ -53,7 +53,7 @@ const Mission1Container = ({ history, match }) => {
 		actions.setMission1("ok");
 		const result = await Activity.mission1EndStart();
 		console.log("mission1", result);
-		history.push(`/mission2/${state.index}`);
+		history.push(`/mission2/${state.mission2Index}`);
 	};
 	const modalFunction = {
 		openModal: () => {
@@ -129,19 +129,13 @@ const Mission1Container = ({ history, match }) => {
 		},
 		// 정답화면 오른쪽카드 다음 버튼 이벤트
 		addIndex: async () => {
-			// index +1 해서 다음문제 넘기기
-			// if (index === 16) {
-			// 	setIndex(index);
 			if (parseInt(match.params.id) === 16) {
-				// actions.setIndex(match.params.id);
 				setProcessPercentage(100);
 				setAnswerResult(undefined);
 				setProcessFunction();
 			} else {
-				// selectExamQuestion(index);
-				// setIndex(index + 1);
-				// selectExamQuestion(match.params.id);
-				// actions.setIndex(match.params.id + 1);
+				console.log(match.params.id);
+				actions.setIndex(parseInt(match.params.id) + 1); // Header active css 적용을 위해서 context 변수 +1
 				modalFunction.togglePrevMediaModal();
 				setAnswerResult(undefined);
 				history.push(`/mission1/${parseInt(match.params.id) + 1}`);

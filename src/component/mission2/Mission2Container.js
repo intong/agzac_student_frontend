@@ -1,10 +1,19 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Activity } from "../../api/api";
 import Mission2Presenter from "./Mission2Presenter";
+import Mission2MobilePresenter from "./mobileVersion/Mission2MobilePresenter";
+import Mission2MobileInputPresenter from "./mobileVersion/Mission2MobileInputPresenter";
 import ProcessContext from "../../contextApi/Process";
 import TempSaveContext from "../../contextApi/TempSave";
 
 const Mission2Container = ({ history, match }) => {
+	//////////////// 모바일 state 시작 ///////////////////////////
+	const [dimension] = useState({
+		width: window.innerWidth,
+		height: window.innerHeight,
+	});
+	const [missionInput, setMissionInput] = useState(false);
+	//////////////// 모바일 state 끝 ///////////////////////////
 	const { state, actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
 	const [index, setIndex] = useState(); // 정답제출 시 +1 을 시키면 배열의 index 를 넘김
@@ -98,6 +107,29 @@ const Mission2Container = ({ history, match }) => {
 				setCorrectFirst(true);
 				setCorrectSeconds(true);
 				setIndex(index + 1);
+				actions.setMission2Index(index + 1);
+				history.push(`/mission2/${parseInt(match.params.id) + 1}`);
+			}
+		},
+	};
+
+	// 모바일 전용 함수관
+	const mobileFunctionList = {
+		toggleInputPresenter: () => {
+			setMissionInput(!missionInput);
+		},
+		// 정답 제출 후 다음 버튼으로 다음 문제 보냄
+		addIndex: () => {
+			if (index === 4) {
+				setIndex(index);
+				setProcessFunction();
+			} else {
+				mobileFunctionList.toggleInputPresenter();
+				setNormal(true);
+				setCorrectFirst(true);
+				setCorrectSeconds(true);
+				setIndex(index + 1);
+				actions.setMission2Index(index + 1);
 				history.push(`/mission2/${parseInt(match.params.id) + 1}`);
 			}
 		},
@@ -108,19 +140,39 @@ const Mission2Container = ({ history, match }) => {
 		setIndex(parseInt(match.params.id));
 	}, [match.params.id]);
 	return (
-		<Mission2Presenter
-			index={index}
-			normal={normal}
-			correctFirst={correctFirst}
-			correctSeconds={correctSeconds}
-			isOpen={isOpen}
-			faqModal={faqModal}
-			missionQuestion={missionQuestion}
-			modalState={modalState}
-			setProcessFunction={setProcessFunction}
-			modalFunction={modalFunction}
-			answerFunctionList={answerFunctionList}
-		/>
+		<>
+			{dimension.width < 415 ? (
+				missionInput ? (
+					<Mission2MobileInputPresenter
+						normal={normal}
+						correctFirst={correctFirst}
+						correctSeconds={correctSeconds}
+						mobileFunctionList={mobileFunctionList}
+						answerFunctionList={answerFunctionList}
+					/>
+				) : (
+					<Mission2MobilePresenter
+						index={index}
+						missionQuestion={missionQuestion}
+						mobileFunctionList={mobileFunctionList}
+					/>
+				)
+			) : (
+				<Mission2Presenter
+					index={index}
+					normal={normal}
+					correctFirst={correctFirst}
+					correctSeconds={correctSeconds}
+					isOpen={isOpen}
+					faqModal={faqModal}
+					missionQuestion={missionQuestion}
+					modalState={modalState}
+					setProcessFunction={setProcessFunction}
+					modalFunction={modalFunction}
+					answerFunctionList={answerFunctionList}
+				/>
+			)}
+		</>
 	);
 };
 

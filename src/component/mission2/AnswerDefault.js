@@ -23,7 +23,6 @@ const options = [
 ];
 
 const AnswerDefault = ({
-	test,
 	index,
 	missionQuestion,
 	normal,

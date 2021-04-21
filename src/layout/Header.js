@@ -29,7 +29,7 @@ const Header = ({ match }) => {
 	};
 	return (
 		<Wrapper>
-			{/* {console.log("header", state.index)} */}
+			{console.log("header", state.mission2Index)}
 			<Block>
 				<ULStyled>
 					<div
@@ -54,17 +54,16 @@ const Header = ({ match }) => {
 					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>
 						<NavLinkStyled2
-							// to='/mission1/1'
 							to={`/mission1/${state.index}`}
 							exact={true}
 							activeStyle={activeStyle}
 							confirm={state.mission1} // css 글자색상 변경 state
-							// onClick={(e) => {
-							// 	if (state.video !== "ok") {
-							// 		e.preventDefault();
-							// 		alert("EY한영 아그작교실 영상시청을 완료해 주세요");
-							// 	}
-							// }}
+							onClick={(e) => {
+								if (state.video !== "ok") {
+									e.preventDefault();
+									alert("EY한영 아그작교실 영상시청을 완료해 주세요");
+								}
+							}}
 						>
 							Mission01
 						</NavLinkStyled2>
