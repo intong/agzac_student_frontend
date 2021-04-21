@@ -89,6 +89,7 @@ const Mission2MobileInputPresenter = ({
 						<ButtonPrimary
 							text='다음'
 							style={{
+								background: "#ffc300",
 								width: "100vw",
 								height: "8vh",
 								fontFamily: "NotoSansCJKkr",
@@ -103,7 +104,7 @@ const Mission2MobileInputPresenter = ({
 						<ButtonPrimary
 							text='다시풀기'
 							style={{
-								background: "red",
+								background: "#ff3737",
 								width: "100vw",
 								height: "8vh",
 								fontFamily: "NotoSansCJKkr",

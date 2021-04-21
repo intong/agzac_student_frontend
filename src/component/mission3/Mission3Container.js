@@ -4,8 +4,15 @@ import Mission3Presenter from "./Mission3Presenter";
 import { missionThreeQandA } from "../AnswerList";
 import ProcessContext from "../../contextApi/Process";
 import TempSaveContext from "../../contextApi/TempSave";
+import Mission3MobilePresenter from "./mobileVersion/Mission3MobilePresenter";
 
 const Mission3Container = ({ history }) => {
+	//////////////// 모바일 state 시작 ///////////////////////////
+	const [dimension] = useState({
+		width: window.innerWidth,
+		height: window.innerHeight,
+	});
+	//////////////// 모바일 state 끝 ///////////////////////////
 	const { state, actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
 	const [faqModal, setFaqModal] = useState();
@@ -112,23 +119,27 @@ const Mission3Container = ({ history }) => {
 
 	return (
 		<>
-			<Mission3Presenter
-				setProcessFunction={setProcessFunction}
-				selectTab={selectTab}
-				selectTabContent={selectTabContent}
-				choosed={choosed}
-				firstAnswer={firstAnswer}
-				secondAnswer={secondAnswer}
-				thirdAnswer={thirdAnswer}
-				firstInputText={firstInputText}
-				secondsInputText={secondsInputText}
-				thirdInputText={thirdInputText}
-				uiFunctionList={uiFunctionList}
-				isOpen={isOpen}
-				faqModal={faqModal}
-				modalState={modalState}
-				modalFunction={modalFunction}
-			/>
+			{dimension.width < 415 ? (
+				<Mission3MobilePresenter />
+			) : (
+				<Mission3Presenter
+					setProcessFunction={setProcessFunction}
+					selectTab={selectTab}
+					selectTabContent={selectTabContent}
+					choosed={choosed}
+					firstAnswer={firstAnswer}
+					secondAnswer={secondAnswer}
+					thirdAnswer={thirdAnswer}
+					firstInputText={firstInputText}
+					secondsInputText={secondsInputText}
+					thirdInputText={thirdInputText}
+					uiFunctionList={uiFunctionList}
+					isOpen={isOpen}
+					faqModal={faqModal}
+					modalState={modalState}
+					modalFunction={modalFunction}
+				/>
+			)}
 		</>
 	);
 };
