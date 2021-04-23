@@ -94,7 +94,7 @@ const HeaderSuccess = styled.div`
 	width: 147px;
 	height: 24px;
 	margin: 0 29px 20px 0;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 18px;
 	font-weight: 500;
 	font-stretch: normal;

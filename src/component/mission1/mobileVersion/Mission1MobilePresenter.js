@@ -178,7 +178,7 @@ const Mission1MobilePresenter = ({
 const Wrapper = styled.div`
 	width: 100vw;
 	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow-y: auto;
 `;
 const ProcessArea = styled.div`
 	background: #e4e4e4;
@@ -213,7 +213,7 @@ const TopContent = styled.div`
 	background: #e4e4e4;
 `;
 const TextDivTop = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 1;
@@ -225,7 +225,7 @@ const TextDivTop = styled.div`
 	padding-top: 14px;
 `;
 const TextDivMiddle = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 26px;
 	font-weight: 500;
 	line-height: 40px;
@@ -235,7 +235,7 @@ const TextDivMiddle = styled.div`
 	margin-top: 20px;
 `;
 const TextDivBottom = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	line-height: 1.57;
 	color: #0f0f15;
@@ -252,7 +252,7 @@ const BottomContent = styled.div`
 	padding-bottom: 8vh;
 `;
 const BottomTextTile = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 18px;
 	font-weight: 500;
 	line-height: 1.33;
@@ -269,13 +269,13 @@ const ExplainContainer = styled.div`
 	padding: 4vw;
 	margin: auto;
 	margin-top: 2vh;
-	overflow: scroll;
+	overflow: auto;
 	padding: 14px;
 `;
 const TitleTodo = styled.div`
 	width: 39px;
 	height: 20px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 1.43;
@@ -284,7 +284,7 @@ const TitleTodo = styled.div`
 `;
 const ExplainTodo = styled.div`
 	width: 71vw;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	line-height: 1.57;
 	color: #0f0f15;
@@ -301,7 +301,7 @@ const BarUnder = styled.div`
 const TitleInterview = styled.div`
 	width: 39px;
 	height: 20px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 1.43;
@@ -310,7 +310,7 @@ const TitleInterview = styled.div`
 `;
 const ExplainInterview = styled.div`
 	width: 71vw;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	line-height: 1.57;
 	color: #0f0f15;
@@ -320,7 +320,7 @@ const ExplainInterview = styled.div`
 const TitleSubject = styled.div`
 	width: 26px;
 	height: 20px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 1.43;
@@ -329,7 +329,7 @@ const TitleSubject = styled.div`
 `;
 const ExplainSubject = styled.div`
 	width: 71vw;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	line-height: 1.57;
 	color: #0f0f15;
@@ -375,7 +375,7 @@ const ModalJobImg = styled.img`
 	bottom: 0vh;
 `;
 const JobTitle = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 18px;
 	font-weight: 500;
 	line-height: 1.33;
@@ -385,7 +385,7 @@ const JobTitle = styled.div`
 	left: 10vw;
 `;
 const SubText = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 18px;
 	font-weight: 500;
 	line-height: 1.33;
@@ -395,7 +395,7 @@ const SubText = styled.div`
 	left: 10vw;
 `;
 const DefaultText = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: sNotoSansCJKkr;
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 1.33;

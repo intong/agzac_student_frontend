@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import HeaderMobile from "./HeaderMobile";
 import Routes from "../../router/Routes";
 
 const LayoutMobile = () => {
+	const [sidebar, setSidebar] = useState(false);
+
+	const toggleSidebar = () => {
+		setSidebar(!sidebar);
+	};
 	return (
 		<>
-			<HeaderMobile />
+			<div style={{ position: "fixed", zIndex: "40" }}>
+				<HeaderMobile sidebar={sidebar} toggleSidebar={toggleSidebar} />
+			</div>
 			<Content>
 				<Routes />
 			</Content>
@@ -16,8 +23,10 @@ const LayoutMobile = () => {
 
 const Content = styled.div`
 	width: 100vw;
+	position: absolute;
+	top: 56px;
 	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow-y: auto;
 `;
 
 export default LayoutMobile;

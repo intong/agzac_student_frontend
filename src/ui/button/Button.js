@@ -236,7 +236,7 @@ const FinalBrn = styled.button`
 	background-color: #0f0f15;
 `;
 const TextStyle = styled.span`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: 500;
 	font-stretch: normal;

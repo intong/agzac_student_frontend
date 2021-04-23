@@ -155,7 +155,7 @@ const Mission1Container = ({ history, match }) => {
 		// 정답확인 함수
 		checkAnswer: () => {
 			answerFunctionList.checkAnswer();
-			if (answerResult === false) {
+			if (answerResult === true) {
 				mobileFunctionList.inputPageHandler();
 				mobileFunctionList.ToggleCorrectModal(); // 정답 끄기
 			}

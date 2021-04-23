@@ -80,7 +80,7 @@ const RightBox = styled.div`
 const Question = styled.div`
 	width: 448px;
 	height: 22px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;

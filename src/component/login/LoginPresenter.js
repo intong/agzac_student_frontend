@@ -230,7 +230,6 @@ const ModalArea = styled.div`
 const Container = styled.div`
 	max-width: 1920px;
 	height: 100vh;
-
 	display: flex;
 	flex-direction: column;
 	position: relative;
@@ -262,7 +261,6 @@ const RobotContainer = styled.img`
 	margin-left: -93px;
 `;
 const TextContainer = styled.div`
-	/* background: lightgreen; */
 	width: 292px;
 	height: 94px;
 	font-size: 32px;
@@ -281,7 +279,6 @@ const LoginBlock = styled.div`
 	margin-left: 70px;
 `;
 const LoginContent = styled.div`
-	/* background: green; */
 	width: 384px;
 	height: 489px;
 	margin: 0 auto;
@@ -291,7 +288,7 @@ const LoginContent = styled.div`
 const Title = styled.div`
 	width: 100%;
 	height: 20px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 18px;
 	font-weight: 500;
 	font-stretch: normal;

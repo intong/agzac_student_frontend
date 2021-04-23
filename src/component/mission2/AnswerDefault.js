@@ -24,10 +24,13 @@ const options = [
 
 const AnswerDefault = ({
 	index,
+	dropdownNull,
 	missionQuestion,
 	normal,
 	correctFirst,
 	correctSeconds,
+	firstFeedback,
+	secondFeedback,
 	answerFunctionList,
 }) => {
 	const leftDropbox = {
@@ -110,23 +113,23 @@ const AnswerDefault = ({
 					id='futureOne'
 					style={leftDropbox}
 					options={options}
-					// correct={correct}
 					placeholder='선택'
+					dropdownNull={dropdownNull}
 				/>
 				<Dropbox
 					id='futureTwo'
 					style={rightDropbox}
 					options={options}
-					// correct={correct}
 					placeholder='선택'
+					dropdownNull={dropdownNull}
 				/>
 			</div>
 			<FeedbackSection>
 				<LeftFeedback normal={normal} correctFirst={correctFirst}>
-					{missionQuestion && missionQuestion[index - 1].answerOneFeedback}
+					{firstFeedback && firstFeedback}
 				</LeftFeedback>
 				<RightFeedback normal={normal} correctSeconds={correctSeconds}>
-					{missionQuestion && missionQuestion[index - 1].answerTwoFeedback}
+					{secondFeedback && secondFeedback}
 				</RightFeedback>
 			</FeedbackSection>
 			{normal ? (
@@ -190,7 +193,7 @@ const Number = styled.div`
 const TitleRight = styled.div`
 	width: 83px;
 	height: 24px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 18px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -207,7 +210,7 @@ const TextContentBoxRight = styled.div`
 	height: 44px;
 	margin-left: 24px;
 	margin-bottom: 18px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -220,7 +223,7 @@ const TextContentBoxRight = styled.div`
 const Cate1 = styled.div`
 	width: 60px;
 	height: 22px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -235,7 +238,7 @@ const Cate1 = styled.div`
 const Cate2 = styled.div`
 	width: 60px;
 	height: 22px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -251,7 +254,7 @@ const CorrectText = styled.div`
 	display: ${(props) => props.normal === true && "none"};
 	width: 146px;
 	height: 20px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -278,7 +281,7 @@ const LeftFeedback = styled.div`
 		props.normal === false && props.correctFirst === true ? "show" : "none"};
 	width: 270px;
 	height: 50px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -296,7 +299,7 @@ const RightFeedback = styled.div`
 		props.normal === false && props.correctSeconds === true ? "show" : "none"};
 	width: 270px;
 	height: 50px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;

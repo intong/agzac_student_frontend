@@ -222,7 +222,7 @@ const TextDiv = styled.div`
 	line-height: 3;
 	border-radius: 2px;
 	border: solid 1px #e4e4e4;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-style: normal;
 	color: white;
@@ -253,7 +253,7 @@ const Wrapper = styled.div`
 	min-width: 1024px;
 	max-width: 1920px;
 	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow-y: auto;
 `;
 
 const BlockTop = styled.div`
@@ -270,7 +270,7 @@ const TopContent = styled.div`
 const BlockBottom = styled.div`
 	background: #f7f7f7;
 	/* background: red; */
-	height: 652px;
+	/* height: 652px; */
 	margin: 0 auto;
 	position: relative;
 `;
@@ -371,7 +371,7 @@ const Tab1 = styled.div`
 const Tab1Title = styled.div`
 	width: 94px;
 	height: 20px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: ${(props) => (props.selectTab === "tab1" ? "500" : "normal")};
 	font-stretch: normal;
@@ -402,7 +402,7 @@ const Tab2 = styled.div`
 const Tab2Title = styled.div`
 	width: 68px;
 	height: 20px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: ${(props) => (props.selectTab === "tab2" ? "500" : "normal")};
 	font-stretch: normal;
@@ -433,7 +433,7 @@ const Tab3 = styled.div`
 const Tab3Title = styled.div`
 	width: 68px;
 	height: 20px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: ${(props) => (props.selectTab === "tab3" ? "500" : "normal")};
 	font-stretch: normal;

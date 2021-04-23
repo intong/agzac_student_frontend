@@ -113,13 +113,9 @@ const SubTitle = styled.div`
 const OneMore = styled.div`
 	width: 115px;
 	height: 20px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: 500;
-	font-stretch: normal;
-	font-style: normal;
-	line-height: normal;
-	letter-spacing: normal;
 	color: #ff3737;
 	position: absolute;
 	left: 24px;

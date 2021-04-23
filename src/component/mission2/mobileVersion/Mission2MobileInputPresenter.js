@@ -127,7 +127,7 @@ const Wrapper = styled.div`
 	height: 130vh;
 	position: fixed;
 	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow-y: auto;
 	background: #ffffff;
 `;
 const CloseImg = styled.img`
@@ -138,7 +138,7 @@ const CloseImg = styled.img`
 	padding-right: 16px;
 `;
 const Title = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 18px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -151,7 +151,7 @@ const Title = styled.div`
 	margin-top: 6vh;
 `;
 const SubTitle = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;

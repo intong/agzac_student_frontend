@@ -92,7 +92,7 @@ const Wrapper = styled.div`
 	position: fixed;
 	/* top: 0vh; */
 	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow-y: auto;
 	background: #ffffff;
 `;
 const CloseImg = styled.img`
@@ -106,7 +106,7 @@ const RightBox = styled.div`
 	padding-left: 9vw;
 `;
 const TitleText = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 18px;
 	font-weight: 500;
 	line-height: 1.33;
@@ -114,7 +114,7 @@ const TitleText = styled.div`
 	margin-top: 55px;
 `;
 const HeaderText = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	line-height: 1.57;
 	color: #0f0f15;

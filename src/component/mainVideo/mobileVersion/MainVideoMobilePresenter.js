@@ -98,7 +98,7 @@ const MainVideoMobilePresenter = ({
 const Wrapper = styled.div`
 	width: 100vw;
 	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow-y: auto;
 `;
 const CircleDiv = styled.div`
 	position: absolute;
@@ -133,7 +133,7 @@ const TopContent = styled.div`
 	background: #e4e4e4;
 `;
 const TextDivTop = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 1;
@@ -145,7 +145,7 @@ const TextDivTop = styled.div`
 	padding-top: 14px;
 `;
 const TextDivMiddle = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 26px;
 	font-weight: 500;
 	line-height: 40px;
@@ -155,7 +155,7 @@ const TextDivMiddle = styled.div`
 	margin-top: 20px;
 `;
 const TextDivBottom = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	line-height: 1.57;
 	color: #0f0f15;

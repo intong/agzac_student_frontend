@@ -33,7 +33,7 @@ const SocialProblem = ({ prevSelect, clickFunctionList }) => {
 						width: "556px",
 						height: "86px",
 						resize: "none",
-						overflowY: "scroll",
+						overflowY: "auto",
 					}}
 				/>
 				<ButtonPrimary
@@ -58,7 +58,7 @@ const RightBox = styled.div`
 const TitleRight = styled.div`
 	width: 549px;
 	height: 22px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -73,7 +73,7 @@ const TitleRight = styled.div`
 const TitleRight2 = styled.div`
 	width: 576px;
 	height: 44px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;

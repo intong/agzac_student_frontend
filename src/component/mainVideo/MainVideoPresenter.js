@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Footer from "../../layout/Footer";
-import ReactPlayer from "react-player";
+import ReactPlayer from "react-player/youtube";
 import { InputDefault } from "../../ui/inputBox/Input";
 import { ButtonPrimary } from "../../ui/button/Button";
 import {
@@ -150,6 +150,7 @@ const ModalWrapper = styled.div`
 	top: 0px;
 	display: flex;
 	z-index: 20;
+	-ms-overflow-style: none; /* IE and Edge */
 `;
 const ModalArea = styled.div`
 	margin: auto;
@@ -160,7 +161,7 @@ const Wrapper = styled.div`
 	min-width: 1024px;
 	max-width: 1920px;
 	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow-y: auto;
 `;
 
 const BlockTop = styled.div`

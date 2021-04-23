@@ -12,7 +12,7 @@ const ProcessContext = createContext({
 		saveTempData: {},
 		index: 1,
 		mission2Index: 1,
-		mission3Index: 1,
+		mission3Index: "category",
 		mission4Index: "social",
 	},
 	actions: {
@@ -42,7 +42,7 @@ const ProcessProvider = ({ children }) => {
 	const [saveTempData, setSaveTempData] = useState({});
 	const [index, setIndex] = useState(1);
 	const [mission2Index, setMission2Index] = useState(1);
-	const [mission3Index, setMission3Index] = useState(1);
+	const [mission3Index, setMission3Index] = useState("category");
 	const [mission4Index, setMission4Index] = useState("social");
 	const value = {
 		state: {

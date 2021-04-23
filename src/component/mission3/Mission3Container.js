@@ -57,7 +57,7 @@ const Mission3Container = ({ history }) => {
 			}
 		},
 		hasAnswerList: (answer) => {
-			const result = selectTabContent.answer.includes(answer);
+			const result = selectTabContent.answer.includes(answer.split(" ").join("")); // 띄어쓰기 없애고 배열에 포함되어있나 체크
 			return result;
 		},
 		checkAnswer: () => {

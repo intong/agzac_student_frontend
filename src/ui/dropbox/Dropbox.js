@@ -2,36 +2,49 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import btnDropdown from "../../assets/icons/btn-dropdown.svg";
 
-export function Dropbox({ style, options, correct, placeholder, id }) {
+export function Dropbox({
+	style,
+	options,
+	correct,
+	placeholder,
+	id,
+	dropdownNull,
+}) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedOption, setSelectedOption] = useState(null);
-	const toggling = () => setIsOpen(!isOpen);
+	const toggling = () => {
+		setSelectedOption(null);
+		setIsOpen(!isOpen);
+	};
 	const onOptionClicked = (value) => () => {
 		setSelectedOption(value);
 		setIsOpen(false);
 	};
 
 	return (
-		<DropDownContainer style={style}>
-			<DropDownHeader onClick={toggling} open={isOpen} correct={correct}>
-				<Text id={id} selectedOption={selectedOption}>
-					{selectedOption || placeholder}
-				</Text>
-				<Image isOpen={isOpen} src={btnDropdown} alt='화살표' />
-			</DropDownHeader>
-			{isOpen && (
-				<DropDownListContainer>
-					<DropDownList>
-						{options &&
-							options.map((option, i) => (
-								<ListItem onClick={onOptionClicked(option)} key={i}>
-									<ListText>{option}</ListText>
-								</ListItem>
-							))}
-					</DropDownList>
-				</DropDownListContainer>
-			)}
-		</DropDownContainer>
+		<>
+			{console.log(dropdownNull)}
+			<DropDownContainer style={style}>
+				<DropDownHeader onClick={toggling} open={isOpen} correct={correct}>
+					<Text id={id} selectedOption={selectedOption} dropdownNull={dropdownNull}>
+						{selectedOption || placeholder}
+					</Text>
+					<Image isOpen={isOpen} src={btnDropdown} alt='화살표' />
+				</DropDownHeader>
+				{isOpen && (
+					<DropDownListContainer>
+						<DropDownList>
+							{options &&
+								options.map((option, i) => (
+									<ListItem onClick={onOptionClicked(option)} key={i}>
+										<ListText>{option}</ListText>
+									</ListItem>
+								))}
+						</DropDownList>
+					</DropDownListContainer>
+				)}
+			</DropDownContainer>
+		</>
 	);
 }
 
@@ -46,7 +59,10 @@ const Text = styled.div`
 	width: 270px;
 	height: 22px;
 	text-align: left;
-	color: ${(props) => (props.selectedOption ? "#0f0f15" : "#d8d8d8")};
+	color: ${(props) =>
+		props.selectedOption === null || props.dropdownNull === null
+			? "#d8d8d8"
+			: "#0f0f15"};
 `;
 
 const Image = styled.img`
@@ -90,7 +106,7 @@ const DropDownList = styled.ul`
 	border-radius: 2px;
 	border: solid 1px #686868;
 	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow-y: auto;
 `;
 
 const ListItem = styled.li`
@@ -106,7 +122,7 @@ const ListItem = styled.li`
 const ListText = styled.div`
 	width: 280px;
 	height: 22px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	line-height: 1.57;
 	color: #686868;
@@ -203,7 +219,7 @@ const DropDownListLine = styled.ul`
 	height: 231px;
 	border-radius: 2px;
 	border: solid 1px #686868;
-	overflow: scroll;
+	overflow: auto;
 `;
 
 const ListItemLine = styled.li`
@@ -219,7 +235,7 @@ const ListItemLine = styled.li`
 const ListTextLine = styled.div`
 	width: 185px;
 	height: 22px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	line-height: 1.57;
 	color: #686868;
@@ -331,7 +347,7 @@ const DropDownListLineSmall = styled.ul`
 	height: 231px;
 	border-radius: 2px;
 	border: solid 1px #686868;
-	overflow: scroll;
+	overflow: auto;
 `;
 
 const ListItemLineSmall = styled.li`
@@ -347,7 +363,7 @@ const ListItemLineSmall = styled.li`
 const ListTextLineSmall = styled.div`
 	width: 185px;
 	height: 22px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	line-height: 1.57;
 	color: #686868;
@@ -459,7 +475,7 @@ const DropDownListLineSmallMobile = styled.ul`
 	height: 231px;
 	border-radius: 2px;
 	border: solid 1px #686868;
-	overflow-y: scroll;
+	overflow-y: auto;
 	overflow-x: hidden;
 	background: #f4f5f6;
 `;
@@ -477,7 +493,7 @@ const ListItemLineSmallMobile = styled.li`
 const ListTextLineSmallMobile = styled.div`
 	width: 185px;
 	height: 22px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	line-height: 1.57;
 	color: #686868;
@@ -589,7 +605,7 @@ const DropDownListLineSmallMobileLong = styled.ul`
 	width: 87vw;
 	border-radius: 2px;
 	border: solid 1px #686868;
-	overflow-y: scroll;
+	overflow-y: auto;
 	overflow-x: hidden;
 	background: #f4f5f6;
 `;
@@ -608,7 +624,7 @@ const ListItemLineSmallMobileLong = styled.li`
 const ListTextLineSmallMobileLong = styled.div`
 	width: 87vw;
 	height: 22px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	line-height: 1.57;
 	color: #686868;

@@ -249,7 +249,7 @@ const TextDiv = styled.div`
 	line-height: 3;
 	border-radius: 2px;
 	border: solid 1px #e4e4e4;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-style: normal;
 	color: white;
@@ -270,7 +270,7 @@ const Wrapper = styled.div`
 	min-width: 1024px;
 	max-width: 1920px;
 	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow-y: auto;
 `;
 
 const BlockTop = styled.div`
@@ -297,7 +297,7 @@ const BottomContent = styled.div`
 const Title = styled.div`
 	width: 278px;
 	height: 24px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 18px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -379,7 +379,7 @@ const RightBox = styled.div`
 const LeftTitle = styled.div`
 	width: 256px;
 	height: 48px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 18px;
 	font-weight: 500;
 	font-stretch: normal;

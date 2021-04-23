@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import devide from "../assets/icons/icn-devide.svg";
 import nextBefor from "../assets/icons/icn-next-dim.svg";
-// import nextAfter from "../assets/icons/icn-next.svg";
 import leaveout from "../assets/icons/icn-leaveout.svg";
 import tempSave from "../assets/icons/icn-save@2x.png";
 import ProcessContext from "../contextApi/Process";
@@ -29,7 +28,6 @@ const Header = ({ match }) => {
 	};
 	return (
 		<Wrapper>
-			{console.log("header", state.mission2Index)}
 			<Block>
 				<ULStyled>
 					<div
@@ -58,12 +56,12 @@ const Header = ({ match }) => {
 							exact={true}
 							activeStyle={activeStyle}
 							confirm={state.mission1} // css 글자색상 변경 state
-							onClick={(e) => {
-								if (state.video !== "ok") {
-									e.preventDefault();
-									alert("EY한영 아그작교실 영상시청을 완료해 주세요");
-								}
-							}}
+							// onClick={(e) => {
+							// 	if (state.video !== "ok") {
+							// 		e.preventDefault();
+							// 		alert("EY한영 아그작교실 영상시청을 완료해 주세요");
+							// 	}
+							// }}
 						>
 							Mission01
 						</NavLinkStyled2>
@@ -152,7 +150,7 @@ const Header = ({ match }) => {
 						height: "20px",
 						fontSize: "14px",
 						lineHeight: "23px",
-						fontFamily: "NotoSansCJKkr-Medium",
+						fontFamily: "NotoSansCJKkr",
 						color: "#ffffff",
 						marginRight: "20px",
 					}}
@@ -174,7 +172,7 @@ const Header = ({ match }) => {
 						height: "20px",
 						fontSize: "14px",
 						lineHeight: "23px",
-						fontFamily: "NotoSansCJKkr-Medium",
+						fontFamily: "NotoSansCJKkr",
 						color: "#ffffff",
 						marginRight: "12px",
 					}}
@@ -202,10 +200,12 @@ const Block = styled.div`
 	/* background: lightgreen; */
 	width: 944px;
 	margin: 0 auto;
+	box-sizing: border-box;
+	padding-left: 90px;
 	display: flex;
 	flex-direction: row;
 	/* align-items: center; */
-	justify-content: center;
+	justify-content: flex-start;
 `;
 const BtnsBlock = styled.div`
 	/* background: red; */
@@ -228,7 +228,7 @@ const ULStyled = styled.ul`
 `;
 
 const LIStyled = styled.li`
-	font-size: 14px;
+	font-size: 0.875rem;
 `;
 
 const NavLinkStyled1 = styled(NavLink)`

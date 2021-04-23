@@ -8,11 +8,13 @@ import { HelpModal, ModalBaseTwoBtn } from "../../ui/modal/Modal";
 import close from "../../assets/icons/bnt-x-24.svg";
 
 const Mission2Presenter = ({
-	test,
 	index,
+	dropdownNull,
 	normal,
 	correctFirst,
 	correctSeconds,
+	firstFeedback,
+	secondFeedback,
 	isOpen,
 	faqModal,
 	missionQuestion,
@@ -63,10 +65,13 @@ const Mission2Presenter = ({
 					*/}
 					<AnswerDefault
 						index={index}
+						dropdownNull={dropdownNull}
 						missionQuestion={missionQuestion}
 						normal={normal}
 						correctFirst={correctFirst}
 						correctSeconds={correctSeconds}
+						firstFeedback={firstFeedback}
+						secondFeedback={secondFeedback}
 						setProcessFunction={setProcessFunction}
 						answerFunctionList={answerFunctionList}
 					/>
@@ -157,7 +162,7 @@ const TextDiv = styled.div`
 	line-height: 3;
 	border-radius: 2px;
 	border: solid 1px #e4e4e4;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-style: normal;
 	color: white;
@@ -170,9 +175,8 @@ const Wrapper = styled.div`
 	/* background: lightgreen; */
 	min-width: 1024px;
 	max-width: 1920px;
-	height: 100vh;
 	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow-y: auto;
 `;
 const ModalWrapper = styled.div`
 	width: 100vw;
@@ -299,7 +303,7 @@ const Title = styled.div`
 	width: 80px;
 	height: 24px;
 	margin: 0 206px 18px 0;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 18px;
 	font-weight: 500;
 	line-height: 1.33;
@@ -311,7 +315,7 @@ const TextContent = styled.div`
 	width: 256px;
 	height: 22px;
 	margin: 18px 0 30px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -325,7 +329,7 @@ const TextContentBox = styled.div`
 	width: 256px;
 	height: 44px;
 	margin: 18px 0 0;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;

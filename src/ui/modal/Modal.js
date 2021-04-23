@@ -71,7 +71,7 @@ const CloseImg = styled.img`
 	}
 `;
 const HeaderDiv = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 18px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -82,7 +82,7 @@ const HeaderDiv = styled.div`
 `;
 const ContentDiv = styled.div`
 	min-height: 66px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -140,7 +140,7 @@ const CloseImgTwoBtnLong = styled.img`
 	}
 `;
 const HeaderDivTwoBtnLong = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 18px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -151,7 +151,7 @@ const HeaderDivTwoBtnLong = styled.div`
 `;
 const ContentDivTwoBtnLong = styled.div`
 	min-height: 66px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -212,7 +212,7 @@ const CloseImgTwoBtn = styled.img`
 	}
 `;
 const HeaderDivTwoBtn = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 18px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -223,7 +223,7 @@ const HeaderDivTwoBtn = styled.div`
 `;
 const ContentDivTwoBtn = styled.div`
 	min-height: 66px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -280,7 +280,7 @@ const BlockWithInput = styled.div`
 	position: relative;
 `;
 const HeaderDivWithInput = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 18px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -290,7 +290,7 @@ const HeaderDivWithInput = styled.div`
 	color: #0f0f15;
 `;
 const ContentDivWithInput = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -418,7 +418,7 @@ const CloseBtn = styled.img`
 const Title = styled.div`
 	width: 184px;
 	height: 24px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 18px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -452,7 +452,7 @@ const CardTitle = styled.div`
 	width: 270px;
 	height: 20px;
 	text-align: center;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 18px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -476,7 +476,7 @@ const RightCard = styled.div`
 	border: solid 1px #e4e4e4;
 	background-color: #f8f8f8;
 	padding: 14px;
-	overflow: scroll;
+	overflow: auto;
 	position: absolute;
 	top: 80px;
 	left: 350px;
@@ -484,7 +484,7 @@ const RightCard = styled.div`
 const TitleDiv = styled.div`
 	width: 39px;
 	height: 20px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -501,7 +501,7 @@ const BarUnder = styled.div`
 `;
 const TodoExplain = styled.div`
 	width: 258px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	line-height: 1.57;
 	color: #0f0f15;
@@ -510,7 +510,7 @@ const TodoExplain = styled.div`
 `;
 const InterviewExplain = styled.div`
 	width: 258px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	line-height: 1.57;
 	color: #0f0f15;
@@ -519,7 +519,7 @@ const InterviewExplain = styled.div`
 `;
 const SubjectExplain = styled.div`
 	width: 258px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	line-height: 1.57;
 	color: #0f0f15;
@@ -588,7 +588,7 @@ const CloseBtnComplete = styled.img`
 	}
 `;
 const HeaderComplete = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 18px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -600,7 +600,7 @@ const HeaderComplete = styled.div`
 const ContentComplete = styled.div`
 	width: 339px;
 	height: 88px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;

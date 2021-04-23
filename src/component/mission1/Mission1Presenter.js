@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ReactPlayer from "react-player";
 import { missionOneMedia } from "../AnswerList";
 import { HelpModal } from "../../ui/modal/Modal";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
@@ -34,7 +35,7 @@ const Mission1Presenter = ({
 				<TopContent>
 					<TextBoxTop>Mission 01</TextBoxTop>
 					<TextBoxMiddle>
-						4차산업형명과 관련된 미래인재 정보를 획득해 보세요.
+						4차산업혁명과 관련된 미래인재 정보를 획득해 보세요.
 					</TextBoxMiddle>
 					<TextBoxBottom>
 						4차산업혁명과 동시에 인간의 삶은 많은 영역에서 변화가 시작되었습니다.
@@ -173,12 +174,11 @@ const Mission1Presenter = ({
 				<ModalWrapper>
 					<ModalPrevNextMediaArea>
 						<CloseBtn src={close} onClick={modalFunction.togglePrevMediaModal} />
-						{missionOneMedia[index - 1].prev}
-						{/* <ReactPlayer
+						<ReactPlayer
 							url={missionOneMedia[index - 1].prev}
 							width='100%'
 							height='100%'
-						/> */}
+						/>
 					</ModalPrevNextMediaArea>
 				</ModalWrapper>
 			)}
@@ -188,12 +188,11 @@ const Mission1Presenter = ({
 				<ModalWrapper>
 					<ModalPrevNextMediaArea>
 						<CloseBtn src={close} onClick={modalFunction.toggleNextMediaModal} />
-						{missionOneMedia[index - 1].next}
-						{/* <ReactPlayer
+						<ReactPlayer
 							url={missionOneMedia[index - 1].next}
 							width='100%'
 							height='100%'
-						/> */}
+						/>
 					</ModalPrevNextMediaArea>
 				</ModalWrapper>
 			)}
@@ -266,8 +265,8 @@ const TextDiv = styled.div`
 	line-height: 3;
 	border-radius: 2px;
 	border: solid 1px #e4e4e4;
-	font-family: "NotoSansCJKkr";
-	font-size: 14px;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
 	font-style: normal;
 	color: white;
 	position: absolute;
@@ -321,8 +320,8 @@ const ProcessBarLabel = styled.div`
 const LabelText = styled.div`
 	width: 123px;
 	height: 20px;
-	font-family: "NotoSansCJKkr";
-	font-size: 14px;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
 	font-weight: 500;
 	font-stretch: normal;
 	font-style: normal;
@@ -335,9 +334,8 @@ const LaberPercent = styled.div``;
 const Wrapper = styled.div`
 	min-width: 1024px;
 	max-width: 1920px;
-	height: 100vh;
 	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow-y: auto;
 `;
 
 const BlockTop = styled.div`
@@ -392,14 +390,14 @@ const ExplainContainer = styled.div`
 	/* background: red; */
 	padding: 14px;
 	margin-left: 16px;
-	overflow: scroll;
+	overflow: auto;
 	padding: 14px;
 `;
 const TitleTodo = styled.div`
 	width: 39px;
 	height: 20px;
-	font-family: "NotoSansCJKkr";
-	font-size: 14px;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
 	font-weight: 500;
 	line-height: 1.43;
 	color: #0f0f15;
@@ -407,8 +405,8 @@ const TitleTodo = styled.div`
 `;
 const ExplainTodo = styled.div`
 	width: 258px;
-	font-family: "NotoSansCJKkr";
-	font-size: 14px;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
 	line-height: 1.57;
 	color: #0f0f15;
 	text-align: justify;
@@ -424,8 +422,8 @@ const BarUnder = styled.div`
 const TitleInterview = styled.div`
 	width: 39px;
 	height: 20px;
-	font-family: "NotoSansCJKkr";
-	font-size: 14px;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
 	font-weight: 500;
 	line-height: 1.43;
 	color: #0f0f15;
@@ -433,8 +431,8 @@ const TitleInterview = styled.div`
 `;
 const ExplainInterview = styled.div`
 	width: 258px;
-	font-family: "NotoSansCJKkr";
-	font-size: 14px;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
 	line-height: 1.57;
 	color: #0f0f15;
 	text-align: justify;
@@ -443,8 +441,8 @@ const ExplainInterview = styled.div`
 const TitleSubject = styled.div`
 	width: 26px;
 	height: 20px;
-	font-family: "NotoSansCJKkr";
-	font-size: 14px;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
 	font-weight: 500;
 	line-height: 1.43;
 	color: #0f0f15;
@@ -452,8 +450,8 @@ const TitleSubject = styled.div`
 `;
 const ExplainSubject = styled.div`
 	width: 258px;
-	font-family: "NotoSansCJKkr";
-	font-size: 14px;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
 	line-height: 1.57;
 	color: #0f0f15;
 	text-align: justify;
@@ -485,18 +483,18 @@ const JobsBtn = styled.img`
 const TextBoxTop = styled.div`
 	width: 70px;
 	height: 14px;
-	font-family: "NotoSansCJKkr";
-	font-size: 14px;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
 	font-weight: 500;
 	line-height: 1;
 	color: #0f0f15;
 	padding-top: 40px;
 `;
 const TextBoxMiddle = styled.div`
-	width: 579px;
+	width: 944px;
 	height: 38px;
-	font-family: "NotoSansCJKkr";
-	font-size: 26px;
+	font-family: NotoSansCJKkr;
+	font-size: 1.625rem;
 	font-weight: 500;
 	color: #0f0f15;
 	margin-top: 8px;
@@ -505,18 +503,19 @@ const TextBoxBottom = styled.div`
 	width: 944px;
 	height: 66px;
 	opacity: 0.8;
-	font-family: "NotoSansCJKkr";
-	font-size: 14px;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
 	font-weight: 500;
 	line-height: 1.57;
 	color: #0f0f15;
+	text-align: justify;
 `;
 
 const TextBoxBottomTitle = styled.div`
-	width: 104px;
+	width: 200px;
 	height: 24px;
-	font-family: "NotoSansCJKkr";
-	font-size: 18px;
+	font-family: NotoSansCJKkr;
+	font-size: 1.125rem;
 	font-weight: 500;
 	line-height: 1.33;
 	color: #0f0f15;

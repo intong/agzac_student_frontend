@@ -22,7 +22,7 @@ const InputDefault = ({
 };
 
 const Input = styled.input`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	line-height: 1.57;
 	color: #0f0f15;
@@ -51,13 +51,13 @@ const InputStyle = styled.input`
 	border-bottom: 1px solid #e4e4e4;
 	padding-bottom: 8px;
 	::placeholder {
-		font-family: "NotoSansCJKkr";
+		font-family: NotoSansCJKkr;
 		font-size: 14px;
 		color: #d8d8d8;
 	}
 	&:focus {
 		border-bottom: 1px solid #0f0f15;
-		font-family: "NotoSansCJKkr";
+		font-family: NotoSansCJKkr;
 		font-size: 14px;
 		color: #0f0f15;
 	}
@@ -75,7 +75,7 @@ const StyledTextArea = styled.textarea`
 	border: solid 1px #e4e4e4;
 	background-color: #fcfcfc;
 	padding: 10px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: "14px";
 	font-weight: "normal";
 	font-stretch: "normal";

@@ -48,7 +48,7 @@ const LogoAgazac = styled.img`
 	width: 50vw;
 `;
 const TextContainer = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 24px;
 	font-weight: bold;
 	line-height: 1.25;
@@ -59,7 +59,7 @@ const TextContainer = styled.div`
 `;
 const SubTextContainer = styled.div`
 	opacity: 0.9;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 16px;
 	font-weight: normal;
 	font-stretch: normal;

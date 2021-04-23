@@ -102,7 +102,7 @@ const RightBox = styled.div`
 const Question = styled.div`
 	width: 576px;
 	height: 66px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -116,7 +116,7 @@ const Question = styled.div`
 const Label = styled.div`
 	width: 60px;
 	height: 22px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;

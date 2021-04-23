@@ -76,7 +76,6 @@ const DropDownHeader = styled.div`
 const DropDownListContainer = styled.div`
 	margin-top: 8px;
 	background: #fcfcfc;
-	display: fixed;
 	&:hover {
 		cursor: pointer;
 	}
@@ -86,18 +85,21 @@ const DropDownList = styled.ul`
 	padding: 0;
 	margin: 0;
 	width: 80vw;
-	height: 231px;
 	border-radius: 2px;
 	border: solid 1px #686868;
 	overflow-x: hidden;
-	overflow-y: scroll;
+	position: absolute;
+	overflow-y: auto;
+	z-index: 10;
 `;
 
 const ListItem = styled.li`
-	width: 280px;
+	background: #ffffff;
+	width: 80vw;
 	height: 42px;
 	border-radius: 2px;
 	list-style: none;
+	z-index: 10;
 	&:hover {
 		background: #f5f5f5;
 	}
@@ -106,7 +108,7 @@ const ListItem = styled.li`
 const ListText = styled.div`
 	width: 280px;
 	height: 22px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	line-height: 1.57;
 	color: #686868;

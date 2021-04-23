@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ReactPlayer from "react-player";
 import { InputDefault } from "../../ui/inputBox/Input";
 import { ButtonPrimary } from "../../ui/button/Button";
 
@@ -285,7 +286,9 @@ const Default = ({
 					</div>
 				</VideoArea>
 			) : (
-				<VideoArea>{selectTabContent && selectTabContent.video}</VideoArea>
+				<VideoArea>
+					<ReactPlayer url={selectTabContent.video} width='100%' height='100%' />
+				</VideoArea>
 			)}
 		</>
 	);
@@ -320,7 +323,7 @@ const LeftInsideBox = styled.div`
 	position: relative;
 `;
 const LeftInsideText = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 20px;
 	font-weight: 500;
 	color: #686868;
@@ -344,7 +347,7 @@ const RightBox = styled.div`
 const TitleContainer = styled.div`
 	width: 228px;
 	height: 24px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 18px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -358,7 +361,7 @@ const TitleContainer = styled.div`
 const ContentContainer = styled.div`
 	width: 256px;
 	height: 66px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -375,7 +378,7 @@ const AnwerText = styled.div`
 	position: absolute;
 	bottom: 33px;
 	left: 24px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: 500;
 	font-stretch: normal;

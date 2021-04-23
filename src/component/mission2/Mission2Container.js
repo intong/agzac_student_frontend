@@ -18,9 +18,12 @@ const Mission2Container = ({ history, match }) => {
 	const { modalState, modalActions } = useContext(TempSaveContext);
 	const [index, setIndex] = useState(); // 정답제출 시 +1 을 시키면 배열의 index 를 넘김
 	const [missionQuestion, setMissionQuestion] = useState(); // 미션 배열 중 한개의 문제만 보내는 state
+	const [dropdownNull, setDropdownNull] = useState(); // Dropdown Null로 초기화 해주는 state (add 함수에서 적용)
 	const [answerList, setAnswerList] = useState();
 	const [normal, setNormal] = useState(true);
 	const [correctFirst, setCorrectFirst] = useState(true);
+	const [firstFeedback, setFirstFeedback] = useState();
+	const [secondFeedback, setSecondFeedback] = useState();
 	const [correctSeconds, setCorrectSeconds] = useState(true);
 	const [faqModal, setFaqModal] = useState();
 	const [isOpen, setIsOpen] = useState(false);
@@ -60,19 +63,32 @@ const Mission2Container = ({ history, match }) => {
 
 	// 정답 입력 및 확인 이벤트
 	const answerFunctionList = {
-		// 정답 2개 중 답안이 포함하는지 확인하는 함수
-		hasAnswerOne: (one) => {
-			if (one === missionQuestion[index - 1].answerOne) {
-				return true;
-			} else {
-				return false;
-			}
+		// missionTwo에서 answerOne과 answerTwo (정답 / 설명만 빼와서 배열을 리턴)
+		makeCorrectAnswerArray: (missionQuestion) => {
+			const result = missionQuestion.map((m) => {
+				let tempArr1 = { answer: "", feedback: "" };
+				let tempArr2 = { answer: "", feedback: "" };
+				let tempArr3 = [];
+				tempArr1.answer = m.answerOne;
+				tempArr1.feedback = m.answerOneFeedback;
+				tempArr2.answer = m.answerTwo;
+				tempArr2.feedback = m.answerTwoFeedback;
+				tempArr3.push(tempArr1);
+				tempArr3.push(tempArr2);
+				return tempArr3;
+			});
+			return result;
 		},
-		hasAnswerTwo: (two) => {
-			if (two === missionQuestion[index - 1].answerTwo) {
-				return true;
+		// 정답 2개 중 답안이 포함하는지 확인하는 함수
+		hasAnswer: (one) => {
+			const result = answerFunctionList.makeCorrectAnswerArray(missionQuestion);
+			const idx = result[index - 1].findIndex((item, i) => {
+				return item.answer === one;
+			});
+			if (result[index - 1][idx] === undefined) {
+				return { bool: false, feedback: "" };
 			} else {
-				return false;
+				return { bool: true, feedback: result[index - 1][idx].feedback };
 			}
 		},
 		checkAnswer: () => {
@@ -84,13 +100,15 @@ const Mission2Container = ({ history, match }) => {
 				alert("같은 미래인재를 선택했습니다.");
 			} else {
 				setNormal(false);
-				if (answerFunctionList.hasAnswerOne(one)) {
+				if (answerFunctionList.hasAnswer(one).bool) {
 					setCorrectFirst(true);
+					setFirstFeedback(answerFunctionList.hasAnswer(one).feedback);
 				} else {
 					setCorrectFirst(false);
 				}
-				if (answerFunctionList.hasAnswerTwo(two)) {
+				if (answerFunctionList.hasAnswer(two).bool) {
 					setCorrectSeconds(true);
+					setSecondFeedback(answerFunctionList.hasAnswer(two).feedback);
 				} else {
 					setCorrectSeconds(false);
 				}
@@ -103,6 +121,7 @@ const Mission2Container = ({ history, match }) => {
 				setIndex(index);
 				setProcessFunction();
 			} else {
+				setDropdownNull(null);
 				setNormal(true);
 				setCorrectFirst(true);
 				setCorrectSeconds(true);
@@ -160,9 +179,12 @@ const Mission2Container = ({ history, match }) => {
 			) : (
 				<Mission2Presenter
 					index={index}
+					dropdownNull={dropdownNull}
 					normal={normal}
 					correctFirst={correctFirst}
 					correctSeconds={correctSeconds}
+					firstFeedback={firstFeedback}
+					secondFeedback={secondFeedback}
 					isOpen={isOpen}
 					faqModal={faqModal}
 					missionQuestion={missionQuestion}

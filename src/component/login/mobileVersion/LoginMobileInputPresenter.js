@@ -214,10 +214,10 @@ const WrapperMobile = styled.div`
 	height: 100vh;
 	background: #f4f5f6;
 	position: fixed;
-	overflow-y: scroll;
+	overflow-y: auto;
 `;
 const HeaderMobile = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: bold;
 	font-stretch: normal;
@@ -238,7 +238,7 @@ const CloseImg = styled.img`
 	right: 16px;
 `;
 const TitleMobile = styled.div`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: 500;
 	font-stretch: normal;

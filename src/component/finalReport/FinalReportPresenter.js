@@ -110,7 +110,7 @@ const TextDiv = styled.div`
 	line-height: 3;
 	border-radius: 2px;
 	border: solid 1px #e4e4e4;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-style: normal;
 	color: white;
@@ -141,7 +141,7 @@ const Wrapper = styled.div`
 	min-width: 1024px;
 	max-width: 1920px;
 	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow-y: auto;
 `;
 
 const BlockTop = styled.div`
