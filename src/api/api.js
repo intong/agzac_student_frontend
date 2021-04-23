@@ -31,7 +31,7 @@ export const Student = {
 
 export const SaveData = {
 	save: (pageId, studentInputs) =>
-		apiToken.post("api/activities/data", {
+		apiToken.post("/api/activities/data", {
 			pageId: pageId,
 			studentInputs: studentInputs,
 		}),

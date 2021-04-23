@@ -82,7 +82,7 @@ const MainVideoContainer = ({ history, location, match }) => {
 		onSubmit: async () => {
 			const result = functionList.checkAnswer();
 			if (result) {
-				const result = await SaveData.save(1, [companyName, secretCode]);
+				const result = await SaveData.save(1, [companyName]);
 				if (result.data.ok) {
 					setProcessFunction(); // 다음단계로 진행
 				}

@@ -162,9 +162,9 @@ const Mission1Presenter = ({
 							content='지금까 입력한 정보가 저장 됩니다.'
 							confirmbtntext='확인'
 							cancelbtntext='취소'
-							confirmbtnEvent={modalFunction.modalConfimBtnEvent}
 							cancelbtnEvent={modalFunction.toggleSaveModal}
 							closeModalEvent={modalFunction.toggleSaveModal}
+							confirmbtnEvent={modalFunction.modalConfimBtnEvent}
 						/>
 					</ModalAreaSave>
 				</ModalWrapper>

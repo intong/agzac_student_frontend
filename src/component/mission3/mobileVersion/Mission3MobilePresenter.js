@@ -1,11 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import { DropboxMobile } from "../../../ui/MobileUI";
+import ReactPlayer from "react-player";
+import checked from "../../../assets/icons/checkedBtn.svg";
+import unchecked from "../../../assets/icons/uncheckedBtn.svg";
 import { ButtonSecondary } from "../../../ui/button/Button";
 import nextIcon from "../../../assets/mobileImage/icn-next-dim@2x.png";
 
-const Mission3MobilePresenter = () => {
-	const options = ["기후변화와 환경", "고령화 사회", "재난과 안전"];
+const Mission3MobilePresenter = ({
+	choosed,
+	selectTab,
+	selectTabContent,
+	mobileFunction,
+	uiFunctionList,
+}) => {
 	return (
 		<Wrapper>
 			<ProcessArea>
@@ -64,12 +71,72 @@ const Mission3MobilePresenter = () => {
 					사회문제 설명영상을 시청한 후 우리 기업이 해결하고 싶은 사회문제 테마
 					1가지를 최종 선택해주세요.
 				</SubText>
-				<DropboxMobile
-					options={options}
-					placeholder='사회문제 선택'
-					style={{ marginLeft: "10vw" }}
-				/>
-				<VideoPlayArea>영상</VideoPlayArea>
+				<Tabs>
+					<Tab1
+						selectTab={selectTab}
+						onClick={() =>
+							choosed === false && uiFunctionList.tabSelectFunction("tab1")
+						}
+					>
+						<div
+							style={{
+								width: "20px",
+								height: "20px",
+								position: "absolute",
+								top: "15px",
+								left: "3vw",
+							}}
+						>
+							<img src={selectTab === "tab1" ? checked : unchecked} alt='체크버튼' />
+						</div>
+						<Tab1Title selectTab={selectTab}>기후변화와 환경</Tab1Title>
+					</Tab1>
+					<Tab2
+						selectTab={selectTab}
+						onClick={() =>
+							choosed === false && uiFunctionList.tabSelectFunction("tab2")
+						}
+					>
+						<div
+							style={{
+								width: "20px",
+								height: "20px",
+								position: "absolute",
+								top: "2vh",
+								left: "3vw",
+							}}
+						>
+							<img src={selectTab === "tab2" ? checked : unchecked} alt='미체크' />
+						</div>
+						<Tab2Title selectTab={selectTab}>고령화 사회</Tab2Title>
+					</Tab2>
+					<Tab3
+						selectTab={selectTab}
+						onClick={() =>
+							choosed === false && uiFunctionList.tabSelectFunction("tab3")
+						}
+					>
+						<div
+							style={{
+								width: "20px",
+								height: "20px",
+								position: "absolute",
+								top: "15px",
+								left: "3vw",
+							}}
+						>
+							<img src={selectTab === "tab3" ? checked : unchecked} alt='체크버튼' />
+						</div>
+						<Tab3Title selectTab={selectTab}>재난과 안전</Tab3Title>
+					</Tab3>
+				</Tabs>
+				<VideoPlayArea>
+					{selectTabContent ? (
+						<ReactPlayer url={selectTabContent.video} width='100%' height='100%' />
+					) : (
+						"테마를 선택하면 영상을 볼 수 있습니다."
+					)}
+				</VideoPlayArea>
 				<ButtonDiv>
 					<ButtonSecondary
 						text='사회문제 최종선택'
@@ -82,6 +149,7 @@ const Mission3MobilePresenter = () => {
 							textAlign: "center",
 							color: "#0f0f15",
 						}}
+						onClick={uiFunctionList.clickFinalChoice}
 					/>
 					<NextIcon src={nextIcon} />
 				</ButtonDiv>
@@ -183,7 +251,7 @@ const SubText = styled.div`
 	opacity: 0.8;
 	color: #0f0f15;
 	width: 80vw;
-	margin: auto;
+	margin: 0 auto;
 	margin-bottom: 3vh;
 `;
 const VideoPlayArea = styled.div`
@@ -193,6 +261,7 @@ const VideoPlayArea = styled.div`
 	border: solid 1px #e4e4e4;
 	margin: 0 auto;
 	margin-top: 3vh;
+	margin-bottom: 5vh;
 `;
 const ButtonDiv = styled.div`
 	position: fixed;
@@ -205,5 +274,98 @@ const NextIcon = styled.img`
 	right: 29vw;
 	width: 24px;
 	height: 24px;
+`;
+const Tabs = styled.div`
+	width: 80vw;
+	margin: 0 auto;
+	margin-top: 16px;
+`;
+const Tab1 = styled.div`
+	width: 80vw;
+	height: 50px;
+	box-shadow: ${(props) =>
+		props.selectTab === "tab1" && "0 0 10px 0 rgba(15, 15, 21, 0.1)"};
+	border: ${(props) => (props.selectTab === "tab1" ? "solid 1px #686868" : "")};
+	background-color: ${(props) =>
+		props.selectTab === "tab1" ? "#ffffff" : "rgba(255, 255, 255, 0.5)"};
+	position: relative;
+	&:hover {
+		cursor: pointer;
+	}
+`;
+const Tab1Title = styled.div`
+	width: 94px;
+	height: 20px;
+	font-family: NotoSansCJKkr;
+	font-size: 14px;
+	font-weight: ${(props) => (props.selectTab === "tab1" ? "500" : "normal")};
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 22.9px;
+	letter-spacing: normal;
+	text-align: center;
+	color: ${(props) => (props.selectTab === "tab1" ? "#0f0f15" : "#686868")};
+	position: absolute;
+	top: 2vh;
+	left: 11vw;
+`;
+
+const Tab2 = styled.div`
+	width: 80vw;
+	height: 50px;
+	box-shadow: ${(props) =>
+		props.selectTab === "tab2" && "0 0 10px 0 rgba(15, 15, 21, 0.1)"};
+	border: ${(props) => (props.selectTab === "tab2" ? "solid 1px #686868" : "")};
+	background-color: ${(props) =>
+		props.selectTab === "tab2" ? "#ffffff" : "rgba(255, 255, 255, 0.5)"};
+	position: relative;
+	&:hover {
+		cursor: pointer;
+	}
+`;
+const Tab2Title = styled.div`
+	width: 68px;
+	height: 20px;
+	font-family: NotoSansCJKkr;
+	font-size: 14px;
+	font-weight: ${(props) => (props.selectTab === "tab2" ? "500" : "normal")};
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 22.9px;
+	letter-spacing: normal;
+	color: ${(props) => (props.selectTab === "tab2" ? "#0f0f15" : "#686868")};
+	position: absolute;
+	top: 2vh;
+	left: 11vw;
+`;
+
+const Tab3 = styled.div`
+	width: 80vw;
+	height: 50px;
+	box-shadow: ${(props) =>
+		props.selectTab === "tab3" && "0 0 10px 0 rgba(15, 15, 21, 0.1)"};
+	border: ${(props) => (props.selectTab === "tab3" ? "solid 1px #686868" : "")};
+	background-color: ${(props) =>
+		props.selectTab === "tab3" ? "#ffffff" : "rgba(255, 255, 255, 0.5)"};
+	position: relative;
+	&:hover {
+		cursor: pointer;
+	}
+`;
+const Tab3Title = styled.div`
+	width: 68px;
+	height: 20px;
+	font-family: NotoSansCJKkr;
+	font-size: 14px;
+	font-weight: ${(props) => (props.selectTab === "tab3" ? "500" : "normal")};
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 22.9px;
+	letter-spacing: normal;
+	text-align: center;
+	color: ${(props) => (props.selectTab === "tab3" ? "#0f0f15" : "#686868")};
+	position: absolute;
+	top: 2vh;
+	left: 11vw;
 `;
 export default Mission3MobilePresenter;

@@ -33,6 +33,8 @@ time, mark, audio, video {
 }
 input, button {
 	outline:none;
+	-webkit-appearance: none;
+    -moz-appearance: none;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 

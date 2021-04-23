@@ -2,18 +2,32 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import btnDropdown from "../assets/icons/btn-dropdown.svg";
 
-export function DropboxMobile({ style, options, correct, placeholder, id }) {
+export function DropboxMobile({
+	style,
+	options,
+	correct,
+	placeholder,
+	id,
+	value,
+}) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedOption, setSelectedOption] = useState(null);
+	const [selectedValue, setSelectedValue] = useState(null);
 	const toggling = () => setIsOpen(!isOpen);
-	const onOptionClicked = (value) => () => {
-		setSelectedOption(value);
+	const onOptionClicked = (text, value) => () => {
+		setSelectedValue(value);
+		setSelectedOption(text);
 		setIsOpen(false);
 	};
 
 	return (
 		<DropDownContainer style={style}>
-			<DropDownHeader onClick={toggling} open={isOpen} correct={correct}>
+			<DropDownHeader
+				onClick={toggling}
+				open={isOpen}
+				correct={correct}
+				value={selectedValue}
+			>
 				<Text id={id} selectedOption={selectedOption}>
 					{selectedOption || placeholder}
 				</Text>
@@ -24,8 +38,8 @@ export function DropboxMobile({ style, options, correct, placeholder, id }) {
 					<DropDownList>
 						{options &&
 							options.map((option, i) => (
-								<ListItem onClick={onOptionClicked(option)} key={i}>
-									<ListText>{option}</ListText>
+								<ListItem onClick={onOptionClicked(option.text, option.value)} key={i}>
+									<ListText>{option.text}</ListText>
 								</ListItem>
 							))}
 					</DropDownList>

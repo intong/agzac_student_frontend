@@ -23,7 +23,6 @@ export function Dropbox({
 
 	return (
 		<>
-			{console.log(dropdownNull)}
 			<DropDownContainer style={style}>
 				<DropDownHeader onClick={toggling} open={isOpen} correct={correct}>
 					<Text id={id} selectedOption={selectedOption} dropdownNull={dropdownNull}>

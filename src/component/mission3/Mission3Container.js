@@ -1,10 +1,11 @@
 import React, { useState, useContext } from "react";
-import { Activity } from "../../api/api";
+import { Activity, SaveData } from "../../api/api";
 import Mission3Presenter from "./Mission3Presenter";
 import { missionThreeQandA } from "../AnswerList";
 import ProcessContext from "../../contextApi/Process";
 import TempSaveContext from "../../contextApi/TempSave";
 import Mission3MobilePresenter from "./mobileVersion/Mission3MobilePresenter";
+import Mission3MobileNextPresenter from "./mobileVersion/Mission3MobileNextPresenter";
 
 const Mission3Container = ({ history }) => {
 	//////////////// 모바일 state 시작 ///////////////////////////
@@ -24,6 +25,7 @@ const Mission3Container = ({ history }) => {
 	const [firstAnswer, setFirstAnswer] = useState();
 	const [secondAnswer, setSecondAnswer] = useState();
 	const [thirdAnswer, setThirdAnswer] = useState();
+	const [inputArray, setInputArray] = useState([]);
 	const [firstInputText, setFirstInputText] = useState();
 	const [secondsInputText, setSecondsInputText] = useState();
 	const [thirdInputText, setThirdInputText] = useState();
@@ -49,9 +51,18 @@ const Mission3Container = ({ history }) => {
 			setSelectTab(tab);
 			setSelectTabContent(selectCategory);
 		},
-		clickFinalChoice: () => {
+		clickFinalChoice: async () => {
 			if (selectTab !== undefined) {
 				setChoosed(!choosed);
+				if (selectTab === "tab1") {
+					await SaveData.save(4, ["기후변화와 환경"]);
+				}
+				if (selectTab === "tab2") {
+					await SaveData.save(4, ["고령화 사회"]);
+				}
+				if (selectTab === "tab3") {
+					await SaveData.save(4, ["재난과 안전"]);
+				}
 			} else {
 				alert("사회문제를 먼저 선택하세요");
 			}
@@ -60,7 +71,7 @@ const Mission3Container = ({ history }) => {
 			const result = selectTabContent.answer.includes(answer.split(" ").join("")); // 띄어쓰기 없애고 배열에 포함되어있나 체크
 			return result;
 		},
-		checkAnswer: () => {
+		checkAnswer: async () => {
 			if (firstInputText && secondsInputText && thirdInputText !== undefined) {
 				if (uiFunctionList.hasAnswerList(firstInputText)) {
 					setFirstAnswer(true);
@@ -81,6 +92,8 @@ const Mission3Container = ({ history }) => {
 					setThirdAnswer(false);
 				}
 				setStudentAnswerList(tempArr);
+				const result = await SaveData.save(5, tempArr);
+				console.log(result);
 			} else {
 				alert("세 가지 키워드를 찾아주세요.");
 			}
@@ -108,8 +121,19 @@ const Mission3Container = ({ history }) => {
 		toggleFaqModal: () => {
 			setFaqModal(!faqModal);
 		},
-		handleSaveModalConfirmBtn: () => {
+		handleSaveModalConfirmBtn: async () => {
 			// 확인버튼 실행함수
+			const tempArr = [];
+			if (firstInputText !== undefined) {
+				tempArr.push(firstInputText);
+			}
+			if (secondsInputText !== undefined) {
+				tempArr.push(secondsInputText);
+			}
+			if (thirdInputText !== undefined) {
+				tempArr.push(thirdInputText);
+			}
+			await SaveData.save(5, tempArr);
 			modalActions.setSaveModalOpen(!modalState.saveModalOpen);
 		},
 		toggleSaveModal: () => {
@@ -117,10 +141,33 @@ const Mission3Container = ({ history }) => {
 		},
 	};
 
+	// mobile 전용 functioinList
+	const mobileFunction = {};
 	return (
 		<>
 			{dimension.width < 415 ? (
-				<Mission3MobilePresenter />
+				choosed ? (
+					<Mission3MobileNextPresenter
+						choosed={choosed}
+						selectTab={selectTab}
+						firstAnswer={firstAnswer}
+						secondAnswer={secondAnswer}
+						thirdAnswer={thirdAnswer}
+						firstInputText={firstInputText}
+						secondsInputText={secondsInputText}
+						thirdInputText={thirdInputText}
+						uiFunctionList={uiFunctionList}
+						setProcessFunction={setProcessFunction}
+					/>
+				) : (
+					<Mission3MobilePresenter
+						choosed={choosed}
+						selectTab={selectTab}
+						selectTabContent={selectTabContent}
+						mobileFunction={mobileFunction}
+						uiFunctionList={uiFunctionList}
+					/>
+				)
 			) : (
 				<Mission3Presenter
 					setProcessFunction={setProcessFunction}

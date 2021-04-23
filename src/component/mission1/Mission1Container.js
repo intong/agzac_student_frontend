@@ -21,25 +21,7 @@ const Mission1Container = ({ history, match }) => {
 	const [prevMedia, setPrevMedia] = useState(true);
 	const [nextMedia, setNextMedia] = useState(false);
 	const [answerInputText, setAnswerInputText] = useState(""); // onChang 인풋 텍스트 저장하는 state
-	const [inputArray, setInputArray] = useState([]);
-	const [answerInputArray, setAnswerInputArray] = useState([
-		{ question1: { answer: "", wrongAnswer: "" } },
-		{ question2: { answer: "", wrongAnswer: "" } },
-		{ question3: { answer: "", wrongAnswer: "" } },
-		{ question4: { answer: "", wrongAnswer: "" } },
-		{ question5: { answer: "", wrongAnswer: "" } },
-		{ question6: { answer: "", wrongAnswer: "" } },
-		{ question7: { answer: "", wrongAnswer: "" } },
-		{ question8: { answer: "", wrongAnswer: "" } },
-		{ question9: { answer: "", wrongAnswer: "" } },
-		{ question10: { answer: "", wrongAnswer: "" } },
-		{ question11: { answer: "", wrongAnswer: "" } },
-		{ question12: { answer: "", wrongAnswer: "" } },
-		{ question13: { answer: "", wrongAnswer: "" } },
-		{ question14: { answer: "", wrongAnswer: "" } },
-		{ question15: { answer: "", wrongAnswer: "" } },
-		{ question16: { answer: "", wrongAnswer: "" } },
-	]); // 정답 16개를 저장하는 배열
+	const [inputArray, setInputArray] = useState([]); // 정답 16개를 저장하는 배열
 	// const [index, setIndex] = useState(1); // 정답제출 시 +1 을 시키면 배열의 index 를 넘김
 	const [missionQuestion, setMissionQuestion] = useState(); // 미션 배열 중 한개의 문제만 보내는 state
 	const [answerResult, setAnswerResult] = useState(); // 오른쪽 카드 영역 정오답화면 변경 state
@@ -51,9 +33,15 @@ const Mission1Container = ({ history, match }) => {
 	const setProcessFunction = async () => {
 		//validation 추가
 		actions.setMission1("ok");
-		const result = await Activity.mission1EndStart();
-		console.log("mission1", result);
+		await Activity.mission1EndStart();
 		history.push(`/mission2/${state.mission2Index}`);
+	};
+	// 임시저장하기 (사용처 : 임시저장 모달 confirm버튼 / 정답제출 버튼)
+	const tempSaveSheet = async () => {
+		const result = await SaveData.save(2, inputArray);
+		if (result.data.ok) {
+			alert("저장했습니다.");
+		}
 	};
 	const modalFunction = {
 		openModal: () => {
@@ -74,8 +62,9 @@ const Mission1Container = ({ history, match }) => {
 		toggleNextMediaModal: () => {
 			setNextMedia(!nextMedia);
 		},
-		modalConfimBtnEvent: () => {
+		modalConfimBtnEvent: async () => {
 			console.log(inputArray);
+			await tempSaveSheet();
 			modalActions.setSaveModalOpen(!modalState.saveModalOpen);
 		},
 	};
@@ -104,11 +93,7 @@ const Mission1Container = ({ history, match }) => {
 			console.log(answer);
 			setInputArray([...inputArray, answer]);
 		},
-		// 임시저장 api 연결
-		tempSaveSheet: async () => {
-			const result = await SaveData.save(1, "[companyNameSave]");
-			console.log(result);
-		},
+
 		// 정답제출 버튼 클릭이벤트
 		checkAnswer: () => {
 			const question = JSON.parse(sessionStorage.getItem("missionOne"));
@@ -117,6 +102,7 @@ const Mission1Container = ({ history, match }) => {
 			} else {
 				if (answerInputText === question[match.params.id - 1].title) {
 					// 정답일때,
+					setInputArray([...inputArray, answerInputText]); // 배열에 답 저장
 					answerFunctionList.findJobCards(answerInputText); // 카드 이미지 찾아오기
 					setAnswerResult(true);
 					setAnswerInputText("");
@@ -130,11 +116,11 @@ const Mission1Container = ({ history, match }) => {
 		// 정답화면 오른쪽카드 다음 버튼 이벤트
 		addIndex: async () => {
 			if (parseInt(match.params.id) === 16) {
+				await tempSaveSheet();
 				setProcessPercentage(100);
 				setAnswerResult(undefined);
 				setProcessFunction();
 			} else {
-				console.log(match.params.id);
 				actions.setIndex(parseInt(match.params.id) + 1); // Header active css 적용을 위해서 context 변수 +1
 				modalFunction.togglePrevMediaModal();
 				setAnswerResult(undefined);

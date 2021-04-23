@@ -84,7 +84,7 @@ const ProductDeveloper = ({ modalFunction, clickFunctionList }) => {
 			<ButtonPrimary
 				text='다음'
 				style={{ position: "absolute", bottom: "24px", right: "24px" }}
-				onClick={modalFunction.togglePriceSettingModal}
+				onClick={() => clickFunctionList.onClickNextFuction("developer")}
 			/>
 		</RightBox>
 	);

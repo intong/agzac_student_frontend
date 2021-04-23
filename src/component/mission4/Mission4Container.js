@@ -1,9 +1,16 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Activity } from "../../api/api";
 import Mission4Presenter from "./Mission4Presenter";
+import Mission4MobilePresenter from "./mobileVersion/Mission4MobilePresenter";
 import ProcessContext from "../../contextApi/Process";
 
 const Mission4Container = ({ history, location, match }) => {
+	//////////////// 모바일 state 시작 ///////////////////////////
+	const [dimension] = useState({
+		width: window.innerWidth,
+		height: window.innerHeight,
+	});
+	//////////////// 모바일 state 끝 ///////////////////////////
 	const { state, actions } = useContext(ProcessContext);
 	const [priceSettingModal, setPriceSettingModal] = useState(false); // 상품가격 세팅 모달 오픈
 	const [productName, setProductName] = useState(); // 최종 상품 이름
@@ -16,6 +23,7 @@ const Mission4Container = ({ history, location, match }) => {
 		social: "",
 		reason: "",
 		developer: "",
+		itemIntro: "",
 	});
 	const [selectTab, setSelectTab] = useState(match.params.id);
 
@@ -31,7 +39,7 @@ const Mission4Container = ({ history, location, match }) => {
 			history.push(`/mission4/${tab}`);
 		},
 		onClickNextFuction: (tab) => {
-			// alert(tab);
+			console.log(tab);
 			if (tab === "social") {
 				// validation 체크 후 컨펌
 				setConfirm({ ...confirm, social: "ok" });
@@ -40,9 +48,14 @@ const Mission4Container = ({ history, location, match }) => {
 				// validation 체크 후 컨펌
 				setConfirm({ ...confirm, reason: "ok" });
 				setSelectTab("developer");
-			} else {
+			} else if (tab === "developer") {
 				// validation 체크 후 컨펌
 				setConfirm({ ...confirm, developer: "ok" });
+				setSelectTab("itemIntro");
+			} else {
+				// validation 체크 후 컨펌
+				setConfirm({ ...confirm, itemIntro: "ok" });
+				setSelectTab("itemIntro");
 			}
 		},
 		//상품이름 설정
@@ -87,21 +100,26 @@ const Mission4Container = ({ history, location, match }) => {
 
 	useEffect(() => {
 		setPrevSelect(location.state);
-		console.log(match.params.id);
 	}, [location.state]);
 
 	return (
-		<Mission4Presenter
-			priceSettingModal={priceSettingModal}
-			completeModal={completeModal}
-			prevSelect={prevSelect}
-			isOpen={isOpen}
-			faqModal={faqModal}
-			confirm={confirm}
-			selectTab={selectTab}
-			clickFunctionList={clickFunctionList}
-			modalFunction={modalFunction}
-		/>
+		<>
+			{dimension.width < 415 ? (
+				<Mission4MobilePresenter />
+			) : (
+				<Mission4Presenter
+					priceSettingModal={priceSettingModal}
+					completeModal={completeModal}
+					prevSelect={prevSelect}
+					isOpen={isOpen}
+					faqModal={faqModal}
+					confirm={confirm}
+					selectTab={selectTab}
+					clickFunctionList={clickFunctionList}
+					modalFunction={modalFunction}
+				/>
+			)}
+		</>
 	);
 };
 

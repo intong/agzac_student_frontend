@@ -9,6 +9,7 @@ import SocialProblem from "./SocialProblem";
 import ProductDeveloper from "./ProductDeveloper";
 import { missionFourImage } from "../AnswerList";
 import ReasonDevelopProduct from "./ReasonDevelopProduct";
+import ItemIntroduction from "./ItemIntroduction";
 import {
 	HelpModal,
 	ModalWithInputOneBtn,
@@ -65,6 +66,7 @@ const Mission4Presenter = ({
 									<>
 										<LeftTitle>
 											{sessionStorage.getItem("user")}&nbsp;님이 선택한 사회문제의
+											<br />
 											주제는&nbsp;{prevSelect.selectTabContent.name}
 											&nbsp;입니다.
 										</LeftTitle>
@@ -92,7 +94,7 @@ const Mission4Presenter = ({
 										selectTab={selectTab}
 										onClick={() => clickFunctionList.selectedTabFunction("social")}
 									>
-										<Text>사회문제</Text>
+										<Text>사회문제 분석</Text>
 									</Tab1>
 									<Tab2
 										confirm={confirm}
@@ -106,10 +108,18 @@ const Mission4Presenter = ({
 										selectTab={selectTab}
 										onClick={() => clickFunctionList.selectedTabFunction("developer")}
 									>
-										<Text>상품 개발자</Text>
+										<Text>미래인재 역할</Text>
 									</Tab3>
+									<Tab4
+										confirm={confirm}
+										selectTab={selectTab}
+										onClick={() => clickFunctionList.selectedTabFunction("itemIntro")}
+									>
+										<Text>상품 소개</Text>
+									</Tab4>
 								</Tabs>
 								{/* 변경 자리 */}
+								{console.log(selectTab)}
 								{selectTab === "social" ? (
 									<SocialProblem
 										prevSelect={prevSelect}
@@ -117,13 +127,13 @@ const Mission4Presenter = ({
 									/>
 								) : selectTab === "reason" ? (
 									<ReasonDevelopProduct clickFunctionList={clickFunctionList} />
+								) : selectTab === "developer" ? (
+									<ProductDeveloper
+										modalFunction={modalFunction}
+										clickFunctionList={clickFunctionList}
+									/>
 								) : (
-									selectTab === "developer" && (
-										<ProductDeveloper
-											modalFunction={modalFunction}
-											clickFunctionList={clickFunctionList}
-										/>
-									)
+									<ItemIntroduction clickFunctionList={clickFunctionList} />
 								)}
 							</RightBox>
 						</div>
@@ -316,11 +326,11 @@ const Tabs = styled.div`
 	margin-bottom: 16px;
 `;
 const Text = styled.div`
-	width: 206.7px;
+	width: 156px;
 `;
 // social
 const Tab1 = styled.div`
-	width: 208px;
+	width: 156px;
 	height: 50px;
 	background-color: #0f0f15;
 	color: #ffffff;
@@ -334,7 +344,7 @@ const Tab1 = styled.div`
 `;
 //reason
 const Tab2 = styled.div`
-	width: 208px;
+	width: 156px;
 	height: 50px;
 	background-color: ${(props) =>
 		props.confirm.social === "ok" ? "#0f0f15" : "#ffffff"};
@@ -350,12 +360,29 @@ const Tab2 = styled.div`
 `;
 // developer
 const Tab3 = styled.div`
-	width: 209px;
+	width: 156px;
 	height: 50px;
 	background-color: ${(props) =>
 		props.confirm.reason === "ok" ? "#0f0f15" : "#ffffff"};
 	color: ${(props) => (props.confirm.reason === "ok" ? "#ffffff" : "#686868")};
-	opacity: ${(props) => (props.confirm.developer === "ok" ? "0.8" : "1")};
+	opacity: ${(props) =>
+		props.confirm.reason === "ok" && props.confirm.developer === "ok"
+			? "0.8"
+			: "1"};
+	text-align: center;
+	line-height: 53px;
+	&:hover {
+		cursor: pointer;
+		opacity: 0.7;
+	}
+`;
+const Tab4 = styled.div`
+	width: 156px;
+	height: 50px;
+	background-color: ${(props) =>
+		props.confirm.developer === "ok" ? "#0f0f15" : "#ffffff"};
+	color: ${(props) =>
+		props.confirm.developer === "ok" ? "#ffffff" : "#686868"};
 	text-align: center;
 	line-height: 53px;
 	&:hover {

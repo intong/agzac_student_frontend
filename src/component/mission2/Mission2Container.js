@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Activity } from "../../api/api";
+import { Activity, SaveData } from "../../api/api";
 import Mission2Presenter from "./Mission2Presenter";
 import Mission2MobilePresenter from "./mobileVersion/Mission2MobilePresenter";
 import Mission2MobileInputPresenter from "./mobileVersion/Mission2MobileInputPresenter";
@@ -16,15 +16,17 @@ const Mission2Container = ({ history, match }) => {
 	//////////////// 모바일 state 끝 ///////////////////////////
 	const { state, actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
+	const [answerTextOne, setAnswerTextOne] = useState();
+	const [answerTextTwo, setAnswerTextTwo] = useState();
 	const [index, setIndex] = useState(); // 정답제출 시 +1 을 시키면 배열의 index 를 넘김
 	const [missionQuestion, setMissionQuestion] = useState(); // 미션 배열 중 한개의 문제만 보내는 state
 	const [dropdownNull, setDropdownNull] = useState(); // Dropdown Null로 초기화 해주는 state (add 함수에서 적용)
-	const [answerList, setAnswerList] = useState();
+	const [inputArray, setInputArray] = useState([]); // 정답리스트 (배열길이 : 4개)
 	const [normal, setNormal] = useState(true);
 	const [correctFirst, setCorrectFirst] = useState(true);
+	const [correctSeconds, setCorrectSeconds] = useState(true);
 	const [firstFeedback, setFirstFeedback] = useState();
 	const [secondFeedback, setSecondFeedback] = useState();
-	const [correctSeconds, setCorrectSeconds] = useState(true);
 	const [faqModal, setFaqModal] = useState();
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -34,6 +36,21 @@ const Mission2Container = ({ history, match }) => {
 		const result = await Activity.mission2EndStart();
 		console.log("mission2EndStart", result);
 		history.push(`/mission3/${state.mission3Index}`);
+	};
+
+	// 정담배열만들기
+	const makeInputArray = () => {
+		console.log(answerTextOne);
+		setInputArray([...inputArray, answerTextOne]);
+		setInputArray([...inputArray, answerTextTwo]);
+	};
+
+	// 임시저장하는 api 함수
+	const tempSaveSheet = async () => {
+		const result = await SaveData.save(3, inputArray);
+		if (result.data.ok) {
+			alert("저장하였습니다.");
+		}
 	};
 
 	const modalFunction = {
@@ -46,8 +63,9 @@ const Mission2Container = ({ history, match }) => {
 		toggleFaqModal: () => {
 			setFaqModal(!faqModal);
 		},
-		handleSaveModalConfirmBtn: () => {
+		handleSaveModalConfirmBtn: async () => {
 			// 확인버튼 실행함수
+			await tempSaveSheet();
 			modalActions.setSaveModalOpen(!modalState.saveModalOpen);
 		},
 		toggleSaveModal: () => {
@@ -102,12 +120,14 @@ const Mission2Container = ({ history, match }) => {
 				setNormal(false);
 				if (answerFunctionList.hasAnswer(one).bool) {
 					setCorrectFirst(true);
+					setAnswerTextOne(one);
 					setFirstFeedback(answerFunctionList.hasAnswer(one).feedback);
 				} else {
 					setCorrectFirst(false);
 				}
 				if (answerFunctionList.hasAnswer(two).bool) {
 					setCorrectSeconds(true);
+					setAnswerTextTwo(two);
 					setSecondFeedback(answerFunctionList.hasAnswer(two).feedback);
 				} else {
 					setCorrectSeconds(false);
