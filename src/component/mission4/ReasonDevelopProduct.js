@@ -50,15 +50,27 @@ const ReasonDevelopProduct = ({ clickFunctionList }) => {
 			<Question style={{ top: "26px" }}>
 				분석한 사회문제의 원인은 무엇인가요?
 			</Question>
-			<InputDefault style={inputStyle1} />
+			<InputDefault
+				style={inputStyle1}
+				onChange={clickFunctionList.onChangeReasonFirst}
+			/>
 			<Question style={{ top: "118px" }}>
 				이 문제로 어려움을 겪고 있는 사람은 누구인가요?
 			</Question>
-			<InputDefault style={inputStyle2} />
+			<InputDefault
+				style={inputStyle2}
+				onChange={clickFunctionList.onChangeReasonSecond}
+			/>
 			<Question style={{ top: "210px" }}>어떤 어려움을 겪고 있나요?</Question>
-			<InputDefault style={inputStyle3} />
+			<InputDefault
+				style={inputStyle3}
+				onChange={clickFunctionList.onChangeReasonThird}
+			/>
 			<Question style={{ top: "302px" }}>왜 이 문제가 해결되어야 하나요?</Question>
-			<InputDefault style={inputStyle4} />
+			<InputDefault
+				style={inputStyle4}
+				onChange={clickFunctionList.onChangeReasonFourth}
+			/>
 			<ButtonPrimary
 				text='다음'
 				style={{ position: "absolute", bottom: "24px", right: "24px" }}

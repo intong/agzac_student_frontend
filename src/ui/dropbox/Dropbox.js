@@ -89,6 +89,7 @@ const DropDownHeader = styled.div`
 `;
 
 const DropDownListContainer = styled.div`
+	height: 200px;
 	margin-top: 8px;
 	background: #fcfcfc;
 	display: fixed;
@@ -101,7 +102,7 @@ const DropDownList = styled.ul`
 	padding: 0;
 	margin: 0;
 	width: 280px;
-	height: 231px;
+	height: 100px;
 	border-radius: 2px;
 	border: solid 1px #686868;
 	overflow-x: hidden;

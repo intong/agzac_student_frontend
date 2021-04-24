@@ -14,6 +14,7 @@ import {
 	HelpModal,
 	ModalWithInputOneBtn,
 	CompleteModal,
+	ModalBaseTwoBtn,
 } from "../../ui/modal/Modal";
 
 const btnStyle = {
@@ -32,6 +33,7 @@ const Mission4Presenter = ({
 	faqModal,
 	confirm,
 	selectTab,
+	modalState,
 	clickFunctionList,
 	modalFunction,
 }) => {
@@ -119,7 +121,6 @@ const Mission4Presenter = ({
 									</Tab4>
 								</Tabs>
 								{/* 변경 자리 */}
-								{console.log(selectTab)}
 								{selectTab === "social" ? (
 									<SocialProblem
 										prevSelect={prevSelect}
@@ -158,6 +159,23 @@ const Mission4Presenter = ({
 							<TextDiv>* 이곳에 써주세요.</TextDiv>
 						</ModalAreaFaq>
 					</ModalWrapperFaq>
+				)}
+
+				{/* 임시저장 모달 */}
+				{modalState.saveModalOpen && (
+					<ModalWrapperSave>
+						<ModalAreaSave>
+							<ModalBaseTwoBtn
+								header='임시 저장 하기'
+								content='지금까 입력한 정보가 저장 됩니다.'
+								confirmbtntext='확인'
+								cancelbtntext='취소'
+								closeModalEvent={modalFunction.toggletempModal}
+								cancelbtnEvent={modalFunction.toggletempModal}
+								confirmbtnEvent={modalFunction.handleSaveModalConfirmBtn}
+							/>
+						</ModalAreaSave>
+					</ModalWrapperSave>
 				)}
 
 				{/* 상품가격 세팅 모달 */}
@@ -471,6 +489,20 @@ const TextBoxBottom = styled.div`
 	line-height: 1.57;
 	color: #0f0f15;
 	margin-top: 10px;
+`;
+
+// 임시저장 모달 css
+const ModalWrapperSave = styled.div`
+	width: 100vw;
+	height: 100vh;
+	background: rgba(15, 15, 21, 0.8);
+	position: fixed;
+	top: 0px;
+	display: flex;
+	z-index: 90;
+`;
+const ModalAreaSave = styled.div`
+	margin: auto;
 `;
 
 export default Mission4Presenter;

@@ -14,6 +14,7 @@ const SocialProblem = ({ prevSelect, clickFunctionList }) => {
 					1가지를 선택해주세요.
 				</TitleRight>
 				<Dropbox
+					id='question'
 					options={options}
 					placeholder='사회문제 현상 키워드 선택'
 					style={{ position: "absolute", top: "62px", left: "24px" }}
@@ -35,6 +36,7 @@ const SocialProblem = ({ prevSelect, clickFunctionList }) => {
 						resize: "none",
 						overflowY: "auto",
 					}}
+					onChange={clickFunctionList.onChangeTextArea}
 				/>
 				<ButtonPrimary
 					text='다음'

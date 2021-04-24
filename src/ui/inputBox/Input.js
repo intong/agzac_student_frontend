@@ -63,9 +63,14 @@ const InputStyle = styled.input`
 	}
 `;
 
-const TextArea = ({ style, onChange, placeholder }) => {
+const TextArea = ({ style, onChange, placeholder, id }) => {
 	return (
-		<StyledTextArea style={style} onChange={onChange} placeholder={placeholder} />
+		<StyledTextArea
+			style={style}
+			onChange={onChange}
+			placeholder={placeholder}
+			id={id}
+		/>
 	);
 };
 
