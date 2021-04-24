@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import ReactPlayer from "react-player";
 import { ButtonSecondary, ButtonPrimary } from "../../../ui/button/Button";
 import nextIcon from "../../../assets/mobileImage/icn-next-dim@2x.png";
 import close from "../../../assets/icons/bnt-x-24.svg";
 import { jobCards } from "../../JobCards";
-import { missionOneMedia } from "../../AnswerList";
 
 const Mission1MobilePresenter = ({
 	prevMedia,
@@ -148,12 +148,12 @@ const Mission1MobilePresenter = ({
 				<ModalWrapper>
 					<ModalPrevNextMediaArea>
 						<CloseBtn src={close} onClick={modalFunction.togglePrevMediaModal} />
-						{missionOneMedia[index - 1].prev}
-						{/* <ReactPlayer
-							url={missionOneMedia[index - 1].prev}
+
+						<ReactPlayer
+							url={missionQuestion && missionQuestion[index - 1].prev}
 							width='100%'
 							height='100%'
-						/> */}
+						/>
 					</ModalPrevNextMediaArea>
 				</ModalWrapper>
 			)}
@@ -162,12 +162,12 @@ const Mission1MobilePresenter = ({
 				<ModalWrapper>
 					<ModalPrevNextMediaArea>
 						<CloseBtn src={close} onClick={modalFunction.toggleNextMediaModal} />
-						{missionOneMedia[index - 1].next}
-						{/* <ReactPlayer
-							url={missionOneMedia[index - 1].next}
+
+						<ReactPlayer
+							url={missionQuestion && missionQuestion[index - 1].next}
 							width='100%'
 							height='100%'
-						/> */}
+						/>
 					</ModalPrevNextMediaArea>
 				</ModalWrapper>
 			)}

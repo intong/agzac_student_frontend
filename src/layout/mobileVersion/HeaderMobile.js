@@ -59,6 +59,18 @@ const HeaderMobile = ({ sidebar, toggleSidebar }) => {
 				<Sidebar>
 					<SidebarHeader>
 						<CloseImg src={close} alt='끄기' onClick={toggleSidebar} />
+						<div
+							style={{
+								width: "100%",
+								height: "5vh",
+								boxSizing: "border-box",
+								paddingTop: "10vh",
+								paddingLeft: "10vw",
+								color: "white",
+							}}
+						>
+							{sessionStorage.getItem("user")}님 기업보고서
+						</div>
 					</SidebarHeader>
 					<SidebarContentBlock>
 						<SidebarContent>

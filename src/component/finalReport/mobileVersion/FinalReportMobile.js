@@ -2,8 +2,18 @@ import React from "react";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
 import { MediaSecretCodeAnswer } from "../../AnswerList";
+import {
+	FinalReportBtnActive,
+	FinalReportBtn,
+} from "../../../ui/button/Button";
 
-const FinalReportMobile = ({ isOpen, faqModal, modalFunction }) => {
+const FinalReportMobile = ({
+	handleProgree,
+	changeBtn,
+	isOpen,
+	faqModal,
+	modalFunction,
+}) => {
 	return (
 		<Wrapper>
 			<ProcessArea>
@@ -75,8 +85,30 @@ const FinalReportMobile = ({ isOpen, faqModal, modalFunction }) => {
 					url={MediaSecretCodeAnswer.endingMedia}
 					width='100%'
 					height='100%'
+					onProgress={handleProgree}
 				/>
 			</VideoPlayArea>
+			{changeBtn ? (
+				<FinalReportBtnActive
+					text='최종보고서 제출하기'
+					style={{ position: "fixed", bottom: "0px", width: "100vw", height: "8vh" }}
+					onClick={() => {
+						alert("링크가기");
+					}}
+				/>
+			) : (
+				<FinalReportBtn
+					text='최종보고서 제출하기'
+					style={{
+						background: "grey",
+						position: "fixed",
+						opacity: "1",
+						bottom: "0px",
+						width: "100vw",
+						height: "8vh",
+					}}
+				/>
+			)}
 		</Wrapper>
 	);
 };
@@ -157,6 +189,6 @@ const VideoPlayArea = styled.div`
 	width: 80vw;
 	height: 25vh;
 	margin: auto;
-	margin-bottom: 5vh;
+	margin-bottom: 10vh;
 `;
 export default FinalReportMobile;

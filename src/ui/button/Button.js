@@ -259,6 +259,9 @@ const FinalBrnActive = styled.button`
 	height: 40px;
 	border-radius: 2px;
 	background-color: #0f0f15;
+	&:hover {
+		cursor: pointer;
+	}
 `;
 const TextStyleActive = styled.span`
 	font-family: NotoSansCJKkr;

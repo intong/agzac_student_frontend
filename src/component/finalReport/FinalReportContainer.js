@@ -36,7 +36,13 @@ const FinalReportContainer = ({ history, match, location }) => {
 	return (
 		<>
 			{dimension.width < 415 ? (
-				<FinalReportMobile />
+				<FinalReportMobile
+					handleProgree={handleProgree}
+					changeBtn={changeBtn}
+					isOpen={isOpen}
+					faqModal={faqModal}
+					modalFunction={modalFunction}
+				/>
 			) : (
 				<FinalReportPresenter
 					handleProgree={handleProgree}
