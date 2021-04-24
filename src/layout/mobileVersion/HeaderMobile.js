@@ -94,10 +94,10 @@ const HeaderMobile = ({ sidebar, toggleSidebar }) => {
 								confirm={state.mission1} // css 글자색상 변경 state
 								onClick={(e) => {
 									toggleSidebar();
-									// if (state.video !== "ok") {
-									// 	e.preventDefault();
-									// 	alert("EY한영 아그작교실 영상시청을 완료해 주세요");
-									// }
+									if (state.video !== "ok") {
+										e.preventDefault();
+										alert("EY한영 아그작교실 영상시청을 완료해 주세요");
+									}
 								}}
 							>
 								Mission01
@@ -111,10 +111,10 @@ const HeaderMobile = ({ sidebar, toggleSidebar }) => {
 								confirm={state.mission2} // css 글자색상 변경 state
 								onClick={(e) => {
 									toggleSidebar();
-									// if (state.mission1 !== "ok") {
-									// 	e.preventDefault();
-									// 	alert("Mission1 을 완료해 주세요");
-									// }
+									if (state.mission1 !== "ok") {
+										e.preventDefault();
+										alert("Mission1 을 완료해 주세요");
+									}
 								}}
 							>
 								Mission02
@@ -128,10 +128,10 @@ const HeaderMobile = ({ sidebar, toggleSidebar }) => {
 								confirm={state.mission3} // css 글자색상 변경 state
 								onClick={(e) => {
 									toggleSidebar();
-									// if (state.mission2 !== "ok") {
-									// 	e.preventDefault();
-									// 	alert("Mission2 을 완료해 주세요");
-									// }
+									if (state.mission2 !== "ok") {
+										e.preventDefault();
+										alert("Mission2 을 완료해 주세요");
+									}
 								}}
 							>
 								Mission03
@@ -145,10 +145,10 @@ const HeaderMobile = ({ sidebar, toggleSidebar }) => {
 								confirm={state.mission4} // css 글자색상 변경 state
 								onClick={(e) => {
 									toggleSidebar();
-									// if (state.mission3 !== "ok") {
-									// 	e.preventDefault();
-									// 	alert("Mission3 을 완료해 주세요");
-									// }
+									if (state.mission3 !== "ok") {
+										e.preventDefault();
+										alert("Mission3 을 완료해 주세요");
+									}
 								}}
 							>
 								Mission04
@@ -161,10 +161,10 @@ const HeaderMobile = ({ sidebar, toggleSidebar }) => {
 								activeStyle={activeStyle}
 								onClick={(e) => {
 									toggleSidebar();
-									// if (state.mission4 !== "ok") {
-									// 	e.preventDefault();
-									// 	alert("Mission4 을 완료해 주세요");
-									// }
+									if (state.mission4 !== "ok") {
+										e.preventDefault();
+										alert("Mission4 을 완료해 주세요");
+									}
 								}}
 							>
 								최종보고서
