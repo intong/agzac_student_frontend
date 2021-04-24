@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Route } from "react-router-dom";
 import Footer from "../../layout/Footer";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";

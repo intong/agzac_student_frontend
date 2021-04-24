@@ -13,10 +13,10 @@ const Routes = () => {
 			{/* <Route path='/mainVideo' component={MainVideoContainer} /> */}
 			<Route exact path='/' component={MainVideoContainer} />
 			<Route path='/mission1/:id' component={Mission1Container} />
-			<Route exact path='/mission2/:id' component={Mission2Container} />
-			<Route exact path='/mission3/:id' component={Mission3Container} />
-			<Route exact path='/mission4/:id' component={Mission4Container} />
-			<Route exact path='/finalreport' component={FinalReport} />
+			<Route path='/mission2/:id' component={Mission2Container} />
+			<Route path='/mission3/:id' component={Mission3Container} />
+			<Route path='/mission4/:id' component={Mission4Container} />
+			<Route path='/finalreport' component={FinalReport} />
 		</>
 	);
 };

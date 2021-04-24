@@ -25,23 +25,19 @@ const Mission3Container = ({ history }) => {
 	const [firstAnswer, setFirstAnswer] = useState();
 	const [secondAnswer, setSecondAnswer] = useState();
 	const [thirdAnswer, setThirdAnswer] = useState();
-	const [inputArray, setInputArray] = useState([]);
 	const [firstInputText, setFirstInputText] = useState();
 	const [secondsInputText, setSecondsInputText] = useState();
 	const [thirdInputText, setThirdInputText] = useState();
 
 	const setProcessFunction = async () => {
 		//validation 추가
-		const result = await Activity.mission3EndStart();
-		console.log("Mission3EndStart", result);
+		await Activity.mission3EndStart();
 		actions.setMission3("ok");
-		history.push({
-			pathname: `/mission4/${state.mission4Index}`,
-			state: {
-				selectTabContent: selectTabContent,
-				studentAnswerList: studentAnswerList,
-			},
+		modalActions.setMission3Selected({
+			selectTabContent: selectTabContent,
+			studentAnswerList: studentAnswerList,
 		});
+		history.push(`/mission4/${state.mission4Index}`);
 	};
 
 	let tempArr = [];
@@ -92,8 +88,7 @@ const Mission3Container = ({ history }) => {
 					setThirdAnswer(false);
 				}
 				setStudentAnswerList(tempArr);
-				const result = await SaveData.save(5, tempArr);
-				console.log(result);
+				await SaveData.save(5, tempArr);
 			} else {
 				alert("세 가지 키워드를 찾아주세요.");
 			}
