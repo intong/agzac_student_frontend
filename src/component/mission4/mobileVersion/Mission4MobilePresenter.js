@@ -203,7 +203,7 @@ const Mission4MobilePresenter = ({
 
 			{/* 모든 미션 완료 및 가격 설정까지 완료 후 모달 */}
 			{completeModal && (
-				<ModalWrapper key>
+				<ModalWrapper>
 					<ModalCompleteArea>
 						<CompleteModal
 							headerText={`${sessionStorage.getItem("user")}님 축하합니다! 
