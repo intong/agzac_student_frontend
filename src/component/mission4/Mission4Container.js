@@ -44,9 +44,7 @@ const Mission4Container = ({ history, location, match }) => {
 
 	// 사회문제 분석 키워드 가져오기
 	const getQuestion = () => {
-		const resultPrev = document.getElementById("question").innerHTML;
-		// const result = resultPrev.replace(/(\r\n\t|\n|\r\t)/gm, ""); // 줄바꿈 개행없애는 처리 (window / linux / apple)
-		const result = resultPrev.replace(/(\r\n|\n|\r)/gm, ""); // 줄바꿈 개행없애는 처리 (window / linux / apple)
+		const result = document.getElementById("question").innerHTML;
 		const tempArr = [];
 		if (result !== "사회문제 현상 키워드 선택") {
 			// 사회문제 키워드 배열담기
@@ -348,7 +346,19 @@ const Mission4Container = ({ history, location, match }) => {
 	return (
 		<>
 			{dimension.width < 415 ? (
-				<Mission4MobilePresenter />
+				<Mission4MobilePresenter
+					itemNameModal={itemNameModal}
+					priceSettingModal={priceSettingModal}
+					completeModal={completeModal}
+					prevSelect={prevSelect}
+					isOpen={isOpen}
+					faqModal={faqModal}
+					confirm={confirm}
+					selectTab={selectTab}
+					modalState={modalState}
+					clickFunctionList={clickFunctionList}
+					modalFunction={modalFunction}
+				/>
 			) : (
 				<Mission4Presenter
 					itemNameModal={itemNameModal}

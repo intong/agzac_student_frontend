@@ -615,3 +615,79 @@ const RobotImg = styled.img`
 	height: 248px;
 	margin-bottom: 12px;
 `;
+
+export const CompleteModalMobile = ({
+	handleCancel,
+	headerText,
+	contentText,
+	onClickBtn,
+}) => {
+	return (
+		<WrapperCompleteMobile>
+			<CloseBtnCompleteMobile src={close} onClick={handleCancel} />
+			<HeaderCompleteMobile>
+				{headerText.split("\n").map((line) => {
+					return (
+						<>
+							{line}
+							<br />
+						</>
+					);
+				})}
+			</HeaderCompleteMobile>
+			<ContentCompleteMobile>{contentText}</ContentCompleteMobile>
+			<RobotImgMobile src={Robot} />
+			<ButtonPrimaryLong
+				style={{ width: "339px", marginBottom: "26px" }}
+				text='최종보고서 작성'
+				onClick={onClickBtn}
+			/>
+		</WrapperCompleteMobile>
+	);
+};
+
+const WrapperCompleteMobile = styled.div`
+	width: 60vw;
+	height: 460px;
+	padding: 26px 24px;
+	border-radius: 2px;
+	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
+	background: #ffffff;
+	position: relative;
+`;
+const CloseBtnCompleteMobile = styled.img`
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	&:hover {
+		cursor: pointer;
+	}
+`;
+const HeaderCompleteMobile = styled.div`
+	font-family: NotoSansCJKkr;
+	font-size: 18px;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	letter-spacing: normal;
+	color: #0f0f15;
+	margin-bottom: 18px;
+`;
+const ContentCompleteMobile = styled.div`
+	width: 339px;
+	height: 88px;
+	font-family: NotoSansCJKkr;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.57;
+	letter-spacing: normal;
+	color: #0f0f15;
+	text-align: justify;
+`;
+const RobotImgMobile = styled.img`
+	width: 339px;
+	height: 248px;
+	margin-bottom: 12px;
+`;

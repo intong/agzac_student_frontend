@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
-import { missionOneMedia } from "../AnswerList";
 import { HelpModal } from "../../ui/modal/Modal";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
@@ -69,6 +68,7 @@ const Mission1Presenter = ({
 										)}
 									</CardContainer>
 									<ExplainContainer>
+										{console.log(missionQuestion[index - 1])}
 										<TitleTodo>하는일</TitleTodo>
 										<ExplainTodo>{missionQuestion[index - 1].todo}</ExplainTodo>
 										<BarUnder />
@@ -175,7 +175,7 @@ const Mission1Presenter = ({
 					<ModalPrevNextMediaArea>
 						<CloseBtn src={close} onClick={modalFunction.togglePrevMediaModal} />
 						<ReactPlayer
-							url={missionOneMedia[index - 1].prev}
+							url={missionQuestion && missionQuestion[index - 1].prev}
 							width='100%'
 							height='100%'
 						/>
@@ -189,7 +189,7 @@ const Mission1Presenter = ({
 					<ModalPrevNextMediaArea>
 						<CloseBtn src={close} onClick={modalFunction.toggleNextMediaModal} />
 						<ReactPlayer
-							url={missionOneMedia[index - 1].next}
+							url={missionQuestion && missionQuestion[index - 1].next}
 							width='100%'
 							height='100%'
 						/>

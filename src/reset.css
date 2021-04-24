@@ -31,7 +31,7 @@ time, mark, audio, video {
 	vertical-align: baseline;
 	font-family: "NotoSansCJKkr";
 }
-input, button {
+input, button, textarea {
 	outline:none;
 	-webkit-appearance: none;
     -moz-appearance: none;

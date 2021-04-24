@@ -75,6 +75,7 @@ const LoginContainer = () => {
 				if (result.data.ok === true && result.data.status === "비밀번호 있음") {
 					modalFunction.toggleInputPasswordModal();
 					setStudentId(result.data.studentId);
+					console.log(result);
 					sessionStorage.setItem(
 						"missionOne",
 						JSON.stringify(result.data.missionOneQandA)

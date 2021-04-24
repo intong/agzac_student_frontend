@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
 import LoginContainer from "../component/login/LoginContainer";
 import Layout from "../layout/Layout";
 import LayoutMobile from "../layout/mobileVersion/LayoutMobile";

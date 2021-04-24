@@ -72,6 +72,7 @@ const Mission1Container = ({ history, match }) => {
 	// 문제출제 세팅 함수
 	const selectExamQuestion = () => {
 		const question = JSON.parse(sessionStorage.getItem("missionOne"));
+		console.log(question);
 		setMissionQuestion(question);
 	};
 
@@ -154,7 +155,7 @@ const Mission1Container = ({ history, match }) => {
 	};
 	useEffect(() => {
 		selectExamQuestion(match.params.id - 1);
-	}, []);
+	}, [match.params.id]);
 
 	return (
 		<>
