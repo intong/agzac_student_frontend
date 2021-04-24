@@ -38,10 +38,8 @@ const Mission1Container = ({ history, match }) => {
 	};
 	// 임시저장하기 (사용처 : 임시저장 모달 confirm버튼 / 정답제출 버튼)
 	const tempSaveSheet = async () => {
-		const result = await SaveData.save(2, inputArray);
-		if (result.data.ok) {
-			alert("저장했습니다.");
-		}
+		console.log(inputArray);
+		await SaveData.save(2, inputArray);
 	};
 	const modalFunction = {
 		openModal: () => {
@@ -63,7 +61,6 @@ const Mission1Container = ({ history, match }) => {
 			setNextMedia(!nextMedia);
 		},
 		modalConfimBtnEvent: async () => {
-			console.log(inputArray);
 			await tempSaveSheet();
 			modalActions.setSaveModalOpen(!modalState.saveModalOpen);
 		},
@@ -72,7 +69,6 @@ const Mission1Container = ({ history, match }) => {
 	// 문제출제 세팅 함수
 	const selectExamQuestion = () => {
 		const question = JSON.parse(sessionStorage.getItem("missionOne"));
-		console.log(question);
 		setMissionQuestion(question);
 	};
 
@@ -88,12 +84,11 @@ const Mission1Container = ({ history, match }) => {
 			setAnswerInputText(e.target.value);
 		},
 		// 임시저장 할 배열만들기 함수
-		makeInputArray: async () => {
-			// 확인버튼 실행함수
-			const answer = { id: match.params.id, text: answerInputText };
-			console.log(answer);
-			setInputArray([...inputArray, answer]);
-		},
+		// makeInputArray: async () => {
+		// 	// 확인버튼 실행함수
+		// 	const answer = { id: match.params.id, text: answerInputText };
+		// 	setInputArray([...inputArray, answer]);
+		// },
 
 		// 정답제출 버튼 클릭이벤트
 		checkAnswer: () => {
@@ -103,6 +98,7 @@ const Mission1Container = ({ history, match }) => {
 			} else {
 				if (answerInputText === question[match.params.id - 1].title) {
 					// 정답일때,
+					console.log("105번줄", answerInputText);
 					setInputArray([...inputArray, answerInputText]); // 배열에 답 저장
 					answerFunctionList.findJobCards(answerInputText); // 카드 이미지 찾아오기
 					setAnswerResult(true);
@@ -123,6 +119,7 @@ const Mission1Container = ({ history, match }) => {
 				setProcessFunction();
 			} else {
 				actions.setIndex(parseInt(match.params.id) + 1); // Header active css 적용을 위해서 context 변수 +1
+				await tempSaveSheet();
 				modalFunction.togglePrevMediaModal();
 				setAnswerResult(undefined);
 				history.push(`/mission1/${parseInt(match.params.id) + 1}`);
@@ -153,8 +150,17 @@ const Mission1Container = ({ history, match }) => {
 			answerFunctionList.addIndex(); // 다음 문제 보내기
 		},
 	};
+
+	// 임시저장데이터 가져오기
+	const getUseTempData = () => {
+		// if (state.saveTempData[3] !== undefined) {
+		// 	const data = JSON.parse(state.saveTempData[3]);
+		// 	console.log(data);
+		// }
+	};
 	useEffect(() => {
 		selectExamQuestion(match.params.id - 1);
+		getUseTempData();
 	}, [match.params.id]);
 
 	return (

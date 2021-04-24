@@ -55,13 +55,25 @@ const MainVideoContainer = ({ history, location, match }) => {
 			modalFunction.toggleModal();
 			modalFunction.tempSaveSheet();
 		},
+		// 임시저장한 Data 사용하기
 		useTempData: () => {
-			const name = state.saveTempData[0];
-			const code = state.saveTempData[1];
-			setCompanyName(name);
-			setSecretCode(code);
-			actions.setUseDataConfirm(true); // 임시저장 데이터 사용하겠다는 글로벌 (context) 변수
-			modalFunction.toggleHasDataModal();
+			console.log(state.saveTempData.length);
+			const path = state.saveTempData.length - 1;
+			if (path === 2) {
+				console.log("영상시청");
+				const name = JSON.parse(state.saveTempData[2]);
+				setCompanyName(name);
+				actions.setUseDataConfirm(true); // 임시저장 데이터 사용하겠다는 글로벌 (context) 변수
+				modalFunction.toggleHasDataModal();
+			} else if (path === 3) {
+				console.log("mission1");
+			} else if (path === 4) {
+				console.log("mission2");
+			} else if (path === 5) {
+				console.log("mission3");
+			} else if (path === 7) {
+				console.log("mission4");
+			}
 		},
 	};
 
@@ -98,7 +110,7 @@ const MainVideoContainer = ({ history, location, match }) => {
 		const result3 = await SaveData.getTempData(params);
 		if (result3.data.writtenData[2] !== undefined) {
 			setHasDataModal(true);
-			actions.setSaveTempData(JSON.parse(result3.data.writtenData[2]));
+			actions.setSaveTempData(result3.data.writtenData);
 		} else {
 			setHasDataModal(false);
 			actions.setUseDataConfirm(false);
@@ -113,8 +125,7 @@ const MainVideoContainer = ({ history, location, match }) => {
 
 	// start 시간 저장 (useEffect에서 실행)
 	const timeStartCheck = async () => {
-		const result = await Activity.loginStart();
-		console.log(result);
+		await Activity.loginStart();
 	};
 
 	useEffect(() => {

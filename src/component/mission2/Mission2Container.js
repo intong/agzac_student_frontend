@@ -173,9 +173,18 @@ const Mission2Container = ({ history, match }) => {
 		},
 	};
 
+	// 임시저장데이터 가져오기
+	const getUseTempData = () => {
+		// if (state.saveTempData[4] !== "") {
+		// 	const data = JSON.parse(state.saveTempData[4]);
+		// 	console.log(data);
+		// }
+	};
+
 	useEffect(() => {
 		selectExamQuestion();
 		setIndex(parseInt(match.params.id));
+		getUseTempData();
 	}, [match.params.id]);
 	return (
 		<>

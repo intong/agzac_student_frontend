@@ -12,7 +12,6 @@ const Auth = () => {
 	});
 
 	useEffect(() => {
-		// console.log(token);x
 		const settingToken = () => {
 			setToken(sessionStorage.getItem("auth"));
 		};

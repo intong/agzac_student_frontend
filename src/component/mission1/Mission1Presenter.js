@@ -68,7 +68,6 @@ const Mission1Presenter = ({
 										)}
 									</CardContainer>
 									<ExplainContainer>
-										{console.log(missionQuestion[index - 1])}
 										<TitleTodo>하는일</TitleTodo>
 										<ExplainTodo>{missionQuestion[index - 1].todo}</ExplainTodo>
 										<BarUnder />

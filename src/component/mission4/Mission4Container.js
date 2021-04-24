@@ -12,7 +12,7 @@ const Mission4Container = ({ history, location, match }) => {
 		height: window.innerHeight,
 	});
 	//////////////// 모바일 state 끝 ///////////////////////////
-	const { actions } = useContext(ProcessContext);
+	const { state, actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
 	const [texts, setTexts] = useState(); // 사회문제 분석 textArea 저장 state
 	const [firstTxtArea, setFirstTxtArea] = useState(); // 상품개발이유 text 저장 state
@@ -261,8 +261,7 @@ const Mission4Container = ({ history, location, match }) => {
 		// 파이널로 가기
 		goToFinalReport: async () => {
 			actions.setMission4("ok");
-			const result = await Activity.mission4EndStart();
-			console.log("Mission4EndStart", result);
+			await Activity.mission4EndStart();
 			history.push("/finalreport");
 		},
 	};
@@ -292,7 +291,6 @@ const Mission4Container = ({ history, location, match }) => {
 			setPriceSettingModal(!priceSettingModal);
 		},
 		toggleCompleteModal: async () => {
-			console.log(productPrice);
 			const result = await SaveData.save(11, [productPrice]);
 			if (result.data.ok) {
 				modalFunction.togglePriceSettingModal();
@@ -308,7 +306,6 @@ const Mission4Container = ({ history, location, match }) => {
 		},
 		// 임시저장 모달 확인 버튼 이벤트
 		handleSaveModalConfirmBtn: async () => {
-			console.log(selectTab);
 			if (selectTab === "social") {
 				// 사회문석분석 탭에서 임시저장할 때
 				const question = getQuestion();
@@ -340,8 +337,37 @@ const Mission4Container = ({ history, location, match }) => {
 		},
 	};
 
+	// 임시저장데이터 가져오기
+	const getUseTempData = () => {
+		// if (state.saveTempData[7] !== "") {
+		// 	const data7 = JSON.parse(state.saveTempData[7]);
+		// 	console.log(data7);
+		// }
+		// if (state.saveTempData[8] !== "") {
+		// 	const data8 = JSON.parse(state.saveTempData[8]);
+		// 	console.log(data8);
+		// }
+		// if (state.saveTempData[9] !== "") {
+		// 	const data9 = JSON.parse(state.saveTempData[9]);
+		// 	console.log(data9);
+		// }
+		// if (state.saveTempData[10] !== "") {
+		// 	const data10 = JSON.parse(state.saveTempData[10]);
+		// 	console.log(data10);
+		// }
+		// if (state.saveTempData[11] !== "") {
+		// 	const data11 = JSON.parse(state.saveTempData[11]);
+		// 	console.log(data11);
+		// }
+		// if (state.saveTempData[12] !== "") {
+		// 	const data12 = JSON.parse(state.saveTempData[12]);
+		// 	console.log(data12);
+		// }
+	};
+
 	useEffect(() => {
 		setPrevSelect(modalState.mission3Selected);
+		getUseTempData();
 	}, [modalState.mission3Selected]);
 
 	return (

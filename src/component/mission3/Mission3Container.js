@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Activity, SaveData } from "../../api/api";
 import Mission3Presenter from "./Mission3Presenter";
 import { missionThreeQandA } from "../AnswerList";
@@ -135,6 +135,22 @@ const Mission3Container = ({ history }) => {
 			modalActions.setSaveModalOpen(!modalState.saveModalOpen);
 		},
 	};
+
+	// 임시저장데이터 가져오기
+	const getUseTempData = () => {
+		// if (state.saveTempData[5] !== "") {
+		// 	const data5 = JSON.parse(state.saveTempData[5]);
+		// 	console.log(data5);
+		// }
+		// if (state.saveTempData[6] !== "") {
+		// 	const data6 = JSON.parse(state.saveTempData[6]);
+		// 	console.log(data6);
+		// }
+	};
+
+	useEffect(() => {
+		getUseTempData();
+	}, []);
 
 	// mobile 전용 functioinList
 	const mobileFunction = {};
