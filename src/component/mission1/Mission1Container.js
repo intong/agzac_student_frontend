@@ -147,17 +147,17 @@ const Mission1Container = ({ history, match, location }) => {
 		},
 	};
 
+	// contextApi의 임시저장된 데이터 사용하기
+	const tempUse = () => {
+		if (location.state !== undefined) {
+			setInputArray(location.state.data);
+		} else {
+			setInputArray(inputArray);
+		}
+	};
+
 	useEffect(() => {
 		selectExamQuestion(match.params.id - 1);
-		// contextApi의 임시저장된 데이터 사용하기
-		const tempUse = () => {
-			console.log(location.state);
-			if (location.state !== undefined) {
-				setInputArray(location.state.data);
-			} else {
-				setInputArray(inputArray);
-			}
-		};
 		tempUse();
 	}, [match.params.id]);
 

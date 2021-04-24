@@ -61,13 +61,14 @@ const MainVideoContainer = ({ history, location, match }) => {
 			console.log("length", state.saveTempData.length);
 			const path = state.saveTempData.length - 1;
 			if (path === 2) {
-				console.log("영상시청");
+				// console.log("영상시청");
 				const name = JSON.parse(state.saveTempData[2]);
 				setCompanyName(name);
 				actions.setUseDataConfirm(true); // 임시저장 데이터 사용하겠다는 글로벌 (context) 변수
 				modalFunction.toggleHasDataModal();
 			} else if (path === 3) {
-				console.log("mission1");
+				// console.log("mission1");
+				actions.setVideo("ok");
 				const data = JSON.parse(state.saveTempData[3]);
 				const step = data.length + 1;
 				actions.setIndex(step);
@@ -77,6 +78,16 @@ const MainVideoContainer = ({ history, location, match }) => {
 				});
 			} else if (path === 4) {
 				console.log("mission2");
+				actions.setVideo("ok");
+				actions.setMission1("ok");
+				console.log(state.saveTempData[4]);
+				const data = JSON.parse(state.saveTempData[4]);
+				const step = data.length / 2 + 1;
+				actions.setMission2Index(step);
+				history.push({
+					pathname: `/mission2/${step}`,
+					state: { step: step, data: data },
+				});
 			} else if (path === 5) {
 				console.log("mission3");
 			} else if (path === 7) {

@@ -6,7 +6,7 @@ import Mission2MobileInputPresenter from "./mobileVersion/Mission2MobileInputPre
 import ProcessContext from "../../contextApi/Process";
 import TempSaveContext from "../../contextApi/TempSave";
 
-const Mission2Container = ({ history, match }) => {
+const Mission2Container = ({ history, match, location }) => {
 	//////////////// 모바일 state 시작 ///////////////////////////
 	const [dimension] = useState({
 		width: window.innerWidth,
@@ -140,6 +140,7 @@ const Mission2Container = ({ history, match }) => {
 					setProcessFunction();
 				}
 			} else {
+				await SaveData.save(3, inputArray);
 				setDropdownNull(null);
 				setNormal(true);
 				setCorrectFirst(true);
@@ -173,18 +174,20 @@ const Mission2Container = ({ history, match }) => {
 		},
 	};
 
-	// 임시저장데이터 가져오기
-	const getUseTempData = () => {
-		// if (state.saveTempData[4] !== "") {
-		// 	const data = JSON.parse(state.saveTempData[4]);
-		// 	console.log(data);
-		// }
+	// contextApi의 임시저장된 데이터 사용하기
+	const tempUse = () => {
+		console.log(location.state);
+		if (location.state !== undefined) {
+			setInputArray(location.state.data);
+		} else {
+			setInputArray(inputArray);
+		}
 	};
 
 	useEffect(() => {
 		selectExamQuestion();
 		setIndex(parseInt(match.params.id));
-		getUseTempData();
+		tempUse();
 	}, [match.params.id]);
 	return (
 		<>
