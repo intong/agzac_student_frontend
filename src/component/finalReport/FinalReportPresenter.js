@@ -6,10 +6,16 @@ import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
 import close from "../../assets/icons/bnt-x-24.svg";
 import Footer from "../../layout/Footer";
-import { FinalReportBtn } from "../../ui/button/Button";
+import { FinalReportBtn, FinalReportBtnActive } from "../../ui/button/Button";
 import { HelpModal } from "../../ui/modal/Modal";
 
-const FinalReportPresenter = ({ isOpen, faqModal, modalFunction }) => {
+const FinalReportPresenter = ({
+	handleProgree,
+	changeBtn,
+	isOpen,
+	faqModal,
+	modalFunction,
+}) => {
 	return (
 		<Wrapper>
 			<BlockTop>
@@ -38,17 +44,33 @@ const FinalReportPresenter = ({ isOpen, faqModal, modalFunction }) => {
 							url={MediaSecretCodeAnswer.endingMedia}
 							width='100%'
 							height='100%'
+							onProgress={handleProgree}
 						/>
 					</VideoArea>
-					<FinalReportBtn
-						text='최종보고서 제출하기'
-						style={{
-							width: "148px",
-							height: "40px",
-							marginLeft: "796px",
-							marginTop: "14px",
-						}}
-					/>
+					{changeBtn ? (
+						<FinalReportBtnActive
+							text='최종보고서 제출하기'
+							style={{
+								width: "148px",
+								height: "40px",
+								marginLeft: "796px",
+								marginTop: "14px",
+							}}
+							onClick={() => {
+								alert("링크가기");
+							}}
+						/>
+					) : (
+						<FinalReportBtn
+							text='최종보고서 제출하기'
+							style={{
+								width: "148px",
+								height: "40px",
+								marginLeft: "796px",
+								marginTop: "14px",
+							}}
+						/>
+					)}
 				</BottomContent>
 			</BlockBottom>
 			{isOpen && (

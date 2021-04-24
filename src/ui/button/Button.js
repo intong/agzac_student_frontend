@@ -221,9 +221,9 @@ const BtnSecondaryDisable = styled.button`
 	color: #000000;
 `;
 
-const FinalReportBtn = ({ text, style, onClick }) => {
+const FinalReportBtn = ({ text, style, onClick, changeBtn }) => {
 	return (
-		<FinalBrn style={style} onClick={onClick}>
+		<FinalBrn style={style} onClick={onClick} changeBtn={changeBtn}>
 			<TextStyle>{text}</TextStyle>
 		</FinalBrn>
 	);
@@ -231,11 +231,36 @@ const FinalReportBtn = ({ text, style, onClick }) => {
 const FinalBrn = styled.button`
 	width: 148px;
 	height: 40px;
-	opacity: 0.2;
+	opacity: ${(props) => (props.changeBtn === true ? "1" : "0.2")};
 	border-radius: 2px;
 	background-color: #0f0f15;
 `;
 const TextStyle = styled.span`
+	font-family: NotoSansCJKkr;
+	font-size: 14px;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: center;
+	color: #ffffff;
+`;
+
+const FinalReportBtnActive = ({ text, style, onClick }) => {
+	return (
+		<FinalBrnActive style={style} onClick={onClick}>
+			<TextStyleActive>{text}</TextStyleActive>
+		</FinalBrnActive>
+	);
+};
+const FinalBrnActive = styled.button`
+	width: 148px;
+	height: 40px;
+	border-radius: 2px;
+	background-color: #0f0f15;
+`;
+const TextStyleActive = styled.span`
 	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: 500;
@@ -256,4 +281,5 @@ export {
 	ButtonSecondaryLong,
 	ButtonSecondaryDisable,
 	FinalReportBtn,
+	FinalReportBtnActive,
 };

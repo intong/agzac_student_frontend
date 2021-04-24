@@ -142,6 +142,7 @@ const Mission4Presenter = ({
 					</BottomContent>
 				</BlockBottom>
 				<Footer />
+				{/* 잡카드 */}
 				{isOpen && (
 					<ModalWrapper>
 						<ModalArea>
@@ -149,7 +150,8 @@ const Mission4Presenter = ({
 						</ModalArea>
 					</ModalWrapper>
 				)}
-				{faqModal && (
+				{/* 도움말 모달 */}
+				{faqModal === true && selectTab === "social" ? (
 					<ModalWrapperFaq>
 						<ModalAreaFaq>
 							<CloseDiv
@@ -157,9 +159,70 @@ const Mission4Presenter = ({
 								alt='닫기버튼'
 								onClick={modalFunction.toggleFaqModal}
 							/>
-							<TextDiv>* 이곳에 써주세요.</TextDiv>
+							<TextDiv>
+								이전 미션에서 찾아낸 사회문제 키워드 중 상품을 개발해 해결하고자 하는
+								키워드 1가지를 선택해주세요
+							</TextDiv>
+							<HelpArea></HelpArea>
+							<TextDiv2>
+								위에서 선택한 사회문제 키워드와 관련된 문제 상황을 작성해주세요
+							</TextDiv2>
+							<HelpArea2></HelpArea2>
 						</ModalAreaFaq>
 					</ModalWrapperFaq>
+				) : (
+					<></>
+				)}
+				{faqModal === true && selectTab === "reason" ? (
+					<ModalWrapperFaq>
+						<ModalAreaFaq>
+							<CloseDiv
+								src={close}
+								alt='닫기버튼'
+								onClick={modalFunction.toggleFaqModal}
+							/>
+							<TextDiv>
+								선택한 사회문제는 왜 발생하고 있는지 작성해주세요 예시) 길거리의
+								쓰레기통 부족으로 쓰레기가 길가에 많이 버려지고 있어요
+							</TextDiv>
+							<HelpArea></HelpArea>
+							<TextDiv1>
+								선택한 사회문제는 왜 발생하고 있는지 작성해주세요 예시) 길거리의
+								쓰레기통 부족으로 쓰레기가 길가에 많이 버려지고 있어요
+							</TextDiv1>
+							<HelpArea1></HelpArea1>
+							<TextDiv2>
+								선택한 사회문제는 왜 발생하고 있는지 작성해주세요 예시) 길거리의
+								쓰레기통 부족으로 쓰레기가 길가에 많이 버려지고 있어요
+							</TextDiv2>
+							<HelpArea2></HelpArea2>
+							<TextDiv3>
+								선택한 사회문제는 왜 발생하고 있는지 작성해주세요 예시) 길거리의
+								쓰레기통 부족으로 쓰레기가 길가에 많이 버려지고 있어요
+							</TextDiv3>
+							<HelpArea3></HelpArea3>
+						</ModalAreaFaq>
+					</ModalWrapperFaq>
+				) : (
+					<></>
+				)}
+				{faqModal === true && selectTab === "developer" ? (
+					<ModalWrapperFaq>
+						<ModalAreaFaq>
+							<CloseDiv
+								src={close}
+								alt='닫기버튼'
+								onClick={modalFunction.toggleFaqModal}
+							/>
+							<TextDiv>
+								어떤 미래 직업을 활용하여 선택한 사회문제를 해결할 수 있을지
+								생각해보시고 미래인재 3가지를 선택해주세요
+							</TextDiv>
+							<HelpArea></HelpArea>
+						</ModalAreaFaq>
+					</ModalWrapperFaq>
+				) : (
+					<></>
 				)}
 
 				{/* 임시저장 모달 */}
@@ -247,7 +310,7 @@ const ModalWrapperFaq = styled.div`
 	background: rgba(15, 15, 21, 0.8);
 	position: fixed;
 	top: 0;
-	z-index: 20;
+	z-index: 90;
 	display: flex;
 `;
 const ModalWrapper = styled.div`
@@ -281,8 +344,8 @@ const CloseDiv = styled.img`
 	width: 24px;
 	height: 24px;
 	position: absolute;
-	top: 480px;
-	right: 24px;
+	top: 200px;
+	left: 340px;
 	filter: invert(100%);
 	&:hover {
 		cursor: pointer;
@@ -290,18 +353,18 @@ const CloseDiv = styled.img`
 `;
 const TextDiv = styled.div`
 	padding-left: 10px;
-	width: 246px;
-	height: 42px;
-	line-height: 3;
+	width: 400px;
+	height: 60px;
+	line-height: 2;
 	border-radius: 2px;
 	border: solid 1px #e4e4e4;
 	font-family: NotoSansCJKkr;
-	font-size: 14px;
+	font-size: 0.875rem;
 	font-style: normal;
 	color: white;
 	position: absolute;
-	top: 509px;
-	right: 24px;
+	top: 250px;
+	left: 330px;
 `;
 
 const ModalArea = styled.div`
@@ -521,6 +584,83 @@ const ModalWrapperSave = styled.div`
 `;
 const ModalAreaSave = styled.div`
 	margin: auto;
+`;
+const HelpArea = styled.div`
+	border: 1px solid red;
+	width: 650px;
+	height: 600px;
+	position: absolute;
+	top: 330px;
+	left: 310px;
+`;
+const TextDiv2 = styled.div`
+	padding-left: 10px;
+	width: 400px;
+	height: 60px;
+	line-height: 2;
+	border-radius: 2px;
+	border: solid 1px #e4e4e4;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
+	font-style: normal;
+	color: white;
+	position: absolute;
+	top: 580px;
+	left: -110px;
+`;
+const HelpArea2 = styled.div`
+	border: 1px solid red;
+	width: 600px;
+	height: 70px;
+	position: absolute;
+	top: 580px;
+	left: 330px;
+`;
+const TextDiv1 = styled.div`
+	padding-left: 10px;
+	width: 400px;
+	height: 60px;
+	line-height: 2;
+	border-radius: 2px;
+	border: solid 1px #e4e4e4;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
+	font-style: normal;
+	color: white;
+	position: absolute;
+	top: 490px;
+	left: -110px;
+`;
+const HelpArea1 = styled.div`
+	border: 1px solid red;
+	width: 600px;
+	height: 70px;
+	position: absolute;
+	top: 490px;
+	left: 330px;
+`;
+const TextDiv3 = styled.div`
+	padding-left: 10px;
+	width: 400px;
+	height: 60px;
+	line-height: 2;
+	border-radius: 2px;
+	border: solid 1px #e4e4e4;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
+	font-style: normal;
+	color: white;
+	position: absolute;
+	top: 680px;
+	left: -110px;
+`;
+const HelpArea3 = styled.div`
+	border: 1px solid red;
+	width: 600px;
+	height: 70px;
+	position: absolute;
+	top: 680px;
+	left: 330px;
 `;
 
 export default Mission4Presenter;

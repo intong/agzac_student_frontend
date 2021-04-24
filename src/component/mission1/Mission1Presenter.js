@@ -132,6 +132,7 @@ const Mission1Presenter = ({
 					</ProcessBarLabel>
 				</ProgressWrpper>
 			</BlockBottom>
+			{/* 잡카드 모달 */}
 			{isOpen && (
 				<ModalWrapper>
 					<ModalArea>
@@ -139,6 +140,7 @@ const Mission1Presenter = ({
 					</ModalArea>
 				</ModalWrapper>
 			)}
+			{/* 도움말 모달 */}
 			{faqModal && (
 				<ModalWrapper>
 					<ModalAreaFaq>
@@ -147,7 +149,18 @@ const Mission1Presenter = ({
 							alt='닫기버튼'
 							onClick={modalFunction.toggleFaqModal}
 						/>
-						<TextDiv>* 이곳에 써주세요.</TextDiv>
+						<TextDiv>
+							이미지를 클릭하시면 직업에 대한 아미봇의 설명을 들을 수 있습니다.
+						</TextDiv>
+						<HelpArea></HelpArea>
+						<TextDiv1>
+							가려진 직업의 하는일과 인터뷰를 읽고 직업의 이름을 맞춰주세요.
+						</TextDiv1>
+						<HelpArea1></HelpArea1>
+						<TextDiv2>
+							전구 모양을 클릭하시면 16가지의 미래직업 이름을 알 수 있습니다.
+						</TextDiv2>
+						<HelpArea2></HelpArea2>
 					</ModalAreaFaq>
 				</ModalWrapper>
 			)}
@@ -251,8 +264,8 @@ const CloseDiv = styled.img`
 	width: 24px;
 	height: 24px;
 	position: absolute;
-	top: 480px;
-	right: 24px;
+	top: 200px;
+	left: 24px;
 	filter: invert(100%);
 	&:hover {
 		cursor: pointer;
@@ -260,8 +273,8 @@ const CloseDiv = styled.img`
 `;
 const TextDiv = styled.div`
 	padding-left: 10px;
-	width: 246px;
-	height: 42px;
+	width: 270px;
+	height: 100px;
 	line-height: 3;
 	border-radius: 2px;
 	border: solid 1px #e4e4e4;
@@ -270,8 +283,38 @@ const TextDiv = styled.div`
 	font-style: normal;
 	color: white;
 	position: absolute;
-	top: 509px;
-	right: 24px;
+	top: 250px;
+	left: 20px;
+`;
+const TextDiv1 = styled.div`
+	padding-left: 10px;
+	width: 270px;
+	height: 100px;
+	line-height: 3;
+	border-radius: 2px;
+	border: solid 1px #e4e4e4;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
+	font-style: normal;
+	color: white;
+	position: absolute;
+	top: 250px;
+	left: 320px;
+`;
+const TextDiv2 = styled.div`
+	padding-left: 10px;
+	width: 270px;
+	height: 100px;
+	line-height: 3;
+	border-radius: 2px;
+	border: solid 1px #e4e4e4;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
+	font-style: normal;
+	color: white;
+	position: absolute;
+	bottom: 150px;
+	right: -340px;
 `;
 
 const Progress = styled.div`
@@ -527,6 +570,30 @@ const ProgressWrpper = styled.div`
 	/* background: red; */
 	width: 944px;
 	margin: 0 auto;
+`;
+const HelpArea = styled.div`
+	border: 1px solid red;
+	width: 280px;
+	height: 370px;
+	position: absolute;
+	top: 370px;
+	left: 20px;
+`;
+const HelpArea1 = styled.div`
+	border: 1px solid red;
+	width: 280px;
+	height: 370px;
+	position: absolute;
+	top: 370px;
+	left: 320px;
+`;
+const HelpArea2 = styled.div`
+	border: 1px solid red;
+	width: 78px;
+	height: 80px;
+	position: absolute;
+	bottom: 20px;
+	right: -348px;
 `;
 
 export default Mission1Presenter;

@@ -28,7 +28,7 @@ const Mission3Presenter = ({
 	modalFunction,
 }) => {
 	return (
-		<Wrapper>
+		<Wrapper faqModal={faqModal}>
 			<BlockTop>
 				<TopContent>
 					<TextBoxTop>Mission 03</TextBoxTop>
@@ -136,6 +136,7 @@ const Mission3Presenter = ({
 					)}
 				</BottomContent>
 			</BlockBottom>
+			{/* 잡카드 모달 */}
 			{isOpen && (
 				<ModalWrapper>
 					<ModalArea>
@@ -143,6 +144,7 @@ const Mission3Presenter = ({
 					</ModalArea>
 				</ModalWrapper>
 			)}
+			{/* 도움말 모달 */}
 			{faqModal && (
 				<ModalWrapperFaq>
 					<ModalAreaFaq>
@@ -151,7 +153,10 @@ const Mission3Presenter = ({
 							alt='닫기버튼'
 							onClick={modalFunction.toggleFaqModal}
 						/>
-						<TextDiv>* 이곳에 써주세요.</TextDiv>
+						<TextDiv>
+							3가지 사회문제의 영상을 시청하시고 해결하고자하는 사회문제를 선택해주세요
+						</TextDiv>
+						<HelpArea></HelpArea>
 					</ModalAreaFaq>
 				</ModalWrapperFaq>
 			)}
@@ -208,8 +213,8 @@ const CloseDiv = styled.img`
 	width: 24px;
 	height: 24px;
 	position: absolute;
-	top: 480px;
-	right: 24px;
+	top: 150px;
+	right: 14px;
 	filter: invert(100%);
 	&:hover {
 		cursor: pointer;
@@ -217,18 +222,18 @@ const CloseDiv = styled.img`
 `;
 const TextDiv = styled.div`
 	padding-left: 10px;
-	width: 246px;
-	height: 42px;
+	width: 940px;
+	height: 120px;
 	line-height: 3;
 	border-radius: 2px;
 	border: solid 1px #e4e4e4;
 	font-family: NotoSansCJKkr;
-	font-size: 14px;
+	font-size: 26px;
 	font-style: normal;
 	color: white;
 	position: absolute;
-	top: 509px;
-	right: 24px;
+	top: 200px;
+	left: 0px;
 `;
 
 const ModalWrapper = styled.div`
@@ -445,6 +450,14 @@ const Tab3Title = styled.div`
 	position: absolute;
 	top: 15px;
 	left: 127px;
+`;
+const HelpArea = styled.div`
+	border: 1px solid red;
+	width: 930px;
+	height: 370px;
+	position: absolute;
+	top: 350px;
+	left: 10px;
 `;
 
 export default Mission3Presenter;

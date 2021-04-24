@@ -77,6 +77,7 @@ const Mission2Presenter = ({
 					/>
 				</BottomContent>
 			</BlockBottom>
+			{/* 잡카드 모달 */}
 			{isOpen && (
 				<ModalWrapper>
 					<ModalArea>
@@ -84,6 +85,7 @@ const Mission2Presenter = ({
 					</ModalArea>
 				</ModalWrapper>
 			)}
+			{/* 도움말 모달 */}
 			{faqModal && (
 				<ModalWrapperFaq>
 					<ModalAreaFaq>
@@ -92,7 +94,17 @@ const Mission2Presenter = ({
 							alt='닫기버튼'
 							onClick={modalFunction.toggleFaqModal}
 						/>
-						<TextDiv>* 이곳에 써주세요.</TextDiv>
+						<TextDiv>
+							상품명과 상품의 설명을 읽고 이 상품을 개발하기 위한 직업을 오른쪽에서
+							선택해주세요 2가지를 모두 맞추셔야 다음으로 넘어갈 수 있습니다.
+						</TextDiv>
+						<HelpArea></HelpArea>
+						<TextDiv2>
+							전구 모양을 클릭하시면 16가지의 미래직업 이름을 알 수 있습니다.
+						</TextDiv2>
+						<HelpArea2></HelpArea2>
+						<TextDiv3>현재 풀고 있는 문제의 수 입니다</TextDiv3>
+						<HelpArea3></HelpArea3>
 					</ModalAreaFaq>
 				</ModalWrapperFaq>
 			)}
@@ -148,8 +160,8 @@ const CloseDiv = styled.img`
 	width: 24px;
 	height: 24px;
 	position: absolute;
-	top: 480px;
-	right: 24px;
+	top: 150px;
+	left: 14px;
 	filter: invert(100%);
 	&:hover {
 		cursor: pointer;
@@ -157,18 +169,18 @@ const CloseDiv = styled.img`
 `;
 const TextDiv = styled.div`
 	padding-left: 10px;
-	width: 246px;
-	height: 42px;
+	width: 930px;
+	height: 100px;
 	line-height: 3;
 	border-radius: 2px;
 	border: solid 1px #e4e4e4;
 	font-family: NotoSansCJKkr;
-	font-size: 14px;
+	font-size: 0.875rem;
 	font-style: normal;
 	color: white;
 	position: absolute;
-	top: 509px;
-	right: 24px;
+	top: 200px;
+	left: 10px;
 `;
 
 const Wrapper = styled.div`
@@ -339,6 +351,60 @@ const TextContentBox = styled.div`
 	color: #0f0f15;
 	margin-left: 24px;
 	text-align: justify;
+`;
+const HelpArea = styled.div`
+	border: 1px solid red;
+	width: 930px;
+	height: 370px;
+	position: absolute;
+	top: 350px;
+	left: 10px;
+`;
+const TextDiv2 = styled.div`
+	padding-left: 10px;
+	width: 270px;
+	height: 100px;
+	line-height: 3;
+	border-radius: 2px;
+	border: solid 1px #e4e4e4;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
+	font-style: normal;
+	color: white;
+	position: absolute;
+	bottom: 150px;
+	right: -340px;
+`;
+const HelpArea2 = styled.div`
+	border: 1px solid red;
+	width: 78px;
+	height: 80px;
+	position: absolute;
+	bottom: 20px;
+	right: -348px;
+`;
+const TextDiv3 = styled.div`
+	padding-left: 10px;
+	width: 270px;
+	height: 100px;
+	line-height: 3;
+	border-radius: 2px;
+	border: solid 1px #e4e4e4;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
+	font-style: normal;
+	color: white;
+	position: absolute;
+	top: 350px;
+	left: 950px;
+`;
+const HelpArea3 = styled.div`
+	border: 1px solid red;
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	top: 370px;
+	left: 880px;
 `;
 
 export default Mission2Presenter;
