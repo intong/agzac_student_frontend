@@ -57,7 +57,8 @@ const MainVideoContainer = ({ history, location, match }) => {
 		},
 		// 임시저장한 Data 사용하기
 		useTempData: () => {
-			console.log(state.saveTempData.length);
+			console.log(state.saveTempData);
+			console.log("length", state.saveTempData.length);
 			const path = state.saveTempData.length - 1;
 			if (path === 2) {
 				console.log("영상시청");
@@ -67,6 +68,13 @@ const MainVideoContainer = ({ history, location, match }) => {
 				modalFunction.toggleHasDataModal();
 			} else if (path === 3) {
 				console.log("mission1");
+				const data = JSON.parse(state.saveTempData[3]);
+				const step = data.length + 1;
+				actions.setIndex(step);
+				history.push({
+					pathname: `/mission1/${step}`,
+					state: { step: step, data: data },
+				});
 			} else if (path === 4) {
 				console.log("mission2");
 			} else if (path === 5) {

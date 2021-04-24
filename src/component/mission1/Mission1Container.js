@@ -7,7 +7,7 @@ import ProcessContext from "../../contextApi/Process";
 import TempSaveContext from "../../contextApi/TempSave";
 import { jobCards } from "../JobCards";
 
-const Mission1Container = ({ history, match }) => {
+const Mission1Container = ({ history, match, location }) => {
 	//////////////// 모바일 state 시작 ///////////////////////////
 	const [dimension] = useState({
 		width: window.innerWidth,
@@ -83,12 +83,6 @@ const Mission1Container = ({ history, match }) => {
 		onChangeAnswer: (e) => {
 			setAnswerInputText(e.target.value);
 		},
-		// 임시저장 할 배열만들기 함수
-		// makeInputArray: async () => {
-		// 	// 확인버튼 실행함수
-		// 	const answer = { id: match.params.id, text: answerInputText };
-		// 	setInputArray([...inputArray, answer]);
-		// },
 
 		// 정답제출 버튼 클릭이벤트
 		checkAnswer: () => {
@@ -118,7 +112,9 @@ const Mission1Container = ({ history, match }) => {
 				setAnswerResult(undefined);
 				setProcessFunction();
 			} else {
+				console.log("match.params.id", match.params.id);
 				actions.setIndex(parseInt(match.params.id) + 1); // Header active css 적용을 위해서 context 변수 +1
+				console.log(inputArray);
 				await tempSaveSheet();
 				modalFunction.togglePrevMediaModal();
 				setAnswerResult(undefined);
@@ -151,16 +147,18 @@ const Mission1Container = ({ history, match }) => {
 		},
 	};
 
-	// 임시저장데이터 가져오기
-	const getUseTempData = () => {
-		// if (state.saveTempData[3] !== undefined) {
-		// 	const data = JSON.parse(state.saveTempData[3]);
-		// 	console.log(data);
-		// }
-	};
 	useEffect(() => {
 		selectExamQuestion(match.params.id - 1);
-		getUseTempData();
+		// contextApi의 임시저장된 데이터 사용하기
+		const tempUse = () => {
+			console.log(location.state);
+			if (location.state !== undefined) {
+				setInputArray(location.state.data);
+			} else {
+				setInputArray(inputArray);
+			}
+		};
+		tempUse();
 	}, [match.params.id]);
 
 	return (
