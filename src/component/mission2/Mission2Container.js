@@ -177,7 +177,7 @@ const Mission2Container = ({ history, match, location }) => {
 	// contextApi의 임시저장된 데이터 사용하기
 	const tempUse = () => {
 		console.log(location.state);
-		if (location.state !== undefined) {
+		if (location.state !== null && location.state !== undefined) {
 			setInputArray(location.state.data);
 		} else {
 			setInputArray(inputArray);

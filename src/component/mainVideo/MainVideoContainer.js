@@ -60,6 +60,7 @@ const MainVideoContainer = ({ history, location, match }) => {
 			console.log(state.saveTempData);
 			console.log("length", state.saveTempData.length);
 			const path = state.saveTempData.length - 1;
+			console.log("path", path);
 			if (path === 2) {
 				// console.log("영상시청");
 				const name = JSON.parse(state.saveTempData[2]);
@@ -71,25 +72,48 @@ const MainVideoContainer = ({ history, location, match }) => {
 				actions.setVideo("ok");
 				const data = JSON.parse(state.saveTempData[3]);
 				const step = data.length + 1;
-				actions.setIndex(step);
-				history.push({
-					pathname: `/mission1/${step}`,
-					state: { step: step, data: data },
-				});
+
+				if (step < 17) {
+					actions.setIndex(step);
+					history.push({
+						pathname: `/mission1/${step}`,
+						state: { step: step, data: data },
+					});
+				} else {
+					actions.setVideo("ok");
+					actions.setMission1("ok");
+					history.push(`/mission2/${state.mission2Index}`);
+				}
 			} else if (path === 4) {
-				console.log("mission2");
+				// console.log("mission2");
 				actions.setVideo("ok");
 				actions.setMission1("ok");
-				console.log(state.saveTempData[4]);
 				const data = JSON.parse(state.saveTempData[4]);
 				const step = data.length / 2 + 1;
-				actions.setMission2Index(step);
-				history.push({
-					pathname: `/mission2/${step}`,
-					state: { step: step, data: data },
-				});
+				console.log(step);
+				if (step < 5) {
+					actions.setMission2Index(step);
+					history.push({
+						pathname: `/mission2/${step}`,
+						state: { step: step, data: data },
+					});
+				} else {
+					actions.setVideo("ok");
+					actions.setMission1("ok");
+					actions.setMission2("ok");
+					history.push(`/mission3/${state.mission3Index}`);
+				}
 			} else if (path === 5) {
 				console.log("mission3");
+				actions.setVideo("ok");
+				actions.setMission1("ok");
+				actions.setMission2("ok");
+				console.log(state.saveTempData[5]);
+				const data = JSON.parse(state.saveTempData[5]);
+				history.push({
+					pathname: "/mission3/category",
+					state: { data: data },
+				});
 			} else if (path === 7) {
 				console.log("mission4");
 			}

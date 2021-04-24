@@ -7,7 +7,7 @@ import TempSaveContext from "../../contextApi/TempSave";
 import Mission3MobilePresenter from "./mobileVersion/Mission3MobilePresenter";
 import Mission3MobileNextPresenter from "./mobileVersion/Mission3MobileNextPresenter";
 
-const Mission3Container = ({ history }) => {
+const Mission3Container = ({ history, location }) => {
 	//////////////// 모바일 state 시작 ///////////////////////////
 	const [dimension] = useState({
 		width: window.innerWidth,
@@ -136,20 +136,40 @@ const Mission3Container = ({ history }) => {
 		},
 	};
 
-	// 임시저장데이터 가져오기
-	const getUseTempData = () => {
-		// if (state.saveTempData[5] !== "") {
-		// 	const data5 = JSON.parse(state.saveTempData[5]);
-		// 	console.log(data5);
-		// }
-		// if (state.saveTempData[6] !== "") {
-		// 	const data6 = JSON.parse(state.saveTempData[6]);
-		// 	console.log(data6);
-		// }
+	// contextApi의 임시저장된 데이터 사용하기
+	const tempUse = async () => {
+		if (location.state !== null && location.state !== undefined) {
+			// 저장이어하기
+			if (location.state.data[0] === "고령화 사회") {
+				setSelectTab("tab2");
+				uiFunctionList.tabSelectFunction("tab2");
+			} else if (location.state.data[0] === "기후변화와 환경") {
+				setSelectTab("tab1");
+				uiFunctionList.tabSelectFunction("tab1");
+			} else {
+				setSelectTab("tab3");
+				uiFunctionList.tabSelectFunction("tab3");
+			}
+		} else {
+			const params = sessionStorage.getItem("auth");
+			const result3 = await SaveData.getTempData(params);
+			console.log(result3.data.writtenData[5]);
+			const data = JSON.parse(result3.data.writtenData[5]);
+			if (data === "고령화 사회") {
+				setSelectTab("tab2");
+				uiFunctionList.tabSelectFunction("tab2");
+			} else if (data === "기후변화와 환경") {
+				setSelectTab("tab1");
+				uiFunctionList.tabSelectFunction("tab1");
+			} else {
+				setSelectTab("tab3");
+				uiFunctionList.tabSelectFunction("tab3");
+			}
+		}
 	};
 
 	useEffect(() => {
-		getUseTempData();
+		tempUse();
 	}, []);
 
 	// mobile 전용 functioinList
