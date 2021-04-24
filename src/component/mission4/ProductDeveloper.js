@@ -48,6 +48,7 @@ const ProductDeveloper = ({ modalFunction, clickFunctionList }) => {
 			<RepeatBlock>
 				<Label>미래인재1</Label>
 				<Dropbox
+					id='roleOne'
 					options={options}
 					style={{ position: "absolute", top: "36px", zIndex: "30" }}
 					placeholder='선택'
@@ -55,11 +56,13 @@ const ProductDeveloper = ({ modalFunction, clickFunctionList }) => {
 				<InputDefault
 					placeholder='미래인재가 사회문제 해결을 위해 어떤 활동을 하는지 작성해 보세요.'
 					style={inputStyle}
+					onChange={clickFunctionList.onChangeHumanFirst}
 				/>
 			</RepeatBlock>
 			<RepeatBlock>
 				<Label>미래인재2</Label>
 				<Dropbox
+					id='roleTwo'
 					options={options}
 					style={{ position: "absolute", top: "36px", zIndex: "20" }}
 					placeholder='선택'
@@ -67,11 +70,13 @@ const ProductDeveloper = ({ modalFunction, clickFunctionList }) => {
 				<InputDefault
 					placeholder='미래인재가 사회문제 해결을 위해 어떤 활동을 하는지 작성해 보세요.'
 					style={inputStyle}
+					onChange={clickFunctionList.onChangeHumanSecond}
 				/>
 			</RepeatBlock>
 			<RepeatBlock>
 				<Label>미래인재3</Label>
 				<Dropbox
+					id='roleThree'
 					options={options}
 					style={{ position: "absolute", top: "36px" }}
 					placeholder='선택'
@@ -79,6 +84,7 @@ const ProductDeveloper = ({ modalFunction, clickFunctionList }) => {
 				<InputDefault
 					placeholder='미래인재가 사회문제 해결을 위해 어떤 활동을 하는지 작성해 보세요.'
 					style={inputStyle}
+					onChange={clickFunctionList.onChangeHumanThird}
 				/>
 			</RepeatBlock>
 			<ButtonPrimary

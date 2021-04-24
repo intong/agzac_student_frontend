@@ -16,8 +16,6 @@ const Mission2Container = ({ history, match }) => {
 	//////////////// 모바일 state 끝 ///////////////////////////
 	const { state, actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
-	const [answerTextOne, setAnswerTextOne] = useState();
-	const [answerTextTwo, setAnswerTextTwo] = useState();
 	const [index, setIndex] = useState(); // 정답제출 시 +1 을 시키면 배열의 index 를 넘김
 	const [missionQuestion, setMissionQuestion] = useState(); // 미션 배열 중 한개의 문제만 보내는 state
 	const [dropdownNull, setDropdownNull] = useState(); // Dropdown Null로 초기화 해주는 state (add 함수에서 적용)
@@ -33,24 +31,15 @@ const Mission2Container = ({ history, match }) => {
 	const setProcessFunction = async () => {
 		//validation 추가
 		actions.setMission2("ok");
-		const result = await Activity.mission2EndStart();
-		console.log("mission2EndStart", result);
+		await Activity.mission2EndStart();
 		history.push(`/mission3/${state.mission3Index}`);
 	};
 
 	// 정담배열만들기
-	const makeInputArray = () => {
-		console.log(answerTextOne);
-		setInputArray([...inputArray, answerTextOne]);
-		setInputArray([...inputArray, answerTextTwo]);
-	};
-
-	// 임시저장하는 api 함수
-	const tempSaveSheet = async () => {
-		const result = await SaveData.save(3, inputArray);
-		if (result.data.ok) {
-			alert("저장하였습니다.");
-		}
+	let tempArr = [];
+	const makeInputArray = (text) => {
+		tempArr.push(text);
+		setInputArray(inputArray.concat(tempArr));
 	};
 
 	const modalFunction = {
@@ -63,10 +52,17 @@ const Mission2Container = ({ history, match }) => {
 		toggleFaqModal: () => {
 			setFaqModal(!faqModal);
 		},
+		// 임시저장 확인 버튼 이벤트 함수
 		handleSaveModalConfirmBtn: async () => {
 			// 확인버튼 실행함수
-			await tempSaveSheet();
-			modalActions.setSaveModalOpen(!modalState.saveModalOpen);
+			const result = await SaveData.save(3, inputArray);
+			if (result.data.ok) {
+				alert("저장하였습니다.");
+				modalActions.setSaveModalOpen(!modalState.saveModalOpen);
+			} else {
+				alert("저장하지 못했습니다.");
+				modalActions.setSaveModalOpen(!modalState.saveModalOpen);
+			}
 		},
 		toggleSaveModal: () => {
 			modalActions.setSaveModalOpen(!modalState.saveModalOpen);
@@ -119,15 +115,15 @@ const Mission2Container = ({ history, match }) => {
 			} else {
 				setNormal(false);
 				if (answerFunctionList.hasAnswer(one).bool) {
+					makeInputArray(one);
 					setCorrectFirst(true);
-					setAnswerTextOne(one);
 					setFirstFeedback(answerFunctionList.hasAnswer(one).feedback);
 				} else {
 					setCorrectFirst(false);
 				}
 				if (answerFunctionList.hasAnswer(two).bool) {
+					makeInputArray(two);
 					setCorrectSeconds(true);
-					setAnswerTextTwo(two);
 					setSecondFeedback(answerFunctionList.hasAnswer(two).feedback);
 				} else {
 					setCorrectSeconds(false);
@@ -138,8 +134,11 @@ const Mission2Container = ({ history, match }) => {
 		addIndex: async () => {
 			// index +1 해서 다음문제 넘기기
 			if (index === 4) {
-				setIndex(index);
-				setProcessFunction();
+				const result = await SaveData.save(3, inputArray);
+				if (result.data.ok) {
+					setIndex(index);
+					setProcessFunction();
+				}
 			} else {
 				setDropdownNull(null);
 				setNormal(true);

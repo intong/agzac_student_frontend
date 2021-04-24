@@ -26,6 +26,7 @@ const btnStyle = {
 };
 
 const Mission4Presenter = ({
+	itemNameModal,
 	priceSettingModal,
 	completeModal,
 	prevSelect,
@@ -178,20 +179,37 @@ const Mission4Presenter = ({
 					</ModalWrapperSave>
 				)}
 
+				{/* 상품이름 세팅 모달 */}
+				{itemNameModal && (
+					<ModalWrapper key={1}>
+						<ModalAreaPrice key={1}>
+							<ModalWithInputOneBtn
+								header='상품개발을 완료했습니다.'
+								content='상품이름을 보고 사람들이 기능을 알아볼 수 있도록 
+								멋진 상품이름을 지어주세요!
+								'
+								placeholder='상품이름을 입력해주세요.'
+								btntext='확인'
+								closeModalEvent={modalFunction.toggleProductNameModal}
+								onChange={clickFunctionList.setProductName}
+								btnEvent={modalFunction.productNameModalConfirmBtn}
+							/>
+						</ModalAreaPrice>
+					</ModalWrapper>
+				)}
+
 				{/* 상품가격 세팅 모달 */}
 				{priceSettingModal && (
 					<ModalWrapper key={1}>
 						<ModalAreaPrice key={1}>
 							<ModalWithInputOneBtn
 								header='상품개발을 완료했습니다.'
-								content='상상품이름을 보고 사람들이 기능을 알아볼 수 있도록 
-								멋진 상품이름을 지어주세요!
-								'
-								placeholder='상품이름을 입력해주세요.'
+								content='상품 가격은 얼마로 할까요??'
+								placeholder='상품가격을 입력해주세요.'
 								btntext='확인'
 								closeModalEvent={modalFunction.togglePriceSettingModal}
+								onChange={clickFunctionList.setProductPrice}
 								btnEvent={modalFunction.toggleCompleteModal}
-								onChange={clickFunctionList.setProductName}
 							/>
 						</ModalAreaPrice>
 					</ModalWrapper>
