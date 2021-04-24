@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const api = axios.create({ baseUrl: "http://13.125.210.253:3000" });
+const api = axios.create({ baseURL: "http://13.125.210.253:3000" });
 
 const apiToken = axios.create({
-	baseUrl: "http://13.125.210.253:3000",
+	baseURL: "http://13.125.210.253:3000",
 	headers: { token: sessionStorage.getItem("auth") },
 });
 
