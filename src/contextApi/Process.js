@@ -2,18 +2,18 @@ import React, { createContext, useState } from "react";
 
 const ProcessContext = createContext({
 	state: {
-		video: "",
-		mission1: "",
-		mission2: "",
-		mission3: "",
-		mission4: "",
+		video: "", // default "", 진행완료 "ok" : 영상시청
+		mission1: "", // default "", 진행완료 "ok" : 미션1
+		mission2: "", // default "", 진행완료 "ok" : 미션2
+		mission3: "", // default "", 진행완료 "ok" : 미션3
+		mission4: "", // default "", 진행완료 "ok" : 미션4
 		final: "",
 		useDataConfirm: "",
 		saveTempData: {},
-		index: 1,
-		mission2Index: 1,
-		mission3Index: "category",
-		mission4Index: "social",
+		index: 1, // default mission2 인덱스 변수
+		mission2Index: 1, // default mission2 인덱스 변수
+		mission3Index: "category", // default mission3 인덱스 변수
+		mission4Index: "social", // default mission4 인덱스 변수
 	},
 	actions: {
 		setVideo: () => {},

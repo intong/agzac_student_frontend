@@ -12,22 +12,15 @@ export function DropboxMobile({
 }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedOption, setSelectedOption] = useState(null);
-	const [selectedValue, setSelectedValue] = useState(null);
 	const toggling = () => setIsOpen(!isOpen);
-	const onOptionClicked = (text, value) => () => {
-		setSelectedValue(value);
+	const onOptionClicked = (text) => () => {
 		setSelectedOption(text);
 		setIsOpen(false);
 	};
 
 	return (
 		<DropDownContainer style={style}>
-			<DropDownHeader
-				onClick={toggling}
-				open={isOpen}
-				correct={correct}
-				value={selectedValue}
-			>
+			<DropDownHeader onClick={toggling} open={isOpen} correct={correct}>
 				<Text id={id} selectedOption={selectedOption}>
 					{selectedOption || placeholder}
 				</Text>
@@ -38,8 +31,8 @@ export function DropboxMobile({
 					<DropDownList>
 						{options &&
 							options.map((option, i) => (
-								<ListItem onClick={onOptionClicked(option.text, option.value)} key={i}>
-									<ListText>{option.text}</ListText>
+								<ListItem onClick={onOptionClicked(option)} key={i}>
+									<ListText>{option}</ListText>
 								</ListItem>
 							))}
 					</DropDownList>

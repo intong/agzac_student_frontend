@@ -16,6 +16,7 @@ const Mission1Container = ({ history, match, location }) => {
 	const [missionInput, setMissionInput] = useState(false);
 	const [correctCard, setCorrectCard] = useState(false);
 	//////////////// 모바일 state 끝 ///////////////////////////
+	const [index, setIndex] = useState();
 	const { state, actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
 	const [prevMedia, setPrevMedia] = useState(true);
@@ -148,17 +149,22 @@ const Mission1Container = ({ history, match, location }) => {
 	};
 
 	// contextApi의 임시저장된 데이터 사용하기
-	const tempUse = () => {
+	const tempUse = async () => {
 		console.log(location);
 		if (location.state !== null && location.state !== undefined) {
 			setInputArray(location.state.data);
 		} else {
-			setInputArray(inputArray);
+			const params = sessionStorage.getItem("auth");
+			const result = await SaveData.getTempData(params);
+			const data = JSON.parse(result.data.writtenData[3]);
+			console.log(data);
+			setInputArray(data);
 		}
 	};
 
 	useEffect(() => {
 		selectExamQuestion(match.params.id - 1);
+		setIndex(match.params.id);
 		tempUse();
 	}, [match.params.id]);
 

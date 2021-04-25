@@ -44,6 +44,15 @@ const MainVideoContainer = ({ history, location, match }) => {
 			setAnswerFalseModal(!answerFalseModal);
 		},
 		toggleHasDataModal: () => {
+			// 임시저장 데이터를 사용하지 않고 다시하고 싶을 때 (ProcessContextApi 변수 초기화)
+			actions.setVideo();
+			actions.setMission1();
+			actions.setMission2();
+			actions.setMission3();
+			actions.setIndex(1);
+			actions.setMission2Index(1);
+			actions.setMission3Index("category");
+			actions.setMission4Index("social");
 			setHasDataModal(!hasDataModal);
 		},
 		tempSaveSheet: async () => {

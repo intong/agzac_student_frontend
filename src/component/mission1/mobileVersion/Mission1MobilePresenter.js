@@ -369,10 +369,12 @@ const ModalArea = styled.div`
 	position: relative;
 `;
 const ModalJobImg = styled.img`
-	width: 72vw;
+	/* border: 1px solid red; */
+	width: 50vw;
 	margin: 0 auto;
 	position: absolute;
-	bottom: 0vh;
+	bottom: 17vh;
+	left: 15vw;
 `;
 const JobTitle = styled.div`
 	font-family: NotoSansCJKkr;
@@ -391,7 +393,7 @@ const SubText = styled.div`
 	line-height: 1.33;
 	color: #0f0f15;
 	position: absolute;
-	top: 9vh;
+	top: 2vh;
 	left: 10vw;
 `;
 const DefaultText = styled.div`
@@ -402,7 +404,7 @@ const DefaultText = styled.div`
 	color: #0f0f15;
 	width: 55vw;
 	position: absolute;
-	top: 15vh;
+	top: 7vh;
 	left: 10vw;
 	z-index: 2;
 `;
