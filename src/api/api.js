@@ -2,7 +2,6 @@ import axios from "axios";
 
 // 배포용
 const api = axios.create({ baseURL: "http://13.125.210.253:3000" });
-
 const apiToken = axios.create({
 	baseURL: "http://13.125.210.253:3000",
 	headers: { token: sessionStorage.getItem("auth") },

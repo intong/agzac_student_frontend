@@ -56,12 +56,12 @@ const Header = ({ match }) => {
 							exact={true}
 							activeStyle={activeStyle}
 							confirm={state.mission1} // css 글자색상 변경 state
-							// onClick={(e) => {
-							// 	if (state.video !== "ok") {
-							// 		e.preventDefault();
-							// 		alert("EY한영 아그작교실 영상시청을 완료해 주세요");
-							// 	}
-							// }}
+							onClick={(e) => {
+								if (state.video !== "ok") {
+									e.preventDefault();
+									alert("EY한영 아그작교실 영상시청을 완료해 주세요");
+								}
+							}}
 						>
 							Mission01
 						</NavLinkStyled2>
@@ -73,12 +73,12 @@ const Header = ({ match }) => {
 							exact={true}
 							activeStyle={activeStyle}
 							confirm={state.mission2} // css 글자색상 변경 state
-							// onClick={(e) => {
-							// 	if (state.mission1 !== "ok") {
-							// 		e.preventDefault();
-							// 		alert("Mission1 을 완료해 주세요");
-							// 	}
-							// }}
+							onClick={(e) => {
+								if (state.mission1 !== "ok") {
+									e.preventDefault();
+									alert("Mission1 을 완료해 주세요");
+								}
+							}}
 						>
 							Mission02
 						</NavLinkStyled3>
@@ -91,12 +91,12 @@ const Header = ({ match }) => {
 							exact={true}
 							activeStyle={activeStyle}
 							confirm={state.mission3} // css 글자색상 변경 state
-							// onClick={(e) => {
-							// 	if (state.mission2 !== "ok") {
-							// 		e.preventDefault();
-							// 		alert("Mission2 을 완료해 주세요");
-							// 	}
-							// }}
+							onClick={(e) => {
+								if (state.mission2 !== "ok") {
+									e.preventDefault();
+									alert("Mission2 을 완료해 주세요");
+								}
+							}}
 						>
 							Mission03
 						</NavLinkStyled4>
@@ -108,12 +108,12 @@ const Header = ({ match }) => {
 							exact={true}
 							activeStyle={activeStyle}
 							confirm={state.mission4} // css 글자색상 변경 state
-							// onClick={(e) => {
-							// 	if (state.mission3 !== "ok") {
-							// 		e.preventDefault();
-							// 		alert("Mission3 을 완료해 주세요");
-							// 	}
-							// }}
+							onClick={(e) => {
+								if (state.mission3 !== "ok") {
+									e.preventDefault();
+									alert("Mission3 을 완료해 주세요");
+								}
+							}}
 						>
 							Mission04
 						</NavLinkStyled5>
@@ -124,12 +124,12 @@ const Header = ({ match }) => {
 							to='/finalreport'
 							exact={true}
 							activeStyle={activeStyle}
-							// onClick={(e) => {
-							// 	if (state.mission4 !== "ok") {
-							// 		e.preventDefault();
-							// 		alert("Mission4 을 완료해 주세요");
-							// 	}
-							// }}
+							onClick={(e) => {
+								if (state.mission4 !== "ok") {
+									e.preventDefault();
+									alert("Mission4 을 완료해 주세요");
+								}
+							}}
 						>
 							최종보고서
 						</NavLinkStyled6>
