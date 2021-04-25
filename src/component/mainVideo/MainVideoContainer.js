@@ -125,7 +125,7 @@ const MainVideoContainer = ({ history, location, match }) => {
 					pathname: "/mission3/category",
 					state: { data: data },
 				});
-			} else if (path < 12) {
+			} else if (path < 13) {
 				// console.log("mission4");
 				const data = state.saveTempData[7];
 				// console.log(data);
