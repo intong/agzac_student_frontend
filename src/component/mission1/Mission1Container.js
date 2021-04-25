@@ -91,7 +91,7 @@ const Mission1Container = ({ history, match, location }) => {
 			if (answerInputText === "") {
 				// alert("직업이름을 입력해 주세요.");
 			} else {
-				if (answerInputText === question[match.params.id - 1].title) {
+				if (answerInputText === question[index - 1].title) {
 					// 정답일때,
 					console.log("105번줄", answerInputText);
 					setInputArray([...inputArray, answerInputText]); // 배열에 답 저장
@@ -107,19 +107,19 @@ const Mission1Container = ({ history, match, location }) => {
 		},
 		// 정답화면 오른쪽카드 다음 버튼 이벤트
 		addIndex: async () => {
-			if (parseInt(match.params.id) === 16) {
+			if (parseInt(index) === 16) {
 				await tempSaveSheet();
 				setProcessPercentage(100);
 				setAnswerResult(undefined);
 				setProcessFunction();
 			} else {
 				console.log("match.params.id", match.params.id);
-				actions.setIndex(parseInt(match.params.id) + 1); // Header active css 적용을 위해서 context 변수 +1
+				actions.setIndex(parseInt(index) + 1); // Header active css 적용을 위해서 context 변수 +1
 				console.log(inputArray);
 				await tempSaveSheet();
 				modalFunction.togglePrevMediaModal();
 				setAnswerResult(undefined);
-				history.push(`/mission1/${parseInt(match.params.id) + 1}`);
+				history.push(`/mission1/${parseInt(index) + 1}`);
 			}
 		},
 	};
@@ -180,7 +180,7 @@ const Mission1Container = ({ history, match, location }) => {
 					/>
 				) : (
 					<Mission1MobilePresenter
-						index={match.params.id}
+						index={index}
 						prevMedia={prevMedia}
 						nextMedia={nextMedia}
 						modalFunction={modalFunction}
@@ -198,8 +198,7 @@ const Mission1Container = ({ history, match, location }) => {
 					nextMedia={nextMedia}
 					answerMissionCards={answerMissionCards}
 					answerInputText={answerInputText}
-					// index={}
-					index={match.params.id}
+					index={index}
 					missionQuestion={missionQuestion}
 					answerResult={answerResult}
 					isOpen={isOpen}
