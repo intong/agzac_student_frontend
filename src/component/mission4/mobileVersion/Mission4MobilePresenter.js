@@ -12,6 +12,20 @@ import {
 } from "../../../ui/modal/Modal";
 
 const Mission4MobilePresenter = ({
+	texts,
+	firstTxtArea,
+	secondTxtArea,
+	thirdTxtArea,
+	fourthTxtArea,
+	humanRole1,
+	humanRole2,
+	humanRole3,
+	itemItro1,
+	itemItro2,
+	itemItro3,
+	itemItro4,
+	productName,
+	productPrice,
 	itemNameModal,
 	priceSettingModal,
 	completeModal,
@@ -134,18 +148,34 @@ const Mission4MobilePresenter = ({
 				{/* 변경 자리 */}
 				{selectTab === "social" ? (
 					<SocialProblemMobile
+						texts={texts}
 						prevSelect={prevSelect}
 						clickFunctionList={clickFunctionList}
 					/>
 				) : selectTab === "reason" ? (
-					<ReasonDevelopProductMobile clickFunctionList={clickFunctionList} />
+					<ReasonDevelopProductMobile
+						firstTxtArea={firstTxtArea}
+						secondTxtArea={secondTxtArea}
+						thirdTxtArea={thirdTxtArea}
+						fourthTxtArea={fourthTxtArea}
+						clickFunctionList={clickFunctionList}
+					/>
 				) : selectTab === "developer" ? (
 					<ProductDeveloperMobile
+						humanRole1={humanRole1}
+						humanRole2={humanRole2}
+						humanRole3={humanRole3}
 						modalFunction={modalFunction}
 						clickFunctionList={clickFunctionList}
 					/>
 				) : (
-					<ItemIntroductionMobile clickFunctionList={clickFunctionList} />
+					<ItemIntroductionMobile
+						itemItro1={itemItro1}
+						itemItro2={itemItro2}
+						itemItro3={itemItro3}
+						itemItro4={itemItro4}
+						clickFunctionList={clickFunctionList}
+					/>
 				)}
 			</BottomContent>
 			{/* 임시저장 모달 */}

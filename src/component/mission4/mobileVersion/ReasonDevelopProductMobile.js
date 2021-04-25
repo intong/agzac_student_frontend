@@ -35,7 +35,13 @@ const inputStyle4 = {
 	backgroundColor: "#fcfcfc",
 };
 
-const ReasonDevelopProduct = ({ clickFunctionList }) => {
+const ReasonDevelopProduct = ({
+	firstTxtArea,
+	secondTxtArea,
+	thirdTxtArea,
+	fourthTxtArea,
+	clickFunctionList,
+}) => {
 	return (
 		<>
 			<RightBox>
@@ -45,6 +51,7 @@ const ReasonDevelopProduct = ({ clickFunctionList }) => {
 				<InputDefault
 					style={inputStyle1}
 					onChange={clickFunctionList.onChangeReasonFirst}
+					value={firstTxtArea ? firstTxtArea : ""}
 				/>
 				<Question style={{ top: "118px" }}>
 					이 문제로 어려움을 겪고 있는 사람은 누구인가요?
@@ -52,11 +59,13 @@ const ReasonDevelopProduct = ({ clickFunctionList }) => {
 				<InputDefault
 					style={inputStyle2}
 					onChange={clickFunctionList.onChangeReasonSecond}
+					value={secondTxtArea ? secondTxtArea : ""}
 				/>
 				<Question style={{ top: "210px" }}>어떤 어려움을 겪고 있나요?</Question>
 				<InputDefault
 					style={inputStyle3}
 					onChange={clickFunctionList.onChangeReasonThird}
+					value={thirdTxtArea ? thirdTxtArea : ""}
 				/>
 				<Question style={{ top: "302px" }}>
 					왜 이 문제가 해결되어야 하나요?
@@ -64,6 +73,7 @@ const ReasonDevelopProduct = ({ clickFunctionList }) => {
 				<InputDefault
 					style={inputStyle4}
 					onChange={clickFunctionList.onChangeReasonFourth}
+					value={fourthTxtArea ? fourthTxtArea : ""}
 				/>
 			</RightBox>
 			<ButtonPrimary

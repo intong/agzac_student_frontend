@@ -78,7 +78,7 @@ const LoginPresenter = ({
 	loginFunction,
 }) => {
 	return (
-		<>
+		<Wrapper>
 			<Container>
 				<LogoBlock src={logoMain} alt='메인로고' />
 				<ContentBackground>
@@ -206,7 +206,7 @@ const LoginPresenter = ({
 					</ModalArea>
 				</ModalWrapper>
 			)}
-		</>
+		</Wrapper>
 	);
 };
 
@@ -226,11 +226,14 @@ const ModalArea = styled.div`
 	height: 304px;
 	margin: auto;
 `;
-
+const Wrapper = styled.div`
+	width: 100%;
+`;
 const Container = styled.div`
 	max-width: 1920px;
 	height: 100vh;
 	display: flex;
+	margin: 0 auto;
 	flex-direction: column;
 	position: relative;
 `;

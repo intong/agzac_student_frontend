@@ -338,42 +338,220 @@ const Mission4Container = ({ history, location, match }) => {
 	};
 
 	// 임시저장데이터 가져오기
-	const getUseTempData = () => {
-		// if (state.saveTempData[7] !== "") {
-		// 	const data7 = JSON.parse(state.saveTempData[7]);
-		// 	console.log(data7);
-		// }
-		// if (state.saveTempData[8] !== "") {
-		// 	const data8 = JSON.parse(state.saveTempData[8]);
-		// 	console.log(data8);
-		// }
-		// if (state.saveTempData[9] !== "") {
-		// 	const data9 = JSON.parse(state.saveTempData[9]);
-		// 	console.log(data9);
-		// }
-		// if (state.saveTempData[10] !== "") {
-		// 	const data10 = JSON.parse(state.saveTempData[10]);
-		// 	console.log(data10);
-		// }
-		// if (state.saveTempData[11] !== "") {
-		// 	const data11 = JSON.parse(state.saveTempData[11]);
-		// 	console.log(data11);
-		// }
-		// if (state.saveTempData[12] !== "") {
-		// 	const data12 = JSON.parse(state.saveTempData[12]);
-		// 	console.log(data12);
-		// }
+	const tempUse = async () => {
+		if (location.state !== null && location.state !== undefined) {
+			// 임시저장 사용하기로 넘어올 경우
+			const data = location.state.data; //JSON 파싱이 안된 상태의 배열 tempSave 모든 데이터 원본 배열
+			const settingPrev = {
+				selectTabContent: {
+					name: JSON.parse(location.state.data.writtenData[5])[0],
+				},
+				studentAnswerList: JSON.parse(location.state.data.writtenData[6]),
+			};
+			setPrevSelect(settingPrev);
+
+			// 사회문제 분석이 있는경우 [7]
+			if (data[7] !== undefined && data[7] !== null) {
+				const result = JSON.parse(data[7]);
+				if (result[0] !== undefined && result[0] !== null && result[0] !== "") {
+				}
+				if (result[1] !== undefined && result[1] !== null && result[1] !== "") {
+					setTexts(result[1]);
+				}
+			}
+			// 상품개발 이유가 있는경우 [8]
+			if (data[8] !== undefined && data[8] !== null) {
+				const result = JSON.parse(data[8]);
+				if (result[0] !== undefined && result[0] !== null && result[0] !== "") {
+					setFirstTxtArea(result[0]);
+				}
+				if (result[1] !== undefined && result[1] !== null && result[1] !== "") {
+					setSecondTxtArea(result[1]);
+				}
+				if (result[2] !== undefined && result[2] !== null && result[2] !== "") {
+					setThirdTxtArea(result[2]);
+				}
+				if (result[3] !== undefined && result[3] !== null && result[3] !== "") {
+					setFourthTxtArea(result[3]);
+				}
+			}
+			// 미래인재역할이 있는경우 [9]
+			if (data[9] !== undefined && data[9] !== null) {
+				const result = JSON.parse(data[9]);
+				console.log(result);
+				if (result[0] !== undefined && result[0] !== null && result[0] !== "") {
+				}
+				if (result[1] !== undefined && result[1] !== null && result[1] !== "") {
+					setHumanRole1(result[1]);
+				}
+				if (result[2] !== undefined && result[2] !== null && result[2] !== "") {
+				}
+				if (result[3] !== undefined && result[3] !== null && result[3] !== "") {
+					setHumanRole2(result[3]);
+				}
+				if (result[4] !== undefined && result[4] !== null && result[4] !== "") {
+				}
+				if (result[5] !== undefined && result[5] !== null && result[5] !== "") {
+					setHumanRole3(result[5]);
+				}
+			}
+			// 상품소개가 있는 경우 [10]
+			if (data[10] !== undefined && data[10] !== null) {
+				const result = JSON.parse(data[10]);
+				console.log(result);
+				if (result[0] !== undefined && result[0] !== null && result[0] !== "") {
+					setItemIntro1(result[0]);
+				}
+				if (result[1] !== undefined && result[1] !== null && result[1] !== "") {
+					setItemIntro2(result[1]);
+				}
+				if (result[2] !== undefined && result[2] !== null && result[2] !== "") {
+					setItemIntro3(result[2]);
+				}
+				if (result[3] !== undefined && result[3] !== null && result[3] !== "") {
+					setItemIntro4(result[3]);
+				}
+			}
+			// 상품 이름이 있는경우 [11]
+			if (data[11] !== undefined && data[11] !== null) {
+				console.log(data[11]);
+				const result = JSON.parse(data[11]);
+				console.log(result);
+				modalFunction.toggleProductNameModal();
+				setProductName(result[0]);
+			}
+			// 상품 가격이 있는 경우 [12]
+			if (data[12] !== undefined && data[12] !== null) {
+				console.log(data[12]);
+				const result = JSON.parse(data[12]);
+				console.log(result);
+				setProductPrice(result[0]);
+				setItemNameModal(false);
+				setPriceSettingModal(false);
+				setCompleteModal(true);
+			}
+		} else {
+			// 저장한 데이터가 없는 경우 (해당페이지에서 새로고침 시,)
+			// 변경 적용해야할 변수
+			// prevSelect.selectTabContent.category
+			// prevSelect.selectTabContent.name
+			// prevSelect.studentAnswerList => []
+			const params = sessionStorage.getItem("auth");
+			const result = await SaveData.getTempData(params);
+			const settingPrev = {
+				selectTabContent: { name: JSON.parse(result.data.writtenData[5])[0] },
+				studentAnswerList: JSON.parse(result.data.writtenData[6]),
+			};
+			setPrevSelect(settingPrev);
+
+			const data = result.data.writtenData;
+			// 사회문제 분석이 있는경우 [7]
+			if (data[7] !== undefined && data[7] !== null) {
+				const result = JSON.parse(data[7]);
+				if (result[0] !== undefined && result[0] !== null && result[0] !== "") {
+				}
+				if (result[1] !== undefined && result[1] !== null && result[1] !== "") {
+					setTexts(result[1]);
+				}
+			}
+			// 상품개발 이유가 있는경우 [8]
+			if (data[8] !== undefined && data[8] !== null) {
+				const result = JSON.parse(data[8]);
+				if (result[0] !== undefined && result[0] !== null && result[0] !== "") {
+					setFirstTxtArea(result[0]);
+				}
+				if (result[1] !== undefined && result[1] !== null && result[1] !== "") {
+					setSecondTxtArea(result[1]);
+				}
+				if (result[2] !== undefined && result[2] !== null && result[2] !== "") {
+					setThirdTxtArea(result[2]);
+				}
+				if (result[3] !== undefined && result[3] !== null && result[3] !== "") {
+					setFourthTxtArea(result[3]);
+				}
+			}
+			// 미래인재역할이 있는경우 [9]
+			if (data[9] !== undefined && data[9] !== null) {
+				const result = JSON.parse(data[9]);
+				console.log(result);
+				if (result[0] !== undefined && result[0] !== null && result[0] !== "") {
+				}
+				if (result[1] !== undefined && result[1] !== null && result[1] !== "") {
+					setHumanRole1(result[1]);
+				}
+				if (result[2] !== undefined && result[2] !== null && result[2] !== "") {
+				}
+				if (result[3] !== undefined && result[3] !== null && result[3] !== "") {
+					setHumanRole2(result[3]);
+				}
+				if (result[4] !== undefined && result[4] !== null && result[4] !== "") {
+				}
+				if (result[5] !== undefined && result[5] !== null && result[5] !== "") {
+					setHumanRole3(result[5]);
+				}
+			}
+			// 상품소개가 있는 경우 [10]
+			if (data[10] !== undefined && data[10] !== null) {
+				const result = JSON.parse(data[10]);
+				console.log(result);
+				if (result[0] !== undefined && result[0] !== null && result[0] !== "") {
+					setItemIntro1(result[0]);
+				}
+				if (result[1] !== undefined && result[1] !== null && result[1] !== "") {
+					setItemIntro2(result[1]);
+				}
+				if (result[2] !== undefined && result[2] !== null && result[2] !== "") {
+					setItemIntro3(result[2]);
+				}
+				if (result[3] !== undefined && result[3] !== null && result[3] !== "") {
+					setItemIntro4(result[3]);
+				}
+			}
+			// 상품 이름이 있는경우 [11]
+			if (data[11] !== undefined && data[11] !== null) {
+				console.log(data[11]);
+				const result = JSON.parse(data[11]);
+				console.log(result);
+				modalFunction.toggleProductNameModal();
+				setProductName(result[0]);
+			}
+			// 상품 가격이 있는 경우 [12]
+			if (data[12] !== undefined && data[12] !== null) {
+				console.log(data[12]);
+				const result = JSON.parse(data[12]);
+				console.log(result);
+				setProductPrice(result[0]);
+				setItemNameModal(false);
+				setPriceSettingModal(false);
+				setCompleteModal(true);
+			}
+		}
 	};
 
 	useEffect(() => {
+		// 미션3에서 진행에 이어서 미션4로 넘어올 경우
+		tempUse();
 		setPrevSelect(modalState.mission3Selected);
-		getUseTempData();
-	}, [modalState.mission3Selected]);
+	}, []);
 
 	return (
 		<>
 			{dimension.width < 415 ? (
 				<Mission4MobilePresenter
+					texts={texts}
+					firstTxtArea={firstTxtArea}
+					secondTxtArea={secondTxtArea}
+					thirdTxtArea={thirdTxtArea}
+					fourthTxtArea={fourthTxtArea}
+					humanRole1={humanRole1}
+					humanRole2={humanRole2}
+					humanRole3={humanRole3}
+					itemItro1={itemItro1}
+					itemItro2={itemItro2}
+					itemItro3={itemItro3}
+					itemItro4={itemItro4}
+					productName={productName}
+					productPrice={productPrice}
 					itemNameModal={itemNameModal}
 					priceSettingModal={priceSettingModal}
 					completeModal={completeModal}
@@ -388,6 +566,20 @@ const Mission4Container = ({ history, location, match }) => {
 				/>
 			) : (
 				<Mission4Presenter
+					texts={texts}
+					firstTxtArea={firstTxtArea}
+					secondTxtArea={secondTxtArea}
+					thirdTxtArea={thirdTxtArea}
+					fourthTxtArea={fourthTxtArea}
+					humanRole1={humanRole1}
+					humanRole2={humanRole2}
+					humanRole3={humanRole3}
+					itemItro1={itemItro1}
+					itemItro2={itemItro2}
+					itemItro3={itemItro3}
+					itemItro4={itemItro4}
+					productName={productName}
+					productPrice={productPrice}
 					itemNameModal={itemNameModal}
 					priceSettingModal={priceSettingModal}
 					completeModal={completeModal}

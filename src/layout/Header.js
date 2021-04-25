@@ -85,6 +85,7 @@ const Header = ({ match }) => {
 					</LIStyled>
 					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
 					<LIStyled>
+						{/* {console.log(state.mission4Index)} */}
 						<NavLinkStyled4
 							to={`/mission3/${state.mission3Index}`}
 							exact={true}

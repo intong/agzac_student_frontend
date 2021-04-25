@@ -35,7 +35,13 @@ const inputStyle4 = {
 	backgroundColor: "#fcfcfc",
 };
 
-const ItemIntroduction = ({ clickFunctionList }) => {
+const ItemIntroduction = ({
+	itemItro1,
+	itemItro2,
+	itemItro3,
+	itemItro4,
+	clickFunctionList,
+}) => {
 	return (
 		<>
 			<RightBox>
@@ -43,11 +49,13 @@ const ItemIntroduction = ({ clickFunctionList }) => {
 				<InputDefault
 					style={inputStyle1}
 					onChange={clickFunctionList.onChangeItemIntro1}
+					value={itemItro1 ? itemItro1 : ""}
 				/>
 				<Question style={{ top: "118px" }}>상품의 사용법을 설명해 주세요.</Question>
 				<InputDefault
 					style={inputStyle2}
 					onChange={clickFunctionList.onChangeItemIntro2}
+					value={itemItro2 ? itemItro2 : ""}
 				/>
 				<Question style={{ top: "210px" }}>
 					이 상품의 단점 혹은 예상되는 문제점은 무엇인가요?
@@ -55,6 +63,7 @@ const ItemIntroduction = ({ clickFunctionList }) => {
 				<InputDefault
 					style={inputStyle3}
 					onChange={clickFunctionList.onChangeItemIntro3}
+					value={itemItro3 ? itemItro3 : ""}
 				/>
 				<Question style={{ top: "302px" }}>
 					단점 혹은 문제점을 해결할 수 있는 방법은 무엇인가요?
@@ -62,6 +71,7 @@ const ItemIntroduction = ({ clickFunctionList }) => {
 				<InputDefault
 					style={inputStyle4}
 					onChange={clickFunctionList.onChangeItemIntro4}
+					value={itemItro4 ? itemItro4 : ""}
 				/>
 			</RightBox>
 			<ButtonPrimary

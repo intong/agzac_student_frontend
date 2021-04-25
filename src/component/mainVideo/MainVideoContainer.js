@@ -66,10 +66,9 @@ const MainVideoContainer = ({ history, location, match }) => {
 		},
 		// 임시저장한 Data 사용하기
 		useTempData: () => {
-			console.log(state.saveTempData);
-			console.log("length", state.saveTempData.length);
+			// console.log(state.saveTempData);
+			// console.log(state.saveTempData.length);
 			const path = state.saveTempData.length - 1;
-			console.log("path", path);
 			if (path === 2) {
 				// console.log("영상시청");
 				const name = JSON.parse(state.saveTempData[2]);
@@ -77,42 +76,45 @@ const MainVideoContainer = ({ history, location, match }) => {
 				actions.setUseDataConfirm(true); // 임시저장 데이터 사용하겠다는 글로벌 (context) 변수
 				modalFunction.toggleHasDataModal();
 			} else if (path === 3) {
-				// console.log("mission1");
 				actions.setVideo("ok");
 				const data = JSON.parse(state.saveTempData[3]);
 				const step = data.length + 1;
-
 				if (step < 17) {
+					// 미션1 총 문제 수 : 16
+					// 미션1 16개 미만 문제를 다 맞춘 경우
 					actions.setIndex(step);
 					history.push({
 						pathname: `/mission1/${step}`,
 						state: { step: step, data: data },
 					});
 				} else {
+					// 미션1 16개의 문제를 다 맞춘 경우
 					actions.setVideo("ok");
 					actions.setMission1("ok");
 					history.push(`/mission2/${state.mission2Index}`);
 				}
 			} else if (path === 4) {
-				// console.log("mission2");
 				actions.setVideo("ok");
 				actions.setMission1("ok");
 				const data = JSON.parse(state.saveTempData[4]);
 				const step = data.length / 2 + 1;
 				console.log(step);
 				if (step < 5) {
+					// 미션2 총 문제 수 : 4
+					// 미션2 4개 미만 문제를 다 맞춘 경우
 					actions.setMission2Index(step);
 					history.push({
 						pathname: `/mission2/${step}`,
 						state: { step: step, data: data },
 					});
 				} else {
+					// 미션2 4개 문제를 다 맞춘 경우
 					actions.setVideo("ok");
 					actions.setMission1("ok");
 					actions.setMission2("ok");
 					history.push(`/mission3/${state.mission3Index}`);
 				}
-			} else if (path === 5) {
+			} else if (path < 6) {
 				console.log("mission3");
 				actions.setVideo("ok");
 				actions.setMission1("ok");
@@ -123,8 +125,33 @@ const MainVideoContainer = ({ history, location, match }) => {
 					pathname: "/mission3/category",
 					state: { data: data },
 				});
-			} else if (path === 7) {
-				console.log("mission4");
+			} else if (path < 12) {
+				// console.log("mission4");
+				const data = state.saveTempData[7];
+				// console.log(data);
+				if (data !== undefined && data !== null) {
+					// 미션4 한 문제라도 푼 경우 = 미션3 끝 미션4 한 문제라도 물었을 경우
+					actions.setVideo("ok");
+					actions.setMission1("ok");
+					actions.setMission2("ok");
+					actions.setMission3("ok");
+					const data = state.saveTempData;
+					// console.log(data);
+					history.push({
+						pathname: `/mission4/${state.mission4Index}`,
+						state: { data: data },
+					});
+				} else {
+					// 미션3 카테고리와 키워드 설정까지 다 한 경우 = 미션3은 끝났지만 미션4를 시작안한 경우
+					actions.setVideo("ok");
+					actions.setMission1("ok");
+					actions.setMission2("ok");
+					const data = JSON.parse(state.saveTempData[5]);
+					history.push({
+						pathname: "/mission3/category",
+						state: { data: data },
+					});
+				}
 			}
 		},
 	};

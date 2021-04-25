@@ -40,9 +40,14 @@ const Input = styled.input`
 	}
 `;
 
-const InputLineType = ({ style, onChange, placeholder }) => {
+const InputLineType = ({ style, onChange, placeholder, value }) => {
 	return (
-		<InputStyle style={style} onChange={onChange} placeholder={placeholder} />
+		<InputStyle
+			style={style}
+			onChange={onChange}
+			placeholder={placeholder}
+			value={value}
+		/>
 	);
 };
 const InputStyle = styled.input`
@@ -63,13 +68,14 @@ const InputStyle = styled.input`
 	}
 `;
 
-const TextArea = ({ style, onChange, placeholder, id }) => {
+const TextArea = ({ style, onChange, placeholder, id, value }) => {
 	return (
 		<StyledTextArea
 			style={style}
 			onChange={onChange}
 			placeholder={placeholder}
 			id={id}
+			value={value}
 		/>
 	);
 };

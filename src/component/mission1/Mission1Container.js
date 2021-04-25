@@ -150,14 +150,12 @@ const Mission1Container = ({ history, match, location }) => {
 
 	// contextApi의 임시저장된 데이터 사용하기
 	const tempUse = async () => {
-		console.log(location);
 		if (location.state !== null && location.state !== undefined) {
 			setInputArray(location.state.data);
 		} else {
 			const params = sessionStorage.getItem("auth");
 			const result = await SaveData.getTempData(params);
 			const data = JSON.parse(result.data.writtenData[3]);
-			console.log(data);
 			setInputArray(data);
 		}
 	};

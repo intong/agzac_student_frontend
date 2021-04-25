@@ -28,7 +28,13 @@ const options = [
 	"탄소배출권거래중개인",
 ];
 
-const ProductDeveloper = ({ modalFunction, clickFunctionList }) => {
+const ProductDeveloper = ({
+	humanRole1,
+	humanRole2,
+	humanRole3,
+	modalFunction,
+	clickFunctionList,
+}) => {
 	return (
 		<>
 			<RightBox>
@@ -49,6 +55,7 @@ const ProductDeveloper = ({ modalFunction, clickFunctionList }) => {
 						placeholder='미래인재가 사회문제 해결을 위해 어떤 활동을 하는지 작성해 보세요.'
 						style={inputStyle}
 						onChange={clickFunctionList.onChangeHumanFirst}
+						value={humanRole1 ? humanRole1 : ""}
 					/>
 				</RepeatBlock>
 				<RepeatBlock>
@@ -63,6 +70,7 @@ const ProductDeveloper = ({ modalFunction, clickFunctionList }) => {
 						placeholder='미래인재가 사회문제 해결을 위해 어떤 활동을 하는지 작성해 보세요.'
 						style={inputStyle}
 						onChange={clickFunctionList.onChangeHumanSecond}
+						value={humanRole2 ? humanRole2 : ""}
 					/>
 				</RepeatBlock>
 				<RepeatBlock>
@@ -77,6 +85,7 @@ const ProductDeveloper = ({ modalFunction, clickFunctionList }) => {
 						placeholder='미래인재가 사회문제 해결을 위해 어떤 활동을 하는지 작성해 보세요.'
 						style={inputStyle}
 						onChange={clickFunctionList.onChangeHumanThird}
+						value={humanRole3 ? humanRole3 : ""}
 					/>
 				</RepeatBlock>
 			</RightBox>

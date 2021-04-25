@@ -26,6 +26,20 @@ const btnStyle = {
 };
 
 const Mission4Presenter = ({
+	texts,
+	firstTxtArea,
+	secondTxtArea,
+	thirdTxtArea,
+	fourthTxtArea,
+	humanRole1,
+	humanRole2,
+	humanRole3,
+	itemItro1,
+	itemItro2,
+	itemItro3,
+	itemItro4,
+	productName,
+	productPrice,
 	itemNameModal,
 	priceSettingModal,
 	completeModal,
@@ -124,18 +138,34 @@ const Mission4Presenter = ({
 								{/* 변경 자리 */}
 								{selectTab === "social" ? (
 									<SocialProblem
+										texts={texts}
 										prevSelect={prevSelect}
 										clickFunctionList={clickFunctionList}
 									/>
 								) : selectTab === "reason" ? (
-									<ReasonDevelopProduct clickFunctionList={clickFunctionList} />
+									<ReasonDevelopProduct
+										firstTxtArea={firstTxtArea}
+										secondTxtArea={secondTxtArea}
+										thirdTxtArea={thirdTxtArea}
+										fourthTxtArea={fourthTxtArea}
+										clickFunctionList={clickFunctionList}
+									/>
 								) : selectTab === "developer" ? (
 									<ProductDeveloper
+										humanRole1={humanRole1}
+										humanRole2={humanRole2}
+										humanRole3={humanRole3}
 										modalFunction={modalFunction}
 										clickFunctionList={clickFunctionList}
 									/>
 								) : (
-									<ItemIntroduction clickFunctionList={clickFunctionList} />
+									<ItemIntroduction
+										itemItro1={itemItro1}
+										itemItro2={itemItro2}
+										itemItro3={itemItro3}
+										itemItro4={itemItro4}
+										clickFunctionList={clickFunctionList}
+									/>
 								)}
 							</RightBox>
 						</div>
@@ -256,6 +286,7 @@ const Mission4Presenter = ({
 								closeModalEvent={modalFunction.toggleProductNameModal}
 								onChange={clickFunctionList.setProductName}
 								btnEvent={modalFunction.productNameModalConfirmBtn}
+								value={productName ? productName : ""}
 							/>
 						</ModalAreaPrice>
 					</ModalWrapper>
@@ -273,6 +304,7 @@ const Mission4Presenter = ({
 								closeModalEvent={modalFunction.togglePriceSettingModal}
 								onChange={clickFunctionList.setProductPrice}
 								btnEvent={modalFunction.toggleCompleteModal}
+								value={productPrice ? productPrice : ""}
 							/>
 						</ModalAreaPrice>
 					</ModalWrapper>
@@ -519,10 +551,10 @@ const LeftTitle = styled.div`
 	left: 24px;
 `;
 const LeftImage = styled.img`
-	width: 304px;
-	height: 364px;
+	width: 280px;
 	position: absolute;
-	bottom: 0px;
+	bottom: 80px;
+	left: 12px;
 `;
 
 const FaqBtn = styled.img`

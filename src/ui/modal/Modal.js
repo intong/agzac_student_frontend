@@ -251,6 +251,7 @@ export const ModalWithInputOneBtn = ({
 	btntext,
 	onChange,
 	closeModalEvent,
+	value,
 }) => {
 	return (
 		<BlockWithInput>
@@ -261,6 +262,7 @@ export const ModalWithInputOneBtn = ({
 				placeholder={placeholder}
 				style={{ marginTop: "20px", marginBottom: "10px" }}
 				onChange={onChange}
+				value={value}
 			/>
 			<BtnPositionWithInput>
 				<ButtonPrimary

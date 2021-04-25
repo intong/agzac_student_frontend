@@ -151,20 +151,21 @@ const Mission3Container = ({ history, location }) => {
 				uiFunctionList.tabSelectFunction("tab3");
 			}
 		} else {
+			// 단순 페이지 이동
 			const params = sessionStorage.getItem("auth");
-			const result3 = await SaveData.getTempData(params);
-			console.log(result3.data.writtenData[5]);
-			const data = JSON.parse(result3.data.writtenData[5]);
-			if (data === "고령화 사회") {
-				setSelectTab("tab2");
-				uiFunctionList.tabSelectFunction("tab2");
-			} else if (data === "기후변화와 환경") {
-				setSelectTab("tab1");
-				uiFunctionList.tabSelectFunction("tab1");
-			} else {
-				setSelectTab("tab3");
-				uiFunctionList.tabSelectFunction("tab3");
-			}
+			await SaveData.getTempData(params).then((result) => {
+				const data = JSON.parse(result.data.writtenData[5]);
+				if (data[0] === "고령화 사회") {
+					setSelectTab("tab2");
+					uiFunctionList.tabSelectFunction("tab2");
+				} else if (data[0] === "기후변화와 환경") {
+					setSelectTab("tab1");
+					uiFunctionList.tabSelectFunction("tab1");
+				} else {
+					setSelectTab("tab3");
+					uiFunctionList.tabSelectFunction("tab3");
+				}
+			});
 		}
 	};
 

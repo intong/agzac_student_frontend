@@ -4,7 +4,7 @@ import { ButtonPrimary } from "../../../ui/button/Button";
 import { TextArea } from "../../../ui/inputBox/Input";
 import { Dropbox } from "../../../ui/dropbox/Dropbox";
 
-const SocialProblem = ({ prevSelect, clickFunctionList }) => {
+const SocialProblem = ({ texts, prevSelect, clickFunctionList }) => {
 	const options = prevSelect && prevSelect.studentAnswerList;
 	return (
 		<>
@@ -33,6 +33,7 @@ const SocialProblem = ({ prevSelect, clickFunctionList }) => {
 						overflowY: "auto",
 					}}
 					onChange={clickFunctionList.onChangeTextArea}
+					value={texts ? texts : ""}
 				/>
 			</RightBox>
 			<ButtonPrimary
