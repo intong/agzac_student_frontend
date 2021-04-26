@@ -58,7 +58,7 @@ const FinalReportPresenter = ({
 									marginTop: "14px",
 								}}
 								onClick={() => {
-									alert("링크가기");
+									window.open("https://forms.gle/RzEH356bezV7XCUo9");
 								}}
 							/>
 						) : (
