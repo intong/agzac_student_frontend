@@ -162,7 +162,7 @@ const Mission4Container = ({ history, location, match }) => {
 		choiceOtherSocialProblem: () => {
 			const ok = window.confirm("다른 사회 문제를 선택하겠습니까?");
 			if (ok) {
-				history.push("/mission3/1");
+				history.push(`/mission3/${state.mission3Index}`);
 			}
 		},
 		selectedTabFunction: (tab) => {
@@ -314,24 +314,15 @@ const Mission4Container = ({ history, location, match }) => {
 			} else if (selectTab === "reason") {
 				// 상품개발이유에서 임시저장 할 때
 				const reason = getDevelopmentReason();
-				const result = await SaveData.save(7, reason);
-				if (result.data.ok) {
-					alert("저장되었습니다");
-				}
+				await SaveData.save(7, reason);
 			} else if (selectTab === "developer") {
 				// 미래인재 역할에서 임시저장 할 때
 				const role = getFutureHumanRole();
-				const result = await SaveData.save(8, role);
-				if (result.data.ok) {
-					alert("저장되었습니다.");
-				}
+				await SaveData.save(8, role);
 			} else if (selectTab === "itemIntro") {
 				// 상품 소개에서 임시저장 할 때
 				const item = getItemItro();
-				const result = await SaveData.save(9, item);
-				if (result.data.ok) {
-					alert("저장되었습니다.");
-				}
+				await SaveData.save(9, item);
 			}
 			modalFunction.toggletempModal();
 		},
