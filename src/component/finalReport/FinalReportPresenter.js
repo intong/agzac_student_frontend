@@ -17,85 +17,91 @@ const FinalReportPresenter = ({
 	modalFunction,
 }) => {
 	return (
-		<Wrapper>
-			<BlockTop>
-				<TopContent>
-					<TextBoxTop>최종 보고서</TextBoxTop>
-					<TextBoxMiddle>
-						최종보고서를 작성하기 위해 마무리 영상을 시청해주세요.
-					</TextBoxMiddle>
-					<TextBoxBottom>
-						지금까지 EY한영 아그작교실 프로젝트를 통해 4차산업혁명기술을 활용하여
-						사회문제를 해결하는 상품을 개발해 보았습니다.
-						<br /> 최종보고서를 작성하기위해 영상을 시청한 후 최종보고서를 작성하여
-						제출해 주시기 바랍니다.
-						<br />
-						<span style={{ color: "#686868" }}>
-							*영상시청이 완료되어야 최종보고서를 제출할 수 있습니다. 최종보고서 제출이
-							완료되어야 모든 미션이 종료된 것입니다.
-						</span>
-					</TextBoxBottom>
-				</TopContent>
-			</BlockTop>
-			<BlockBottom>
-				<BottomContent>
-					<VideoArea>
-						<ReactPlayer
-							url={MediaSecretCodeAnswer.endingMedia}
-							width='100%'
-							height='100%'
-							onProgress={handleProgree}
-						/>
-					</VideoArea>
-					{changeBtn ? (
-						<FinalReportBtnActive
-							text='최종보고서 제출하기'
-							style={{
-								width: "148px",
-								height: "40px",
-								marginLeft: "796px",
-								marginTop: "14px",
-							}}
-							onClick={() => {
-								alert("링크가기");
-							}}
-						/>
-					) : (
-						<FinalReportBtn
-							text='최종보고서 제출하기'
-							style={{
-								width: "148px",
-								height: "40px",
-								marginLeft: "796px",
-								marginTop: "14px",
-							}}
-						/>
-					)}
-				</BottomContent>
-			</BlockBottom>
-			{isOpen && (
-				<ModalWrapper>
-					<ModalArea>
-						<HelpModal modalFunction={modalFunction} />
-					</ModalArea>
-				</ModalWrapper>
-			)}
-			{faqModal && (
-				<ModalWrapperFaq>
-					<ModalAreaFaq>
-						<CloseDiv
-							src={close}
-							alt='닫기버튼'
-							onClick={modalFunction.toggleFaqModal}
-						/>
-						<TextDiv>* 이곳에 써주세요.</TextDiv>
-					</ModalAreaFaq>
-				</ModalWrapperFaq>
-			)}
-			<Footer />
-			<FaqBtn src={btnFaq} alt='힌트버튼' onClick={modalFunction.toggleFaqModal} />
-			<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
-		</Wrapper>
+		<Layout>
+			<Wrapper>
+				<BlockTop>
+					<TopContent>
+						<TextBoxTop>최종 보고서</TextBoxTop>
+						<TextBoxMiddle>
+							최종보고서를 작성하기 위해 마무리 영상을 시청해주세요.
+						</TextBoxMiddle>
+						<TextBoxBottom>
+							지금까지 EY한영 아그작교실 프로젝트를 통해 4차산업혁명기술을 활용하여
+							사회문제를 해결하는 상품을 개발해 보았습니다.
+							<br /> 최종보고서를 작성하기위해 영상을 시청한 후 최종보고서를 작성하여
+							제출해 주시기 바랍니다.
+							<br />
+							<span style={{ color: "#686868" }}>
+								*영상시청이 완료되어야 최종보고서를 제출할 수 있습니다. 최종보고서
+								제출이 완료되어야 모든 미션이 종료된 것입니다.
+							</span>
+						</TextBoxBottom>
+					</TopContent>
+				</BlockTop>
+				<BlockBottom>
+					<BottomContent>
+						<VideoArea>
+							<ReactPlayer
+								url={MediaSecretCodeAnswer.endingMedia}
+								width='100%'
+								height='100%'
+								onProgress={handleProgree}
+							/>
+						</VideoArea>
+						{changeBtn ? (
+							<FinalReportBtnActive
+								text='최종보고서 제출하기'
+								style={{
+									width: "148px",
+									height: "40px",
+									marginLeft: "796px",
+									marginTop: "14px",
+								}}
+								onClick={() => {
+									alert("링크가기");
+								}}
+							/>
+						) : (
+							<FinalReportBtn
+								text='최종보고서 제출하기'
+								style={{
+									width: "148px",
+									height: "40px",
+									marginLeft: "796px",
+									marginTop: "14px",
+								}}
+							/>
+						)}
+					</BottomContent>
+				</BlockBottom>
+				{isOpen && (
+					<ModalWrapper>
+						<ModalArea>
+							<HelpModal modalFunction={modalFunction} />
+						</ModalArea>
+					</ModalWrapper>
+				)}
+				{faqModal && (
+					<ModalWrapperFaq>
+						<ModalAreaFaq>
+							<CloseDiv
+								src={close}
+								alt='닫기버튼'
+								onClick={modalFunction.toggleFaqModal}
+							/>
+							<TextDiv>* 이곳에 써주세요.</TextDiv>
+						</ModalAreaFaq>
+					</ModalWrapperFaq>
+				)}
+				<Footer />
+				<FaqBtn
+					src={btnFaq}
+					alt='힌트버튼'
+					onClick={modalFunction.toggleFaqModal}
+				/>
+				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
+			</Wrapper>
+		</Layout>
 	);
 };
 
@@ -157,7 +163,9 @@ const ModalArea = styled.div`
 	bottom: 122px;
 	right: 114px;
 `;
-
+const Layout = styled.div`
+	width: 100%;
+`;
 const Wrapper = styled.div`
 	/* background: lightgreen; */
 	min-width: 1024px;

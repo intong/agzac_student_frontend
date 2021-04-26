@@ -9,7 +9,7 @@ const Mission2MobilePresenter = ({
 	mobileFunctionList,
 }) => {
 	return (
-		<>
+		<Layout>
 			<Wrapper>
 				<ProcessArea>
 					<CircleDiv>
@@ -90,10 +90,12 @@ const Mission2MobilePresenter = ({
 					</ButtonDiv>
 				</BottomContent>
 			</Wrapper>
-		</>
+		</Layout>
 	);
 };
-
+const Layout = styled.div`
+	width: 100%;
+`;
 const Wrapper = styled.div`
 	width: 100vw;
 	overflow-x: hidden;

@@ -29,188 +29,194 @@ const Mission1Presenter = ({
 	answerFunctionList,
 }) => {
 	return (
-		<Wrapper>
-			<BlockTop>
-				<TopContent>
-					<TextBoxTop>Mission 01</TextBoxTop>
-					<TextBoxMiddle>
-						4차산업혁명과 관련된 미래인재 정보를 획득해 보세요.
-					</TextBoxMiddle>
-					<TextBoxBottom>
-						4차산업혁명과 동시에 인간의 삶은 많은 영역에서 변화가 시작되었습니다.
-						변화에 따라 다양한 직업이 사라지거나 새롭게 생겨났습니다. 지금부터
-						여러분은 제시된 미래인재의 정보와 직업이름을 매칭하여 완벽한 정보를
-						획득해야 합니다. 우측 하단의 💡표시를 눌러 직업이름을 확인하여 정확한
-						미래인재 정보를 획득해보세요!
-					</TextBoxBottom>
-				</TopContent>
-			</BlockTop>
-			<BlockBottom>
-				<BottomContent>
-					<LeftBlock>
-						<TextBoxBottomTitle>미래인재 정보</TextBoxBottomTitle>
-						<CardBlock>
-							{missionQuestion && (
-								<>
-									<CardContainer>
-										{answerResult ? (
-											<img
-												src={jobCards[answerMissionCards].imgUrl}
-												alt=''
-												style={{ widht: "270px", height: "336px", objectFit: "cover" }}
-											/>
-										) : (
-											<img
-												src={group}
-												alt=''
-												style={{ widht: "270px", height: "336px", objectFit: "cover" }}
-											/>
-										)}
-									</CardContainer>
-									<ExplainContainer>
-										<TitleTodo>하는일</TitleTodo>
-										<ExplainTodo>{missionQuestion[index - 1].todo}</ExplainTodo>
-										<BarUnder />
-										<TitleInterview>인터뷰</TitleInterview>
-										<ExplainInterview>
-											{missionQuestion[index - 1].interview}
-										</ExplainInterview>
-										<BarUnder />
-										<TitleSubject>학과</TitleSubject>
-										<ExplainSubject>{missionQuestion[index - 1].subject}</ExplainSubject>
-									</ExplainContainer>
-								</>
-							)}
-						</CardBlock>
-					</LeftBlock>
-					<RightBlock>
-						<TextBoxBottomTitle>직업이름 매칭</TextBoxBottomTitle>
-						<RightBox>
-							{/*오른쪽 정답화면 교체*/}
-							{answerResult === true ? (
-								<Answer2Correct
-									index={index}
-									modalFunction={modalFunction}
-									answerFunctionList={answerFunctionList}
-								/>
-							) : (
-								<Answer1Default
-									index={index}
-									answerInputText={answerInputText}
-									setProcessFunction={setProcessFunction}
-									answerFunctionList={answerFunctionList}
-									wrong={answerResult}
-								/>
-							)}
-						</RightBox>
-					</RightBlock>
-				</BottomContent>
-				<ProgressWrpper>
-					<Progress>
-						<ProgressBackground></ProgressBackground>
-						<ProgressValue
-							processPercentage={Math.floor((index / 16) * 100)}
-						></ProgressValue>
-					</Progress>
-					<ProcessBarLabel>
-						<LabelText>미래인재 매칭 달성도</LabelText>
-						<LaberPercent>
-							<span
-								style={{
-									fontFamily: "NotoSansCJKkr",
-									fontSize: "18px",
-									fontWeight: "bold",
-									lineHeight: "1.11",
-									color: "#0f0f15",
-								}}
-							>
-								{Math.floor((index / 16) * 100)}
-							</span>
-							&nbsp;%
-						</LaberPercent>
-					</ProcessBarLabel>
-				</ProgressWrpper>
-			</BlockBottom>
-			{/* 잡카드 모달 */}
-			{isOpen && (
-				<ModalWrapper>
-					<ModalArea>
-						<HelpModal modalFunction={modalFunction} />
-					</ModalArea>
-				</ModalWrapper>
-			)}
-			{/* 도움말 모달 */}
-			{faqModal && (
-				<ModalWrapper>
-					<ModalAreaFaq>
-						<CloseDiv
-							src={close}
-							alt='닫기버튼'
-							onClick={modalFunction.toggleFaqModal}
-						/>
-						<TextDiv>
-							이미지를 클릭하시면 직업에 대한 아미봇의 설명을 들을 수 있습니다.
-						</TextDiv>
-						<HelpArea></HelpArea>
-						<TextDiv1>
-							가려진 직업의 하는일과 인터뷰를 읽고 직업의 이름을 맞춰주세요.
-						</TextDiv1>
-						<HelpArea1></HelpArea1>
-						<TextDiv2>
-							전구 모양을 클릭하시면 16가지의 미래직업 이름을 알 수 있습니다.
-						</TextDiv2>
-						<HelpArea2></HelpArea2>
-					</ModalAreaFaq>
-				</ModalWrapper>
-			)}
-			<Footer />
+		<Layout>
+			<Wrapper>
+				<BlockTop>
+					<TopContent>
+						<TextBoxTop>Mission 01</TextBoxTop>
+						<TextBoxMiddle>
+							4차산업혁명과 관련된 미래인재 정보를 획득해 보세요.
+						</TextBoxMiddle>
+						<TextBoxBottom>
+							4차산업혁명과 동시에 인간의 삶은 많은 영역에서 변화가 시작되었습니다.
+							변화에 따라 다양한 직업이 사라지거나 새롭게 생겨났습니다. 지금부터
+							여러분은 제시된 미래인재의 정보와 직업이름을 매칭하여 완벽한 정보를
+							획득해야 합니다. 우측 하단의 💡표시를 눌러 직업이름을 확인하여 정확한
+							미래인재 정보를 획득해보세요!
+						</TextBoxBottom>
+					</TopContent>
+				</BlockTop>
+				<BlockBottom>
+					<BottomContent>
+						<LeftBlock>
+							<TextBoxBottomTitle>미래인재 정보</TextBoxBottomTitle>
+							<CardBlock>
+								{missionQuestion && (
+									<>
+										<CardContainer>
+											{answerResult ? (
+												<img
+													src={jobCards[answerMissionCards].imgUrl}
+													alt=''
+													style={{ widht: "270px", height: "336px", objectFit: "cover" }}
+												/>
+											) : (
+												<img
+													src={group}
+													alt=''
+													style={{ widht: "270px", height: "336px", objectFit: "cover" }}
+												/>
+											)}
+										</CardContainer>
+										<ExplainContainer>
+											<TitleTodo>하는일</TitleTodo>
+											<ExplainTodo>{missionQuestion[index - 1].todo}</ExplainTodo>
+											<BarUnder />
+											<TitleInterview>인터뷰</TitleInterview>
+											<ExplainInterview>
+												{missionQuestion[index - 1].interview}
+											</ExplainInterview>
+											<BarUnder />
+											<TitleSubject>학과</TitleSubject>
+											<ExplainSubject>{missionQuestion[index - 1].subject}</ExplainSubject>
+										</ExplainContainer>
+									</>
+								)}
+							</CardBlock>
+						</LeftBlock>
+						<RightBlock>
+							<TextBoxBottomTitle>직업이름 매칭</TextBoxBottomTitle>
+							<RightBox>
+								{/*오른쪽 정답화면 교체*/}
+								{answerResult === true ? (
+									<Answer2Correct
+										index={index}
+										modalFunction={modalFunction}
+										answerFunctionList={answerFunctionList}
+									/>
+								) : (
+									<Answer1Default
+										index={index}
+										answerInputText={answerInputText}
+										setProcessFunction={setProcessFunction}
+										answerFunctionList={answerFunctionList}
+										wrong={answerResult}
+									/>
+								)}
+							</RightBox>
+						</RightBlock>
+					</BottomContent>
+					<ProgressWrpper>
+						<Progress>
+							<ProgressBackground></ProgressBackground>
+							<ProgressValue
+								processPercentage={Math.floor((index / 16) * 100)}
+							></ProgressValue>
+						</Progress>
+						<ProcessBarLabel>
+							<LabelText>미래인재 매칭 달성도</LabelText>
+							<LaberPercent>
+								<span
+									style={{
+										fontFamily: "NotoSansCJKkr",
+										fontSize: "18px",
+										fontWeight: "bold",
+										lineHeight: "1.11",
+										color: "#0f0f15",
+									}}
+								>
+									{Math.floor((index / 16) * 100)}
+								</span>
+								&nbsp;%
+							</LaberPercent>
+						</ProcessBarLabel>
+					</ProgressWrpper>
+				</BlockBottom>
+				{/* 잡카드 모달 */}
+				{isOpen && (
+					<ModalWrapper>
+						<ModalArea>
+							<HelpModal modalFunction={modalFunction} />
+						</ModalArea>
+					</ModalWrapper>
+				)}
+				{/* 도움말 모달 */}
+				{faqModal && (
+					<ModalWrapper>
+						<ModalAreaFaq>
+							<CloseDiv
+								src={close}
+								alt='닫기버튼'
+								onClick={modalFunction.toggleFaqModal}
+							/>
+							<TextDiv>
+								이미지를 클릭하시면 직업에 대한 아미봇의 설명을 들을 수 있습니다.
+							</TextDiv>
+							<HelpArea></HelpArea>
+							<TextDiv1>
+								가려진 직업의 하는일과 인터뷰를 읽고 직업의 이름을 맞춰주세요.
+							</TextDiv1>
+							<HelpArea1></HelpArea1>
+							<TextDiv2>
+								전구 모양을 클릭하시면 16가지의 미래직업 이름을 알 수 있습니다.
+							</TextDiv2>
+							<HelpArea2></HelpArea2>
+						</ModalAreaFaq>
+					</ModalWrapper>
+				)}
+				<Footer />
 
-			{/* 임시저장하기 모달 */}
-			{modalState.saveModalOpen && (
-				<ModalWrapper>
-					<ModalAreaSave>
-						<ModalBaseTwoBtn
-							header='임시 저장 하기'
-							content='지금까 입력한 정보가 저장 됩니다.'
-							confirmbtntext='확인'
-							cancelbtntext='취소'
-							cancelbtnEvent={modalFunction.toggleSaveModal}
-							closeModalEvent={modalFunction.toggleSaveModal}
-							confirmbtnEvent={modalFunction.modalConfimBtnEvent}
-						/>
-					</ModalAreaSave>
-				</ModalWrapper>
-			)}
-			{/* 문제 풀기 전 영상 플레이 모달 */}
-			{prevMedia && (
-				<ModalWrapper>
-					<ModalPrevNextMediaArea>
-						<CloseBtn src={close} onClick={modalFunction.togglePrevMediaModal} />
-						<ReactPlayer
-							url={missionQuestion && missionQuestion[index - 1].prev}
-							width='100%'
-							height='100%'
-						/>
-					</ModalPrevNextMediaArea>
-				</ModalWrapper>
-			)}
+				{/* 임시저장하기 모달 */}
+				{modalState.saveModalOpen && (
+					<ModalWrapper>
+						<ModalAreaSave>
+							<ModalBaseTwoBtn
+								header='임시 저장 하기'
+								content='지금까 입력한 정보가 저장 됩니다.'
+								confirmbtntext='확인'
+								cancelbtntext='취소'
+								cancelbtnEvent={modalFunction.toggleSaveModal}
+								closeModalEvent={modalFunction.toggleSaveModal}
+								confirmbtnEvent={modalFunction.modalConfimBtnEvent}
+							/>
+						</ModalAreaSave>
+					</ModalWrapper>
+				)}
+				{/* 문제 풀기 전 영상 플레이 모달 */}
+				{prevMedia && (
+					<ModalWrapper>
+						<ModalPrevNextMediaArea>
+							<CloseBtn src={close} onClick={modalFunction.togglePrevMediaModal} />
+							<ReactPlayer
+								url={missionQuestion && missionQuestion[index - 1].prev}
+								width='100%'
+								height='100%'
+							/>
+						</ModalPrevNextMediaArea>
+					</ModalWrapper>
+				)}
 
-			{/* 문제 푼 후 영상 플레이 모달 */}
-			{nextMedia && (
-				<ModalWrapper>
-					<ModalPrevNextMediaArea>
-						<CloseBtn src={close} onClick={modalFunction.toggleNextMediaModal} />
-						<ReactPlayer
-							url={missionQuestion && missionQuestion[index - 1].next}
-							width='100%'
-							height='100%'
-						/>
-					</ModalPrevNextMediaArea>
-				</ModalWrapper>
-			)}
-			<FaqBtn src={btnFaq} alt='힌트버튼' onClick={modalFunction.toggleFaqModal} />
-			<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
-		</Wrapper>
+				{/* 문제 푼 후 영상 플레이 모달 */}
+				{nextMedia && (
+					<ModalWrapper>
+						<ModalPrevNextMediaArea>
+							<CloseBtn src={close} onClick={modalFunction.toggleNextMediaModal} />
+							<ReactPlayer
+								url={missionQuestion && missionQuestion[index - 1].next}
+								width='100%'
+								height='100%'
+							/>
+						</ModalPrevNextMediaArea>
+					</ModalWrapper>
+				)}
+				<FaqBtn
+					src={btnFaq}
+					alt='힌트버튼'
+					onClick={modalFunction.toggleFaqModal}
+				/>
+				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
+			</Wrapper>
+		</Layout>
 	);
 };
 
@@ -372,7 +378,9 @@ const LabelText = styled.div`
 	color: #0f0f15;
 `;
 const LaberPercent = styled.div``;
-
+const Layout = styled.div`
+	width: 100%;
+`;
 const Wrapper = styled.div`
 	min-width: 1024px;
 	max-width: 1920px;

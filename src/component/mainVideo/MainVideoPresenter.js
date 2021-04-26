@@ -30,7 +30,7 @@ const MainVideoPresenter = ({
 	functionList,
 }) => {
 	return (
-		<>
+		<Layout>
 			{mediaAndSecretCode && (
 				<Wrapper>
 					<BlockTop>
@@ -138,7 +138,7 @@ const MainVideoPresenter = ({
 			) : (
 				<></>
 			)}
-		</>
+		</Layout>
 	);
 };
 
@@ -156,6 +156,9 @@ const ModalArea = styled.div`
 	margin: auto;
 `;
 
+const Layout = styled.div`
+	width: 100%;
+`;
 const Wrapper = styled.div`
 	/* background: lightgreen; */
 	min-width: 1024px;

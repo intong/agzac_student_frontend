@@ -28,156 +28,163 @@ const Mission3Presenter = ({
 	modalFunction,
 }) => {
 	return (
-		<Wrapper faqModal={faqModal}>
-			<BlockTop>
-				<TopContent>
-					<TextBoxTop>Mission 03</TextBoxTop>
-					<TextBoxMiddle>사회 문제를 발견해 주세요!</TextBoxMiddle>
-					<TextBoxBottom>
-						지금부터는 우리에게 일어나고 있거나, 미래에 일어날 다양한 사회문제들을
-						찾아보고 분석하는 작업을 진행할 것입니다. 우리 기업이 해결하고자 하는
-						사회문제를 찾아보고 분석해봅시다! 제시된 사회문제 테마 3가지 중 1가지를
-						선택하여 관련 영상을 시청하고, 선택한 사회문제와 관련된 키워드를
-						찾아주세요!
-					</TextBoxBottom>
-				</TopContent>
-			</BlockTop>
-			<BlockBottom>
-				<BottomContent>
-					<Title>사회문제 선정하고 분석하기</Title>
-					<SubTitle>
-						{choosed
-							? "선택한 사회문제를 분석해 주세요."
-							: "사회문제 설명영상을 시청한 후 우리 기업이 해결하고 싶은 사회문제 테마 1가지를 최종 선택해주세요."}
-					</SubTitle>
-					<Tabs>
-						<Tab1
-							selectTab={selectTab}
-							onClick={() =>
-								choosed === false && uiFunctionList.tabSelectFunction("tab1")
-							}
-						>
-							<div
-								style={{
-									width: "20px",
-									height: "20px",
-									position: "absolute",
-									top: "15px",
-									left: "80px",
-								}}
+		<Layout>
+			<Wrapper faqModal={faqModal}>
+				<BlockTop>
+					<TopContent>
+						<TextBoxTop>Mission 03</TextBoxTop>
+						<TextBoxMiddle>사회 문제를 발견해 주세요!</TextBoxMiddle>
+						<TextBoxBottom>
+							지금부터는 우리에게 일어나고 있거나, 미래에 일어날 다양한 사회문제들을
+							찾아보고 분석하는 작업을 진행할 것입니다. 우리 기업이 해결하고자 하는
+							사회문제를 찾아보고 분석해봅시다! 제시된 사회문제 테마 3가지 중 1가지를
+							선택하여 관련 영상을 시청하고, 선택한 사회문제와 관련된 키워드를
+							찾아주세요!
+						</TextBoxBottom>
+					</TopContent>
+				</BlockTop>
+				<BlockBottom>
+					<BottomContent>
+						<Title>사회문제 선정하고 분석하기</Title>
+						<SubTitle>
+							{choosed
+								? "선택한 사회문제를 분석해 주세요."
+								: "사회문제 설명영상을 시청한 후 우리 기업이 해결하고 싶은 사회문제 테마 1가지를 최종 선택해주세요."}
+						</SubTitle>
+						<Tabs>
+							<Tab1
+								selectTab={selectTab}
+								onClick={() =>
+									choosed === false && uiFunctionList.tabSelectFunction("tab1")
+								}
 							>
-								<img src={selectTab === "tab1" ? checked : unchecked} alt='체크버튼' />
-							</div>
-							<Tab1Title selectTab={selectTab}>기후변화와 환경</Tab1Title>
-						</Tab1>
-						<Tab2
-							selectTab={selectTab}
-							onClick={() =>
-								choosed === false && uiFunctionList.tabSelectFunction("tab2")
-							}
-						>
-							<div
-								style={{
-									width: "20px",
-									height: "20px",
-									position: "absolute",
-									top: "15px",
-									left: "95px",
-								}}
+								<div
+									style={{
+										width: "20px",
+										height: "20px",
+										position: "absolute",
+										top: "15px",
+										left: "80px",
+									}}
+								>
+									<img src={selectTab === "tab1" ? checked : unchecked} alt='체크버튼' />
+								</div>
+								<Tab1Title selectTab={selectTab}>기후변화와 환경</Tab1Title>
+							</Tab1>
+							<Tab2
+								selectTab={selectTab}
+								onClick={() =>
+									choosed === false && uiFunctionList.tabSelectFunction("tab2")
+								}
 							>
-								<img src={selectTab === "tab2" ? checked : unchecked} alt='미체크' />
-							</div>
-							<Tab2Title selectTab={selectTab}>고령화 사회</Tab2Title>
-						</Tab2>
-						<Tab3
-							selectTab={selectTab}
-							onClick={() =>
-								choosed === false && uiFunctionList.tabSelectFunction("tab3")
-							}
-						>
-							<div
-								style={{
-									width: "20px",
-									height: "20px",
-									position: "absolute",
-									top: "15px",
-									left: "97px",
-								}}
+								<div
+									style={{
+										width: "20px",
+										height: "20px",
+										position: "absolute",
+										top: "15px",
+										left: "95px",
+									}}
+								>
+									<img src={selectTab === "tab2" ? checked : unchecked} alt='미체크' />
+								</div>
+								<Tab2Title selectTab={selectTab}>고령화 사회</Tab2Title>
+							</Tab2>
+							<Tab3
+								selectTab={selectTab}
+								onClick={() =>
+									choosed === false && uiFunctionList.tabSelectFunction("tab3")
+								}
 							>
-								<img src={selectTab === "tab3" ? checked : unchecked} alt='체크버튼' />
-							</div>
-							<Tab3Title selectTab={selectTab}>재난과 안전</Tab3Title>
-						</Tab3>
-					</Tabs>
-					<Default
-						setProcessFunction={setProcessFunction}
-						selectTabContent={selectTabContent}
-						choosed={choosed}
-						firstAnswer={firstAnswer}
-						secondAnswer={secondAnswer}
-						thirdAnswer={thirdAnswer}
-						firstInputText={firstInputText}
-						secondsInputText={secondsInputText}
-						thirdInputText={thirdInputText}
-						uiFunctionList={uiFunctionList}
-					/>
-					{choosed === false && (
-						<ButtonPrimary
-							text='사회문제 최종선택'
-							style={{
-								width: "135px",
-								height: "40px",
-								position: "absolute",
-								bottom: "29px",
-								right: "0px",
-							}}
-							onClick={uiFunctionList.clickFinalChoice}
+								<div
+									style={{
+										width: "20px",
+										height: "20px",
+										position: "absolute",
+										top: "15px",
+										left: "97px",
+									}}
+								>
+									<img src={selectTab === "tab3" ? checked : unchecked} alt='체크버튼' />
+								</div>
+								<Tab3Title selectTab={selectTab}>재난과 안전</Tab3Title>
+							</Tab3>
+						</Tabs>
+						<Default
+							setProcessFunction={setProcessFunction}
+							selectTabContent={selectTabContent}
+							choosed={choosed}
+							firstAnswer={firstAnswer}
+							secondAnswer={secondAnswer}
+							thirdAnswer={thirdAnswer}
+							firstInputText={firstInputText}
+							secondsInputText={secondsInputText}
+							thirdInputText={thirdInputText}
+							uiFunctionList={uiFunctionList}
 						/>
-					)}
-				</BottomContent>
-			</BlockBottom>
-			{/* 잡카드 모달 */}
-			{isOpen && (
-				<ModalWrapper>
-					<ModalArea>
-						<HelpModal modalFunction={modalFunction} />
-					</ModalArea>
-				</ModalWrapper>
-			)}
-			{/* 도움말 모달 */}
-			{faqModal && (
-				<ModalWrapperFaq>
-					<ModalAreaFaq>
-						<CloseDiv
-							src={close}
-							alt='닫기버튼'
-							onClick={modalFunction.toggleFaqModal}
-						/>
-						<TextDiv>
-							3가지 사회문제의 영상을 시청하시고 해결하고자하는 사회문제를 선택해주세요
-						</TextDiv>
-						<HelpArea></HelpArea>
-					</ModalAreaFaq>
-				</ModalWrapperFaq>
-			)}
-			{modalState.saveModalOpen && (
-				<ModalWrapperSave>
-					<ModalAreaSave>
-						<ModalBaseTwoBtn
-							header='임시 저장 하기'
-							content='지금까 입력한 정보가 저장 됩니다.'
-							confirmbtntext='확인'
-							cancelbtntext='취소'
-							confirmbtnEvent={modalFunction.handleSaveModalConfirmBtn}
-							cancelbtnEvent={modalFunction.toggleSaveModal}
-						/>
-					</ModalAreaSave>
-				</ModalWrapperSave>
-			)}
-			<Footer />
-			<FaqBtn src={btnFaq} alt='힌트버튼' onClick={modalFunction.toggleFaqModal} />
-			<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
-		</Wrapper>
+						{choosed === false && (
+							<ButtonPrimary
+								text='사회문제 최종선택'
+								style={{
+									width: "135px",
+									height: "40px",
+									position: "absolute",
+									bottom: "29px",
+									right: "0px",
+								}}
+								onClick={uiFunctionList.clickFinalChoice}
+							/>
+						)}
+					</BottomContent>
+				</BlockBottom>
+				{/* 잡카드 모달 */}
+				{isOpen && (
+					<ModalWrapper>
+						<ModalArea>
+							<HelpModal modalFunction={modalFunction} />
+						</ModalArea>
+					</ModalWrapper>
+				)}
+				{/* 도움말 모달 */}
+				{faqModal && (
+					<ModalWrapperFaq>
+						<ModalAreaFaq>
+							<CloseDiv
+								src={close}
+								alt='닫기버튼'
+								onClick={modalFunction.toggleFaqModal}
+							/>
+							<TextDiv>
+								3가지 사회문제의 영상을 시청하시고 해결하고자하는 사회문제를
+								선택해주세요
+							</TextDiv>
+							<HelpArea></HelpArea>
+						</ModalAreaFaq>
+					</ModalWrapperFaq>
+				)}
+				{modalState.saveModalOpen && (
+					<ModalWrapperSave>
+						<ModalAreaSave>
+							<ModalBaseTwoBtn
+								header='임시 저장 하기'
+								content='지금까 입력한 정보가 저장 됩니다.'
+								confirmbtntext='확인'
+								cancelbtntext='취소'
+								confirmbtnEvent={modalFunction.handleSaveModalConfirmBtn}
+								cancelbtnEvent={modalFunction.toggleSaveModal}
+							/>
+						</ModalAreaSave>
+					</ModalWrapperSave>
+				)}
+				<Footer />
+				<FaqBtn
+					src={btnFaq}
+					alt='힌트버튼'
+					onClick={modalFunction.toggleFaqModal}
+				/>
+				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
+			</Wrapper>
+		</Layout>
 	);
 };
 
@@ -252,7 +259,9 @@ const ModalArea = styled.div`
 	bottom: 122px;
 	right: 114px;
 `;
-
+const Layout = styled.div`
+	width: 100%;
+`;
 const Wrapper = styled.div`
 	/* background: lightgreen; */
 	min-width: 1024px;

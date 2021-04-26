@@ -27,167 +27,172 @@ const Header = ({ match }) => {
 		color: "#ffc300",
 	};
 	return (
-		<Wrapper>
-			<Block>
-				<ULStyled>
+		<Layout>
+			<Wrapper>
+				<Block>
+					<ULStyled>
+						<div
+							style={{
+								fontSize: "14px",
+								color: "#ffffff",
+							}}
+						>
+							{sessionStorage.getItem("user")}님의 아그작 기업 보고서
+						</div>
+						<img src={devide} alt='분단기호' style={{ marginTop: "-3px" }} />
+						<LIStyled>
+							<NavLinkStyled1
+								to='/'
+								exact={true}
+								activeStyle={activeStyle}
+								confirm={state.video} // css 글자색상 변경 state
+							>
+								EY한영 아그작교실 영상시청
+							</NavLinkStyled1>
+						</LIStyled>
+						<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
+						<LIStyled>
+							<NavLinkStyled2
+								to={`/mission1/${state.index}`}
+								exact={true}
+								activeStyle={activeStyle}
+								confirm={state.mission1} // css 글자색상 변경 state
+								onClick={(e) => {
+									if (state.video !== "ok") {
+										e.preventDefault();
+										alert("EY한영 아그작교실 영상시청을 완료해 주세요");
+									}
+								}}
+							>
+								Mission01
+							</NavLinkStyled2>
+						</LIStyled>
+						<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
+						<LIStyled>
+							<NavLinkStyled3
+								to={`/mission2/${state.mission2Index}`}
+								exact={true}
+								activeStyle={activeStyle}
+								confirm={state.mission2} // css 글자색상 변경 state
+								onClick={(e) => {
+									if (state.mission1 !== "ok") {
+										e.preventDefault();
+										alert("Mission1 을 완료해 주세요");
+									}
+								}}
+							>
+								Mission02
+							</NavLinkStyled3>
+						</LIStyled>
+						<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
+						<LIStyled>
+							{/* {console.log(state.mission4Index)} */}
+							<NavLinkStyled4
+								to={`/mission3/${state.mission3Index}`}
+								exact={true}
+								activeStyle={activeStyle}
+								confirm={state.mission3} // css 글자색상 변경 state
+								onClick={(e) => {
+									if (state.mission2 !== "ok") {
+										e.preventDefault();
+										alert("Mission2 을 완료해 주세요");
+									}
+								}}
+							>
+								Mission03
+							</NavLinkStyled4>
+						</LIStyled>
+						<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
+						<LIStyled>
+							<NavLinkStyled5
+								to={`/mission4/${state.mission4Index}`}
+								exact={true}
+								activeStyle={activeStyle}
+								confirm={state.mission4} // css 글자색상 변경 state
+								onClick={(e) => {
+									if (state.mission3 !== "ok") {
+										e.preventDefault();
+										alert("Mission3 을 완료해 주세요");
+									}
+								}}
+							>
+								Mission04
+							</NavLinkStyled5>
+						</LIStyled>
+						<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
+						<LIStyled>
+							<NavLinkStyled6
+								to='/finalreport'
+								exact={true}
+								activeStyle={activeStyle}
+								onClick={(e) => {
+									if (state.mission4 !== "ok") {
+										e.preventDefault();
+										alert("Mission4 을 완료해 주세요");
+									}
+								}}
+							>
+								최종보고서
+							</NavLinkStyled6>
+						</LIStyled>
+					</ULStyled>
+				</Block>
+				<BtnsBlock>
+					<img
+						src={tempSave}
+						alt='임시저장'
+						style={{ width: "24px", height: "24px", marginRight: "4px" }}
+						onClick={() => {
+							modalActions.setSaveModalOpen(!modalState.saveModalOpen);
+						}}
+					/>
 					<div
 						style={{
+							width: "52px",
+							height: "20px",
 							fontSize: "14px",
+							lineHeight: "23px",
+							fontFamily: "NotoSansCJKkr",
 							color: "#ffffff",
+							marginRight: "20px",
+						}}
+						onClick={() => {
+							modalActions.setSaveModalOpen(!modalState.saveModalOpen);
 						}}
 					>
-						{sessionStorage.getItem("user")}님의 아그작 기업 보고서
+						임시저장
 					</div>
-					<img src={devide} alt='분단기호' style={{ marginTop: "-3px" }} />
-					<LIStyled>
-						<NavLinkStyled1
-							to='/'
-							exact={true}
-							activeStyle={activeStyle}
-							confirm={state.video} // css 글자색상 변경 state
-						>
-							EY한영 아그작교실 영상시청
-						</NavLinkStyled1>
-					</LIStyled>
-					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
-					<LIStyled>
-						<NavLinkStyled2
-							to={`/mission1/${state.index}`}
-							exact={true}
-							activeStyle={activeStyle}
-							confirm={state.mission1} // css 글자색상 변경 state
-							onClick={(e) => {
-								if (state.video !== "ok") {
-									e.preventDefault();
-									alert("EY한영 아그작교실 영상시청을 완료해 주세요");
-								}
-							}}
-						>
-							Mission01
-						</NavLinkStyled2>
-					</LIStyled>
-					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
-					<LIStyled>
-						<NavLinkStyled3
-							to={`/mission2/${state.mission2Index}`}
-							exact={true}
-							activeStyle={activeStyle}
-							confirm={state.mission2} // css 글자색상 변경 state
-							onClick={(e) => {
-								if (state.mission1 !== "ok") {
-									e.preventDefault();
-									alert("Mission1 을 완료해 주세요");
-								}
-							}}
-						>
-							Mission02
-						</NavLinkStyled3>
-					</LIStyled>
-					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
-					<LIStyled>
-						{/* {console.log(state.mission4Index)} */}
-						<NavLinkStyled4
-							to={`/mission3/${state.mission3Index}`}
-							exact={true}
-							activeStyle={activeStyle}
-							confirm={state.mission3} // css 글자색상 변경 state
-							onClick={(e) => {
-								if (state.mission2 !== "ok") {
-									e.preventDefault();
-									alert("Mission2 을 완료해 주세요");
-								}
-							}}
-						>
-							Mission03
-						</NavLinkStyled4>
-					</LIStyled>
-					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
-					<LIStyled>
-						<NavLinkStyled5
-							to={`/mission4/${state.mission4Index}`}
-							exact={true}
-							activeStyle={activeStyle}
-							confirm={state.mission4} // css 글자색상 변경 state
-							onClick={(e) => {
-								if (state.mission3 !== "ok") {
-									e.preventDefault();
-									alert("Mission3 을 완료해 주세요");
-								}
-							}}
-						>
-							Mission04
-						</NavLinkStyled5>
-					</LIStyled>
-					<img src={nextBefor} alt='다음기호' style={{ marginTop: "-3px" }} />
-					<LIStyled>
-						<NavLinkStyled6
-							to='/finalreport'
-							exact={true}
-							activeStyle={activeStyle}
-							onClick={(e) => {
-								if (state.mission4 !== "ok") {
-									e.preventDefault();
-									alert("Mission4 을 완료해 주세요");
-								}
-							}}
-						>
-							최종보고서
-						</NavLinkStyled6>
-					</LIStyled>
-				</ULStyled>
-			</Block>
-			<BtnsBlock>
-				<img
-					src={tempSave}
-					alt='임시저장'
-					style={{ width: "24px", height: "24px", marginRight: "4px" }}
-					onClick={() => {
-						modalActions.setSaveModalOpen(!modalState.saveModalOpen);
-					}}
-				/>
-				<div
-					style={{
-						width: "52px",
-						height: "20px",
-						fontSize: "14px",
-						lineHeight: "23px",
-						fontFamily: "NotoSansCJKkr",
-						color: "#ffffff",
-						marginRight: "20px",
-					}}
-					onClick={() => {
-						modalActions.setSaveModalOpen(!modalState.saveModalOpen);
-					}}
-				>
-					임시저장
-				</div>
-				<img
-					src={leaveout}
-					alt='나가기버튼'
-					style={{ width: "24px", height: "24px", marginRight: "4px" }}
-					onClick={Logout}
-				/>
-				<div
-					style={{
-						width: "39px",
-						height: "20px",
-						fontSize: "14px",
-						lineHeight: "23px",
-						fontFamily: "NotoSansCJKkr",
-						color: "#ffffff",
-						marginRight: "12px",
-					}}
-					onClick={Logout}
-				>
-					나가기
-				</div>
-			</BtnsBlock>
-		</Wrapper>
+					<img
+						src={leaveout}
+						alt='나가기버튼'
+						style={{ width: "24px", height: "24px", marginRight: "4px" }}
+						onClick={Logout}
+					/>
+					<div
+						style={{
+							width: "39px",
+							height: "20px",
+							fontSize: "14px",
+							lineHeight: "23px",
+							fontFamily: "NotoSansCJKkr",
+							color: "#ffffff",
+							marginRight: "12px",
+						}}
+						onClick={Logout}
+					>
+						나가기
+					</div>
+				</BtnsBlock>
+			</Wrapper>
+		</Layout>
 	);
 };
 
 export default Header;
 
+const Layout = styled.div`
+	width: 100%;
+`;
 const Wrapper = styled.div`
 	background: #0f0f15;
 	min-width: 1024px;

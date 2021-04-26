@@ -53,7 +53,7 @@ const Mission4Presenter = ({
 	modalFunction,
 }) => {
 	return (
-		<>
+		<Layout>
 			<Wrapper>
 				<BlockTop>
 					<TopContent>
@@ -332,7 +332,7 @@ const Mission4Presenter = ({
 				/>
 				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 			</Wrapper>
-		</>
+		</Layout>
 	);
 };
 
@@ -406,7 +406,9 @@ const ModalArea = styled.div`
 	bottom: 122px;
 	right: 114px;
 `;
-
+const Layout = styled.div`
+	width: 100%;
+`;
 const Wrapper = styled.div`
 	min-width: 1024px;
 	max-width: 1920px;
