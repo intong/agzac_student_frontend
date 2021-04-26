@@ -179,19 +179,13 @@ const Mission4Container = ({ history, location, match }) => {
 			} else if (tab === "reason") {
 				// validation 체크 후 컨펌
 				const reason = getDevelopmentReason();
-				const result = await SaveData.save(7, reason);
-				if (result.data.ok) {
-					alert("저장되었습니다");
-				}
+				await SaveData.save(7, reason);
 				setConfirm({ ...confirm, reason: "ok" });
 				setSelectTab("developer");
 			} else if (tab === "developer") {
 				// validation 체크 후 컨펌
 				const role = getFutureHumanRole();
-				const result = await SaveData.save(8, role);
-				if (result.data.ok) {
-					alert("저장되었습니다.");
-				}
+				await SaveData.save(8, role);
 				setConfirm({ ...confirm, developer: "ok" });
 				setSelectTab("itemIntro");
 			} else if (tab === "itemIntro") {
@@ -199,7 +193,6 @@ const Mission4Container = ({ history, location, match }) => {
 				const item = getItemItro();
 				const result = await SaveData.save(9, item);
 				if (result.data.ok) {
-					alert("저장되었습니다.");
 					modalFunction.toggleProductNameModal(); // 상품이름 쓰는 모달 열기
 				}
 				setConfirm({ ...confirm, itemIntro: "ok" });
