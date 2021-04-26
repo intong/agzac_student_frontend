@@ -162,7 +162,7 @@ const Mission4Container = ({ history, location, match }) => {
 		choiceOtherSocialProblem: () => {
 			const ok = window.confirm("다른 사회 문제를 선택하겠습니까?");
 			if (ok) {
-				history.push(`/mission3/${state.mission3Index}`);
+				history.push(`/mission3Index/${state.mission3Index}`);
 			}
 		},
 		selectedTabFunction: (tab) => {
