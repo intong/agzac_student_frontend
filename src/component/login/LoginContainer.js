@@ -115,26 +115,34 @@ const LoginContainer = () => {
 			setPassword(e.target.value);
 		},
 		inputPassword: async () => {
-			const result2 = await Student.checkPassword(studentId, password);
-			if (result2.data.ok) {
-				sessionStorage.setItem("auth", result2.data.token);
-				sessionStorage.setItem("user", studentName);
-
-				modalFunction.toggleInputPasswordModal();
-				window.location.href = "/";
+			// password 입력 null 체크
+			if (password !== undefined && password !== null) {
+				const result2 = await Student.checkPassword(studentId, password);
+				if (result2.data.ok) {
+					sessionStorage.setItem("auth", result2.data.token);
+					sessionStorage.setItem("user", studentName);
+					modalFunction.toggleInputPasswordModal();
+					window.location.href = "/";
+				} else {
+					modalFunction.toggleInputPasswordModal();
+					modalFunction.toggleErrorModal();
+				}
 			} else {
-				modalFunction.toggleInputPasswordModal();
-				modalFunction.toggleErrorModal();
+				alert("비밀번호를 입력해 주세요.");
 			}
 		},
 		createPassword: async () => {
 			// 최초접속 && 임시저장데이터 없음
-			const result3 = await Student.createPassword(studentId, password);
-			if (result3.data.ok) {
-				sessionStorage.setItem("auth", result3.data.token);
-				sessionStorage.setItem("user", studentName);
-				modalFunction.toggleModal();
-				window.location.href = "/";
+			if (password !== undefined && password !== null) {
+				const result3 = await Student.createPassword(studentId, password);
+				if (result3.data.ok) {
+					sessionStorage.setItem("auth", result3.data.token);
+					sessionStorage.setItem("user", studentName);
+					modalFunction.toggleModal();
+					window.location.href = "/";
+				}
+			} else {
+				alert("비밀번호를 입력해 주세요");
 			}
 		},
 	};

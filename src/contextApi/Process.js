@@ -14,6 +14,7 @@ const ProcessContext = createContext({
 		mission2Index: 1, // default mission2 인덱스 변수
 		mission3Index: "category", // default mission3 인덱스 변수
 		mission4Index: "social", // default mission4 인덱스 변수
+		goFinal: "finalreport",
 	},
 	actions: {
 		setVideo: () => {},
@@ -28,6 +29,7 @@ const ProcessContext = createContext({
 		setMission2Index: () => {},
 		setMission3Index: () => {},
 		setMission4Index: () => {},
+		setGoFinal: () => {},
 	},
 });
 
@@ -44,6 +46,7 @@ const ProcessProvider = ({ children }) => {
 	const [mission2Index, setMission2Index] = useState(1);
 	const [mission3Index, setMission3Index] = useState("category");
 	const [mission4Index, setMission4Index] = useState("social");
+	const [goFinal, setGoFinal] = useState("finalreport");
 	const value = {
 		state: {
 			video,
@@ -58,6 +61,7 @@ const ProcessProvider = ({ children }) => {
 			mission2Index,
 			mission3Index,
 			mission4Index,
+			goFinal,
 		},
 		actions: {
 			setVideo,
@@ -72,6 +76,7 @@ const ProcessProvider = ({ children }) => {
 			setMission2Index,
 			setMission3Index,
 			setMission4Index,
+			setGoFinal,
 		},
 	};
 	return (

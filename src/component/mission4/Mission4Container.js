@@ -167,7 +167,7 @@ const Mission4Container = ({ history, location, match }) => {
 		},
 		selectedTabFunction: (tab) => {
 			setSelectTab(tab);
-			history.push = `/mission4/${tab}`;
+			history.push(`/mission4/${tab}`);
 		},
 		onClickNextFuction: async (tab) => {
 			if (tab === "social") {
