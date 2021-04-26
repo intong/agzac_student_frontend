@@ -9,7 +9,7 @@ const Mission2MobilePresenter = ({
 	mobileFunctionList,
 }) => {
 	return (
-		<Layout>
+		<LayOutContent>
 			<Wrapper>
 				<ProcessArea>
 					<CircleDiv>
@@ -90,16 +90,18 @@ const Mission2MobilePresenter = ({
 					</ButtonDiv>
 				</BottomContent>
 			</Wrapper>
-		</Layout>
+		</LayOutContent>
 	);
 };
-const Layout = styled.div`
-	width: 100%;
+
+const LayOutContent = styled.div`
+	width: 100vw;
 `;
 const Wrapper = styled.div`
 	width: 100vw;
 	overflow-x: hidden;
 	overflow-y: auto;
+	margin: 0 auto;
 `;
 const ProcessArea = styled.div`
 	background: #e4e4e4;

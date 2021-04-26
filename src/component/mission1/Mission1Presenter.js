@@ -29,7 +29,7 @@ const Mission1Presenter = ({
 	answerFunctionList,
 }) => {
 	return (
-		<Layout>
+		<LayOutContent>
 			<Wrapper>
 				<BlockTop>
 					<TopContent>
@@ -216,7 +216,7 @@ const Mission1Presenter = ({
 				/>
 				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 			</Wrapper>
-		</Layout>
+		</LayOutContent>
 	);
 };
 
@@ -378,8 +378,9 @@ const LabelText = styled.div`
 	color: #0f0f15;
 `;
 const LaberPercent = styled.div``;
-const Layout = styled.div`
-	width: 100%;
+
+const LayOutContent = styled.div`
+	width: 100vw;
 `;
 const Wrapper = styled.div`
 	min-width: 1024px;

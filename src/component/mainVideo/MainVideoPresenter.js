@@ -30,7 +30,7 @@ const MainVideoPresenter = ({
 	functionList,
 }) => {
 	return (
-		<Layout>
+		<LayOutContent>
 			{mediaAndSecretCode && (
 				<Wrapper>
 					<BlockTop>
@@ -138,7 +138,7 @@ const MainVideoPresenter = ({
 			) : (
 				<></>
 			)}
-		</Layout>
+		</LayOutContent>
 	);
 };
 
@@ -155,9 +155,8 @@ const ModalWrapper = styled.div`
 const ModalArea = styled.div`
 	margin: auto;
 `;
-
-const Layout = styled.div`
-	width: 100%;
+const LayOutContent = styled.div`
+	width: 100vw;
 `;
 const Wrapper = styled.div`
 	/* background: lightgreen; */
@@ -165,6 +164,7 @@ const Wrapper = styled.div`
 	max-width: 1920px;
 	overflow-x: hidden;
 	overflow-y: auto;
+	margin: 0 auto;
 `;
 
 const BlockTop = styled.div`

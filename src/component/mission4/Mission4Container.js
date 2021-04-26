@@ -310,7 +310,7 @@ const Mission4Container = ({ history, location, match }) => {
 				// 사회문석분석 탭에서 임시저장할 때
 				const question = getQuestion();
 				const result = await SaveData.save(6, question); // question api
-				alert(result);
+				console.log(result);
 			} else if (selectTab === "reason") {
 				// 상품개발이유에서 임시저장 할 때
 				const reason = getDevelopmentReason();
@@ -342,12 +342,16 @@ const Mission4Container = ({ history, location, match }) => {
 		if (location.state !== null && location.state !== undefined) {
 			// 임시저장 사용하기로 넘어올 경우
 			const data = location.state.data; //JSON 파싱이 안된 상태의 배열 tempSave 모든 데이터 원본 배열
+			// console.log(data);
+			const prevDateName = JSON.parse(location.state.data[5]);
+			const prevAnswerList = JSON.parse(location.state.data[6]);
 			const settingPrev = {
 				selectTabContent: {
-					name: JSON.parse(location.state.data.writtenData[5])[0],
+					name: prevDateName[0],
 				},
-				studentAnswerList: JSON.parse(location.state.data.writtenData[6]),
+				studentAnswerList: prevAnswerList,
 			};
+			console.log(settingPrev);
 			setPrevSelect(settingPrev);
 
 			// 사회문제 분석이 있는경우 [7]
@@ -530,8 +534,8 @@ const Mission4Container = ({ history, location, match }) => {
 
 	useEffect(() => {
 		// 미션3에서 진행에 이어서 미션4로 넘어올 경우
-		tempUse();
 		setPrevSelect(modalState.mission3Selected);
+		tempUse();
 	}, []);
 
 	return (

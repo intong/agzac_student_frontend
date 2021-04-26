@@ -28,7 +28,7 @@ const Mission3Presenter = ({
 	modalFunction,
 }) => {
 	return (
-		<Layout>
+		<LayOutContent>
 			<Wrapper faqModal={faqModal}>
 				<BlockTop>
 					<TopContent>
@@ -184,7 +184,7 @@ const Mission3Presenter = ({
 				/>
 				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 			</Wrapper>
-		</Layout>
+		</LayOutContent>
 	);
 };
 
@@ -259,15 +259,18 @@ const ModalArea = styled.div`
 	bottom: 122px;
 	right: 114px;
 `;
-const Layout = styled.div`
-	width: 100%;
+
+const LayOutContent = styled.div`
+	width: 100vw;
 `;
+
 const Wrapper = styled.div`
 	/* background: lightgreen; */
 	min-width: 1024px;
 	max-width: 1920px;
 	overflow-x: hidden;
 	overflow-y: auto;
+	margin: 0 auto;
 `;
 
 const BlockTop = styled.div`

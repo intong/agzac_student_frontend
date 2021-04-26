@@ -66,8 +66,8 @@ const MainVideoContainer = ({ history, location, match }) => {
 		},
 		// 임시저장한 Data 사용하기
 		useTempData: () => {
-			// console.log(state.saveTempData);
-			// console.log(state.saveTempData.length);
+			console.log(state.saveTempData);
+			console.log(state.saveTempData.length);
 			const path = state.saveTempData.length - 1;
 			if (path === 2) {
 				// console.log("영상시청");
