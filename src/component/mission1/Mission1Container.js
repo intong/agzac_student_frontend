@@ -91,11 +91,11 @@ const Mission1Container = ({ history, match, location }) => {
 			if (answerInputText === "") {
 				// alert("직업이름을 입력해 주세요.");
 			} else {
-				if (answerInputText === question[index - 1].title) {
+				const upperCaseText = answerInputText.toUpperCase();
+				if (upperCaseText === question[index - 1].title) {
 					// 정답일때,
-					console.log("105번줄", answerInputText);
-					setInputArray([...inputArray, answerInputText]); // 배열에 답 저장
-					answerFunctionList.findJobCards(answerInputText); // 카드 이미지 찾아오기
+					setInputArray([...inputArray, upperCaseText]); // 배열에 답 저장
+					answerFunctionList.findJobCards(upperCaseText); // 카드 이미지 찾아오기
 					setAnswerResult(true);
 					setAnswerInputText("");
 				} else {
@@ -155,8 +155,10 @@ const Mission1Container = ({ history, match, location }) => {
 		} else {
 			const params = sessionStorage.getItem("auth");
 			const result = await SaveData.getTempData(params);
+			console.log(result.data.writtenData[3]);
 			const data = JSON.parse(result.data.writtenData[3]);
-			setInputArray(data);
+			console.log(data);
+			setInputArray(inputArray);
 		}
 	};
 

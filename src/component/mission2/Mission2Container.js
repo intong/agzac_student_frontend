@@ -108,23 +108,25 @@ const Mission2Container = ({ history, match, location }) => {
 		checkAnswer: () => {
 			const one = document.getElementById("futureOne").innerHTML;
 			const two = document.getElementById("futureTwo").innerHTML;
-			if (one === "선택" || two === "선택") {
+			const upperOne = one.toUpperCase();
+			const upperTwo = two.toUpperCase();
+			if (upperOne === "선택" || upperTwo === "선택") {
 				alert("미래인재를 선택해 주세요.");
-			} else if (one === two) {
+			} else if (upperOne === upperTwo) {
 				alert("같은 미래인재를 선택했습니다.");
 			} else {
 				setNormal(false);
-				if (answerFunctionList.hasAnswer(one).bool) {
-					makeInputArray(one);
+				if (answerFunctionList.hasAnswer(upperOne).bool) {
+					makeInputArray(upperOne);
 					setCorrectFirst(true);
-					setFirstFeedback(answerFunctionList.hasAnswer(one).feedback);
+					setFirstFeedback(answerFunctionList.hasAnswer(upperOne).feedback);
 				} else {
 					setCorrectFirst(false);
 				}
-				if (answerFunctionList.hasAnswer(two).bool) {
-					makeInputArray(two);
+				if (answerFunctionList.hasAnswer(upperTwo).bool) {
+					makeInputArray(upperTwo);
 					setCorrectSeconds(true);
-					setSecondFeedback(answerFunctionList.hasAnswer(two).feedback);
+					setSecondFeedback(answerFunctionList.hasAnswer(upperTwo).feedback);
 				} else {
 					setCorrectSeconds(false);
 				}
@@ -176,13 +178,13 @@ const Mission2Container = ({ history, match, location }) => {
 
 	// contextApi의 임시저장된 데이터 사용하기
 	const tempUse = async () => {
-		console.log(location.state);
+		// console.log(location.state);
 		if (location.state !== null && location.state !== undefined) {
 			setInputArray(location.state.data);
 		} else {
 			const params = sessionStorage.getItem("auth");
-			const result = await SaveData.getTempData(params);
-			console.log(result.data.writtenData[4]);
+			await SaveData.getTempData(params);
+			setIndex(state.mission2Index);
 			setInputArray(inputArray);
 		}
 	};
@@ -194,6 +196,7 @@ const Mission2Container = ({ history, match, location }) => {
 	}, [match.params.id]);
 	return (
 		<>
+			{/* {console.log(index)} */}
 			{dimension.width < 415 ? (
 				missionInput ? (
 					<Mission2MobileInputPresenter

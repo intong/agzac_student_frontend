@@ -56,6 +56,12 @@ const LoginContainer = () => {
 				.getElementById("studentClass")
 				.getAttribute("value");
 			const studentNo = document.getElementById("studentNo").getAttribute("value");
+			console.log("grade", grade);
+			console.log("studentClass", studentClass);
+			console.log("studentNo", studentNo);
+			console.log("studentName", studentName);
+			console.log("schoolName", schoolName);
+			console.log("connectCode", connectCode);
 			if (
 				grade &&
 				studentClass &&
@@ -72,6 +78,7 @@ const LoginContainer = () => {
 					studentName,
 					schoolName
 				);
+				console.log(result);
 				if (result.data.ok === true && result.data.status === "비밀번호 있음") {
 					modalFunction.toggleInputPasswordModal();
 					setStudentId(result.data.studentId);
