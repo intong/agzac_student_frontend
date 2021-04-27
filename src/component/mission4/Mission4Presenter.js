@@ -26,7 +26,13 @@ const btnStyle = {
 };
 
 const Mission4Presenter = ({
+	tabClick, // only css 이벤트 (택클릭시 색깔 변화)
+	handleTabClick, // only css 이벤트 (택클릭시 색깔 변화)
+	socialProblem,
 	texts,
+	humanRole1DropDown,
+	humanRole2DropDown,
+	humanRole3DropDown,
 	firstTxtArea,
 	secondTxtArea,
 	thirdTxtArea,
@@ -55,6 +61,7 @@ const Mission4Presenter = ({
 	return (
 		<LayOutContent>
 			{/* {console.log(prevSelect)} */}
+			{/* {console.log(confirm)} */}
 			<Wrapper>
 				<BlockTop>
 					<TopContent>
@@ -110,28 +117,32 @@ const Mission4Presenter = ({
 									<Tab1
 										confirm={confirm}
 										selectTab={selectTab}
-										onClick={() => clickFunctionList.selectedTabFunction("social")}
+										tabClick={tabClick} //클릭 : true, unclick: false
+										onClick={() => handleTabClick("social")}
 									>
 										<Text>사회문제 분석</Text>
 									</Tab1>
 									<Tab2
 										confirm={confirm}
 										selectTab={selectTab}
-										onClick={() => clickFunctionList.selectedTabFunction("reason")}
+										tabClick={tabClick} //클릭 : true, unclick: false
+										onClick={() => handleTabClick("reason")}
 									>
 										<Text>상품개발 이유</Text>
 									</Tab2>
 									<Tab3
 										confirm={confirm}
 										selectTab={selectTab}
-										onClick={() => clickFunctionList.selectedTabFunction("developer")}
+										tabClick={tabClick} //클릭 : true, unclick: false
+										onClick={() => handleTabClick("developer")}
 									>
 										<Text>미래인재 역할</Text>
 									</Tab3>
 									<Tab4
 										confirm={confirm}
 										selectTab={selectTab}
-										onClick={() => clickFunctionList.selectedTabFunction("itemIntro")}
+										tabClick={tabClick} //클릭 : true, unclick: false
+										onClick={() => handleTabClick("itemIntro")}
 									>
 										<Text>상품 소개</Text>
 									</Tab4>
@@ -139,6 +150,7 @@ const Mission4Presenter = ({
 								{/* 변경 자리 */}
 								{selectTab === "social" ? (
 									<SocialProblem
+										socialProblem={socialProblem}
 										texts={texts}
 										prevSelect={prevSelect}
 										clickFunctionList={clickFunctionList}
@@ -153,6 +165,9 @@ const Mission4Presenter = ({
 									/>
 								) : selectTab === "developer" ? (
 									<ProductDeveloper
+										humanRole1DropDown={humanRole1DropDown}
+										humanRole2DropDown={humanRole2DropDown}
+										humanRole3DropDown={humanRole3DropDown}
 										humanRole1={humanRole1}
 										humanRole2={humanRole2}
 										humanRole3={humanRole3}
@@ -469,14 +484,19 @@ const Text = styled.div`
 const Tab1 = styled.div`
 	width: 156px;
 	height: 50px;
-	background-color: #0f0f15;
-	color: #ffffff;
-	opacity: ${(props) => props.confirm.social === "ok" && "0.8"};
+	background-color: ${(props) =>
+		props.selectTab === "social" || props.confirm.social === "ok"
+			? "#0f0f15"
+			: "#ffffff"};
+	color: ${(props) =>
+		props.selectTab === "social" || props.confirm.social === "ok"
+			? "#ffffff"
+			: "#686868"};
+	opacity: ${(props) => (props.confirm.social === "ok" ? "0.8" : "1")};
 	text-align: center;
 	line-height: 53px;
 	&:hover {
 		cursor: pointer;
-		opacity: 0.7;
 	}
 `;
 //reason
@@ -484,15 +504,18 @@ const Tab2 = styled.div`
 	width: 156px;
 	height: 50px;
 	background-color: ${(props) =>
-		props.confirm.social === "ok" ? "#0f0f15" : "#ffffff"};
-	color: ${(props) => (props.confirm.social === "ok" ? "#ffffff" : "#686868")};
-	opacity: ${(props) =>
-		props.confirm.social === "ok" && props.confirm.reason === "ok" ? "0.8" : "1"};
+		props.selectTab === "reason" || props.confirm.reason === "ok"
+			? "#0f0f15"
+			: "#ffffff"};
+	color: ${(props) =>
+		props.selectTab === "reason" || props.confirm.reason === "ok"
+			? "#ffffff"
+			: "#686868"};
+	opacity: ${(props) => (props.confirm.reason === "ok" ? "0.8" : "1")};
 	text-align: center;
 	line-height: 53px;
 	&:hover {
 		cursor: pointer;
-		opacity: 0.7;
 	}
 `;
 // developer
@@ -500,31 +523,36 @@ const Tab3 = styled.div`
 	width: 156px;
 	height: 50px;
 	background-color: ${(props) =>
-		props.confirm.reason === "ok" ? "#0f0f15" : "#ffffff"};
-	color: ${(props) => (props.confirm.reason === "ok" ? "#ffffff" : "#686868")};
-	opacity: ${(props) =>
-		props.confirm.reason === "ok" && props.confirm.developer === "ok"
-			? "0.8"
-			: "1"};
+		props.selectTab === "developer" || props.confirm.developer === "ok"
+			? "#0f0f15"
+			: "#ffffff"};
+	color: ${(props) =>
+		props.selectTab === "developer" || props.confirm.developer === "ok"
+			? "#ffffff"
+			: "#686868"};
+	opacity: ${(props) => (props.confirm.developer === "ok" ? "0.8" : "1")};
 	text-align: center;
 	line-height: 53px;
 	&:hover {
 		cursor: pointer;
-		opacity: 0.7;
 	}
 `;
 const Tab4 = styled.div`
 	width: 156px;
 	height: 50px;
 	background-color: ${(props) =>
-		props.confirm.developer === "ok" ? "#0f0f15" : "#ffffff"};
+		props.selectTab === "itemIntro" || props.confirm.itemIntro === "ok"
+			? "#0f0f15"
+			: "#ffffff"};
 	color: ${(props) =>
-		props.confirm.developer === "ok" ? "#ffffff" : "#686868"};
+		props.selectTab === "itemIntro" || props.confirm.itemIntro === "ok"
+			? "#ffffff"
+			: "#686868"};
+	opacity: ${(props) => (props.confirm.itemIntro === "ok" ? "0.8" : "1")};
 	text-align: center;
 	line-height: 53px;
 	&:hover {
 		cursor: pointer;
-		opacity: 0.7;
 	}
 `;
 const LeftBox = styled.div`

@@ -2,14 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import btnDropdown from "../../assets/icons/btn-dropdown.svg";
 
-export function Dropbox({
-	style,
-	options,
-	correct,
-	placeholder,
-	id,
-	dropdownNull,
-}) {
+export function Dropbox({ item, style, options, correct, placeholder, id }) {
+	// 변수 item 용도 : loading 된 데이터에서 내용이 있으면 그 내용을 text로 띄워주는 변수
+	// selectedOption 용도 : dropdown에서 선택한 내용을 text로 띄워주는 변수
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedOption, setSelectedOption] = useState(null);
 	const toggling = () => {
@@ -25,8 +20,8 @@ export function Dropbox({
 		<>
 			<DropDownContainer style={style}>
 				<DropDownHeader onClick={toggling} open={isOpen} correct={correct}>
-					<Text id={id} selectedOption={selectedOption} dropdownNull={dropdownNull}>
-						{selectedOption || placeholder}
+					<Text id={id} selectedOption={selectedOption} item={item}>
+						{selectedOption ? selectedOption : item ? item : placeholder}
 					</Text>
 					<Image isOpen={isOpen} src={btnDropdown} alt='화살표' />
 				</DropDownHeader>
@@ -59,9 +54,9 @@ const Text = styled.div`
 	height: 22px;
 	text-align: left;
 	color: ${(props) =>
-		props.selectedOption === null || props.dropdownNull === null
-			? "#d8d8d8"
-			: "#0f0f15"};
+		props.selectedOption !== null || props.item !== undefined
+			? "#0f0f15"
+			: "#d8d8d8"};
 `;
 
 const Image = styled.img`

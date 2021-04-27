@@ -18,8 +18,7 @@ const Mission2Container = ({ history, match, location }) => {
 	const { modalState, modalActions } = useContext(TempSaveContext);
 	const [index, setIndex] = useState(); // 정답제출 시 +1 을 시키면 배열의 index 를 넘김
 	const [missionQuestion, setMissionQuestion] = useState(); // 미션 배열 중 한개의 문제만 보내는 state
-	const [dropdownNull, setDropdownNull] = useState(); // Dropdown Null로 초기화 해주는 state (add 함수에서 적용)
-	const [inputArray, setInputArray] = useState([]); // 정답리스트 (배열길이 : 4개)
+	const [inputArray, setInputArray] = useState([]); // 정답리스트 (배열길이 : 최대 8개) 구글시트 저장
 	const [normal, setNormal] = useState(true);
 	const [correctFirst, setCorrectFirst] = useState(true);
 	const [correctSeconds, setCorrectSeconds] = useState(true);
@@ -35,11 +34,17 @@ const Mission2Container = ({ history, match, location }) => {
 		history.push(`/mission3/${state.mission3Index}`);
 	};
 
-	// 정담배열만들기
-	let tempArr = [];
+	// missionTwo 셋팅
+	const selectExamQuestion = () => {
+		const question = JSON.parse(sessionStorage.getItem("missionTwo"));
+		setMissionQuestion(question);
+	};
+
+	// 정담배열만들기 (inputArray 배열 만들기 : 최대 8개 (답변2 * 4문제))
+	let tempArr = []; // 배열길이 무조건 2개
 	const makeInputArray = (text) => {
 		tempArr.push(text);
-		setInputArray(inputArray.concat(tempArr));
+		setInputArray(inputArray.concat(tempArr)); // inputArray 에
 	};
 
 	const modalFunction = {
@@ -69,12 +74,6 @@ const Mission2Container = ({ history, match, location }) => {
 		},
 	};
 
-	// missionTwo 셋팅
-	const selectExamQuestion = () => {
-		const question = JSON.parse(sessionStorage.getItem("missionTwo"));
-		setMissionQuestion(question);
-	};
-
 	// 정답 입력 및 확인 이벤트
 	const answerFunctionList = {
 		// missionTwo에서 answerOne과 answerTwo (정답 / 설명만 빼와서 배열을 리턴)
@@ -93,9 +92,10 @@ const Mission2Container = ({ history, match, location }) => {
 			});
 			return result;
 		},
-		// 정답 2개 중 답안이 포함하는지 확인하는 함수
+		// 정답 2개 중 답안이 포함하는지 확인하는 함수 (정답제출 or 오답화면의 다음버튼에서 실행 (checkAnswer의 콜백함수) : 총 각 문제당 두번 실행 미래인재가 2명이기 때문에 각각 실행)
 		hasAnswer: (one) => {
 			const result = answerFunctionList.makeCorrectAnswerArray(missionQuestion);
+			// result 결과물 => [[1번문제],[2번문제],[3번문제],[4번문제]] // [1번문제] => [{미래인재1의 정답 && 피드백},{미래인재2의 정답&&피드백}]
 			const idx = result[index - 1].findIndex((item, i) => {
 				return item.answer === one;
 			});
@@ -142,8 +142,8 @@ const Mission2Container = ({ history, match, location }) => {
 					setProcessFunction();
 				}
 			} else {
+				console.log("다음버튼 이벤트", inputArray);
 				await SaveData.save(3, inputArray);
-				setDropdownNull(null);
 				setNormal(true);
 				setCorrectFirst(true);
 				setCorrectSeconds(true);
@@ -216,7 +216,6 @@ const Mission2Container = ({ history, match, location }) => {
 			) : (
 				<Mission2Presenter
 					index={index}
-					dropdownNull={dropdownNull}
 					normal={normal}
 					correctFirst={correctFirst}
 					correctSeconds={correctSeconds}

@@ -4,7 +4,12 @@ import { ButtonPrimary } from "../../ui/button/Button";
 import { TextArea } from "../../ui/inputBox/Input";
 import { Dropbox } from "../../ui/dropbox/Dropbox";
 
-const SocialProblem = ({ texts, prevSelect, clickFunctionList }) => {
+const SocialProblem = ({
+	socialProblem,
+	texts,
+	prevSelect,
+	clickFunctionList,
+}) => {
 	const options = prevSelect && prevSelect.studentAnswerList;
 	return (
 		<>
@@ -15,6 +20,7 @@ const SocialProblem = ({ texts, prevSelect, clickFunctionList }) => {
 				</TitleRight>
 				<Dropbox
 					id='question'
+					item={socialProblem}
 					options={options}
 					placeholder='사회문제 현상 키워드 선택'
 					style={{ position: "absolute", top: "62px", left: "24px" }}

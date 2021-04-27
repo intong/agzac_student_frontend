@@ -30,6 +30,9 @@ const options = [
 ];
 
 const ProductDeveloper = ({
+	humanRole1DropDown,
+	humanRole2DropDown,
+	humanRole3DropDown,
 	humanRole1,
 	humanRole2,
 	humanRole3,
@@ -55,6 +58,7 @@ const ProductDeveloper = ({
 				<Label>미래인재1</Label>
 				<Dropbox
 					id='roleOne'
+					item={humanRole1DropDown}
 					options={options}
 					style={{ position: "absolute", top: "36px", zIndex: "30" }}
 					placeholder='선택'
@@ -70,6 +74,7 @@ const ProductDeveloper = ({
 				<Label>미래인재2</Label>
 				<Dropbox
 					id='roleTwo'
+					item={humanRole2DropDown}
 					options={options}
 					style={{ position: "absolute", top: "36px", zIndex: "20" }}
 					placeholder='선택'
@@ -85,6 +90,7 @@ const ProductDeveloper = ({
 				<Label>미래인재3</Label>
 				<Dropbox
 					id='roleThree'
+					item={humanRole3DropDown}
 					options={options}
 					style={{ position: "absolute", top: "36px" }}
 					placeholder='선택'

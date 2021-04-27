@@ -89,9 +89,10 @@ const Mission1Container = ({ history, match, location }) => {
 		checkAnswer: () => {
 			const question = JSON.parse(sessionStorage.getItem("missionOne"));
 			if (answerInputText === "") {
-				// alert("직업이름을 입력해 주세요.");
+				alert("직업이름을 입력해 주세요.");
 			} else {
-				const upperCaseText = answerInputText.toUpperCase();
+				const noneSpaceText = answerInputText.split(" ").join(""); // 띄어쓰기 없앰
+				const upperCaseText = noneSpaceText.toUpperCase(); // 대소문자 구분 없앰 (대문자로 통일)
 				if (upperCaseText === question[index - 1].title) {
 					// 정답일때,
 					setInputArray([...inputArray, upperCaseText]); // 배열에 답 저장

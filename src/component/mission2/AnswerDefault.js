@@ -24,7 +24,6 @@ const options = [
 
 const AnswerDefault = ({
 	index,
-	dropdownNull,
 	missionQuestion,
 	normal,
 	correctFirst,
@@ -115,14 +114,12 @@ const AnswerDefault = ({
 					style={leftDropbox}
 					options={options}
 					placeholder='선택'
-					dropdownNull={dropdownNull}
 				/>
 				<Dropbox
 					id='futureTwo'
 					style={rightDropbox}
 					options={options}
 					placeholder='선택'
-					dropdownNull={dropdownNull}
 				/>
 			</div>
 			<FeedbackSection>

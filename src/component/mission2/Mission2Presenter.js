@@ -9,7 +9,6 @@ import close from "../../assets/icons/bnt-x-24.svg";
 
 const Mission2Presenter = ({
 	index,
-	dropdownNull,
 	normal,
 	correctFirst,
 	correctSeconds,
@@ -65,7 +64,6 @@ const Mission2Presenter = ({
 					*/}
 					<AnswerDefault
 						index={index}
-						dropdownNull={dropdownNull}
 						missionQuestion={missionQuestion}
 						normal={normal}
 						correctFirst={correctFirst}
