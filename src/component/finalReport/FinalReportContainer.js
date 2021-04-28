@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FinalReportPresenter from "./FinalReportPresenter";
 import FinalReportMobile from "./mobileVersion/FinalReportMobile";
 
@@ -13,14 +13,6 @@ const FinalReportContainer = ({ history, match, location }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [changeBtn, setChangeBtn] = useState(false);
 
-	const handleProgree = (data) => {
-		const result = Math.round(data.playedSeconds) / data.loadedSeconds;
-		const result2 = Math.round(data.played * 100) / 100;
-		if (result === result2) {
-			setChangeBtn(true);
-		}
-	};
-
 	const modalFunction = {
 		openModal: () => {
 			setIsOpen(!isOpen);
@@ -32,12 +24,16 @@ const FinalReportContainer = ({ history, match, location }) => {
 			setFaqModal(!faqModal);
 		},
 	};
+	useEffect(() => {
+		setTimeout(() => {
+			setChangeBtn(true);
+		}, 80000);
+	}, []);
 
 	return (
 		<>
 			{dimension.width < 415 ? (
 				<FinalReportMobile
-					handleProgree={handleProgree}
 					changeBtn={changeBtn}
 					isOpen={isOpen}
 					faqModal={faqModal}
@@ -45,7 +41,6 @@ const FinalReportContainer = ({ history, match, location }) => {
 				/>
 			) : (
 				<FinalReportPresenter
-					handleProgree={handleProgree}
 					changeBtn={changeBtn}
 					isOpen={isOpen}
 					faqModal={faqModal}

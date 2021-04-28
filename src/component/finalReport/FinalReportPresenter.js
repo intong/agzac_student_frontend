@@ -10,7 +10,6 @@ import { FinalReportBtn, FinalReportBtnActive } from "../../ui/button/Button";
 import { HelpModal } from "../../ui/modal/Modal";
 
 const FinalReportPresenter = ({
-	handleProgree,
 	changeBtn,
 	isOpen,
 	faqModal,
@@ -45,7 +44,6 @@ const FinalReportPresenter = ({
 								url={MediaSecretCodeAnswer.endingMedia}
 								width='100%'
 								height='100%'
-								onProgress={handleProgree}
 							/>
 						</VideoArea>
 						{changeBtn ? (
