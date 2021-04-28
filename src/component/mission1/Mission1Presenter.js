@@ -13,6 +13,7 @@ import { ModalBaseTwoBtn } from "../../ui/modal/Modal";
 import { jobCards } from "../JobCards";
 
 const Mission1Presenter = ({
+	inputArray,
 	prevMedia,
 	nextMedia,
 	answerMissionCards,

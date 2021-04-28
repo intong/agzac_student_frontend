@@ -39,7 +39,6 @@ const Mission1Container = ({ history, match, location }) => {
 	};
 	// 임시저장하기 (사용처 : 임시저장 모달 confirm버튼 / 정답제출 버튼)
 	const tempSaveSheet = async () => {
-		console.log(inputArray);
 		await SaveData.save(2, inputArray);
 	};
 	const modalFunction = {
@@ -69,6 +68,7 @@ const Mission1Container = ({ history, match, location }) => {
 
 	// 문제출제 세팅 함수
 	const selectExamQuestion = () => {
+		console.log("selectExamQuestion");
 		const question = JSON.parse(sessionStorage.getItem("missionOne"));
 		setMissionQuestion(question);
 	};
@@ -83,6 +83,12 @@ const Mission1Container = ({ history, match, location }) => {
 		// 정답 입력값 가져오기
 		onChangeAnswer: (e) => {
 			setAnswerInputText(e.target.value);
+		},
+
+		// 이전문제 보기 이벤트
+		prevQuestion: () => {
+			console.log("이전문제보기");
+			console.log(inputArray.length);
 		},
 
 		// 정답제출 버튼 클릭이벤트
@@ -114,9 +120,8 @@ const Mission1Container = ({ history, match, location }) => {
 				setAnswerResult(undefined);
 				setProcessFunction();
 			} else {
-				console.log("match.params.id", match.params.id);
+				// console.log("match.params.id", match.params.id);
 				actions.setIndex(parseInt(index) + 1); // Header active css 적용을 위해서 context 변수 +1
-				console.log(inputArray);
 				await tempSaveSheet();
 				modalFunction.togglePrevMediaModal();
 				setAnswerResult(undefined);
@@ -152,19 +157,35 @@ const Mission1Container = ({ history, match, location }) => {
 	// contextApi의 임시저장된 데이터 사용하기
 	const tempUse = async () => {
 		if (location.state !== null && location.state !== undefined) {
+			console.log(111);
+			// 이어하기로 페이지 진입한 경우
+			// 	1. 가지고 들어온 임시저장데이터 (정답리스트 inputArray에 추가하기)
 			setInputArray(location.state.data);
 		} else {
+			// 페이지 들어오는 경우의 수
+			// 	1. 메뉴에서 바로 들어오는 경우 (임시저장 데이터 있음:길이 16인 배열 미션2를 완료하고 오는 경우 밖에 없음)
+			// 	2. 임시저장데이터가 있지만 사용하지 않고 새로 하는 경우 (임시저장 데이터 있음 하지만 inputArray 초기화 필요)
+			//	3. 정답제출 후 다음버튼으로 들어오는 경우 (임시저장 데이터 있음)
+			console.log(2222);
 			const params = sessionStorage.getItem("auth");
 			const result = await SaveData.getTempData(params);
-			console.log(result.data.writtenData[3]);
-			const data = JSON.parse(result.data.writtenData[3]);
-			console.log(data);
-			setInputArray(inputArray);
+			if (result.data.writtenData[3]) {
+				console.log(333);
+				const result2 = JSON.parse(result.data.writtenData[3]);
+				if (result2.length === 16) {
+					// 미션2를 끝내고 온 경우
+					console.log("미션2 끝 이후 접근");
+					setInputArray(result2); // 정답 List
+				}
+			} else {
+				console.log("다시시작하기");
+				setInputArray(inputArray); // 임시저장 이용 안하고 다시하기로 들어왔을 때 빈 배열 만들기
+			}
 		}
 	};
 
 	useEffect(() => {
-		selectExamQuestion(match.params.id - 1);
+		selectExamQuestion();
 		setIndex(match.params.id);
 		tempUse();
 	}, [match.params.id]);
@@ -195,6 +216,7 @@ const Mission1Container = ({ history, match, location }) => {
 				)
 			) : (
 				<Mission1Presenter
+					inputArray={inputArray}
 					prevMedia={prevMedia}
 					nextMedia={nextMedia}
 					answerMissionCards={answerMissionCards}

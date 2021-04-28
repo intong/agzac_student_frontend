@@ -47,125 +47,222 @@ const Mission4Container = ({ history, location, match }) => {
 	});
 	const [selectTab, setSelectTab] = useState(match.params.id);
 
-	// only css 이벤트 (tabclick)
+	// only css 선택 된 탭 색상 바꾸기 이벤트 (tabclick) : only css 용도
 	const handleTabClick = (tab) => {
 		clickFunctionList.selectedTabFunction(tab);
 	};
 
-	// 사회문제 분석 키워드 가져오기
-	const getQuestion = () => {
-		const result = document.getElementById("question").innerHTML;
-		const tempArr = [];
-		if (result !== "사회문제 현상 키워드 선택") {
-			// 사회문제 키워드 배열담기
-			tempArr.push(result);
-		}
-		if (texts !== undefined) {
-			// textArea 텍스트 배열 담기
-			tempArr.push(texts);
-		}
-		return tempArr; // 두개의 요소를 담은 배열 리턴
-	};
-
-	// 상품개발이유 텍스트들 가져와서 배열 만들기
-	const getDevelopmentReason = () => {
-		const tempArr = [];
-		if (firstTxtArea !== undefined) {
-			tempArr.push(firstTxtArea);
-		}
-		if (secondTxtArea !== undefined) {
-			tempArr.push(secondTxtArea);
-		}
-		if (thirdTxtArea !== undefined) {
-			tempArr.push(thirdTxtArea);
-		}
-		if (fourthTxtArea !== undefined) {
-			tempArr.push(fourthTxtArea);
-		}
-		return tempArr;
-	};
-
-	// 미래인재 역할 text들 가져오기
-	const getFutureHumanRole = () => {
-		const inner1 = document.getElementById("roleOne").innerHTML;
-		const inner2 = document.getElementById("roleTwo").innerHTML;
-		const inner3 = document.getElementById("roleThree").innerHTML;
-
-		let checkOverlap = []; // validation용 배열 (미래인재 1, 2, 3을 담아서 중복체크)
-		const tempArr = [];
-
-		// validation
-		if (inner1 === "선택") {
-			alert("미래인재1을 선택해 주세요.");
-		} else if (humanRole1 === undefined) {
-			alert("미래인재1을 선택한 이유를 설명해 주세요.");
-		} else if (inner2 === "선택") {
-			alert("미래인재2를 선택해 주세요.");
-		} else if (humanRole2 === undefined) {
-			alert("미래인재2를 선택한 이유를 설명해 주세요.");
-		} else if (inner3 === "선택") {
-			alert("미래인재3을 선택해 주세요.");
-		} else if (humanRole3 === undefined) {
-			alert("미래인재3을 선택한 이유를 설명해 주세요.");
-		} else {
-			checkOverlap.push(inner1);
-			checkOverlap.push(inner2);
-			checkOverlap.push(inner3);
-			let newCheck = new Set(checkOverlap);
-			if (newCheck.size !== 3) {
-				alert("같은 미래인재를 선택하셨습니다.");
-				newCheck = [];
-				checkOverlap = [];
+	// 각 탭의 input 값 null check 및 구글 api request data 배열 만들기
+	const makeApiArr = {
+		// 사회문제 분석 키워드 가져오기 (null check validataion 포함)
+		getQuestion: () => {
+			const result = document.getElementById("question").innerHTML;
+			const tempArr = [];
+			if (result !== "사회문제 현상 키워드 선택") {
+				// 사회문제 키워드 배열담기
+				tempArr.push(result);
+				if (texts !== undefined) {
+					// textArea 텍스트 배열 담기
+					tempArr.push(texts);
+					return { ok: true, data: tempArr };
+				} else {
+					alert("관련된 문제상황을 작성해 주세요.");
+					return { ok: false, data: tempArr };
+				}
 			} else {
-				if (inner1 !== "선택") {
-					tempArr.push(inner1);
-					if (humanRole1 !== undefined) {
-						tempArr.push(humanRole1);
-					}
-				}
-				if (inner2 !== "선택") {
-					tempArr.push(inner2);
-					if (humanRole2 !== undefined) {
-						tempArr.push(humanRole2);
-					}
-				}
-				if (inner3 !== "선택") {
-					tempArr.push(inner3);
-					if (humanRole3 !== undefined) {
-						tempArr.push(humanRole3);
-					}
-				}
-				return tempArr;
+				alert("사회문제현상 키워드를 선택해 주세요.");
+				return { ok: false, data: tempArr };
 			}
-		}
-	};
-
-	// 상품소개 input text들 가져오기
-	const getItemItro = () => {
-		const tempArr = [];
-		if (itemItro1 === undefined) {
-			alert("상품의 모습을 설명해 주세요.");
-		} else if (itemItro2 === undefined) {
-			alert("상품의 사용법을 설명해 주세요.");
-		} else if (itemItro3 === undefined) {
-			alert("이 상품의 단점 혹은 예상되는 문제점을 써주세요.");
-		} else if (itemItro4 === undefined) {
-			alert("단점 혹은 문제점을 해결할 수 있는 방법을 써주세요.");
-		} else {
+		},
+		// 상품개발이유 텍스트들 가져와서 배열 만들기 (null check validataion 포함)
+		getDevelopmentReason: () => {
+			const tempArr = [];
+			if (firstTxtArea !== undefined) {
+				tempArr.push(firstTxtArea);
+				if (secondTxtArea !== undefined) {
+					tempArr.push(secondTxtArea);
+					if (thirdTxtArea !== undefined) {
+						tempArr.push(thirdTxtArea);
+						if (fourthTxtArea !== undefined) {
+							tempArr.push(fourthTxtArea);
+							return { ok: true, data: tempArr };
+						} else {
+							alert("문제가 해결되야 하는 이유를 작성해 주세요.");
+							return { ok: false, data: tempArr };
+						}
+					} else {
+						alert("어떤 어려움을 겪는지 작성해 주세요.");
+						return { ok: false, data: tempArr };
+					}
+				} else {
+					alert("이 문제로 어려움을 겪고 있는 사람을 작성해 주세요.");
+					return { ok: false, data: tempArr };
+				}
+			} else {
+				alert("사회문제의 원인을 작성해 주세요.");
+				return { ok: false, data: tempArr };
+			}
+		},
+		// 미래인재 역할 text들 가져오기 (null check validataion 포함)
+		getFutureHumanRole: () => {
+			const inner1 = document.getElementById("roleOne").innerHTML;
+			const inner2 = document.getElementById("roleTwo").innerHTML;
+			const inner3 = document.getElementById("roleThree").innerHTML;
+			let checkOverlap = []; // validation용 배열 (미래인재 1, 2, 3을 담아서 중복체크)
+			const tempArr = [];
+			// validation
+			if (inner1 !== "선택") {
+				checkOverlap.push(inner1);
+				if (humanRole1 !== undefined) {
+					tempArr.push(humanRole1);
+					if (inner2 !== "선택") {
+						checkOverlap.push(inner2);
+						if (humanRole2 !== undefined) {
+							tempArr.push(humanRole2);
+							if (inner3 !== "선택") {
+								checkOverlap.push(inner3);
+								if (humanRole3 !== undefined) {
+									tempArr.push(humanRole3);
+									let newCheck = new Set(checkOverlap);
+									if (newCheck.size === 3) {
+										tempArr.unshift(checkOverlap[0]); // 인재 1 tempArr 배열 [0]에 넣기
+										tempArr.splice(2, 0, checkOverlap[1]); // 인재 2 tempArr 배열 [2]에 넣기
+										tempArr.splice(4, 0, checkOverlap[2]); // 인재 3 tempArr 배열 [4]에 넣기
+										return { ok: true, data: tempArr };
+									} else {
+										alert("같은 인재를 선택했습니다.");
+										newCheck = [];
+										checkOverlap = [];
+										return { ok: false, data: tempArr };
+									}
+								} else {
+									alert("미래인재3을 선택한 이유를 설명해 주세요.");
+									return { ok: false, data: tempArr };
+								}
+							} else {
+								alert("미래인재3을 선택해 주세요.");
+								return { ok: false, data: tempArr };
+							}
+						} else {
+							alert("미래인재2를 선택한 이유를 설명해 주세요.");
+							return { ok: false, data: tempArr };
+						}
+					} else {
+						alert("미래인재2를 선택해 주세요.");
+						return { ok: false, data: tempArr };
+					}
+				} else {
+					alert("미래인재1을 선택한 이유를 설명해 주세요.");
+					return { ok: false, data: tempArr };
+				}
+			} else {
+				alert("미래인재1을 선택해 주세요.");
+				return { ok: false, data: tempArr };
+			}
+		},
+		// 상품소개 input text들 가져오기 (null check validataion 포함)
+		getItemItro: () => {
+			const tempArr = [];
 			if (itemItro1 !== undefined) {
 				tempArr.push(itemItro1);
+				if (itemItro2 !== undefined) {
+					tempArr.push(itemItro2);
+					if (itemItro3 !== undefined) {
+						tempArr.push(itemItro3);
+						if (itemItro4 !== undefined) {
+							tempArr.push(itemItro4);
+							return { ok: true, data: tempArr };
+						} else {
+							alert("단점 혹은 문제점을 해결할 수 있는 방법을 써주세요.");
+							return { ok: false, data: tempArr };
+						}
+					} else {
+						alert("이 상품의 단점 혹은 예상되는 문제점을 써주세요.");
+						return { ok: false, data: tempArr };
+					}
+				} else {
+					alert("상품의 사용법을 설명해 주세요.");
+					return { ok: false, data: tempArr };
+				}
+			} else {
+				alert("상품의 모습을 설명해 주세요.");
+				return { ok: false, data: tempArr };
 			}
-			if (itemItro2 !== undefined) {
-				tempArr.push(itemItro2);
-			}
-			if (itemItro3 !== undefined) {
-				tempArr.push(itemItro3);
-			}
-			if (itemItro4 !== undefined) {
-				tempArr.push(itemItro4);
+		},
+	};
+
+	// 임시저장시 api 연결 배열 만들기 (validation check 없이 진행)
+	const makeTempSaveArr = {
+		getQuestion: () => {
+			const result = document.getElementById("question").innerHTML;
+			const tempArr = [];
+			if (result !== "사회문제 현상 키워드 선택") {
+				tempArr.push(result);
+				if (texts !== undefined) {
+					tempArr.push(texts);
+				}
 			}
 			return tempArr;
-		}
+		},
+		getDevelopmentReason: () => {
+			const tempArr = [];
+			if (firstTxtArea !== undefined) {
+				tempArr.push(firstTxtArea);
+				if (secondTxtArea !== undefined) {
+					tempArr.push(secondTxtArea);
+					if (thirdTxtArea !== undefined) {
+						tempArr.push(thirdTxtArea);
+						if (fourthTxtArea !== undefined) {
+							tempArr.push(fourthTxtArea);
+							return tempArr;
+						}
+					}
+				}
+			}
+			return tempArr;
+		},
+		getFutureHumanRole: () => {
+			const inner1 = document.getElementById("roleOne").innerHTML;
+			const inner2 = document.getElementById("roleTwo").innerHTML;
+			const inner3 = document.getElementById("roleThree").innerHTML;
+			const tempArr = [];
+			// validation
+			if (inner1 !== "선택") {
+				tempArr.push(inner1);
+				if (humanRole1 !== undefined) {
+					tempArr.push(humanRole1);
+					if (inner2 !== "선택") {
+						tempArr.push(inner2);
+						if (humanRole2 !== undefined) {
+							tempArr.push(humanRole2);
+							if (inner3 !== "선택") {
+								tempArr.push(inner3);
+								if (humanRole3 !== undefined) {
+									tempArr.push(humanRole3);
+								}
+							}
+						}
+					}
+				}
+			}
+			return tempArr;
+		},
+		getItemItro: () => {
+			const tempArr = [];
+			if (itemItro1 !== undefined) {
+				tempArr.push(itemItro1);
+				if (itemItro2 !== undefined) {
+					tempArr.push(itemItro2);
+					if (itemItro3 !== undefined) {
+						tempArr.push(itemItro3);
+						if (itemItro4 !== undefined) {
+							tempArr.push(itemItro4);
+						}
+					}
+				}
+			}
+			return tempArr;
+		},
 	};
 
 	const clickFunctionList = {
@@ -182,31 +279,39 @@ const Mission4Container = ({ history, location, match }) => {
 		onClickNextFuction: async (tab) => {
 			if (tab === "social") {
 				// validation 체크 후 컨펌
-				const question = getQuestion();
-				await SaveData.save(6, question); // question api
-				setConfirm({ ...confirm, social: "ok" });
-				setSelectTab("reason");
+				const question = makeApiArr.getQuestion();
+				if (question.ok) {
+					await SaveData.save(6, question.data); // question api
+					setConfirm({ ...confirm, social: "ok" });
+					setSelectTab("reason");
+				}
 			} else if (tab === "reason") {
 				// validation 체크 후 컨펌
-				const reason = getDevelopmentReason();
-				await SaveData.save(7, reason);
-				setConfirm({ ...confirm, reason: "ok" });
-				setSelectTab("developer");
+				const reason = makeApiArr.getDevelopmentReason();
+				if (reason.ok) {
+					await SaveData.save(7, reason.data);
+					setConfirm({ ...confirm, reason: "ok" });
+					setSelectTab("developer");
+				}
 			} else if (tab === "developer") {
 				// validation 체크 후 컨펌
-				const role = getFutureHumanRole();
-				await SaveData.save(8, role);
-				setConfirm({ ...confirm, developer: "ok" });
-				setSelectTab("itemIntro");
+				const role = makeApiArr.getFutureHumanRole();
+				if (role.ok) {
+					await SaveData.save(8, role.data);
+					setConfirm({ ...confirm, developer: "ok" });
+					setSelectTab("itemIntro");
+				}
 			} else if (tab === "itemIntro") {
 				// validation 체크 후 컨펌
-				const item = getItemItro();
-				const result = await SaveData.save(9, item);
-				if (result.data.ok) {
-					modalFunction.toggleProductNameModal(); // 상품이름 쓰는 모달 열기
+				const item = makeApiArr.getItemItro();
+				if (item.ok) {
+					const result = await SaveData.save(9, item.data);
+					if (result.data.ok) {
+						modalFunction.toggleProductNameModal(); // 상품이름 쓰는 모달 열기
+					}
+					setConfirm({ ...confirm, itemIntro: "ok" });
+					setSelectTab("itemIntro");
 				}
-				setConfirm({ ...confirm, itemIntro: "ok" });
-				setSelectTab("itemIntro");
 			}
 		},
 
@@ -285,7 +390,6 @@ const Mission4Container = ({ history, location, match }) => {
 		productNameModalConfirmBtn: async () => {
 			const result = await SaveData.save(10, [productName]);
 			if (result.data.ok) {
-				alert("다음으로 가격을 정해주세요");
 				modalFunction.toggleProductNameModal();
 				modalFunction.togglePriceSettingModal();
 			}
@@ -311,20 +415,20 @@ const Mission4Container = ({ history, location, match }) => {
 		handleSaveModalConfirmBtn: async () => {
 			if (selectTab === "social") {
 				// 사회문석분석 탭에서 임시저장할 때
-				const question = getQuestion();
+				const question = makeTempSaveArr.getQuestion();
 				const result = await SaveData.save(6, question); // question api
 				console.log(result);
 			} else if (selectTab === "reason") {
 				// 상품개발이유에서 임시저장 할 때
-				const reason = getDevelopmentReason();
+				const reason = makeTempSaveArr.getDevelopmentReason();
 				await SaveData.save(7, reason);
 			} else if (selectTab === "developer") {
 				// 미래인재 역할에서 임시저장 할 때
-				const role = getFutureHumanRole();
+				const role = makeTempSaveArr.getFutureHumanRole();
 				await SaveData.save(8, role);
 			} else if (selectTab === "itemIntro") {
 				// 상품 소개에서 임시저장 할 때
-				const item = getItemItro();
+				const item = makeTempSaveArr.getItemItro();
 				await SaveData.save(9, item);
 			}
 			modalFunction.toggletempModal();

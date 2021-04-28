@@ -65,11 +65,13 @@ const Answer1Default = ({
 				value={answerInputText ? answerInputText : ""}
 				onChange={answerFunctionList.onChangeAnswer}
 			/>
-			<ButtonPrimary
-				text='정답제출'
-				style={{ marginTop: "128px", marginLeft: "200px" }}
-				onClick={() => answerFunctionList.checkAnswer()}
-			/>
+			<Btns>
+				<ButtonPrimary
+					text='정답제출'
+					style={{ marginTop: "0px", marginLeft: "0px" }}
+					onClick={() => answerFunctionList.checkAnswer()}
+				/>
+			</Btns>
 			<OneMore wrong={wrong}>한번 더 풀어보세요!</OneMore>
 		</RightBox>
 	);
@@ -108,6 +110,16 @@ const SubTitle = styled.div`
 	color: #686868;
 	margin-top: 8px;
 	margin-left: 24px;
+`;
+const Btns = styled.div`
+	/* background: blue; */
+	width: 100%;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: flex-end;
+	gap: 4px;
+	padding-right: 24px;
+	margin-top: 128px;
 `;
 
 const OneMore = styled.div`

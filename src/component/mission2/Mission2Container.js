@@ -44,7 +44,7 @@ const Mission2Container = ({ history, match, location }) => {
 	let tempArr = []; // 배열길이 무조건 2개
 	const makeInputArray = (text) => {
 		tempArr.push(text);
-		setInputArray(inputArray.concat(tempArr)); // inputArray 에
+		setInputArray(inputArray.concat(tempArr)); // inputArray 와 tempArr 붙여서 하나의 배열 구성
 	};
 
 	const modalFunction = {
