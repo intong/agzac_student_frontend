@@ -15,6 +15,7 @@ const MainVideoContainer = ({ history, location, match }) => {
 	});
 	const [mainVideoInput, setMainVideoInput] = useState(false);
 	//////////////// 모바일 state 끝 ///////////////////////////
+	const [loading, setLoading] = useState();
 	const { state, actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
 	const [hasDataModal, setHasDataModal] = useState(); // 저장된 데어터가 있을 때 데이터 불러오기 모달
@@ -43,16 +44,27 @@ const MainVideoContainer = ({ history, location, match }) => {
 		toggleAnswerFalseModal: () => {
 			setAnswerFalseModal(!answerFalseModal);
 		},
+		cleanAllMission: async () => {
+			const ok = window.confirm("모든 미션이 초기화 됩니다. 진행하시겠습니까?");
+			if (ok) {
+				modalFunction.toggleHasDataModal();
+				setLoading(true);
+				const result = await Activity.cleanAllMissionData();
+				if (result) {
+					setLoading(false);
+					// 임시저장 데이터를 사용하지 않고 다시하고 싶을 때 (ProcessContextApi 변수 초기화)
+					actions.setVideo();
+					actions.setMission1();
+					actions.setMission2();
+					actions.setMission3();
+					actions.setIndex(1);
+					actions.setMission2Index(1);
+					actions.setMission3Index("category");
+					actions.setMission4Index("social");
+				}
+			}
+		},
 		toggleHasDataModal: () => {
-			// 임시저장 데이터를 사용하지 않고 다시하고 싶을 때 (ProcessContextApi 변수 초기화)
-			actions.setVideo();
-			actions.setMission1();
-			actions.setMission2();
-			actions.setMission3();
-			actions.setIndex(1);
-			actions.setMission2Index(1);
-			actions.setMission3Index("category");
-			actions.setMission4Index("social");
 			setHasDataModal(!hasDataModal);
 		},
 		tempSaveSheet: async () => {
@@ -68,13 +80,13 @@ const MainVideoContainer = ({ history, location, match }) => {
 		useTempData: () => {
 			// console.log(state.saveTempData);
 			// console.log(state.saveTempData.length);
+			modalFunction.toggleHasDataModal();
 			const path = state.saveTempData.length;
 			if (path < 4) {
 				// console.log("영상시청");
 				const name = JSON.parse(state.saveTempData[2]);
 				setCompanyName(name);
 				actions.setUseDataConfirm(true); // 임시저장 데이터 사용하겠다는 글로벌 (context) 변수
-				modalFunction.toggleHasDataModal();
 			} else if (path < 5) {
 				// console.log("미션1")
 				actions.setVideo("ok");
@@ -175,8 +187,10 @@ const MainVideoContainer = ({ history, location, match }) => {
 		onSubmit: async () => {
 			const result = functionList.checkAnswer();
 			if (result) {
+				setLoading(true);
 				const result = await SaveData.save(1, [companyName]);
 				if (result.data.ok) {
+					setLoading(false);
 					setProcessFunction(); // 다음단계로 진행
 				}
 			} else {
@@ -243,6 +257,7 @@ const MainVideoContainer = ({ history, location, match }) => {
 				)
 			) : (
 				<MainVideoPresenter
+					loading={loading}
 					companyName={companyName}
 					secretCode={secretCode}
 					hasDataModal={hasDataModal}

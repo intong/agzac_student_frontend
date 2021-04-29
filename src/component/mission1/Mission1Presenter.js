@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
-import { HelpModal } from "../../ui/modal/Modal";
+import { HelpModal, ModalBaseTwoBtn } from "../../ui/modal/Modal";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
 import group from "../../assets/img/img-jobs-default@2x.png";
@@ -9,10 +9,11 @@ import Footer from "../../layout/Footer";
 import close from "../../assets/icons/bnt-x-24.svg";
 import Answer1Default from "./Answer1Default";
 import Answer2Correct from "./Answer2Correct";
-import { ModalBaseTwoBtn } from "../../ui/modal/Modal";
 import { jobCards } from "../JobCards";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Mission1Presenter = ({
+	loading,
 	inputArray,
 	prevMedia,
 	nextMedia,
@@ -133,6 +134,13 @@ const Mission1Presenter = ({
 						</ProcessBarLabel>
 					</ProgressWrpper>
 				</BlockBottom>
+				{loading && (
+					<ModalWrapper>
+						<ModalAreaSave>
+							<ClipLoader color={"#ffc300"} style={{ margin: "0 auto" }} />
+						</ModalAreaSave>
+					</ModalWrapper>
+				)}
 				{/* 잡카드 모달 */}
 				{isOpen && (
 					<ModalWrapper>
@@ -173,7 +181,7 @@ const Mission1Presenter = ({
 						<ModalAreaSave>
 							<ModalBaseTwoBtn
 								header='임시 저장 하기'
-								content='지금까 입력한 정보가 저장 됩니다.'
+								content='지금까지 입력한 정보가 저장 됩니다.'
 								confirmbtntext='확인'
 								cancelbtntext='취소'
 								cancelbtnEvent={modalFunction.toggleSaveModal}
@@ -231,6 +239,10 @@ const ModalWrapper = styled.div`
 	top: 0;
 	z-index: 20;
 	display: flex;
+`;
+const LoadingModalArea = styled.div`
+	width: 200px;
+	height: 200px;
 `;
 const ModalPrevNextMediaArea = styled.div`
 	width: 944px;

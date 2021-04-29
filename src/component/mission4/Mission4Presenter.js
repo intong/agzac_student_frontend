@@ -16,6 +16,7 @@ import {
 	CompleteModal,
 	ModalBaseTwoBtn,
 } from "../../ui/modal/Modal";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const btnStyle = {
 	width: "256px",
@@ -26,6 +27,7 @@ const btnStyle = {
 };
 
 const Mission4Presenter = ({
+	loading,
 	tabClick, // only css 이벤트 (택클릭시 색깔 변화)
 	handleTabClick, // only css 이벤트 (택클릭시 색깔 변화)
 	socialProblem,
@@ -61,7 +63,6 @@ const Mission4Presenter = ({
 	return (
 		<LayOutContent>
 			{/* {console.log(prevSelect)} */}
-			{/* {console.log(confirm)} */}
 			<Wrapper>
 				<BlockTop>
 					<TopContent>
@@ -188,6 +189,7 @@ const Mission4Presenter = ({
 					</BottomContent>
 				</BlockBottom>
 				<Footer />
+
 				{/* 잡카드 */}
 				{isOpen && (
 					<ModalWrapper>
@@ -277,7 +279,7 @@ const Mission4Presenter = ({
 						<ModalAreaSave>
 							<ModalBaseTwoBtn
 								header='임시 저장 하기'
-								content='지금까 입력한 정보가 저장 됩니다.'
+								content='지금까지 입력한 정보가 저장 됩니다.'
 								confirmbtntext='확인'
 								cancelbtntext='취소'
 								closeModalEvent={modalFunction.toggletempModal}
@@ -339,6 +341,16 @@ const Mission4Presenter = ({
 								onClickBtn={clickFunctionList.goToFinalReport}
 							/>
 						</ModalCompleteArea>
+					</ModalWrapper>
+				)}
+				{loading && (
+					<ModalWrapper>
+						<ModalAreaSave>
+							<ClipLoader
+								color={"#ffc300"}
+								style={{ margin: "0 auto", zIndex: "100" }}
+							/>
+						</ModalAreaSave>
 					</ModalWrapper>
 				)}
 				<FaqBtn

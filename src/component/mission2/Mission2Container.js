@@ -14,6 +14,7 @@ const Mission2Container = ({ history, match, location }) => {
 	});
 	const [missionInput, setMissionInput] = useState(false);
 	//////////////// 모바일 state 끝 ///////////////////////////
+	const [loading, setLoading] = useState(false);
 	const { state, actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
 	const [item, setItem] = useState();
@@ -137,23 +138,28 @@ const Mission2Container = ({ history, match, location }) => {
 		},
 		// 정답화면 오른쪽카드 다음 버튼 이벤트
 		addIndex: async () => {
+			setLoading(true);
 			// index +1 해서 다음문제 넘기기
 			if (index === 4) {
 				const result = await SaveData.save(3, inputArray);
 				if (result.data.ok) {
+					setLoading(false);
 					setIndex(index);
 					setProcessFunction();
 				}
 			} else {
-				console.log("다음버튼 이벤트", inputArray);
-				await SaveData.save(3, inputArray);
-				setItem();
-				setNormal(true);
-				setCorrectFirst(true);
-				setCorrectSeconds(true);
-				setIndex(index + 1);
-				actions.setMission2Index(index + 1);
-				history.push(`/mission2/${parseInt(match.params.id) + 1}`);
+				// console.log("다음버튼 이벤트", inputArray);
+				const result = await SaveData.save(3, inputArray);
+				if (result.data.ok) {
+					setLoading(false);
+					setItem();
+					setNormal(true);
+					setCorrectFirst(true);
+					setCorrectSeconds(true);
+					setIndex(index + 1);
+					actions.setMission2Index(index + 1);
+					history.push(`/mission2/${parseInt(match.params.id) + 1}`);
+				}
 			}
 		},
 	};
@@ -219,6 +225,7 @@ const Mission2Container = ({ history, match, location }) => {
 				)
 			) : (
 				<Mission2Presenter
+					loading={loading}
 					item={item}
 					index={index}
 					normal={normal}

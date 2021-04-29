@@ -6,8 +6,10 @@ import Footer from "../../layout/Footer";
 import AnswerDefault from "./AnswerDefault";
 import { HelpModal, ModalBaseTwoBtn } from "../../ui/modal/Modal";
 import close from "../../assets/icons/bnt-x-24.svg";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Mission2Presenter = ({
+	loading,
 	item,
 	index,
 	normal,
@@ -77,6 +79,13 @@ const Mission2Presenter = ({
 					/>
 				</BottomContent>
 			</BlockBottom>
+			{loading && (
+				<ModalWrapper>
+					<ModalAreaSave>
+						<ClipLoader color={"#ffc300"} style={{ margin: "0 auto" }} />
+					</ModalAreaSave>
+				</ModalWrapper>
+			)}
 			{/* 잡카드 모달 */}
 			{isOpen && (
 				<ModalWrapper>
@@ -114,7 +123,7 @@ const Mission2Presenter = ({
 					<ModalAreaSave>
 						<ModalBaseTwoBtn
 							header='임시 저장 하기'
-							content='지금까 입력한 정보가 저장 됩니다.'
+							content='지금까지 입력한 정보가 저장 됩니다.'
 							confirmbtntext='확인'
 							cancelbtntext='취소'
 							confirmbtnEvent={modalFunction.handleSaveModalConfirmBtn}

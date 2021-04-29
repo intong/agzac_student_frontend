@@ -10,6 +10,7 @@ import {
 	LoadingModal,
 	ModalTwoBtnLong,
 } from "../../ui/modal/Modal";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const inputStyle = {
 	width: "244px",
@@ -20,6 +21,7 @@ const inputStyle = {
 };
 
 const MainVideoPresenter = ({
+	loading,
 	companyName,
 	secretCode,
 	hasDataModal,
@@ -92,7 +94,7 @@ const MainVideoPresenter = ({
 					<ModalArea>
 						<ModalBaseTwoBtn
 							header='임시 저장 하기'
-							content='지금까 입력한 정보가 저장 됩니다.'
+							content='지금까지 입력한 정보가 저장 됩니다.'
 							confirmbtntext='확인'
 							cancelbtntext='취소'
 							confirmbtnEvent={modalFunction.tempSaveSheet}
@@ -130,14 +132,23 @@ const MainVideoPresenter = ({
 						<ModalTwoBtnLong
 							header='저장된 데이터 불러오기'
 							content='이미 작성된 데이터가 있습니다. 저장된 데이터를 불러올까요?'
-							closeModalEvent={modalFunction.toggleHasDataModal}
 							confirmBtnOnClick={modalFunction.useTempData}
-							cancelBtnOnClick={modalFunction.toggleHasDataModal}
+							cancelBtnOnClick={modalFunction.cleanAllMission}
 						/>
 					</ModalArea>
 				</ModalWrapper>
 			) : (
 				<></>
+			)}
+			{loading && (
+				<ModalWrapper>
+					<ModalArea>
+						<ClipLoader
+							color={"#ffc300"}
+							style={{ margin: "0 auto", zIndex: "100" }}
+						/>
+					</ModalArea>
+				</ModalWrapper>
 			)}
 		</LayOutContent>
 	);

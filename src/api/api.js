@@ -49,6 +49,7 @@ export const SaveData = {
 
 export const Activity = {
 	loginStart: () => apiToken.patch("/api/activities/start-page-end"),
+	cleanAllMissionData: () => apiToken.delete("/api/activities/data"),
 	mission1EndStart: () => apiToken.patch("/api/activities/mission-one-end"),
 	mission2EndStart: () => apiToken.patch("/api/activities/mission-two-end"),
 	mission3EndStart: () => apiToken.patch("/api/activities/mission-three-end"),

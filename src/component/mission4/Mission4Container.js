@@ -14,6 +14,7 @@ const Mission4Container = ({ history, location, match }) => {
 	//////////////// 모바일 state 끝 ///////////////////////////
 	const { state, actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
+	const [loading, setLoading] = useState(false);
 	const [tabClick, setTabClick] = useState(false); // only css 변수 (탭클릭 배경색 변경)
 	const [socialProblem, setSocialProblem] = useState(); // 선택한 사회문제
 	const [texts, setTexts] = useState(); // 사회문제 분석 textArea 저장 state
@@ -343,32 +344,47 @@ const Mission4Container = ({ history, location, match }) => {
 				// validation 체크 후 컨펌
 				const question = makeApiArr.getQuestion();
 				if (question.ok) {
-					await SaveData.save(6, question.data); // question api
-					setConfirm({ ...confirm, social: "ok" });
-					setSelectTab("reason");
+					setLoading(true);
+					const result = await SaveData.save(6, question.data); // question api
+					console.log(result);
+					if (result.data.ok) {
+						setLoading(false);
+						setConfirm({ ...confirm, social: "ok" });
+						setSelectTab("reason");
+					}
 				}
 			} else if (tab === "reason") {
 				// validation 체크 후 컨펌
 				const reason = makeApiArr.getDevelopmentReason();
 				if (reason.ok) {
-					await SaveData.save(7, reason.data);
-					setConfirm({ ...confirm, reason: "ok" });
-					setSelectTab("developer");
+					setLoading(true);
+					const result = await SaveData.save(7, reason.data);
+					if (result.data.ok) {
+						setLoading(false);
+						setConfirm({ ...confirm, reason: "ok" });
+						setSelectTab("developer");
+					}
 				}
 			} else if (tab === "developer") {
 				// validation 체크 후 컨펌
 				const role = makeApiArr.getFutureHumanRole();
 				if (role.ok) {
-					await SaveData.save(8, role.data);
-					setConfirm({ ...confirm, developer: "ok" });
-					setSelectTab("itemIntro");
+					setLoading(true);
+					const result = await SaveData.save(8, role.data);
+					if (result.data.ok) {
+						setLoading(false);
+						setConfirm({ ...confirm, developer: "ok" });
+						setSelectTab("itemIntro");
+					}
 				}
 			} else if (tab === "itemIntro") {
 				// validation 체크 후 컨펌
 				const item = makeApiArr.getItemItro();
 				if (item.ok) {
+					setLoading(true);
 					const result = await SaveData.save(9, item.data);
 					if (result.data.ok) {
+						setLoading(false);
 						modalFunction.toggleProductNameModal(); // 상품이름 쓰는 모달 열기
 					}
 					setConfirm({ ...confirm, itemIntro: "ok" });
@@ -451,8 +467,10 @@ const Mission4Container = ({ history, location, match }) => {
 		},
 		productNameModalConfirmBtn: async () => {
 			if (productName !== undefined) {
+				setLoading(true);
 				const result = await SaveData.save(10, [productName]);
 				if (result.data.ok) {
+					setLoading(false);
 					modalFunction.toggleProductNameModal();
 					modalFunction.togglePriceSettingModal();
 				}
@@ -465,8 +483,10 @@ const Mission4Container = ({ history, location, match }) => {
 		},
 		toggleCompleteModal: async () => {
 			if (!isNaN(productPrice)) {
+				setLoading(true);
 				const result = await SaveData.save(11, [productPrice]);
 				if (result.data.ok) {
+					setLoading(false);
 					modalFunction.togglePriceSettingModal();
 					setCompleteModal(!completeModal);
 				}
@@ -798,6 +818,7 @@ const Mission4Container = ({ history, location, match }) => {
 				/>
 			) : (
 				<Mission4Presenter
+					loading={loading}
 					tabClick={tabClick} // only css 이벤트 (택클릭시 색깔 변화)
 					handleTabClick={handleTabClick} // only css 이벤트 (탭클릭시 색깔 변화)
 					socialProblem={socialProblem}

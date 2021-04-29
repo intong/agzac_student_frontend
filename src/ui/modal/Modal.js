@@ -12,13 +12,14 @@ import prev from "../../assets/icons/btn-prev.svg";
 import next from "../../assets/icons/btn-next.svg";
 import { jobCards } from "../../component/JobCards";
 import Robot from "../../assets/img/img-robot-confirmpopup@2x.png";
-import ReactLoading from "react-loading";
+import ClipLoader from "react-spinners/ClipLoader";
 
-export const LoadingModal = () => {
+export const LoadingModal = ({ style }) => {
 	return (
-		<BlockLoading>
+		<BlockLoading style={style}>
 			<Content>
-				<ReactLoading type={"spin"} color={"#fffff"} width={"50%"} height={"50%"} />
+				{/* <ReactLoading type={"spin"} color={"#fffff"} width={"50%"} height={"50%"} /> */}
+				<ClipLoader color={"#ffc300"} />
 			</Content>
 		</BlockLoading>
 	);
@@ -26,6 +27,7 @@ export const LoadingModal = () => {
 
 const BlockLoading = styled.div`
 	width: 320px;
+	box-sizing: border-box;
 	padding: 26px 24px;
 	position: relative;
 `;
@@ -35,10 +37,59 @@ const Content = styled.div`
 	margin: auto;
 `;
 
+export function FinalAlertModal({
+	modalStyle,
+	closeModalEvent,
+	header,
+	content,
+	subContent,
+	btntext,
+	btnStyle,
+	btnEvent,
+}) {
+	return (
+		<Block style={modalStyle}>
+			<HeaderDiv>{header}</HeaderDiv>
+			<FinalContentDiv>{content}</FinalContentDiv>
+			<SubContentDiv>{subContent}</SubContentDiv>
+			<BtnPosition>
+				<ButtonPrimary text={btntext} style={btnStyle} onClick={btnEvent} />
+			</BtnPosition>
+		</Block>
+	);
+}
+const FinalContentDiv = styled.div`
+	min-height: 30px;
+	font-family: NotoSansCJKkr;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.57;
+	letter-spacing: normal;
+	color: #0f0f15;
+	margin-top: 30px;
+`;
+const SubContentDiv = styled.div`
+	width: 100%;
+	height: 20px;
+	font-family: NotoSansCJKkr;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.57;
+	letter-spacing: normal;
+	color: #0f0f15;
+	margin-bottom: 25px;
+	/* background: green; */
+`;
+
 // Type1_버튼 내용이 짧은 경우 _ 1btn
 export function ModalBase({
 	header,
 	content,
+	subContent,
 	modalStyle,
 	btnStyle,
 	btntext,
@@ -111,7 +162,7 @@ export const ModalTwoBtnLong = ({
 }) => {
 	return (
 		<BlockTwoBtnLong>
-			<CloseImgTwoBtnLong src={close} alt='' onClick={closeModalEvent} />
+			{/* <CloseImgTwoBtnLong src={close} alt='' onClick={closeModalEvent} /> */}
 			<HeaderDivTwoBtnLong>{header}</HeaderDivTwoBtnLong>
 			<ContentDivTwoBtnLong>{content}</ContentDivTwoBtnLong>
 			<ButtonSecondaryLong

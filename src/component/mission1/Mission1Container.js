@@ -16,6 +16,7 @@ const Mission1Container = ({ history, match, location }) => {
 	const [missionInput, setMissionInput] = useState(false);
 	const [correctCard, setCorrectCard] = useState(false);
 	//////////////// 모바일 state 끝 ///////////////////////////
+	const [loading, setLoading] = useState(false); // loading Modal 용
 	const [index, setIndex] = useState();
 	const { state, actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
@@ -39,9 +40,13 @@ const Mission1Container = ({ history, match, location }) => {
 	};
 	// 임시저장하기 (사용처 : 임시저장 모달 confirm버튼 / 정답제출 버튼)
 	const tempSaveSheet = async () => {
-		await SaveData.save(2, inputArray);
+		const result = await SaveData.save(2, inputArray);
+		return result;
 	};
 	const modalFunction = {
+		toggleLoadingModal: () => {
+			setLoading(!loading);
+		},
 		openModal: () => {
 			setIsOpen(!isOpen);
 		},
@@ -115,17 +120,26 @@ const Mission1Container = ({ history, match, location }) => {
 		// 정답화면 오른쪽카드 다음 버튼 이벤트
 		addIndex: async () => {
 			if (parseInt(index) === 16) {
-				await tempSaveSheet();
-				setProcessPercentage(100);
-				setAnswerResult(undefined);
-				setProcessFunction();
+				setLoading(true);
+				const result = await tempSaveSheet();
+				if (result.data.ok) {
+					setLoading(false);
+					modalFunction.toggleLoadingModal();
+					setProcessPercentage(100);
+					setAnswerResult(undefined);
+					setProcessFunction();
+				}
 			} else {
+				setLoading(true);
 				// console.log("match.params.id", match.params.id);
 				actions.setIndex(parseInt(index) + 1); // Header active css 적용을 위해서 context 변수 +1
-				await tempSaveSheet();
-				modalFunction.togglePrevMediaModal();
-				setAnswerResult(undefined);
-				history.push(`/mission1/${parseInt(index) + 1}`);
+				const result = await tempSaveSheet();
+				if (result.data.ok) {
+					modalFunction.togglePrevMediaModal();
+					setLoading(false);
+					setAnswerResult(undefined);
+					history.push(`/mission1/${parseInt(index) + 1}`);
+				}
 			}
 		},
 	};
@@ -213,6 +227,7 @@ const Mission1Container = ({ history, match, location }) => {
 				)
 			) : (
 				<Mission1Presenter
+					loading={loading}
 					inputArray={inputArray}
 					prevMedia={prevMedia}
 					nextMedia={nextMedia}

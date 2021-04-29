@@ -12,6 +12,7 @@ const FinalReportContainer = ({ history, match, location }) => {
 	const [faqModal, setFaqModal] = useState();
 	const [isOpen, setIsOpen] = useState(false);
 	const [changeBtn, setChangeBtn] = useState(false);
+	const [alertModal, setAlertModal] = useState(false);
 
 	const modalFunction = {
 		openModal: () => {
@@ -23,17 +24,22 @@ const FinalReportContainer = ({ history, match, location }) => {
 		toggleFaqModal: () => {
 			setFaqModal(!faqModal);
 		},
+		toggleAlertModal: () => {
+			setAlertModal(!alertModal);
+		},
 	};
 	useEffect(() => {
 		setTimeout(() => {
 			setChangeBtn(true);
 		}, 80000);
+		modalFunction.toggleAlertModal();
 	}, []);
 
 	return (
 		<>
 			{dimension.width < 415 ? (
 				<FinalReportMobile
+					alertModal={alertModal}
 					changeBtn={changeBtn}
 					isOpen={isOpen}
 					faqModal={faqModal}
@@ -41,6 +47,7 @@ const FinalReportContainer = ({ history, match, location }) => {
 				/>
 			) : (
 				<FinalReportPresenter
+					alertModal={alertModal}
 					changeBtn={changeBtn}
 					isOpen={isOpen}
 					faqModal={faqModal}

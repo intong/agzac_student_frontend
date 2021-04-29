@@ -167,7 +167,7 @@ const Mission3Presenter = ({
 						<ModalAreaSave>
 							<ModalBaseTwoBtn
 								header='임시 저장 하기'
-								content='지금까 입력한 정보가 저장 됩니다.'
+								content='지금까지 입력한 정보가 저장 됩니다.'
 								confirmbtntext='확인'
 								cancelbtntext='취소'
 								confirmbtnEvent={modalFunction.handleSaveModalConfirmBtn}

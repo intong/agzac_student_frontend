@@ -8,8 +8,10 @@ import close from "../../assets/icons/bnt-x-24.svg";
 import Footer from "../../layout/Footer";
 import { FinalReportBtn, FinalReportBtnActive } from "../../ui/button/Button";
 import { HelpModal } from "../../ui/modal/Modal";
+import { FinalAlertModal } from "../../ui/modal/Modal";
 
 const FinalReportPresenter = ({
+	alertModal,
 	changeBtn,
 	isOpen,
 	faqModal,
@@ -92,6 +94,21 @@ const FinalReportPresenter = ({
 						</ModalAreaFaq>
 					</ModalWrapperFaq>
 				)}
+				{alertModal && (
+					<ModalWrapper key={1}>
+						<ModalAreaPrice key={1}>
+							<FinalAlertModal
+								header='알림'
+								content='영상을 모두 시청하셔야'
+								subContent='최종보고서를 제출하실 수 있습니다.'
+								btntext='확인'
+								closeModalEvent={modalFunction.toggleAlertModal}
+								btnEvent={modalFunction.toggleAlertModal}
+							/>
+						</ModalAreaPrice>
+					</ModalWrapper>
+				)}
+
 				<Footer />
 				<FaqBtn
 					src={btnFaq}
@@ -144,6 +161,11 @@ const TextDiv = styled.div`
 	position: absolute;
 	top: 509px;
 	right: 24px;
+`;
+const ModalAreaPrice = styled.div`
+	width: 320px;
+	height: 304px;
+	margin: auto;
 `;
 
 const ModalWrapper = styled.div`
