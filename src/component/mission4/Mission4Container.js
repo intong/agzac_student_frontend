@@ -62,9 +62,14 @@ const Mission4Container = ({ history, location, match }) => {
 				// 사회문제 키워드 배열담기
 				tempArr.push(result);
 				if (texts !== undefined) {
-					// textArea 텍스트 배열 담기
-					tempArr.push(texts);
-					return { ok: true, data: tempArr };
+					const space = texts.split(" ").join("");
+					if (space > 14) {
+						// textArea 텍스트 배열 담기
+						tempArr.push(texts);
+						return { ok: true, data: tempArr };
+					} else {
+						alert("관련 문제상황을 15자 이상 작성해 주세요.");
+					}
 				} else {
 					alert("관련된 문제상황을 작성해 주세요.");
 					return { ok: false, data: tempArr };
@@ -78,24 +83,44 @@ const Mission4Container = ({ history, location, match }) => {
 		getDevelopmentReason: () => {
 			const tempArr = [];
 			if (firstTxtArea !== undefined) {
-				tempArr.push(firstTxtArea);
-				if (secondTxtArea !== undefined) {
-					tempArr.push(secondTxtArea);
-					if (thirdTxtArea !== undefined) {
-						tempArr.push(thirdTxtArea);
-						if (fourthTxtArea !== undefined) {
-							tempArr.push(fourthTxtArea);
-							return { ok: true, data: tempArr };
+				if (firstTxtArea.split(" ").join("").length > 4) {
+					tempArr.push(firstTxtArea);
+					if (secondTxtArea !== undefined) {
+						if (secondTxtArea.split(" ").join("").length > 4) {
+							tempArr.push(secondTxtArea);
+							if (thirdTxtArea !== undefined) {
+								if (thirdTxtArea.split(" ").join("").length > 9) {
+									tempArr.push(thirdTxtArea);
+									if (fourthTxtArea !== undefined) {
+										if (fourthTxtArea.split(" ").join("").length > 9) {
+											tempArr.push(fourthTxtArea);
+											return { ok: true, data: tempArr };
+										} else {
+											alert("10자 이상 작성해주세요.");
+											return { ok: false, data: tempArr };
+										}
+									} else {
+										alert("문제가 해결되야 하는 이유를 작성해 주세요.");
+										return { ok: false, data: tempArr };
+									}
+								} else {
+									alert("10자 이상 작성해주세요.");
+									return { ok: false, data: tempArr };
+								}
+							} else {
+								alert("어떤 어려움을 겪는지 작성해 주세요.");
+								return { ok: false, data: tempArr };
+							}
 						} else {
-							alert("문제가 해결되야 하는 이유를 작성해 주세요.");
+							alert("5자 이상 작성해주세요.");
 							return { ok: false, data: tempArr };
 						}
 					} else {
-						alert("어떤 어려움을 겪는지 작성해 주세요.");
+						alert("이 문제로 어려움을 겪고 있는 사람을 작성해 주세요.");
 						return { ok: false, data: tempArr };
 					}
 				} else {
-					alert("이 문제로 어려움을 겪고 있는 사람을 작성해 주세요.");
+					alert("5자 이상 작성해주세요.");
 					return { ok: false, data: tempArr };
 				}
 			} else {
@@ -114,41 +139,57 @@ const Mission4Container = ({ history, location, match }) => {
 			if (inner1 !== "선택") {
 				checkOverlap.push(inner1);
 				if (humanRole1 !== undefined) {
-					tempArr.push(humanRole1);
-					if (inner2 !== "선택") {
-						checkOverlap.push(inner2);
-						if (humanRole2 !== undefined) {
-							tempArr.push(humanRole2);
-							if (inner3 !== "선택") {
-								checkOverlap.push(inner3);
-								if (humanRole3 !== undefined) {
-									tempArr.push(humanRole3);
-									let newCheck = new Set(checkOverlap);
-									if (newCheck.size === 3) {
-										tempArr.unshift(checkOverlap[0]); // 인재 1 tempArr 배열 [0]에 넣기
-										tempArr.splice(2, 0, checkOverlap[1]); // 인재 2 tempArr 배열 [2]에 넣기
-										tempArr.splice(4, 0, checkOverlap[2]); // 인재 3 tempArr 배열 [4]에 넣기
-										return { ok: true, data: tempArr };
+					if (humanRole1.split(" ").join("").length > 9) {
+						tempArr.push(humanRole1);
+						if (inner2 !== "선택") {
+							checkOverlap.push(inner2);
+							if (humanRole2 !== undefined) {
+								if (humanRole2.split(" ").join("").length > 9) {
+									tempArr.push(humanRole2);
+									if (inner3 !== "선택") {
+										checkOverlap.push(inner3);
+										if (humanRole3 !== undefined) {
+											if (humanRole3.split(" ").join("").length > 9) {
+												tempArr.push(humanRole3);
+												let newCheck = new Set(checkOverlap);
+												if (newCheck.size === 3) {
+													tempArr.unshift(checkOverlap[0]); // 인재 1 tempArr 배열 [0]에 넣기
+													tempArr.splice(2, 0, checkOverlap[1]); // 인재 2 tempArr 배열 [2]에 넣기
+													tempArr.splice(4, 0, checkOverlap[2]); // 인재 3 tempArr 배열 [4]에 넣기
+													return { ok: true, data: tempArr };
+												} else {
+													alert("같은 인재를 선택했습니다.");
+													newCheck = [];
+													checkOverlap = [];
+													return { ok: false, data: tempArr };
+												}
+											} else {
+												alert("미래인재3 이유를 10자 이상 작성해 주세요.");
+												return { ok: false, data: tempArr };
+											}
+										} else {
+											alert("미래인재3을 선택한 이유를 설명해 주세요.");
+											return { ok: false, data: tempArr };
+										}
 									} else {
-										alert("같은 인재를 선택했습니다.");
-										newCheck = [];
-										checkOverlap = [];
+										alert("미래인재3을 선택해 주세요.");
 										return { ok: false, data: tempArr };
 									}
 								} else {
-									alert("미래인재3을 선택한 이유를 설명해 주세요.");
+									alert("미래인재2 이유를 10자 이상 작성해 주세요.");
+									console.log(humanRole2.split(" ").join("").length);
 									return { ok: false, data: tempArr };
 								}
 							} else {
-								alert("미래인재3을 선택해 주세요.");
+								alert("미래인재2를 선택한 이유를 설명해 주세요.");
 								return { ok: false, data: tempArr };
 							}
 						} else {
-							alert("미래인재2를 선택한 이유를 설명해 주세요.");
+							alert("미래인재2를 선택해 주세요.");
 							return { ok: false, data: tempArr };
 						}
 					} else {
-						alert("미래인재2를 선택해 주세요.");
+						alert("미래인재1 이유를 10자 이상 작성해 주세요.");
 						return { ok: false, data: tempArr };
 					}
 				} else {
@@ -164,24 +205,44 @@ const Mission4Container = ({ history, location, match }) => {
 		getItemItro: () => {
 			const tempArr = [];
 			if (itemItro1 !== undefined) {
-				tempArr.push(itemItro1);
-				if (itemItro2 !== undefined) {
-					tempArr.push(itemItro2);
-					if (itemItro3 !== undefined) {
-						tempArr.push(itemItro3);
-						if (itemItro4 !== undefined) {
-							tempArr.push(itemItro4);
-							return { ok: true, data: tempArr };
+				if (itemItro1.split(" ").join("").length > 9) {
+					tempArr.push(itemItro1);
+					if (itemItro2 !== undefined) {
+						if (itemItro2.split(" ").join("").length > 14) {
+							tempArr.push(itemItro2);
+							if (itemItro3 !== undefined) {
+								if (itemItro3.split(" ").join("").length > 14) {
+									tempArr.push(itemItro3);
+									if (itemItro4 !== undefined) {
+										if (itemItro4.split(" ").join("").length > 9) {
+											tempArr.push(itemItro4);
+											return { ok: true, data: tempArr };
+										} else {
+											alert("해결방법을 10자 이상 작성해 주세요.");
+											return { ok: false, data: tempArr };
+										}
+									} else {
+										alert("단점 혹은 문제점을 해결할 수 있는 방법을 써주세요.");
+										return { ok: false, data: tempArr };
+									}
+								} else {
+									alert("상품의 단점 혹은 문제점을 15자 이상 작성해 주세요.");
+									return { ok: false, data: tempArr };
+								}
+							} else {
+								alert("이 상품의 단점 혹은 예상되는 문제점을 써주세요.");
+								return { ok: false, data: tempArr };
+							}
 						} else {
-							alert("단점 혹은 문제점을 해결할 수 있는 방법을 써주세요.");
+							alert("상품의 사용법을 15자 이상 작성해 주세요.");
 							return { ok: false, data: tempArr };
 						}
 					} else {
-						alert("이 상품의 단점 혹은 예상되는 문제점을 써주세요.");
+						alert("상품의 사용법을 설명해 주세요.");
 						return { ok: false, data: tempArr };
 					}
 				} else {
-					alert("상품의 사용법을 설명해 주세요.");
+					alert("상품의 모습을 10자 이상 작성해 주세요.");
 					return { ok: false, data: tempArr };
 				}
 			} else {
@@ -388,20 +449,28 @@ const Mission4Container = ({ history, location, match }) => {
 			setItemNameModal(!itemNameModal);
 		},
 		productNameModalConfirmBtn: async () => {
-			const result = await SaveData.save(10, [productName]);
-			if (result.data.ok) {
-				modalFunction.toggleProductNameModal();
-				modalFunction.togglePriceSettingModal();
+			if (productName !== undefined) {
+				const result = await SaveData.save(10, [productName]);
+				if (result.data.ok) {
+					modalFunction.toggleProductNameModal();
+					modalFunction.togglePriceSettingModal();
+				}
+			} else {
+				alert("상품의 이름을 1자 이상 작성해 주세요.");
 			}
 		},
 		togglePriceSettingModal: () => {
 			setPriceSettingModal(!priceSettingModal);
 		},
 		toggleCompleteModal: async () => {
-			const result = await SaveData.save(11, [productPrice]);
-			if (result.data.ok) {
-				modalFunction.togglePriceSettingModal();
-				setCompleteModal(!completeModal);
+			if (!isNaN(productPrice)) {
+				const result = await SaveData.save(11, [productPrice]);
+				if (result.data.ok) {
+					modalFunction.togglePriceSettingModal();
+					setCompleteModal(!completeModal);
+				}
+			} else {
+				alert("가격을 숫자로 1원 이상 입력해 주세요.");
 			}
 		},
 		cancelCompleteModal: () => {

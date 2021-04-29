@@ -4,18 +4,29 @@ import Auth from "./router/Auth";
 import { ProcessProvider } from "./contextApi/Process";
 import { TempSaveProvider } from "./contextApi/TempSave";
 import { MissionQandAProvider } from "./contextApi/MissionQandA";
+import { ChannelTalk } from "react-channel-plugin";
 
 function App() {
+	const onTalkError = React.useCallback((err) => {
+		console.error("Error", err);
+	}, []);
 	return (
-		<ProcessProvider>
-			<TempSaveProvider>
-				<MissionQandAProvider>
-					<BrowserRouter>
-						<Auth />
-					</BrowserRouter>
-				</MissionQandAProvider>
-			</TempSaveProvider>
-		</ProcessProvider>
+		<>
+			<ChannelTalk
+				pluginKey='4ee3e7ee-40a7-4861-8227-e64fc829c3ad'
+				locale='ko'
+				onError={onTalkError}
+			/>
+			<ProcessProvider>
+				<TempSaveProvider>
+					<MissionQandAProvider>
+						<BrowserRouter>
+							<Auth />
+						</BrowserRouter>
+					</MissionQandAProvider>
+				</TempSaveProvider>
+			</ProcessProvider>
+		</>
 	);
 }
 

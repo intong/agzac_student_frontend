@@ -45,6 +45,11 @@ const Header = ({ match }) => {
 							exact={true}
 							activeStyle={activeStyle}
 							confirm={state.video} // css 글자색상 변경 state
+							onClick={(e) => {
+								if (state.mission3 === "ok") {
+									e.preventDefault();
+								}
+							}}
 						>
 							EY한영 아그작교실 영상시청
 						</NavLinkStyled1>
@@ -60,6 +65,12 @@ const Header = ({ match }) => {
 								if (state.video !== "ok") {
 									e.preventDefault();
 									alert("EY한영 아그작교실 영상시청을 완료해 주세요");
+								}
+								if (state.mission1 === "ok") {
+									e.preventDefault();
+								}
+								if (state.mission3 === "ok") {
+									e.preventDefault();
 								}
 							}}
 						>
@@ -77,6 +88,9 @@ const Header = ({ match }) => {
 								if (state.mission1 !== "ok") {
 									e.preventDefault();
 									alert("Mission1 을 완료해 주세요");
+								}
+								if (state.mission2 === "ok") {
+									e.preventDefault();
 								}
 							}}
 						>

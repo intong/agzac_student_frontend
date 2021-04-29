@@ -157,7 +157,6 @@ const Mission1Container = ({ history, match, location }) => {
 	// contextApi의 임시저장된 데이터 사용하기
 	const tempUse = async () => {
 		if (location.state !== null && location.state !== undefined) {
-			console.log(111);
 			// 이어하기로 페이지 진입한 경우
 			// 	1. 가지고 들어온 임시저장데이터 (정답리스트 inputArray에 추가하기)
 			setInputArray(location.state.data);
@@ -166,11 +165,9 @@ const Mission1Container = ({ history, match, location }) => {
 			// 	1. 메뉴에서 바로 들어오는 경우 (임시저장 데이터 있음:길이 16인 배열 미션2를 완료하고 오는 경우 밖에 없음)
 			// 	2. 임시저장데이터가 있지만 사용하지 않고 새로 하는 경우 (임시저장 데이터 있음 하지만 inputArray 초기화 필요)
 			//	3. 정답제출 후 다음버튼으로 들어오는 경우 (임시저장 데이터 있음)
-			console.log(2222);
 			const params = sessionStorage.getItem("auth");
 			const result = await SaveData.getTempData(params);
 			if (result.data.writtenData[3]) {
-				console.log(333);
 				const result2 = JSON.parse(result.data.writtenData[3]);
 				if (result2.length === 16) {
 					// 미션2를 끝내고 온 경우
