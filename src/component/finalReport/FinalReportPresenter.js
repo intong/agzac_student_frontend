@@ -44,6 +44,7 @@ const FinalReportPresenter = ({
 								url={MediaSecretCodeAnswer.endingMedia}
 								width='100%'
 								height='100%'
+								controls={true}
 							/>
 						</VideoArea>
 						{changeBtn ? (

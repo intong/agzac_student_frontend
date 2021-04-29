@@ -287,7 +287,12 @@ const Default = ({
 				</VideoArea>
 			) : (
 				<VideoArea>
-					<ReactPlayer url={selectTabContent.video} width='100%' height='100%' />
+					<ReactPlayer
+						url={selectTabContent.video}
+						width='100%'
+						height='100%'
+						controls={true}
+					/>
 				</VideoArea>
 			)}
 		</>

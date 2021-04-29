@@ -53,6 +53,7 @@ const MainVideoPresenter = ({
 										url={mediaAndSecretCode.openingMedia}
 										width='100%'
 										height='100%'
+										controls={true}
 									/>
 								</VideoPlayArea>
 							</LeftBox>

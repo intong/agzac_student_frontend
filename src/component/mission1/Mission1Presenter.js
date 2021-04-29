@@ -192,6 +192,7 @@ const Mission1Presenter = ({
 								url={missionQuestion && missionQuestion[index - 1].prev}
 								width='100%'
 								height='100%'
+								controls={true}
 							/>
 						</ModalPrevNextMediaArea>
 					</ModalWrapper>
@@ -206,6 +207,7 @@ const Mission1Presenter = ({
 								url={missionQuestion && missionQuestion[index - 1].next}
 								width='100%'
 								height='100%'
+								controls={true}
 							/>
 						</ModalPrevNextMediaArea>
 					</ModalWrapper>
