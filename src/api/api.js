@@ -1,17 +1,17 @@
 import axios from "axios";
 
 // 배포용
-// const api = axios.create({ baseURL: "http://54.180.105.98:4000" });
-// const apiToken = axios.create({
-// 	baseURL: "http://54.180.105.98:4000",
-// 	headers: { token: sessionStorage.getItem("auth") },
-// });
-
-// 개발용
-const api = axios.create({});
+const api = axios.create({ baseURL: "http://54.180.105.98:4000" });
 const apiToken = axios.create({
+	baseURL: "http://54.180.105.98:4000",
 	headers: { token: sessionStorage.getItem("auth") },
 });
+
+// 개발용
+// const api = axios.create({});
+// const apiToken = axios.create({
+// 	headers: { token: sessionStorage.getItem("auth") },
+// });
 
 export const Student = {
 	loginStudent: (
