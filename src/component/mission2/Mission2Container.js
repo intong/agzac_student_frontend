@@ -16,6 +16,7 @@ const Mission2Container = ({ history, match, location }) => {
 	//////////////// 모바일 state 끝 ///////////////////////////
 	const { state, actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
+	const [item, setItem] = useState();
 	const [index, setIndex] = useState(); // 정답제출 시 +1 을 시키면 배열의 index 를 넘김
 	const [missionQuestion, setMissionQuestion] = useState(); // 미션 배열 중 한개의 문제만 보내는 state
 	const [inputArray, setInputArray] = useState([]); // 정답리스트 (배열길이 : 최대 8개) 구글시트 저장
@@ -112,8 +113,10 @@ const Mission2Container = ({ history, match, location }) => {
 			const upperTwo = two.toUpperCase();
 			if (upperOne === "선택" || upperTwo === "선택") {
 				alert("미래인재를 선택해 주세요.");
+				setItem(upperOne);
 			} else if (upperOne === upperTwo) {
 				alert("같은 미래인재를 선택했습니다.");
+				setItem(upperTwo);
 			} else {
 				setNormal(false);
 				if (answerFunctionList.hasAnswer(upperOne).bool) {
@@ -144,6 +147,7 @@ const Mission2Container = ({ history, match, location }) => {
 			} else {
 				console.log("다음버튼 이벤트", inputArray);
 				await SaveData.save(3, inputArray);
+				setItem();
 				setNormal(true);
 				setCorrectFirst(true);
 				setCorrectSeconds(true);
@@ -215,6 +219,7 @@ const Mission2Container = ({ history, match, location }) => {
 				)
 			) : (
 				<Mission2Presenter
+					item={item}
 					index={index}
 					normal={normal}
 					correctFirst={correctFirst}

@@ -63,12 +63,13 @@ const Mission4Container = ({ history, location, match }) => {
 				tempArr.push(result);
 				if (texts !== undefined) {
 					const space = texts.split(" ").join("");
-					if (space > 14) {
+					if (space.length > 14) {
 						// textArea 텍스트 배열 담기
 						tempArr.push(texts);
 						return { ok: true, data: tempArr };
 					} else {
 						alert("관련 문제상황을 15자 이상 작성해 주세요.");
+						return { ok: false, data: tempArr };
 					}
 				} else {
 					alert("관련된 문제상황을 작성해 주세요.");
