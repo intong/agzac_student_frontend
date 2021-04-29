@@ -33,7 +33,7 @@ const missionThreeQandA = [
 	{
 		category: "tab1",
 		name: "기후변화와 환경",
-		video: "https://youtu.be/Y1GvbFK252s",
+		video: "https://youtu.be/vEca4pBcxyM",
 		answer: [
 			"녹아내리는빙하",
 			"사라지는섬",
@@ -59,7 +59,7 @@ const missionThreeQandA = [
 	{
 		category: "tab3",
 		name: "재난과 안전",
-		video: "https://youtu.be/vEca4pBcxyM",
+		video: "https://youtu.be/Y1GvbFK252s",
 		answer: [
 			"교통사고",
 			"전염병",
