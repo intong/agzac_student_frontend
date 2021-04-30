@@ -25,6 +25,17 @@ const optionsClass = [
 	{ text: "7 반", value: 7 },
 	{ text: "8 반", value: 8 },
 	{ text: "9 반", value: 9 },
+	{ text: "10 반", value: 10 },
+	{ text: "11 반", value: 11 },
+	{ text: "12 반", value: 12 },
+	{ text: "13 반", value: 13 },
+	{ text: "14 반", value: 14 },
+	{ text: "15 반", value: 15 },
+	{ text: "16 반", value: 16 },
+	{ text: "17 반", value: 17 },
+	{ text: "18 반", value: 18 },
+	{ text: "19 반", value: 19 },
+	{ text: "20 반", value: 20 },
 ];
 const optionsStudentNo = [
 	{ text: "1 번", value: 1 },

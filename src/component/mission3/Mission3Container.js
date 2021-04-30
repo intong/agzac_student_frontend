@@ -69,26 +69,36 @@ const Mission3Container = ({ history, location }) => {
 		},
 		checkAnswer: async () => {
 			if (firstInputText && secondsInputText && thirdInputText !== undefined) {
-				if (uiFunctionList.hasAnswerList(firstInputText)) {
-					setFirstAnswer(true);
-					tempArr.push(firstInputText);
+				const temp = [
+					firstInputText.split(" ").join(""),
+					secondsInputText.split(" ").join(""),
+					thirdInputText.split(" ").join(""),
+				];
+				const result = new Set(temp);
+				if (result.size === 3) {
+					if (uiFunctionList.hasAnswerList(firstInputText)) {
+						setFirstAnswer(true);
+						tempArr.push(firstInputText);
+					} else {
+						setFirstAnswer(false);
+					}
+					if (uiFunctionList.hasAnswerList(secondsInputText)) {
+						setSecondAnswer(true);
+						tempArr.push(secondsInputText);
+					} else {
+						setSecondAnswer(false);
+					}
+					if (uiFunctionList.hasAnswerList(thirdInputText)) {
+						setThirdAnswer(true);
+						tempArr.push(thirdInputText);
+					} else {
+						setThirdAnswer(false);
+					}
+					setStudentAnswerList(tempArr);
+					await SaveData.save(5, tempArr);
 				} else {
-					setFirstAnswer(false);
+					alert("중복 선택한 키워드가 있습니다.");
 				}
-				if (uiFunctionList.hasAnswerList(secondsInputText)) {
-					setSecondAnswer(true);
-					tempArr.push(secondsInputText);
-				} else {
-					setSecondAnswer(false);
-				}
-				if (uiFunctionList.hasAnswerList(thirdInputText)) {
-					setThirdAnswer(true);
-					tempArr.push(thirdInputText);
-				} else {
-					setThirdAnswer(false);
-				}
-				setStudentAnswerList(tempArr);
-				await SaveData.save(5, tempArr);
 			} else {
 				alert("세 가지 키워드를 찾아주세요.");
 			}
