@@ -114,10 +114,8 @@ const Mission2Container = ({ history, match, location }) => {
 			const upperTwo = two.toUpperCase();
 			if (upperOne === "선택" || upperTwo === "선택") {
 				alert("미래인재를 선택해 주세요.");
-				setItem(upperOne);
 			} else if (upperOne === upperTwo) {
 				alert("같은 미래인재를 선택했습니다.");
-				setItem(upperTwo);
 			} else {
 				setNormal(false);
 				if (answerFunctionList.hasAnswer(upperOne).bool) {
@@ -226,7 +224,6 @@ const Mission2Container = ({ history, match, location }) => {
 			) : (
 				<Mission2Presenter
 					loading={loading}
-					item={item}
 					index={index}
 					normal={normal}
 					correctFirst={correctFirst}

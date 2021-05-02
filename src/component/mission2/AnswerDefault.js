@@ -23,7 +23,6 @@ const options = [
 ];
 
 const AnswerDefault = ({
-	item,
 	index,
 	missionQuestion,
 	normal,
@@ -116,14 +115,12 @@ const AnswerDefault = ({
 					style={leftDropbox}
 					options={options}
 					placeholder='선택'
-					item={item}
 				/>
 				<Dropbox
 					id='futureTwo'
 					style={rightDropbox}
 					options={options}
 					placeholder='선택'
-					item={item}
 				/>
 			</div>
 			<FeedbackSection>

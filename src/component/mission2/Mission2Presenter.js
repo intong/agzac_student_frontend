@@ -10,7 +10,6 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 const Mission2Presenter = ({
 	loading,
-	item,
 	index,
 	normal,
 	correctFirst,
@@ -66,7 +65,6 @@ const Mission2Presenter = ({
 						normal=false && correctFirst={false or true} && correctSeconds={false or true}  : 오답화면
 					*/}
 					<AnswerDefault
-						item={item}
 						index={index}
 						missionQuestion={missionQuestion}
 						normal={normal}
