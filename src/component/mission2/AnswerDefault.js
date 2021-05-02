@@ -109,7 +109,6 @@ const AnswerDefault = ({
 					background: "red",
 				}}
 			>
-				{console.log(item)}
 				<Dropbox
 					id='futureOne'
 					style={leftDropbox}
