@@ -17,7 +17,6 @@ const Mission2Container = ({ history, match, location }) => {
 	const [loading, setLoading] = useState(false);
 	const { state, actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
-	const [item, setItem] = useState();
 	const [index, setIndex] = useState(); // 정답제출 시 +1 을 시키면 배열의 index 를 넘김
 	const [missionQuestion, setMissionQuestion] = useState(); // 미션 배열 중 한개의 문제만 보내는 state
 	const [inputArray, setInputArray] = useState([]); // 정답리스트 (배열길이 : 최대 8개) 구글시트 저장
@@ -40,13 +39,6 @@ const Mission2Container = ({ history, match, location }) => {
 	const selectExamQuestion = () => {
 		const question = JSON.parse(sessionStorage.getItem("missionTwo"));
 		setMissionQuestion(question);
-	};
-
-	// 정담배열만들기 (inputArray 배열 만들기 : 최대 8개 (답변2 * 4문제))
-	let tempArr = []; // 배열길이 무조건 2개
-	const makeInputArray = (text) => {
-		tempArr.push(text);
-		setInputArray(inputArray.concat(tempArr)); // inputArray 와 tempArr 붙여서 하나의 배열 구성
 	};
 
 	const modalFunction = {
@@ -96,18 +88,25 @@ const Mission2Container = ({ history, match, location }) => {
 		},
 		// 정답 2개 중 답안이 포함하는지 확인하는 함수 (정답제출 or 오답화면의 다음버튼에서 실행 (checkAnswer의 콜백함수) : 총 각 문제당 두번 실행 미래인재가 2명이기 때문에 각각 실행)
 		hasAnswer: (one) => {
+			const tempArr = [];
 			const result = answerFunctionList.makeCorrectAnswerArray(missionQuestion);
 			// result 결과물 => [[1번문제],[2번문제],[3번문제],[4번문제]] // [1번문제] => [{미래인재1의 정답 && 피드백},{미래인재2의 정답&&피드백}]
+			// console.log(result[index - 1]);
 			const idx = result[index - 1].findIndex((item, i) => {
 				return item.answer === one;
 			});
 			if (result[index - 1][idx] === undefined) {
 				return { bool: false, feedback: "" };
 			} else {
-				return { bool: true, feedback: result[index - 1][idx].feedback };
+				tempArr.push(one);
+				return {
+					bool: true,
+					feedback: result[index - 1][idx].feedback,
+				};
 			}
 		},
 		checkAnswer: () => {
+			let tempArr = []; // 오답은 걸러주는 배열
 			const one = document.getElementById("futureOne").innerHTML;
 			const two = document.getElementById("futureTwo").innerHTML;
 			const upperOne = one.toUpperCase();
@@ -119,18 +118,22 @@ const Mission2Container = ({ history, match, location }) => {
 			} else {
 				setNormal(false);
 				if (answerFunctionList.hasAnswer(upperOne).bool) {
-					makeInputArray(upperOne);
+					tempArr.push(upperOne);
 					setCorrectFirst(true);
 					setFirstFeedback(answerFunctionList.hasAnswer(upperOne).feedback);
 				} else {
 					setCorrectFirst(false);
 				}
 				if (answerFunctionList.hasAnswer(upperTwo).bool) {
-					makeInputArray(upperTwo);
+					tempArr.push(upperTwo);
 					setCorrectSeconds(true);
 					setSecondFeedback(answerFunctionList.hasAnswer(upperTwo).feedback);
 				} else {
 					setCorrectSeconds(false);
+				}
+				// 정답일 때마다 tempArr 배열에 담고, 그 배열의 길이가 2일때, inputArray에 넣기 (inputArray는 api request용 정답들 배열)
+				if (tempArr.length === 2) {
+					setInputArray(inputArray.concat(tempArr));
 				}
 			}
 		},
@@ -150,7 +153,6 @@ const Mission2Container = ({ history, match, location }) => {
 				const result = await SaveData.save(3, inputArray);
 				if (result.data.ok) {
 					setLoading(false);
-					setItem();
 					setNormal(true);
 					setCorrectFirst(true);
 					setCorrectSeconds(true);

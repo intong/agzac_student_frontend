@@ -136,7 +136,7 @@ const AnswerDefault = ({
 					style={{ position: "absolute", bottom: "24px", right: "24px" }}
 					onClick={answerFunctionList.checkAnswer}
 				/>
-			) : correctFirst && correctSeconds ? (
+			) : correctFirst === true && correctSeconds === true ? (
 				<ButtonPrimary
 					text='다음'
 					style={{ position: "absolute", bottom: "24px", right: "24px" }}
@@ -144,7 +144,7 @@ const AnswerDefault = ({
 				/>
 			) : (
 				<ButtonPrimary
-					text='다음'
+					text='정답제출'
 					style={{ position: "absolute", bottom: "24px", right: "24px" }}
 					onClick={answerFunctionList.checkAnswer}
 				/>

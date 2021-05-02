@@ -13,6 +13,7 @@ const SocialProblem = ({
 	const options = prevSelect && prevSelect.studentAnswerList;
 	return (
 		<>
+			{console.log(socialProblem)}
 			<RightBox>
 				<TitleRight>
 					선택한 사회문제관련 키워드 중 상품을 개발하여 해결할 사회문제 키워드

@@ -287,7 +287,6 @@ const Default = ({
 				</VideoArea>
 			) : (
 				<VideoArea>
-					{console.log(selectTabContent)}
 					<ReactPlayer
 						url={selectTabContent.video}
 						width='100%'

@@ -668,6 +668,7 @@ const Mission4Container = ({ history, location, match }) => {
 				setConfirm({ ...confirm, social: "ok" });
 				const result = JSON.parse(data[7]);
 				if (result[0] !== undefined && result[0] !== null && result[0] !== "") {
+					console.log(result[0]);
 					setSocialProblem(result[0]);
 				}
 				if (result[1] !== undefined && result[1] !== null && result[1] !== "") {
