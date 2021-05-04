@@ -239,6 +239,7 @@ const MainVideoContainer = ({ history, location, match }) => {
 			{dimension.width < 415 ? (
 				mainVideoInput ? (
 					<MainVideoMobileInputPresenter
+						loading={loading}
 						isModalOpen={modalState.saveModalOpen}
 						companyName={companyName}
 						secretCode={secretCode}

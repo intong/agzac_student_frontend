@@ -73,7 +73,7 @@ const MainVideoMobilePresenter = ({
 			{hasDataModal === undefined ? (
 				<ModalWrapper>
 					<ModalArea>
-						<LoadingModal />
+						<LoadingModal style={{ marginLeft: "15vw", marginBottom: "20vh" }} />
 					</ModalArea>
 				</ModalWrapper>
 			) : hasDataModal === true ? (
@@ -82,9 +82,8 @@ const MainVideoMobilePresenter = ({
 						<ModalTwoBtnLong
 							header='저장된 데이터 불러오기'
 							content='이미 작성된 데이터가 있습니다. 저장된 데이터를 불러올까요?'
-							closeModalEvent={modalFunction.toggleHasDataModal}
 							confirmBtnOnClick={modalFunction.useTempData}
-							cancelBtnOnClick={modalFunction.toggleHasDataModal}
+							cancelBtnOnClick={modalFunction.cleanAllMission}
 						/>
 					</ModalArea>
 				</ModalWrapper>

@@ -102,12 +102,12 @@ const Header = ({ match }) => {
 							exact={true}
 							activeStyle={activeStyle}
 							confirm={state.mission3} // css 글자색상 변경 state
-							onClick={(e) => {
-								if (state.mission2 !== "ok") {
-									e.preventDefault();
-									alert("Mission2 을 완료해 주세요");
-								}
-							}}
+							// onClick={(e) => {
+							// 	if (state.mission2 !== "ok") {
+							// 		e.preventDefault();
+							// 		alert("Mission2 을 완료해 주세요");
+							// 	}
+							// }}
 						>
 							Mission03
 						</NavLinkStyled4>

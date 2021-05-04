@@ -316,7 +316,6 @@ const DropDownHeaderLineSmall = styled.div`
 	width: 120px;
 	height: 22px;
 	padding-bottom: 8px;
-	border-radius: 2px;
 	border-bottom: ${(props) =>
 		props.open === false
 			? props.correct === false
@@ -340,7 +339,6 @@ const DropDownListLineSmall = styled.ul`
 	margin: 0;
 	width: 120px;
 	height: 231px;
-	border-radius: 2px;
 	border: solid 1px #686868;
 	overflow: auto;
 `;
@@ -348,7 +346,6 @@ const DropDownListLineSmall = styled.ul`
 const ListItemLineSmall = styled.li`
 	width: 185px;
 	height: 42px;
-	border-radius: 2px;
 	list-style: none;
 	&:hover {
 		background: #f5f5f5;

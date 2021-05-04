@@ -4,8 +4,10 @@ import { InputDefault } from "../../../ui/inputBox/Input";
 import { ButtonPrimary } from "../../../ui/button/Button";
 import { ModalBase, ModalBaseTwoBtn } from "../../../ui/modal/Modal";
 import close from "../../../assets/icons/bnt-x-24.svg";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const MainVideoMobileInputPresenter = ({
+	loading,
 	isModalOpen,
 	companyName,
 	secretCode,
@@ -78,6 +80,17 @@ const MainVideoMobileInputPresenter = ({
 							cancelbtntext='취소'
 							confirmbtnEvent={modalFunction.tempSaveSheet}
 							cancelbtnEvent={modalFunction.toggleModal}
+						/>
+					</ModalArea>
+				</ModalWrapper>
+			)}
+			{/* Loading 화면 */}
+			{loading && (
+				<ModalWrapper>
+					<ModalArea>
+						<ClipLoader
+							color={"#ffc300"}
+							style={{ margin: "0 auto", zIndex: "100" }}
 						/>
 					</ModalArea>
 				</ModalWrapper>

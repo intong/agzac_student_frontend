@@ -63,8 +63,9 @@ const Mission4Container = ({ history, location, match }) => {
 				// 사회문제 키워드 배열담기
 				tempArr.push(result);
 				if (texts !== undefined) {
-					const space = texts.split(" ").join("");
-					if (space.length > 14) {
+					const lineBreak = texts.replace(/(\r\n\t|\n|\r\t)/gm, ""); // 줄바꿈 제거
+					const spaceBreak = lineBreak.split(" ").join(""); // space 공백 띄어쓰기 제거
+					if (spaceBreak.length > 14) {
 						// textArea 텍스트 배열 담기
 						tempArr.push(texts);
 						return { ok: true, data: tempArr };

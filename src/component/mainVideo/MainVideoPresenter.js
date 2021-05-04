@@ -140,6 +140,7 @@ const MainVideoPresenter = ({
 			) : (
 				<></>
 			)}
+			{/* Loading 화면 */}
 			{loading && (
 				<ModalWrapper>
 					<ModalArea>
