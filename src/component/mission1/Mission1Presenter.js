@@ -134,6 +134,7 @@ const Mission1Presenter = ({
 						</ProcessBarLabel>
 					</ProgressWrpper>
 				</BlockBottom>
+				{/* Loading 화면 */}
 				{loading && (
 					<ModalWrapper>
 						<ModalAreaSave>
@@ -239,10 +240,6 @@ const ModalWrapper = styled.div`
 	top: 0;
 	z-index: 20;
 	display: flex;
-`;
-const LoadingModalArea = styled.div`
-	width: 200px;
-	height: 200px;
 `;
 const ModalPrevNextMediaArea = styled.div`
 	width: 944px;

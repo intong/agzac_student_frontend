@@ -182,14 +182,6 @@ const BlockTwoBtnLong = styled.div`
 	padding: 26px 24px;
 	position: relative;
 `;
-const CloseImgTwoBtnLong = styled.img`
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	&:hover {
-		cursor: pointer;
-	}
-`;
 const HeaderDivTwoBtnLong = styled.div`
 	font-family: NotoSansCJKkr;
 	font-size: 18px;
@@ -360,6 +352,169 @@ const BtnPositionWithInput = styled.div`
 	display: flex;
 	justify-content: flex-end;
 	gap: 8px;
+`;
+
+export const HelpModalMobile = ({ modalFunction }) => {
+	const [count, setCount] = useState(1);
+
+	const handleClickPage = {
+		handlePrev: () => {
+			if (count > 1) {
+				setCount(count - 1);
+			}
+		},
+		handleNext: () => {
+			if (count < 16) {
+				setCount(count + 1);
+			}
+		},
+	};
+
+	return (
+		<>
+			<WrapperHelpMobile>
+				<CloseBtnMobile src={close} alt='' onClick={modalFunction.closeModal} />
+				<TitleMobile>4차 산업혁명과 미래인재</TitleMobile>
+				<CardDivMobile>
+					<CardTitleMobile>{jobCards[count - 1].title}</CardTitleMobile>
+					<CardImageMobile src={jobCards[count - 1].imgUrl} alt='드론개발자' />
+					<ExplainCard>
+						<TitleDivMobile>하는일</TitleDivMobile>
+						<TodoExplainMobile>{jobCards[count - 1].todo}</TodoExplainMobile>
+						<BarUnderMobile />
+						<TitleDivMobile>인터뷰</TitleDivMobile>
+						<InterviewExplainMobile>
+							{jobCards[count - 1].interview}
+						</InterviewExplainMobile>
+						<BarUnderMobile />
+						<TitleDivMobile>학과</TitleDivMobile>
+						<SubjectExplainMobile>{jobCards[count - 1].subject}</SubjectExplainMobile>
+					</ExplainCard>
+				</CardDivMobile>
+			</WrapperHelpMobile>
+			<WrapperIndicationMobile>
+				<PrevBtn src={prev} alt='이전' onClick={handleClickPage.handlePrev} />
+				<NoDiv>
+					<span style={{ fontFamily: "NotoSansCJKkr", fontSize: "0.875rem" }}>
+						{count}&nbsp;
+					</span>
+					<span style={{ fontFamily: "NotoSansCJKkr", fontSize: "0.875rem" }}>
+						/ 16
+					</span>
+				</NoDiv>
+				<NextBtn src={next} alt='다음' onClick={handleClickPage.handleNext} />
+			</WrapperIndicationMobile>
+		</>
+	);
+};
+
+const WrapperHelpMobile = styled.div`
+	width: 72vw;
+	height: 48vh;
+	overflow-y: scroll;
+	overflow-x: hidden;
+`;
+const CloseBtnMobile = styled.img`
+	position: absolute;
+	top: 1vh;
+	right: 2vw;
+`;
+const TitleMobile = styled.div``;
+const CardDivMobile = styled.div`
+	margin-bottom: 5vh;
+`;
+const CardTitleMobile = styled.div`
+	width: 72vw;
+	text-align: center;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
+	position: relative;
+	top: 4vh;
+	left: 0vw;
+`;
+const CardImageMobile = styled.img`
+	width: 71vw;
+`;
+const ExplainCard = styled.div`
+	background-color: #f8f8f8;
+	box-sizing: border-box;
+	padding: 3vw;
+`;
+const TitleDivMobile = styled.div`
+	width: 66vw;
+	height: 2vh;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.43;
+	letter-spacing: normal;
+	color: #0f0f15;
+	margin-bottom: 2vh;
+`;
+const TodoExplainMobile = styled.div`
+	width: 66vw;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.43;
+	letter-spacing: normal;
+	color: #0f0f15;
+	text-align: justify;
+`;
+const BarUnderMobile = styled.div`
+	width: 72vw;
+	height: 0.2vh;
+	opacity: 0.3;
+	background-color: #d8d8d8;
+	margin-top: 3vh;
+	margin-bottom: 3vh;
+`;
+const InterviewExplainMobile = styled.div`
+	width: 66vw;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.43;
+	letter-spacing: normal;
+	color: #0f0f15;
+	text-align: justify;
+`;
+const SubjectExplainMobile = styled.div`
+	width: 66vw;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.43;
+	letter-spacing: normal;
+	color: #0f0f15;
+	text-align: justify;
+`;
+const WrapperIndicationMobile = styled.div`
+	/* background: lightpink; */
+	width: 72vw;
+	height: 7vh;
+	box-sizing: border-box;
+	padding: 0 10px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+`;
+const NoDiv = styled.div`
+	border: solid 1px #e4e4e4;
+	box-sizing: border-box;
+	text-align: center;
+	width: 20vw;
+	height: 5vh;
+	padding: 1.2vh 3vw;
 `;
 
 export const HelpModal = ({ style, modalFunction }) => {

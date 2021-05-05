@@ -2,11 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
 import { ButtonSecondary, ButtonPrimary } from "../../../ui/button/Button";
+import { HelpModalMobile } from "../../../ui/modal/Modal";
 import nextIcon from "../../../assets/mobileImage/icn-next-dim@2x.png";
 import close from "../../../assets/icons/bnt-x-24.svg";
 import { jobCards } from "../../JobCards";
+import btnJobs from "../../../assets/icons/btn-floaing-jobs.svg";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Mission1MobilePresenter = ({
+	isOpen,
+	loading,
 	prevMedia,
 	nextMedia,
 	modalFunction,
@@ -62,7 +67,10 @@ const Mission1MobilePresenter = ({
 					</TextDivBottom>
 				</TopContent>
 				<BottomContent>
-					<BottomTextTile>미래인재 정보</BottomTextTile>
+					<BottomTextTile>
+						<span>미래인재 정보</span>
+						<span style={{ marginLeft: "42vw" }}>{index}/16</span>
+					</BottomTextTile>
 
 					<ExplainContainer>
 						{missionQuestion && (
@@ -97,6 +105,7 @@ const Mission1MobilePresenter = ({
 						<NextIcon src={nextIcon} />
 					</ButtonDiv>
 				</BottomContent>
+				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 			</Wrapper>
 			{/* 정답화면 모달 */}
 			{correctCard && answerResult === true ? (
@@ -143,6 +152,7 @@ const Mission1MobilePresenter = ({
 			) : (
 				<></>
 			)}
+
 			{/* 문제 풀기 전 영상 플레이 모달 */}
 			{prevMedia && (
 				<ModalWrapper>
@@ -153,6 +163,7 @@ const Mission1MobilePresenter = ({
 							url={missionQuestion && missionQuestion[index - 1].prev}
 							width='100%'
 							height='100%'
+							controls={true}
 						/>
 					</ModalPrevNextMediaArea>
 				</ModalWrapper>
@@ -167,8 +178,24 @@ const Mission1MobilePresenter = ({
 							url={missionQuestion && missionQuestion[index - 1].next}
 							width='100%'
 							height='100%'
+							controls={true}
 						/>
 					</ModalPrevNextMediaArea>
+				</ModalWrapper>
+			)}
+			{/* 잡카드 모달 */}
+			{isOpen && (
+				<ModalWrapper>
+					<ModalArea>
+						<HelpModalMobile modalFunction={modalFunction} />
+					</ModalArea>
+				</ModalWrapper>
+			)}
+			{loading && (
+				<ModalWrapper>
+					<ModalAreaSave>
+						<ClipLoader color={"#ffc300"} style={{ margin: "0 auto" }} />
+					</ModalAreaSave>
 				</ModalWrapper>
 			)}
 		</>
@@ -428,5 +455,19 @@ const CloseBtn = styled.img`
 	&:hover {
 		cursor: pointer;
 	}
+`;
+const JobsBtn = styled.img`
+	width: 13vw;
+	height: 13vh;
+	position: fixed;
+	bottom: 7vh;
+	right: 3.5vw;
+	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
+	&:hover {
+		cursor: pointer;
+	}
+`;
+const ModalAreaSave = styled.div`
+	margin: auto;
 `;
 export default Mission1MobilePresenter;

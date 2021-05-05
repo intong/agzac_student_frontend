@@ -2,7 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { InputDefault } from "../../../ui/inputBox/Input";
 import { ButtonPrimary } from "../../../ui/button/Button";
+import { HelpModalMobile } from "../../../ui/modal/Modal";
 import close from "../../../assets/icons/bnt-x-24.svg";
+import ClipLoader from "react-spinners/ClipLoader";
+import btnJobs from "../../../assets/icons/btn-floaing-jobs.svg";
 
 const inputStyle = {
 	width: "80vw",
@@ -13,8 +16,11 @@ const inputStyle = {
 };
 
 const Mission1MobileInputPresenter = ({
+	isOpen,
+	loading,
 	wrongModal,
 	wrong,
+	modalFunction,
 	answerInputText,
 	mobileFunctionList,
 	answerFunctionList,
@@ -34,6 +40,7 @@ const Mission1MobileInputPresenter = ({
 						wrong={wrong}
 						onChange={answerFunctionList.onChangeAnswer}
 					/>
+					<OneMore wrong={wrong}>한번 더 풀어보세요!</OneMore>
 					<ButtonDiv>
 						<ButtonPrimary
 							text='정답 제출'
@@ -50,7 +57,23 @@ const Mission1MobileInputPresenter = ({
 						/>
 					</ButtonDiv>
 				</RightBox>
+				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 			</Wrapper>
+			{loading && (
+				<ModalWrapper>
+					<ModalAreaSave>
+						<ClipLoader color={"#ffc300"} style={{ margin: "0 auto" }} />
+					</ModalAreaSave>
+				</ModalWrapper>
+			)}
+			{/* 잡카드 모달 */}
+			{isOpen && (
+				<ModalWrapper>
+					<ModalArea>
+						<HelpModalMobile modalFunction={modalFunction} />
+					</ModalArea>
+				</ModalWrapper>
+			)}
 		</>
 	);
 };
@@ -97,10 +120,53 @@ const SubTitle = styled.div`
 	color: #686868;
 	margin-top: 8px;
 `;
+const OneMore = styled.div`
+	font-family: NotoSansCJKkr;
+	font-size: 14px;
+	font-weight: 500;
+	color: #ff3737;
+	display: ${(props) => (props.wrong === false ? "" : "none")};
+	margin-top: 2vh;
+`;
 const ButtonDiv = styled.div`
 	position: fixed;
 	bottom: 0px;
 	left: 0px;
+`;
+const ModalWrapper = styled.div`
+	width: 100vw;
+	height: 100vh;
+	background: rgba(15, 15, 21, 0.8);
+	position: fixed;
+	top: 0;
+	z-index: 20;
+	display: flex;
+`;
+const ModalAreaSave = styled.div`
+	margin: auto;
+`;
+const ModalArea = styled.div`
+	/* background: red; */
+	background: #ffffff;
+	width: 72vw;
+	height: 56vh;
+	border-radius: 5px;
+	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
+	margin: 0 auto;
+	margin-top: 15vh;
+	padding: 2vh 4vw;
+	position: relative;
+`;
+const JobsBtn = styled.img`
+	width: 13vw;
+	height: 13vh;
+	position: fixed;
+	bottom: 7vh;
+	right: 3.5vw;
+	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
+	&:hover {
+		cursor: pointer;
+	}
 `;
 
 export default Mission1MobileInputPresenter;

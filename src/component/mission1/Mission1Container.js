@@ -155,10 +155,28 @@ const Mission1Container = ({ history, match, location }) => {
 		},
 		// 정답확인 함수
 		checkAnswer: () => {
-			answerFunctionList.checkAnswer();
-			if (answerResult === true) {
-				mobileFunctionList.inputPageHandler();
-				mobileFunctionList.ToggleCorrectModal(); // 정답 끄기
+			const question = JSON.parse(sessionStorage.getItem("missionOne"));
+			if (answerInputText === "") {
+				alert("직업이름을 입력해 주세요.");
+			} else {
+				const noneSpaceText = answerInputText.split(" ").join(""); // 띄어쓰기 없앰
+				const upperCaseText = noneSpaceText.toUpperCase(); // 대소문자 구분 없앰 (대문자로 통일)
+				if (upperCaseText === question[index - 1].title) {
+					// 정답일때,
+					setInputArray([...inputArray, upperCaseText]); // 배열에 답 저장
+					answerFunctionList.findJobCards(upperCaseText); // 카드 이미지 찾아오기
+					setAnswerResult(true);
+					setAnswerInputText("");
+					mobileFunctionList.inputPageHandler();
+					mobileFunctionList.ToggleCorrectModal(); // 정답 켜기
+					if (correctCard === true) {
+						setLoading(false);
+					}
+				} else {
+					// 오답일때,
+					setAnswerResult(false);
+					setAnswerInputText("");
+				}
 			}
 		},
 		// 다음버튼 함수
@@ -206,13 +224,18 @@ const Mission1Container = ({ history, match, location }) => {
 			{dimension.width < 415 ? (
 				missionInput ? (
 					<Mission1MobileInputPresenter
+						isOpen={isOpen}
+						loading={loading}
 						wrong={answerResult}
 						answerInputText={answerInputText}
+						modalFunction={modalFunction}
 						mobileFunctionList={mobileFunctionList}
 						answerFunctionList={answerFunctionList}
 					/>
 				) : (
 					<Mission1MobilePresenter
+						isOpen={isOpen}
+						loading={loading}
 						index={index}
 						prevMedia={prevMedia}
 						nextMedia={nextMedia}
