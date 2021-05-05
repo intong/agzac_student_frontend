@@ -190,6 +190,7 @@ const Mission3Container = ({ history, location }) => {
 			{dimension.width < 415 ? (
 				choosed ? (
 					<Mission3MobileNextPresenter
+						isOpen={isOpen}
 						choosed={choosed}
 						selectTab={selectTab}
 						firstAnswer={firstAnswer}
@@ -199,14 +200,17 @@ const Mission3Container = ({ history, location }) => {
 						secondsInputText={secondsInputText}
 						thirdInputText={thirdInputText}
 						uiFunctionList={uiFunctionList}
+						modalFunction={modalFunction}
 						setProcessFunction={setProcessFunction}
 					/>
 				) : (
 					<Mission3MobilePresenter
+						isOpen={isOpen}
 						choosed={choosed}
 						selectTab={selectTab}
 						selectTabContent={selectTabContent}
 						mobileFunction={mobileFunction}
+						modalFunction={modalFunction}
 						uiFunctionList={uiFunctionList}
 					/>
 				)

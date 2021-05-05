@@ -5,6 +5,8 @@ import { InputDefault } from "../../../ui/inputBox/Input";
 import nextIcon from "../../../assets/mobileImage/icn-next-dim@2x.png";
 import checked from "../../../assets/icons/checkedBtn.svg";
 import unchecked from "../../../assets/icons/uncheckedBtn.svg";
+import btnJobs from "../../../assets/icons/btn-floaing-jobs.svg";
+import { HelpModalMobile } from "../../../ui/modal/Modal";
 
 const inputStyle = {
 	width: "85vw",
@@ -16,6 +18,7 @@ const inputStyle = {
 };
 
 const Mission3MobileNextPresenter = ({
+	isOpen,
 	choosed,
 	selectTab,
 	firstAnswer,
@@ -25,6 +28,7 @@ const Mission3MobileNextPresenter = ({
 	secondsInputText,
 	thirdInputText,
 	uiFunctionList,
+	modalFunction,
 	setProcessFunction,
 }) => {
 	// 화면 왼쪽 카드 텍스트 랜덤값 텍스트 배치
@@ -348,27 +352,29 @@ const Mission3MobileNextPresenter = ({
 							? "다시 한번 생각해 볼까요?"
 							: "정답입니다!"}
 					</AnwerText>
-					<InputDefault
-						name='first'
-						style={inputStyle}
-						wrong={firstAnswer}
-						value={firstInputText ? firstInputText : ""}
-						onChange={uiFunctionList.onChange}
-					/>
-					<InputDefault
-						name='second'
-						style={inputStyle}
-						wrong={secondAnswer}
-						value={secondsInputText ? secondsInputText : ""}
-						onChange={uiFunctionList.onChange}
-					/>
-					<InputDefault
-						name='third'
-						style={inputStyle}
-						wrong={thirdAnswer}
-						value={thirdInputText ? thirdInputText : ""}
-						onChange={uiFunctionList.onChange}
-					/>
+					<div style={{ marginTop: "2vh" }}>
+						<InputDefault
+							name='first'
+							style={inputStyle}
+							wrong={firstAnswer}
+							value={firstInputText ? firstInputText : ""}
+							onChange={uiFunctionList.onChange}
+						/>
+						<InputDefault
+							name='second'
+							style={inputStyle}
+							wrong={secondAnswer}
+							value={secondsInputText ? secondsInputText : ""}
+							onChange={uiFunctionList.onChange}
+						/>
+						<InputDefault
+							name='third'
+							style={inputStyle}
+							wrong={thirdAnswer}
+							value={thirdInputText ? thirdInputText : ""}
+							onChange={uiFunctionList.onChange}
+						/>
+					</div>
 				</RightBox>
 				<ButtonDiv>
 					{firstAnswer && secondAnswer && thirdAnswer ? (
@@ -402,6 +408,15 @@ const Mission3MobileNextPresenter = ({
 					<NextIcon src={nextIcon} />
 				</ButtonDiv>
 			</BottomContent>
+			<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
+			{/* 잡카드 모달 */}
+			{isOpen && (
+				<ModalWrapper>
+					<ModalArea>
+						<HelpModalMobile modalFunction={modalFunction} />
+					</ModalArea>
+				</ModalWrapper>
+			)}
 		</Wrapper>
 	);
 };
@@ -697,6 +712,39 @@ const Tab3Title = styled.div`
 	position: absolute;
 	top: 2vh;
 	left: 11vw;
+`;
+
+const JobsBtn = styled.img`
+	width: 13vw;
+	height: 13vh;
+	position: fixed;
+	bottom: 7vh;
+	right: 3.5vw;
+	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
+	&:hover {
+		cursor: pointer;
+	}
+`;
+const ModalWrapper = styled.div`
+	width: 100vw;
+	height: 100vh;
+	background: rgba(15, 15, 21, 0.8);
+	position: fixed;
+	top: 0px;
+	display: flex;
+	z-index: 20;
+`;
+const ModalArea = styled.div`
+	/* background: red; */
+	background: #ffffff;
+	width: 72vw;
+	height: 56vh;
+	border-radius: 5px;
+	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
+	margin: 0 auto;
+	margin-top: 15vh;
+	padding: 2vh 4vw;
+	position: relative;
 `;
 
 export default Mission3MobileNextPresenter;

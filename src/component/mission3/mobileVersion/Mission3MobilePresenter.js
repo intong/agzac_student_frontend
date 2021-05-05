@@ -5,12 +5,16 @@ import checked from "../../../assets/icons/checkedBtn.svg";
 import unchecked from "../../../assets/icons/uncheckedBtn.svg";
 import { ButtonSecondary } from "../../../ui/button/Button";
 import nextIcon from "../../../assets/mobileImage/icn-next-dim@2x.png";
+import btnJobs from "../../../assets/icons/btn-floaing-jobs.svg";
+import { HelpModalMobile } from "../../../ui/modal/Modal";
 
 const Mission3MobilePresenter = ({
+	isOpen,
 	choosed,
 	selectTab,
 	selectTabContent,
 	mobileFunction,
+	modalFunction,
 	uiFunctionList,
 }) => {
 	return (
@@ -132,9 +136,16 @@ const Mission3MobilePresenter = ({
 				</Tabs>
 				<VideoPlayArea>
 					{selectTabContent ? (
-						<ReactPlayer url={selectTabContent.video} width='100%' height='100%' />
+						<ReactPlayer
+							url={selectTabContent.video}
+							width='100%'
+							height='100%'
+							controls={true}
+						/>
 					) : (
-						"테마를 선택하면 영상을 볼 수 있습니다."
+						<div style={{ width: "90vw", textAlign: "center", marginTop: "14vh" }}>
+							테마를 선택하면 영상을 볼 수 있습니다.
+						</div>
 					)}
 				</VideoPlayArea>
 				<ButtonDiv>
@@ -154,6 +165,15 @@ const Mission3MobilePresenter = ({
 					<NextIcon src={nextIcon} />
 				</ButtonDiv>
 			</BottomContent>
+			<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
+			{/* 잡카드 모달 */}
+			{isOpen && (
+				<ModalWrapper>
+					<ModalArea>
+						<HelpModalMobile modalFunction={modalFunction} />
+					</ModalArea>
+				</ModalWrapper>
+			)}
 		</Wrapper>
 	);
 };
@@ -367,5 +387,37 @@ const Tab3Title = styled.div`
 	position: absolute;
 	top: 2vh;
 	left: 11vw;
+`;
+const JobsBtn = styled.img`
+	width: 13vw;
+	height: 13vh;
+	position: fixed;
+	bottom: 7vh;
+	right: 3.5vw;
+	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
+	&:hover {
+		cursor: pointer;
+	}
+`;
+const ModalWrapper = styled.div`
+	width: 100vw;
+	height: 100vh;
+	background: rgba(15, 15, 21, 0.8);
+	position: fixed;
+	top: 0px;
+	display: flex;
+	z-index: 20;
+`;
+const ModalArea = styled.div`
+	/* background: red; */
+	background: #ffffff;
+	width: 72vw;
+	height: 56vh;
+	border-radius: 5px;
+	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
+	margin: 0 auto;
+	margin-top: 15vh;
+	padding: 2vh 4vw;
+	position: relative;
 `;
 export default Mission3MobilePresenter;
