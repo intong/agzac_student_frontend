@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
 import { ButtonSecondary, ButtonPrimary } from "../../../ui/button/Button";
-import { HelpModalMobile } from "../../../ui/modal/Modal";
+import { HelpModalMobile, ModalBaseTwoBtn } from "../../../ui/modal/Modal";
 import nextIcon from "../../../assets/mobileImage/icn-next-dim@2x.png";
 import close from "../../../assets/icons/bnt-x-24.svg";
 import { jobCards } from "../../JobCards";
@@ -10,6 +10,7 @@ import btnJobs from "../../../assets/icons/btn-floaing-jobs.svg";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const Mission1MobilePresenter = ({
+	modalState,
 	isOpen,
 	loading,
 	prevMedia,
@@ -152,7 +153,6 @@ const Mission1MobilePresenter = ({
 			) : (
 				<></>
 			)}
-
 			{/* 문제 풀기 전 영상 플레이 모달 */}
 			{prevMedia && (
 				<ModalWrapper>
@@ -195,6 +195,22 @@ const Mission1MobilePresenter = ({
 				<ModalWrapper>
 					<ModalAreaSave>
 						<ClipLoader color={"#ffc300"} style={{ margin: "0 auto" }} />
+					</ModalAreaSave>
+				</ModalWrapper>
+			)}
+			{/*임시저장하기 모달*/}
+			{modalState.saveModalOpen && (
+				<ModalWrapper>
+					<ModalAreaSave>
+						<ModalBaseTwoBtn
+							header='임시 저장 하기'
+							content='지금까지 입력한 정보가 저장 됩니다.'
+							confirmbtntext='확인'
+							cancelbtntext='취소'
+							cancelbtnEvent={modalFunction.toggleSaveModal}
+							closeModalEvent={modalFunction.toggleSaveModal}
+							confirmbtnEvent={modalFunction.modalConfimBtnEvent}
+						/>
 					</ModalAreaSave>
 				</ModalWrapper>
 			)}

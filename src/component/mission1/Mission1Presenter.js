@@ -175,7 +175,6 @@ const Mission1Presenter = ({
 					</ModalWrapper>
 				)}
 				<Footer />
-
 				{/* 임시저장하기 모달 */}
 				{modalState.saveModalOpen && (
 					<ModalWrapper>

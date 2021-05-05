@@ -163,7 +163,12 @@ const Mission3Container = ({ history, location }) => {
 		} else {
 			// 단순 페이지 이동
 			const params = sessionStorage.getItem("auth");
-			await SaveData.getTempData(params).then((result) => {
+			const result = await SaveData.getTempData(params);
+			if (
+				result.data.writtenData[5] !== undefined &&
+				result.data.writtenData[5] !== null &&
+				result.data.writtenData[5] !== ""
+			) {
 				const data = JSON.parse(result.data.writtenData[5]);
 				if (data[0] === "고령화 사회") {
 					setSelectTab("tab2");
@@ -175,7 +180,7 @@ const Mission3Container = ({ history, location }) => {
 					setSelectTab("tab3");
 					uiFunctionList.tabSelectFunction("tab3");
 				}
-			});
+			}
 		}
 	};
 

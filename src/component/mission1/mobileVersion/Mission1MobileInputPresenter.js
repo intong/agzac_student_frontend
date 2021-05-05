@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { InputDefault } from "../../../ui/inputBox/Input";
 import { ButtonPrimary } from "../../../ui/button/Button";
-import { HelpModalMobile } from "../../../ui/modal/Modal";
+import { HelpModalMobile, ModalBaseTwoBtn } from "../../../ui/modal/Modal";
 import close from "../../../assets/icons/bnt-x-24.svg";
 import ClipLoader from "react-spinners/ClipLoader";
 import btnJobs from "../../../assets/icons/btn-floaing-jobs.svg";
@@ -16,6 +16,7 @@ const inputStyle = {
 };
 
 const Mission1MobileInputPresenter = ({
+	modalState,
 	isOpen,
 	loading,
 	wrongModal,
@@ -72,6 +73,22 @@ const Mission1MobileInputPresenter = ({
 					<ModalArea>
 						<HelpModalMobile modalFunction={modalFunction} />
 					</ModalArea>
+				</ModalWrapper>
+			)}
+			{/*임시저장하기 모달*/}
+			{modalState.saveModalOpen && (
+				<ModalWrapper>
+					<ModalAreaSave>
+						<ModalBaseTwoBtn
+							header='임시 저장 하기'
+							content='지금까지 입력한 정보가 저장 됩니다.'
+							confirmbtntext='확인'
+							cancelbtntext='취소'
+							cancelbtnEvent={modalFunction.toggleSaveModal}
+							closeModalEvent={modalFunction.toggleSaveModal}
+							confirmbtnEvent={modalFunction.modalConfimBtnEvent}
+						/>
+					</ModalAreaSave>
 				</ModalWrapper>
 			)}
 		</>

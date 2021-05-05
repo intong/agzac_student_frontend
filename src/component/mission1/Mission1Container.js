@@ -224,6 +224,7 @@ const Mission1Container = ({ history, match, location }) => {
 			{dimension.width < 415 ? (
 				missionInput ? (
 					<Mission1MobileInputPresenter
+						modalState={modalState}
 						isOpen={isOpen}
 						loading={loading}
 						wrong={answerResult}
@@ -234,6 +235,7 @@ const Mission1Container = ({ history, match, location }) => {
 					/>
 				) : (
 					<Mission1MobilePresenter
+						modalState={modalState}
 						isOpen={isOpen}
 						loading={loading}
 						index={index}

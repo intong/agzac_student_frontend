@@ -138,6 +138,7 @@ const Mission4MobilePresenter = ({
 					<ButtonSecondary
 						text='다른 사회문제 선택하기'
 						style={{ width: "80vw", height: "7vh", marginLeft: "10vw" }}
+						onClick={clickFunctionList.choiceOtherSocialProblem}
 					/>
 				</div>
 				<Tabs>

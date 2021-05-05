@@ -62,7 +62,6 @@ const Mission4Presenter = ({
 }) => {
 	return (
 		<LayOutContent>
-			{/* {console.log(prevSelect)} */}
 			<Wrapper>
 				<BlockTop>
 					<TopContent>
