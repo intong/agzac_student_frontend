@@ -89,7 +89,7 @@ const FinalReportMobile = ({
 					url={MediaSecretCodeAnswer.endingMedia}
 					width='100%'
 					height='100%'
-					onProgress={handleProgree}
+					controls={true}
 				/>
 			</VideoPlayArea>
 			{changeBtn ? (
