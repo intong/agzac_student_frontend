@@ -66,7 +66,7 @@ const Header = ({ match }) => {
 									e.preventDefault();
 									alert("EY한영 아그작교실 영상시청을 완료해 주세요");
 								}
-								if (state.mission2 === "ok") {
+								if (state.mission2 === "ok" || state.mission1 === "ok") {
 									e.preventDefault();
 								}
 							}}
@@ -86,7 +86,7 @@ const Header = ({ match }) => {
 									e.preventDefault();
 									alert("Mission1 을 완료해 주세요");
 								}
-								if (state.mission3 === "ok") {
+								if (state.mission2 === "ok" || state.mission3 === "ok") {
 									e.preventDefault();
 								}
 							}}
