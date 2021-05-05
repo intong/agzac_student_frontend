@@ -170,18 +170,29 @@ const Mission2Container = ({ history, match, location }) => {
 			setMissionInput(!missionInput);
 		},
 		// 정답 제출 후 다음 버튼으로 다음 문제 보냄
-		addIndex: () => {
+		addIndex: async () => {
+			setLoading(true);
+			// index +1 해서 다음문제 넘기기
 			if (index === 4) {
-				setIndex(index);
-				setProcessFunction();
+				const result = await SaveData.save(3, inputArray);
+				if (result.data.ok) {
+					setLoading(false);
+					setIndex(index);
+					setProcessFunction();
+				}
 			} else {
-				mobileFunctionList.toggleInputPresenter();
-				setNormal(true);
-				setCorrectFirst(true);
-				setCorrectSeconds(true);
-				setIndex(index + 1);
-				actions.setMission2Index(index + 1);
-				history.push(`/mission2/${parseInt(match.params.id) + 1}`);
+				// console.log("다음버튼 이벤트", inputArray);
+				const result = await SaveData.save(3, inputArray);
+				if (result.data.ok) {
+					mobileFunctionList.toggleInputPresenter();
+					setLoading(false);
+					setNormal(true);
+					setCorrectFirst(true);
+					setCorrectSeconds(true);
+					setIndex(index + 1);
+					actions.setMission2Index(index + 1);
+					history.push(`/mission2/${parseInt(match.params.id) + 1}`);
+				}
 			}
 		},
 	};
@@ -210,16 +221,25 @@ const Mission2Container = ({ history, match, location }) => {
 			{dimension.width < 415 ? (
 				missionInput ? (
 					<Mission2MobileInputPresenter
+						index={index}
+						isOpen={isOpen}
+						loading={loading}
 						normal={normal}
 						correctFirst={correctFirst}
 						correctSeconds={correctSeconds}
+						firstFeedback={firstFeedback}
+						secondFeedback={secondFeedback}
+						modalFunction={modalFunction}
 						mobileFunctionList={mobileFunctionList}
 						answerFunctionList={answerFunctionList}
 					/>
 				) : (
 					<Mission2MobilePresenter
+						isOpen={isOpen}
+						loading={loading}
 						index={index}
 						missionQuestion={missionQuestion}
+						modalFunction={modalFunction}
 						mobileFunctionList={mobileFunctionList}
 					/>
 				)

@@ -1,11 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import nextIcon from "../../../assets/mobileImage/icn-next-dim@2x.png";
+import btnJobs from "../../../assets/icons/btn-floaing-jobs.svg";
 import { ButtonSecondary } from "../../../ui/button/Button";
+import { HelpModalMobile } from "../../../ui/modal/Modal";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Mission2MobilePresenter = ({
+	isOpen,
+	loading,
 	index,
 	missionQuestion,
+	modalFunction,
 	mobileFunctionList,
 }) => {
 	return (
@@ -63,7 +69,9 @@ const Mission2MobilePresenter = ({
 				<BottomContent>
 					{missionQuestion && (
 						<>
-							<BottomTextTile>상품소개</BottomTextTile>
+							<BottomTextTile>
+								상품소개&nbsp;&nbsp;({index}&nbsp;/&nbsp;4)
+							</BottomTextTile>
 							<Title>상품명</Title>
 							<ProductName>{missionQuestion[index - 1].proName}</ProductName>
 							<Title>상품설명</Title>
@@ -89,7 +97,23 @@ const Mission2MobilePresenter = ({
 						<NextIcon src={nextIcon} />
 					</ButtonDiv>
 				</BottomContent>
+				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 			</Wrapper>
+			{loading && (
+				<ModalWrapper>
+					<ModalAreaSave>
+						<ClipLoader color={"#ffc300"} style={{ margin: "0 auto" }} />
+					</ModalAreaSave>
+				</ModalWrapper>
+			)}
+			{/* 잡카드 모달 */}
+			{isOpen && (
+				<ModalWrapper>
+					<ModalArea>
+						<HelpModalMobile modalFunction={modalFunction} />
+					</ModalArea>
+				</ModalWrapper>
+			)}
 		</LayOutContent>
 	);
 };
@@ -171,12 +195,12 @@ const TextDivBottom = styled.div`
 const BottomContent = styled.div`
 	background: #f4f5f6;
 	position: relative;
-	padding-top: 30px;
-	padding-bottom: 8vh;
+	padding-top: 5vh;
+	padding-bottom: 20vh;
 `;
 const BottomTextTile = styled.div`
 	font-family: NotoSansCJKkr;
-	font-size: 18px;
+	font-size: 1.125rem;
 	font-weight: 500;
 	line-height: 1.33;
 	color: #0f0f15;
@@ -221,6 +245,41 @@ const NextIcon = styled.img`
 	right: 32vw;
 	width: 24px;
 	height: 24px;
+`;
+const ModalWrapper = styled.div`
+	width: 100vw;
+	height: 100vh;
+	background: rgba(15, 15, 21, 0.8);
+	position: fixed;
+	top: 0px;
+	display: flex;
+	z-index: 20;
+`;
+const ModalAreaSave = styled.div`
+	margin: auto;
+`;
+const ModalArea = styled.div`
+	/* background: red; */
+	background: #ffffff;
+	width: 72vw;
+	height: 56vh;
+	border-radius: 5px;
+	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
+	margin: 0 auto;
+	margin-top: 15vh;
+	padding: 2vh 4vw;
+	position: relative;
+`;
+const JobsBtn = styled.img`
+	width: 13vw;
+	height: 13vh;
+	position: fixed;
+	bottom: 7vh;
+	right: 3.5vw;
+	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
+	&:hover {
+		cursor: pointer;
+	}
 `;
 
 export default Mission2MobilePresenter;

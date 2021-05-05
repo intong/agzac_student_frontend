@@ -3,6 +3,9 @@ import styled from "styled-components";
 import close from "../../../assets/icons/bnt-x-24.svg";
 import { DropboxMobile } from "../../../ui/MobileUI";
 import { ButtonPrimary } from "../../../ui/button/Button";
+import { HelpModalMobile } from "../../../ui/modal/Modal";
+import ClipLoader from "react-spinners/ClipLoader";
+import btnJobs from "../../../assets/icons/btn-floaing-jobs.svg";
 
 const options = [
 	"드론개발자",
@@ -24,9 +27,15 @@ const options = [
 ];
 
 const Mission2MobileInputPresenter = ({
+	index,
+	isOpen,
+	loading,
 	normal,
 	correctFirst,
 	correctSeconds,
+	firstFeedback,
+	secondFeedback,
+	modalFunction,
 	mobileFunctionList,
 	answerFunctionList,
 }) => {
@@ -46,30 +55,39 @@ const Mission2MobileInputPresenter = ({
 		<>
 			<Wrapper>
 				<CloseImg src={close} onClick={mobileFunctionList.toggleInputPresenter} />
-				<Title>4차산업기술을 보유한 미래인재</Title>
+				<Title>4차산업기술을 보유한 미래인재&nbsp;({index}&nbsp;/&nbsp;4)</Title>
 				<SubTitle>
 					사회문제를 해결하는 상품을 개발하기 위해서는 4차산업 기술을 보유한 인재가
 					필요합니다. 어떤 미래인재가 참여해야 할까요? 상품을 개발한 미래인재 2명을
 					찾아주세요!
 				</SubTitle>
-				<SubTitle style={{ marginLeft: "10vw", marginBottom: "2vh" }}>
-					미래인재1
-				</SubTitle>
-				<DropboxMobile
-					id='futureOne'
-					style={leftDropbox}
-					placeholder='선택'
-					options={options}
-				/>
-				<SubTitle style={{ marginLeft: "10vw", marginBottom: "2vh" }}>
-					미래인재2
-				</SubTitle>
-				<DropboxMobile
-					id='futureTwo'
-					style={rightDropbox}
-					placeholder='선택'
-					options={options}
-				/>
+				<div style={{ marginBottom: "20vh" }}>
+					<SubTitle style={{ marginLeft: "10vw", marginBottom: "2vh" }}>
+						미래인재1
+					</SubTitle>
+					<DropboxMobile
+						id='futureOne'
+						style={leftDropbox}
+						placeholder='선택'
+						options={options}
+					/>
+					<SubFeedbackFirst normal={normal} correctFirst={correctFirst}>
+						{firstFeedback && firstFeedback}
+					</SubFeedbackFirst>
+					<SubTitle style={{ marginLeft: "10vw", marginBottom: "2vh" }}>
+						미래인재2
+					</SubTitle>
+					<DropboxMobile
+						id='futureTwo'
+						style={rightDropbox}
+						placeholder='선택'
+						options={options}
+					/>
+					<SubFeedbackSeconds normal={normal} correctSeconds={correctSeconds}>
+						{secondFeedback && secondFeedback}
+					</SubFeedbackSeconds>
+				</div>
+				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
 				<ButtonDiv>
 					{normal ? (
 						<ButtonPrimary
@@ -117,6 +135,21 @@ const Mission2MobileInputPresenter = ({
 						/>
 					)}
 				</ButtonDiv>
+				{/* 잡카드 모달 */}
+				{isOpen && (
+					<ModalWrapper>
+						<ModalArea>
+							<HelpModalMobile modalFunction={modalFunction} />
+						</ModalArea>
+					</ModalWrapper>
+				)}
+				{loading && (
+					<ModalWrapper>
+						<ModalAreaSave>
+							<ClipLoader color={"#ffc300"} style={{ margin: "0 auto" }} />
+						</ModalAreaSave>
+					</ModalWrapper>
+				)}
 			</Wrapper>
 		</>
 	);
@@ -124,10 +157,10 @@ const Mission2MobileInputPresenter = ({
 
 const Wrapper = styled.div`
 	width: 100vw;
-	height: 130vh;
-	position: fixed;
+	height: 100vh;
+	/* position: fixed; */
 	overflow-x: hidden;
-	overflow-y: auto;
+	overflow-y: scroll;
 	background: #ffffff;
 `;
 const CloseImg = styled.img`
@@ -164,10 +197,77 @@ const SubTitle = styled.div`
 	margin: auto;
 	margin-top: 4vh;
 `;
+const SubFeedbackFirst = styled.div`
+	display: ${(props) =>
+		props.normal === false && props.correctFirst === true ? "show" : "none"};
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.57;
+	letter-spacing: normal;
+	color: #0f0f15;
+	text-align: justify;
+	width: 85vw;
+	margin: auto;
+	margin-top: 2vh;
+`;
+const SubFeedbackSeconds = styled.div`
+	display: ${(props) =>
+		props.normal === false && props.correctSeconds === true ? "show" : "none"};
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.57;
+	letter-spacing: normal;
+	color: #0f0f15;
+	text-align: justify;
+	width: 85vw;
+	margin: auto;
+	margin-top: 2vh;
+`;
 const ButtonDiv = styled.div`
 	position: fixed;
 	bottom: 0px;
 	left: 0px;
+`;
+const ModalWrapper = styled.div`
+	width: 100vw;
+	height: 100vh;
+	background: rgba(15, 15, 21, 0.8);
+	position: fixed;
+	top: 0px;
+	display: flex;
+	z-index: 20;
+`;
+const ModalAreaSave = styled.div`
+	margin: auto;
+`;
+const ModalArea = styled.div`
+	/* background: red; */
+	background: #ffffff;
+	width: 72vw;
+	height: 56vh;
+	border-radius: 5px;
+	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
+	margin: 0 auto;
+	margin-top: 15vh;
+	padding: 2vh 4vw;
+	position: relative;
+`;
+const JobsBtn = styled.img`
+	width: 13vw;
+	height: 13vh;
+	position: fixed;
+	bottom: 7vh;
+	right: 3.5vw;
+	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
+	&:hover {
+		cursor: pointer;
+	}
 `;
 
 export default Mission2MobileInputPresenter;

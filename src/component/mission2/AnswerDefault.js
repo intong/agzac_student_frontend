@@ -49,7 +49,6 @@ const AnswerDefault = ({
 			correctFirst={correctFirst}
 			correctSeconds={correctSeconds}
 		>
-			{/* {console.log(index)} */}
 			<Number>
 				<span
 					style={{
