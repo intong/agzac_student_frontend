@@ -50,6 +50,7 @@ const MainVideoMobilePresenter = ({
 						url={mediaAndSecretCode.openingMedia}
 						width='100%'
 						height='100%'
+						controls={true}
 					/>
 				</VideoPlayArea>
 				<ButtonDiv>
@@ -166,15 +167,17 @@ const TextDivBottom = styled.div`
 `;
 const BottomContent = styled.div`
 	background: #f4f5f6;
+	/* background: red; */
+	box-sizing: border-box;
 	position: relative;
-	padding-top: 30px;
-	height: 35vh;
+	padding-bottom: 10vh;
+	height: 60vh;
 `;
 const VideoPlayArea = styled.div`
 	border-radius: 2px;
-	border: solid 1px #e4e4e4;
-	width: 80vw;
-	height: 25vh;
+	/* border: solid 1px #e4e4e4; */
+	width: 100vw;
+	height: 50vh;
 	margin: auto;
 `;
 const ButtonDiv = styled.div`

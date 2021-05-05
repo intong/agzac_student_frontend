@@ -81,6 +81,9 @@ const HeaderMobile = ({ sidebar, toggleSidebar }) => {
 								confirm={state.video} // css 글자색상 변경 state
 								onClick={(e) => {
 									toggleSidebar();
+									if (state.video === "ok") {
+										e.preventDefault();
+									}
 								}}
 							>
 								EY한영 아그작교실 영상시청
@@ -98,6 +101,9 @@ const HeaderMobile = ({ sidebar, toggleSidebar }) => {
 										e.preventDefault();
 										alert("EY한영 아그작교실 영상시청을 완료해 주세요");
 									}
+									if (state.mission2 === "ok") {
+										e.preventDefault();
+									}
 								}}
 							>
 								Mission01
@@ -114,6 +120,9 @@ const HeaderMobile = ({ sidebar, toggleSidebar }) => {
 									if (state.mission1 !== "ok") {
 										e.preventDefault();
 										alert("Mission1 을 완료해 주세요");
+									}
+									if (state.mission3 === "ok") {
+										e.preventDefault();
 									}
 								}}
 							>

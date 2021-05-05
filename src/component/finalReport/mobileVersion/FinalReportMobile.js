@@ -6,8 +6,10 @@ import {
 	FinalReportBtnActive,
 	FinalReportBtn,
 } from "../../../ui/button/Button";
+import { FinalAlertModal } from "../../../ui/modal/Modal";
 
 const FinalReportMobile = ({
+	alertModal,
 	handleProgree,
 	changeBtn,
 	isOpen,
@@ -75,9 +77,11 @@ const FinalReportMobile = ({
 				<TextDivBottom>
 					지금까지 EY한영 아그작교실 프로젝트를 통해 4차산업혁명기술을 활용하여
 					사회문제를 해결하는 상품을 개발해 보았습니다. 최종보고서를 작성하기위해
-					영상을 시청한 후 최종보고서를 작성하여 제출해 주시기 바랍니다. *영상시청이
-					완료되어야 최종보고서를 제출할 수 있습니다. 최종보고서 제출이 완료되어야
-					모든 미션이 종료된 것입니다.
+					영상을 시청한 후 최종보고서를 작성하여 제출해 주시기 바랍니다.{" "}
+					<p style={{ marginTop: "2vh" }}>
+						*영상시청이 완료되어야 최종보고서를 제출할 수 있습니다. 최종보고서 제출이
+						완료되어야 모든 미션이 종료된 것입니다.
+					</p>
 				</TextDivBottom>
 			</TopContent>
 			<VideoPlayArea>
@@ -93,7 +97,7 @@ const FinalReportMobile = ({
 					text='최종보고서 제출하기'
 					style={{ position: "fixed", bottom: "0px", width: "100vw", height: "8vh" }}
 					onClick={() => {
-						alert("링크가기");
+						window.open("https://forms.gle/RzEH356bezV7XCUo9");
 					}}
 				/>
 			) : (
@@ -108,6 +112,20 @@ const FinalReportMobile = ({
 						height: "8vh",
 					}}
 				/>
+			)}
+			{alertModal && (
+				<ModalWrapper key={1}>
+					<ModalAreaPrice key={1}>
+						<FinalAlertModal
+							header='알림'
+							content='영상을 모두 시청하셔야'
+							subContent='최종보고서를 제출하실 수 있습니다.'
+							btntext='확인'
+							closeModalEvent={modalFunction.toggleAlertModal}
+							btnEvent={modalFunction.toggleAlertModal}
+						/>
+					</ModalAreaPrice>
+				</ModalWrapper>
 			)}
 		</Wrapper>
 	);
@@ -168,6 +186,7 @@ const TextDivMiddle = styled.div`
 	font-weight: 500;
 	line-height: 40px;
 	color: #0f0f15;
+	text-align: justify;
 	width: 80vw;
 	margin: auto;
 	margin-top: 20px;
@@ -184,11 +203,28 @@ const TextDivBottom = styled.div`
 	padding-bottom: 30px;
 `;
 const VideoPlayArea = styled.div`
+	box-sizing: border-box;
 	border-radius: 2px;
-	border: solid 1px #e4e4e4;
-	width: 80vw;
-	height: 25vh;
+	/* border: solid 1px #e4e4e4; */
+	width: 90vw;
+	height: 50vh;
+	padding-top: 5vh;
+	/* padding-bottom: 10vh; */
 	margin: auto;
 	margin-bottom: 10vh;
+`;
+const ModalWrapper = styled.div`
+	width: 100vw;
+	height: 100vh;
+	background: rgba(15, 15, 21, 0.8);
+	position: fixed;
+	top: 0;
+	z-index: 20;
+	display: flex;
+`;
+const ModalAreaPrice = styled.div`
+	/* width: 320px;
+	height: 304px; */
+	margin: auto;
 `;
 export default FinalReportMobile;

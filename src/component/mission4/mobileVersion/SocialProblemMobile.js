@@ -3,8 +3,15 @@ import styled from "styled-components";
 import { ButtonPrimary } from "../../../ui/button/Button";
 import { TextArea } from "../../../ui/inputBox/Input";
 import { Dropbox } from "../../../ui/dropbox/Dropbox";
+import ClipLoader from "react-spinners/ClipLoader";
 
-const SocialProblem = ({ texts, prevSelect, clickFunctionList }) => {
+const SocialProblem = ({
+	loading,
+	socialProblem,
+	texts,
+	prevSelect,
+	clickFunctionList,
+}) => {
 	const options = prevSelect && prevSelect.studentAnswerList;
 	return (
 		<>
@@ -15,6 +22,7 @@ const SocialProblem = ({ texts, prevSelect, clickFunctionList }) => {
 				</TitleRight>
 				<Dropbox
 					id='question'
+					item={socialProblem}
 					options={options}
 					placeholder='사회문제 현상 키워드 선택'
 				/>
@@ -48,6 +56,13 @@ const SocialProblem = ({ texts, prevSelect, clickFunctionList }) => {
 				}}
 				onClick={() => clickFunctionList.onClickNextFuction("social")}
 			/>
+			{loading && (
+				<ModalWrapper>
+					<ModalAreaSave>
+						<ClipLoader color={"#ffc300"} style={{ margin: "0 auto" }} />
+					</ModalAreaSave>
+				</ModalWrapper>
+			)}
 		</>
 	);
 };
@@ -92,6 +107,18 @@ const TitleRight2 = styled.div`
 	text-align: justify;
 	margin-top: 10vh;
 	margin-bottom: 1vh;
+`;
+const ModalWrapper = styled.div`
+	width: 100vw;
+	height: 100vh;
+	background: rgba(15, 15, 21, 0.8);
+	position: fixed;
+	top: 0px;
+	display: flex;
+	z-index: 20;
+`;
+const ModalAreaSave = styled.div`
+	margin: auto;
 `;
 
 export default SocialProblem;

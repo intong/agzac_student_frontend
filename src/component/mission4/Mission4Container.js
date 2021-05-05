@@ -67,7 +67,7 @@ const Mission4Container = ({ history, location, match }) => {
 					const spaceBreak = lineBreak.split(" ").join(""); // space 공백 띄어쓰기 제거
 					if (spaceBreak.length > 14) {
 						// textArea 텍스트 배열 담기
-						tempArr.push(texts);
+						tempArr.push(spaceBreak);
 						return { ok: true, data: tempArr };
 					} else {
 						alert("관련 문제상황을 15자 이상 작성해 주세요.");
@@ -604,7 +604,6 @@ const Mission4Container = ({ history, location, match }) => {
 					itemIntro: "ok",
 				});
 				const result = JSON.parse(data[10]);
-				console.log(result);
 				if (result[0] !== undefined && result[0] !== null && result[0] !== "") {
 					setItemIntro1(result[0]);
 				}
@@ -787,6 +786,7 @@ const Mission4Container = ({ history, location, match }) => {
 		<>
 			{dimension.width < 415 ? (
 				<Mission4MobilePresenter
+					loading={loading}
 					tabClick={tabClick}
 					socialProblem={socialProblem}
 					texts={texts}

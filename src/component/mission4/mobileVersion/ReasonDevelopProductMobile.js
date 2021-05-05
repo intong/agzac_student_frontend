@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { InputDefault } from "../../../ui/inputBox/Input";
 import { ButtonPrimary } from "../../../ui/button/Button";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const inputStyle1 = {
 	width: "80vw",
@@ -36,6 +37,7 @@ const inputStyle4 = {
 };
 
 const ReasonDevelopProduct = ({
+	loading,
 	firstTxtArea,
 	secondTxtArea,
 	thirdTxtArea,
@@ -88,6 +90,13 @@ const ReasonDevelopProduct = ({
 				}}
 				onClick={() => clickFunctionList.onClickNextFuction("reason")}
 			/>
+			{loading && (
+				<ModalWrapper>
+					<ModalAreaSave>
+						<ClipLoader color={"#ffc300"} style={{ margin: "0 auto" }} />
+					</ModalAreaSave>
+				</ModalWrapper>
+			)}
 		</>
 	);
 };
@@ -115,6 +124,18 @@ const Question = styled.div`
 	line-height: 1.57;
 	letter-spacing: normal;
 	color: #0f0f15;
+`;
+const ModalWrapper = styled.div`
+	width: 100vw;
+	height: 100vh;
+	background: rgba(15, 15, 21, 0.8);
+	position: fixed;
+	top: 0px;
+	display: flex;
+	z-index: 20;
+`;
+const ModalAreaSave = styled.div`
+	margin: auto;
 `;
 
 export default ReasonDevelopProduct;
