@@ -91,7 +91,6 @@ const Mission2Container = ({ history, match, location }) => {
 			const tempArr = [];
 			const result = answerFunctionList.makeCorrectAnswerArray(missionQuestion);
 			// result 결과물 => [[1번문제],[2번문제],[3번문제],[4번문제]] // [1번문제] => [{미래인재1의 정답 && 피드백},{미래인재2의 정답&&피드백}]
-			// console.log(result[index - 1]);
 			const idx = result[index - 1].findIndex((item, i) => {
 				return item.answer === one;
 			});
@@ -149,7 +148,6 @@ const Mission2Container = ({ history, match, location }) => {
 					setProcessFunction();
 				}
 			} else {
-				// console.log("다음버튼 이벤트", inputArray);
 				const result = await SaveData.save(3, inputArray);
 				if (result.data.ok) {
 					setLoading(false);
@@ -181,7 +179,6 @@ const Mission2Container = ({ history, match, location }) => {
 					setProcessFunction();
 				}
 			} else {
-				// console.log("다음버튼 이벤트", inputArray);
 				const result = await SaveData.save(3, inputArray);
 				if (result.data.ok) {
 					mobileFunctionList.toggleInputPresenter();
@@ -199,7 +196,6 @@ const Mission2Container = ({ history, match, location }) => {
 
 	// contextApi의 임시저장된 데이터 사용하기
 	const tempUse = async () => {
-		// console.log(location.state);
 		if (location.state !== null && location.state !== undefined) {
 			setInputArray(location.state.data);
 		} else {
@@ -217,7 +213,6 @@ const Mission2Container = ({ history, match, location }) => {
 	}, [match.params.id]);
 	return (
 		<>
-			{/* {console.log(index)} */}
 			{dimension.width < 415 ? (
 				missionInput ? (
 					<Mission2MobileInputPresenter

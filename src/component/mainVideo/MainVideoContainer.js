@@ -78,8 +78,6 @@ const MainVideoContainer = ({ history, location, match }) => {
 		},
 		// 임시저장한 Data 사용하기
 		useTempData: () => {
-			// console.log(state.saveTempData);
-			// console.log(state.saveTempData.length);
 			modalFunction.toggleHasDataModal();
 			const path = state.saveTempData.length;
 			if (path < 4) {
@@ -112,7 +110,6 @@ const MainVideoContainer = ({ history, location, match }) => {
 				actions.setMission1("ok");
 				const data = JSON.parse(state.saveTempData[4]);
 				const step = data.length / 2 + 1;
-				console.log(step);
 				if (step < 5) {
 					// 미션2 총 문제 수 : 4
 					// 미션2 4개 미만 문제를 다 맞춘 경우
@@ -133,7 +130,6 @@ const MainVideoContainer = ({ history, location, match }) => {
 				actions.setVideo("ok");
 				actions.setMission1("ok");
 				actions.setMission2("ok");
-				console.log(state.saveTempData[5]);
 				const data = JSON.parse(state.saveTempData[5]);
 				history.push({
 					pathname: "/mission3/category",
@@ -142,7 +138,6 @@ const MainVideoContainer = ({ history, location, match }) => {
 			} else if (path < 14) {
 				// console.log("미션4");
 				const data = state.saveTempData[7];
-				// console.log(data);
 				if (data !== undefined && data !== null) {
 					// 미션4 한 문제라도 푼 경우 = 미션3 끝 미션4 한 문제라도 물었을 경우
 					actions.setVideo("ok");
@@ -150,7 +145,6 @@ const MainVideoContainer = ({ history, location, match }) => {
 					actions.setMission2("ok");
 					actions.setMission3("ok");
 					const data = state.saveTempData;
-					// console.log(data);
 					history.push({
 						pathname: `/mission4/${state.mission4Index}`,
 						state: { data: data },

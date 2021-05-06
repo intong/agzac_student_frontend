@@ -73,7 +73,7 @@ const Mission1Container = ({ history, match, location }) => {
 
 	// 문제출제 세팅 함수
 	const selectExamQuestion = () => {
-		console.log("selectExamQuestion");
+		// console.log("selectExamQuestion");
 		const question = JSON.parse(sessionStorage.getItem("missionOne"));
 		setMissionQuestion(question);
 	};
@@ -88,12 +88,6 @@ const Mission1Container = ({ history, match, location }) => {
 		// 정답 입력값 가져오기
 		onChangeAnswer: (e) => {
 			setAnswerInputText(e.target.value);
-		},
-
-		// 이전문제 보기 이벤트
-		prevQuestion: () => {
-			console.log("이전문제보기");
-			console.log(inputArray.length);
 		},
 
 		// 정답제출 버튼 클릭이벤트
@@ -203,11 +197,11 @@ const Mission1Container = ({ history, match, location }) => {
 				const result2 = JSON.parse(result.data.writtenData[3]);
 				if (result2.length === 16) {
 					// 미션2를 끝내고 온 경우
-					console.log("미션2 끝 이후 접근");
+					// console.log("미션2 끝 이후 접근");
 					setInputArray(result2); // 정답 List
 				}
 			} else {
-				console.log("다시시작하기");
+				// console.log("다시시작하기");
 				setInputArray(inputArray); // 임시저장 이용 안하고 다시하기로 들어왔을 때 빈 배열 만들기
 			}
 		}

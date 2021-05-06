@@ -180,7 +180,6 @@ const Mission4Container = ({ history, location, match }) => {
 									}
 								} else {
 									alert("미래인재2 이유를 10자 이상 작성해 주세요.");
-									console.log(humanRole2.split(" ").join("").length);
 									return { ok: false, data: tempArr };
 								}
 							} else {
@@ -347,7 +346,6 @@ const Mission4Container = ({ history, location, match }) => {
 				if (question.ok) {
 					setLoading(true);
 					const result = await SaveData.save(6, question.data); // question api
-					console.log(result);
 					if (result.data.ok) {
 						setLoading(false);
 						setConfirm({ ...confirm, social: "ok" });
@@ -382,14 +380,30 @@ const Mission4Container = ({ history, location, match }) => {
 				// validation 체크 후 컨펌
 				const item = makeApiArr.getItemItro();
 				if (item.ok) {
+					// 플레이블 요청 후 api request 수정 요청 있을시 해제 사용
 					setLoading(true);
-					const result = await SaveData.save(9, item.data);
-					if (result.data.ok) {
+					if (confirm.social === "") {
+						alert("사회문제 분석 탭을 작성하고 다음을 눌러주세요.");
 						setLoading(false);
-						modalFunction.toggleProductNameModal(); // 상품이름 쓰는 모달 열기
+					} else {
+						if (confirm.reason === "") {
+							alert("상품개발 이유 탭을 작성하고 다음을 눌러주세요.");
+							setLoading(false);
+						} else {
+							if (confirm.developer === "") {
+								alert("미래인재 역할 탭을 작성하고 다음을 눌러주세요.");
+								setLoading(false);
+							} else {
+								const result = await SaveData.save(9, item.data);
+								if (result.data.ok) {
+									setLoading(false);
+									modalFunction.toggleProductNameModal(); // 상품이름 쓰는 모달 열기
+								}
+								setConfirm({ ...confirm, itemIntro: "ok" });
+								setSelectTab("itemIntro");
+							}
+						}
 					}
-					setConfirm({ ...confirm, itemIntro: "ok" });
-					setSelectTab("itemIntro");
 				}
 			}
 		},
@@ -507,8 +521,7 @@ const Mission4Container = ({ history, location, match }) => {
 			if (selectTab === "social") {
 				// 사회문석분석 탭에서 임시저장할 때
 				const question = makeTempSaveArr.getQuestion();
-				const result = await SaveData.save(6, question); // question api
-				console.log(result);
+				await SaveData.save(6, question); // question api
 			} else if (selectTab === "reason") {
 				// 상품개발이유에서 임시저장 할 때
 				const reason = makeTempSaveArr.getDevelopmentReason();
@@ -531,7 +544,6 @@ const Mission4Container = ({ history, location, match }) => {
 		if (location.state !== null && location.state !== undefined) {
 			// 임시저장 사용하기로 넘어올 경우
 			const data = location.state.data; //JSON 파싱이 안된 상태의 배열 tempSave 모든 데이터 원본 배열
-			// console.log(data);
 			const prevDateName = JSON.parse(location.state.data[5]);
 			const prevAnswerList = JSON.parse(location.state.data[6]);
 			const settingPrev = {
@@ -540,7 +552,6 @@ const Mission4Container = ({ history, location, match }) => {
 				},
 				studentAnswerList: prevAnswerList,
 			};
-			// console.log(settingPrev);
 			setPrevSelect(settingPrev);
 
 			// 사회문제 분석이 있는경우 [7]
@@ -575,7 +586,6 @@ const Mission4Container = ({ history, location, match }) => {
 			if (data[9] !== undefined && data[9] !== null) {
 				setConfirm({ ...confirm, social: "ok", reason: "ok", developer: "ok" });
 				const result = JSON.parse(data[9]);
-				// console.log(result);
 				if (result[0] !== undefined && result[0] !== null && result[0] !== "") {
 					setHumanRole1DropDown(result[0]);
 				}
@@ -625,9 +635,7 @@ const Mission4Container = ({ history, location, match }) => {
 					developer: "ok",
 					itemIntro: "ok",
 				});
-				console.log(data[11]);
 				const result = JSON.parse(data[11]);
-				console.log(result);
 				modalFunction.toggleProductNameModal();
 				setProductName(result[0]);
 			}
@@ -639,9 +647,7 @@ const Mission4Container = ({ history, location, match }) => {
 					developer: "ok",
 					itemIntro: "ok",
 				});
-				console.log(data[12]);
 				const result = JSON.parse(data[12]);
-				console.log(result);
 				setProductPrice(result[0]);
 				setItemNameModal(false);
 				setPriceSettingModal(false);
@@ -668,7 +674,6 @@ const Mission4Container = ({ history, location, match }) => {
 				setConfirm({ ...confirm, social: "ok" });
 				const result = JSON.parse(data[7]);
 				if (result[0] !== undefined && result[0] !== null && result[0] !== "") {
-					console.log(result[0]);
 					setSocialProblem(result[0]);
 				}
 				if (result[1] !== undefined && result[1] !== null && result[1] !== "") {
@@ -752,9 +757,7 @@ const Mission4Container = ({ history, location, match }) => {
 					developer: "ok",
 					itemIntro: "ok",
 				});
-				console.log(data[11]);
 				const result = JSON.parse(data[11]);
-				console.log(result);
 				modalFunction.toggleProductNameModal();
 				setProductName(result[0]);
 			}
@@ -767,7 +770,6 @@ const Mission4Container = ({ history, location, match }) => {
 					itemIntro: "ok",
 				});
 				const result = JSON.parse(data[12]);
-				console.log(result);
 				setProductPrice(result[0]);
 				setItemNameModal(false);
 				setPriceSettingModal(false);
