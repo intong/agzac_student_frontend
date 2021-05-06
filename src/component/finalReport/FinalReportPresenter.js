@@ -59,7 +59,7 @@ const FinalReportPresenter = ({
 									marginTop: "14px",
 								}}
 								onClick={() => {
-									window.open("https://forms.gle/RzEH356bezV7XCUo9");
+									window.open("https://docs.google.com/forms/d/e/1FAIpQLSfqzz01Y69sYumIzaMKYIFiL5o7R3xuuvbnf3RFKT7ghmBgJA/viewform?usp=sf_link");
 								}}
 							/>
 						) : (
