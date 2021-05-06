@@ -216,6 +216,7 @@ const Mission2Container = ({ history, match, location }) => {
 			{dimension.width < 415 ? (
 				missionInput ? (
 					<Mission2MobileInputPresenter
+						missionQuestion={missionQuestion}
 						index={index}
 						isOpen={isOpen}
 						loading={loading}

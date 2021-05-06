@@ -96,7 +96,7 @@ const DropDownList = styled.ul`
 	border-radius: 2px;
 	border: solid 1px #686868;
 	overflow-x: hidden;
-	position: absolute;
+	position: relative;
 	overflow-y: auto;
 	z-index: 10;
 `;

@@ -27,6 +27,7 @@ const options = [
 ];
 
 const Mission2MobileInputPresenter = ({
+	missionQuestion,
 	index,
 	isOpen,
 	loading,
@@ -61,6 +62,14 @@ const Mission2MobileInputPresenter = ({
 					필요합니다. 어떤 미래인재가 참여해야 할까요? 상품을 개발한 미래인재 2명을
 					찾아주세요!
 				</SubTitle>
+				<QuestionDiv>
+					<TitleQuestion>상품명</TitleQuestion>
+					<ProductName>{missionQuestion[index - 1].proName}</ProductName>
+					<TitleQuestion>상품설명</TitleQuestion>
+					<ProductDescription>
+						{missionQuestion[index - 1].proDescription}
+					</ProductDescription>
+				</QuestionDiv>
 				<div style={{ marginBottom: "20vh" }}>
 					<SubTitle style={{ marginLeft: "10vw", marginBottom: "2vh" }}>
 						미래인재1
@@ -196,6 +205,42 @@ const SubTitle = styled.div`
 	width: 85vw;
 	margin: auto;
 	margin-top: 4vh;
+`;
+const QuestionDiv = styled.div`
+	/* background: lightpink; */
+	width: 85vw;
+	height: 25vh;
+	box-sizing: border-box;
+	margin: auto;
+	margin-top: 8vh;
+`;
+const TitleQuestion = styled.div`
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 1.33;
+	color: #0f0f15;
+	width: 80vw;
+	margin: auto;
+	margin-top: 0vh;
+	margin-bottom: 1vh;
+`;
+const ProductName = styled.div`
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.33;
+	color: #0f0f15;
+	width: 80vw;
+	margin: auto;
+	margin-bottom: 3vh;
+`;
+const ProductDescription = styled.div`
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.33;
+	color: #0f0f15;
+	width: 80vw;
+	margin: auto;
+	text-align: justify;
 `;
 const SubFeedbackFirst = styled.div`
 	display: ${(props) =>

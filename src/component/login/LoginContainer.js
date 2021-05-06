@@ -56,12 +56,12 @@ const LoginContainer = () => {
 				.getElementById("studentClass")
 				.getAttribute("value");
 			const studentNo = document.getElementById("studentNo").getAttribute("value");
-			console.log("grade", grade);
-			console.log("studentClass", studentClass);
-			console.log("studentNo", studentNo);
-			console.log("studentName", studentName);
-			console.log("schoolName", schoolName);
-			console.log("connectCode", connectCode);
+			// console.log("grade", grade);
+			// console.log("studentClass", studentClass);
+			// console.log("studentNo", studentNo);
+			// console.log("studentName", studentName);
+			// console.log("schoolName", schoolName);
+			// console.log("connectCode", connectCode);
 			if (
 				grade &&
 				studentClass &&
