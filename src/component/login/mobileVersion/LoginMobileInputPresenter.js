@@ -115,6 +115,7 @@ const LoginMobileInputPresenter = ({
 				}}
 				onChange={loginFunction.onChangeSchoolName}
 			/>
+			<SubTitleMobile>학교</SubTitleMobile>
 			<DropboxLineTypeMobileLoginLong
 				id='grade'
 				placeholder='학년'
@@ -246,6 +247,19 @@ const TitleMobile = styled.div`
 	line-height: 1.43;
 	letter-spacing: normal;
 	color: #0f0f15;
+`;
+const SubTitleMobile = styled.div`
+	font-family: NotoSansCJKkr;
+	font-size: 14px;
+	font-weight: 500;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.43;
+	letter-spacing: normal;
+	color: #0f0f15;
+	position: absolute;
+	top: 33vh;
+	right: 9vw;
 `;
 const ClassNoDiv = styled.div`
 	display: flex;
