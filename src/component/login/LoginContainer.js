@@ -78,10 +78,10 @@ const LoginContainer = () => {
 					studentName,
 					schoolName
 				);
-				console.log(result);
 				if (result.data.ok === true && result.data.status === "비밀번호 있음") {
 					modalFunction.toggleInputPasswordModal();
 					setStudentId(result.data.studentId);
+					sessionStorage.setItem("studentId", result.data.studentId);
 					sessionStorage.setItem(
 						"missionOne",
 						JSON.stringify(result.data.missionOneQandA)
@@ -96,6 +96,7 @@ const LoginContainer = () => {
 				) {
 					modalFunction.toggleModal();
 					setStudentId(result.data.studentId);
+					sessionStorage.setItem("studentId", result.data.studentId);
 					sessionStorage.setItem(
 						"missionOne",
 						JSON.stringify(result.data.missionOneQandA)

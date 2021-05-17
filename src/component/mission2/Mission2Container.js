@@ -5,6 +5,7 @@ import Mission2MobilePresenter from "./mobileVersion/Mission2MobilePresenter";
 import Mission2MobileInputPresenter from "./mobileVersion/Mission2MobileInputPresenter";
 import ProcessContext from "../../contextApi/Process";
 import TempSaveContext from "../../contextApi/TempSave";
+import DBdataContext from "../../contextApi/DBdata";
 
 const Mission2Container = ({ history, match, location }) => {
 	//////////////// 모바일 state 시작 ///////////////////////////
@@ -17,6 +18,7 @@ const Mission2Container = ({ history, match, location }) => {
 	const [loading, setLoading] = useState(false);
 	const { state, actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
+	const { dataState, dataActions } = useContext(DBdataContext);
 	const [index, setIndex] = useState(); // 정답제출 시 +1 을 시키면 배열의 index 를 넘김
 	const [missionQuestion, setMissionQuestion] = useState(); // 미션 배열 중 한개의 문제만 보내는 state
 	const [inputArray, setInputArray] = useState([]); // 정답리스트 (배열길이 : 최대 8개) 구글시트 저장
@@ -210,6 +212,7 @@ const Mission2Container = ({ history, match, location }) => {
 		selectExamQuestion();
 		setIndex(parseInt(match.params.id));
 		tempUse();
+		console.log(sessionStorage.getItem("data"));
 	}, [match.params.id]);
 	return (
 		<>

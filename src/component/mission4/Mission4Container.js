@@ -63,7 +63,9 @@ const Mission4Container = ({ history, location, match }) => {
 				// 사회문제 키워드 배열담기
 				tempArr.push(result);
 				if (texts !== undefined) {
-					const lineBreak = texts.replace(/(\r\n\t|\n|\r\t)/gm, ""); // 줄바꿈 제거
+					const mark2Break = texts.replace(/\[.*?\]/g, ""); // 대괄호제거
+					const markBreak = mark2Break.replace(/\"/g, ""); // 따옴표 제거
+					const lineBreak = markBreak.replace(/(\r\n\t|\n|\r\t)/gm, ""); // 줄바꿈 제거
 					const spaceBreak = lineBreak.split(" ").join(""); // space 공백 띄어쓰기 제거
 					if (spaceBreak.length > 14) {
 						// textArea 텍스트 배열 담기
@@ -262,7 +264,11 @@ const Mission4Container = ({ history, location, match }) => {
 			if (result !== "사회문제 현상 키워드 선택") {
 				tempArr.push(result);
 				if (texts !== undefined) {
-					tempArr.push(texts);
+					const mark2Break = texts.replace(/\[.*?\]/g, ""); // 대괄호제거
+					const markBreak = mark2Break.replace(/\"/g, ""); // 따옴표 제거
+					const lineBreak = markBreak.replace(/(\r\n\t|\n|\r\t)/gm, ""); // 줄바꿈 제거
+					const spaceBreak = lineBreak.split(" ").join(""); // space 공백 띄어쓰기 제거
+					tempArr.push(spaceBreak);
 				}
 			}
 			return tempArr;

@@ -1,10 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Activity, SaveData } from "../../api/api";
+import { Activity, SaveData, DBData } from "../../api/api";
 import Mission1Presenter from "./Mission1Presenter";
 import Mission1MobilePresenter from "./mobileVersion/Mission1MobilePresenter";
 import Mission1MobileInputPresenter from "./mobileVersion/Mission1MobileInputPresenter";
 import ProcessContext from "../../contextApi/Process";
 import TempSaveContext from "../../contextApi/TempSave";
+import DBdataContext from "../../contextApi/DBdata";
 import { jobCards } from "../JobCards";
 
 const Mission1Container = ({ history, match, location }) => {
@@ -31,13 +32,64 @@ const Mission1Container = ({ history, match, location }) => {
 	const [processPercentage, setProcessPercentage] = useState(0);
 	const [faqModal, setFaqModal] = useState();
 	const [isOpen, setIsOpen] = useState(false);
-
+	const [saveData, setSaveData] = useState({
+		// 디비 저장에 관한 데이터 포멧
+		time: 0, // 문제의 정답을 맞추기까지 시간
+		isAnswer: true, // 문제의 첫번째 답변이 정답 or 오답
+		wrongCount: 0, // 정답 맞추기까지 틀린횟수
+		moreCount: false, // 더보기를 눌렀나 안눌렀나
+		help: 0, // 잡카드 누른 횟수
+	});
+	const [startTime, setStartTime] = useState();
 	const setProcessFunction = async () => {
 		//validation 추가
 		actions.setMission1("ok");
 		await Activity.mission1EndStart();
 		history.push(`/mission2/${state.mission2Index}`);
 	};
+
+	// db에 결과 데이터 저장하기
+	const goSaveDB = async () => {};
+
+	// saveData 만들기 함수 list
+	const makeSaveDataFunctionList = {
+		// 초기화
+		resetSaveData: () => {
+			setSaveData({
+				time: 0,
+				isAnswer: true,
+				wrongCount: 0,
+				moreCount: false,
+				help: 0,
+			});
+		},
+		// 정답 맞추는 시간 계산하기용 시간 값 가져오기
+		calculTime: () => {
+			const time = new Date();
+			const timeSec = time.getTime();
+			return timeSec;
+		},
+
+		// 오답횟수 기록
+		countWrongAnswer: () => {
+			setSaveData({
+				...saveData,
+				wrongCount: saveData.wrongCount + 1,
+				isAnswer: false,
+			});
+		},
+
+		// 더보기 버튼 눌렀을 때 saveData의 moreCount +1 하기
+		onClickMoreCount: () => {
+			setSaveData({ ...saveData, moreCount: true });
+		},
+
+		// job카드 누른 횟수
+		onClickJobCardCount: () => {
+			setSaveData({ ...saveData, help: saveData.help + 1 });
+		},
+	};
+
 	// 임시저장하기 (사용처 : 임시저장 모달 confirm버튼 / 정답제출 버튼)
 	const tempSaveSheet = async () => {
 		const result = await SaveData.save(2, inputArray);
@@ -100,12 +152,16 @@ const Mission1Container = ({ history, match, location }) => {
 				const upperCaseText = noneSpaceText.toUpperCase(); // 대소문자 구분 없앰 (대문자로 통일)
 				if (upperCaseText === question[index - 1].title) {
 					// 정답일때,
+					const endTime = makeSaveDataFunctionList.calculTime();
+					const gap = (endTime - startTime) / 1000;
+					setSaveData({ ...saveData, time: gap });
 					setInputArray([...inputArray, upperCaseText]); // 배열에 답 저장
 					answerFunctionList.findJobCards(upperCaseText); // 카드 이미지 찾아오기
 					setAnswerResult(true);
 					setAnswerInputText("");
 				} else {
 					// 오답일때,
+					makeSaveDataFunctionList.countWrongAnswer();
 					setAnswerResult(false);
 					setAnswerInputText("");
 				}
@@ -124,8 +180,8 @@ const Mission1Container = ({ history, match, location }) => {
 					setProcessFunction();
 				}
 			} else {
+				goSaveDB(); // db저장함수
 				setLoading(true);
-				// console.log("match.params.id", match.params.id);
 				actions.setIndex(parseInt(index) + 1); // Header active css 적용을 위해서 context 변수 +1
 				const result = await tempSaveSheet();
 				if (result.data.ok) {
@@ -133,6 +189,7 @@ const Mission1Container = ({ history, match, location }) => {
 					setLoading(false);
 					setAnswerResult(undefined);
 					history.push(`/mission1/${parseInt(index) + 1}`);
+					makeSaveDataFunctionList.resetSaveData();
 				}
 			}
 		},
@@ -211,10 +268,16 @@ const Mission1Container = ({ history, match, location }) => {
 		selectExamQuestion();
 		setIndex(match.params.id);
 		tempUse();
+		const settingStartTime = () => {
+			const time = makeSaveDataFunctionList.calculTime();
+			setStartTime(time);
+		};
+		settingStartTime();
 	}, [match.params.id]);
 
 	return (
 		<>
+			{/* {console.log(saveData)} */}
 			{dimension.width < 415 ? (
 				missionInput ? (
 					<Mission1MobileInputPresenter
@@ -262,6 +325,7 @@ const Mission1Container = ({ history, match, location }) => {
 					setProcessFunction={setProcessFunction}
 					modalFunction={modalFunction}
 					answerFunctionList={answerFunctionList}
+					makeSaveDataFunctionList={makeSaveDataFunctionList}
 				/>
 			)}
 		</>

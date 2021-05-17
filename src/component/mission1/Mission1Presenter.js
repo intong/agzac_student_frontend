@@ -29,6 +29,7 @@ const Mission1Presenter = ({
 	setProcessFunction,
 	modalFunction,
 	answerFunctionList,
+	makeSaveDataFunctionList,
 }) => {
 	return (
 		<LayOutContent>
@@ -95,6 +96,7 @@ const Mission1Presenter = ({
 										index={index}
 										modalFunction={modalFunction}
 										answerFunctionList={answerFunctionList}
+										makeSaveDataFunctionList={makeSaveDataFunctionList}
 									/>
 								) : (
 									<Answer1Default
@@ -225,7 +227,14 @@ const Mission1Presenter = ({
 					alt='힌트버튼'
 					onClick={modalFunction.toggleFaqModal}
 				/>
-				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
+				<JobsBtn
+					src={btnJobs}
+					alt='직업버튼'
+					onClick={() => {
+						modalFunction.openModal();
+						makeSaveDataFunctionList.onClickJobCardCount();
+					}}
+				/>
 			</Wrapper>
 		</LayOutContent>
 	);

@@ -2,7 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { ButtonPrimary, ButtonSecondary } from "../../ui/button/Button";
 
-const Answer2Correct = ({ index, modalFunction, answerFunctionList }) => {
+const Answer2Correct = ({
+	index,
+	modalFunction,
+	answerFunctionList,
+	makeSaveDataFunctionList,
+}) => {
 	return (
 		<RightBox>
 			<Number>
@@ -62,7 +67,10 @@ const Answer2Correct = ({ index, modalFunction, answerFunctionList }) => {
 					marginTop: "20px",
 					marginLeft: "24px",
 				}}
-				onClick={modalFunction.toggleNextMediaModal}
+				onClick={() => {
+					modalFunction.toggleNextMediaModal();
+					makeSaveDataFunctionList.onClickMoreCount();
+				}}
 			/>
 			<ButtonPrimary
 				text='다음'

@@ -8,13 +8,15 @@ import tempSave from "../assets/icons/icn-save@2x.png";
 import ProcessContext from "../contextApi/Process";
 import TempSaveContext from "../contextApi/TempSave";
 
-const Header = ({ match }) => {
+const Header = ({ match, location }) => {
 	const { state } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
 
 	const Logout = () => {
+		console.log(location);
 		const ok = window.confirm("정말 나가시겠습니까?");
 		if (ok) {
+			sessionStorage.removeItem("studentId");
 			sessionStorage.removeItem("auth");
 			sessionStorage.removeItem("user");
 			sessionStorage.removeItem("missionOne");
@@ -81,15 +83,15 @@ const Header = ({ match }) => {
 							exact={true}
 							activeStyle={activeStyle}
 							confirm={state.mission2} // css 글자색상 변경 state
-							onClick={(e) => {
-								if (state.mission1 !== "ok") {
-									e.preventDefault();
-									alert("Mission1 을 완료해 주세요");
-								}
-								if (state.mission2 === "ok" || state.mission3 === "ok") {
-									e.preventDefault();
-								}
-							}}
+							// onClick={(e) => {
+							// 	if (state.mission1 !== "ok") {
+							// 		e.preventDefault();
+							// 		alert("Mission1 을 완료해 주세요");
+							// 	}
+							// 	if (state.mission2 === "ok" || state.mission3 === "ok") {
+							// 		e.preventDefault();
+							// 	}
+							// }}
 						>
 							Mission02
 						</NavLinkStyled3>

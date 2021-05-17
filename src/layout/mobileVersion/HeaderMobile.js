@@ -16,6 +16,7 @@ const HeaderMobile = ({ sidebar, toggleSidebar }) => {
 	const Logout = () => {
 		const ok = window.confirm("정말 나가시겠습니까?");
 		if (ok) {
+			sessionStorage.removeItem("studentId");
 			sessionStorage.removeItem("auth");
 			sessionStorage.removeItem("user");
 			sessionStorage.removeItem("missionOne");

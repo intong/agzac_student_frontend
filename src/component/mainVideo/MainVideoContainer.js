@@ -197,7 +197,6 @@ const MainVideoContainer = ({ history, location, match }) => {
 	const getTempData = useCallback(async () => {
 		const params = sessionStorage.getItem("auth");
 		const result3 = await SaveData.getTempData(params);
-		console.log(result3);
 		if (result3.data.writtenData[2] !== undefined) {
 			setHasDataModal(true);
 			actions.setSaveTempData(result3.data.writtenData);
