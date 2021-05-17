@@ -64,7 +64,7 @@ const Mission4Container = ({ history, location, match }) => {
 				tempArr.push(result);
 				if (texts !== undefined) {
 					const mark2Break = texts.replace(/\[.*?\]/g, ""); // 대괄호제거
-					const markBreak = mark2Break.replace(/\"/g, ""); // 따옴표 제거
+					const markBreak = mark2Break.replace("\"", ""); // 따옴표 제거
 					const lineBreak = markBreak.replace(/(\r\n\t|\n|\r\t)/gm, ""); // 줄바꿈 제거
 					const spaceBreak = lineBreak.split(" ").join(""); // space 공백 띄어쓰기 제거
 					if (spaceBreak.length > 14) {
