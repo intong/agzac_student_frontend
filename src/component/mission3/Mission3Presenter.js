@@ -11,6 +11,7 @@ import Default from "./Default";
 import Footer from "../../layout/Footer";
 
 const Mission3Presenter = ({
+	makeSaveDataFunctionList,
 	setProcessFunction,
 	selectTab,
 	selectTabContent,
@@ -182,7 +183,14 @@ const Mission3Presenter = ({
 					alt='힌트버튼'
 					onClick={modalFunction.toggleFaqModal}
 				/>
-				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
+				<JobsBtn
+					src={btnJobs}
+					alt='직업버튼'
+					onClick={() => {
+						modalFunction.openModal();
+						makeSaveDataFunctionList.onClickJobCardCount();
+					}}
+				/>
 			</Wrapper>
 		</LayOutContent>
 	);

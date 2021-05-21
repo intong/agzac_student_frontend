@@ -58,6 +58,16 @@ export const Activity = {
 
 export const DBData = {
 	missionOne: (dbSaveArr) =>
-		apiToken.post("/api/data/mission-one", { missionOneData: dbSaveArr }),
+		apiToken.post("/api/data/mission-one", {
+			missionOneData: dbSaveArr,
+		}),
+	missionTwo: (dbSaveArr) =>
+		apiToken.post("/api/data/mission-two", { missionTwoData: dbSaveArr }),
+	missionThree: (dbSaveObj) =>
+		apiToken.post("/api/data/mission-three", dbSaveObj),
+	missionFour: (dbSave) => apiToken.post("/api/data/mission-four", dbSave),
 	getMissionOne: () => apiToken.get("/api/data/mission-one"),
+	getMissionTwo: () => apiToken.get("/api/data/mission-two"),
+	getMissionThree: () => apiToken.get("/api/data/mission-three"),
+	getMissionFour: () => apiToken.get("/api/data/mission-four"),
 };
