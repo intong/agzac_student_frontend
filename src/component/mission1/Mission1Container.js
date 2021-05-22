@@ -21,6 +21,7 @@ const Mission1Container = ({ history, match, location }) => {
 	const [index, setIndex] = useState();
 	const { state, actions } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
+	const { dataState, dataActions } = useContext(DBdataContext);
 	const [prevMedia, setPrevMedia] = useState(true);
 	const [nextMedia, setNextMedia] = useState(false);
 	const [answerInputText, setAnswerInputText] = useState(""); // onChang 인풋 텍스트 저장하는 state
@@ -49,7 +50,13 @@ const Mission1Container = ({ history, match, location }) => {
 	};
 
 	// db에 결과 데이터 저장하기
-	const goSaveDB = async () => {};
+	const goSaveDB = async () => {
+		dataActions.setMissionOneData(dataState.missionOneData.push(saveData));
+	};
+
+	const linkDBapi = async () => {
+		await DBData.missionOne(dataState.missionOneData);
+	};
 
 	// saveData 만들기 함수 list
 	const makeSaveDataFunctionList = {
@@ -92,6 +99,8 @@ const Mission1Container = ({ history, match, location }) => {
 
 	// 임시저장하기 (사용처 : 임시저장 모달 confirm버튼 / 정답제출 버튼)
 	const tempSaveSheet = async () => {
+		// await DBData.missionOne(dataState.missionOneData);
+		linkDBapi(); //
 		const result = await SaveData.save(2, inputArray);
 		return result;
 	};
@@ -154,7 +163,7 @@ const Mission1Container = ({ history, match, location }) => {
 					// 정답일때,
 					const endTime = makeSaveDataFunctionList.calculTime();
 					const gap = (endTime - startTime) / 1000;
-					setSaveData({ ...saveData, time: gap });
+					setSaveData({ ...saveData, time: gap }); // db저장 객체에 저장
 					setInputArray([...inputArray, upperCaseText]); // 배열에 답 저장
 					answerFunctionList.findJobCards(upperCaseText); // 카드 이미지 찾아오기
 					setAnswerResult(true);
@@ -170,6 +179,7 @@ const Mission1Container = ({ history, match, location }) => {
 		// 정답화면 오른쪽카드 다음 버튼 이벤트
 		addIndex: async () => {
 			if (parseInt(index) === 16) {
+				goSaveDB(); // db저장함수
 				setLoading(true);
 				const result = await tempSaveSheet();
 				if (result.data.ok) {

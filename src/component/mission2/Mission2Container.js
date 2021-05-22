@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Activity, SaveData } from "../../api/api";
+import { Activity, SaveData, DBData } from "../../api/api";
 import Mission2Presenter from "./Mission2Presenter";
 import Mission2MobilePresenter from "./mobileVersion/Mission2MobilePresenter";
 import Mission2MobileInputPresenter from "./mobileVersion/Mission2MobileInputPresenter";
@@ -29,6 +29,14 @@ const Mission2Container = ({ history, match, location }) => {
 	const [secondFeedback, setSecondFeedback] = useState();
 	const [faqModal, setFaqModal] = useState();
 	const [isOpen, setIsOpen] = useState(false);
+	const [saveData, setSaveData] = useState({
+		// 디비 저장에 관한 데이터 포멧
+		time: 0, // 문제의 정답을 맞추기까지 시간
+		isAnswer: true, // 문제의 첫번째 답변이 정답 or 오답
+		wrongCount: 0, // 정답 맞추기까지 틀린횟수
+		help: 0, // 잡카드 누른 횟수
+	});
+	const [startTime, setStartTime] = useState();
 
 	const setProcessFunction = async () => {
 		//validation 추가
@@ -41,6 +49,46 @@ const Mission2Container = ({ history, match, location }) => {
 	const selectExamQuestion = () => {
 		const question = JSON.parse(sessionStorage.getItem("missionTwo"));
 		setMissionQuestion(question);
+	};
+
+	// db에 결과 데이터 context에 저장하기
+	const goSaveDB = async () => {
+		dataActions.setMissionTwoData(dataState.missionTwoData.push(saveData));
+	};
+
+	const linkDBapi = async () => {
+		await DBData.missionTwo(dataState.missionTwoData);
+	};
+
+	// db에 결과 데이터 saveData 만들기 함수 list
+	const makeSaveDataFunctionList = {
+		// 초기화
+		resetSaveData: () => {
+			setSaveData({
+				time: 0,
+				isAnswer: true,
+				wrongCount: 0,
+				help: 0,
+			});
+		},
+		// 정답 맞추는 시간 계산하기용 시간 값 가져오기
+		calculTime: () => {
+			const time = new Date();
+			const timeSec = time.getTime();
+			return timeSec;
+		},
+		// 오답횟수 기록
+		countWrongAnswer: () => {
+			setSaveData({
+				...saveData,
+				wrongCount: saveData.wrongCount + 1,
+				isAnswer: false,
+			});
+		},
+		// job카드 누른 횟수
+		onClickJobCardCount: () => {
+			setSaveData({ ...saveData, help: saveData.help + 1 });
+		},
 	};
 
 	const modalFunction = {
@@ -56,6 +104,7 @@ const Mission2Container = ({ history, match, location }) => {
 		// 임시저장 확인 버튼 이벤트 함수
 		handleSaveModalConfirmBtn: async () => {
 			// 확인버튼 실행함수
+			await DBData.missionTwo(dataState.missionTwoData);
 			const result = await SaveData.save(3, inputArray);
 			if (result.data.ok) {
 				alert("저장하였습니다.");
@@ -134,7 +183,14 @@ const Mission2Container = ({ history, match, location }) => {
 				}
 				// 정답일 때마다 tempArr 배열에 담고, 그 배열의 길이가 2일때, inputArray에 넣기 (inputArray는 api request용 정답들 배열)
 				if (tempArr.length === 2) {
+					// 둘다 정답일때,
+					const endTime = makeSaveDataFunctionList.calculTime();
+					const gap = (endTime - startTime) / 1000;
+					setSaveData({ ...saveData, time: gap });
 					setInputArray(inputArray.concat(tempArr));
+				} else {
+					// 오답일때,
+					makeSaveDataFunctionList.countWrongAnswer(); // db wrongCount +1 하기
 				}
 			}
 		},
@@ -143,15 +199,19 @@ const Mission2Container = ({ history, match, location }) => {
 			setLoading(true);
 			// index +1 해서 다음문제 넘기기
 			if (index === 4) {
+				goSaveDB(); // db저장함수 호출
 				const result = await SaveData.save(3, inputArray);
 				if (result.data.ok) {
+					linkDBapi();
 					setLoading(false);
 					setIndex(index);
 					setProcessFunction();
 				}
 			} else {
+				goSaveDB(); // db저장함수 호출
 				const result = await SaveData.save(3, inputArray);
 				if (result.data.ok) {
+					linkDBapi();
 					setLoading(false);
 					setNormal(true);
 					setCorrectFirst(true);
@@ -159,6 +219,7 @@ const Mission2Container = ({ history, match, location }) => {
 					setIndex(index + 1);
 					actions.setMission2Index(index + 1);
 					history.push(`/mission2/${parseInt(match.params.id) + 1}`);
+					makeSaveDataFunctionList.resetSaveData();
 				}
 			}
 		},
@@ -212,7 +273,11 @@ const Mission2Container = ({ history, match, location }) => {
 		selectExamQuestion();
 		setIndex(parseInt(match.params.id));
 		tempUse();
-		console.log(sessionStorage.getItem("data"));
+		const settingStartTime = () => {
+			const time = makeSaveDataFunctionList.calculTime();
+			setStartTime(time);
+		};
+		settingStartTime();
 	}, [match.params.id]);
 	return (
 		<>
@@ -244,6 +309,7 @@ const Mission2Container = ({ history, match, location }) => {
 				)
 			) : (
 				<Mission2Presenter
+					makeSaveDataFunctionList={makeSaveDataFunctionList}
 					loading={loading}
 					index={index}
 					normal={normal}
