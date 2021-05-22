@@ -9,6 +9,7 @@ import close from "../../assets/icons/bnt-x-24.svg";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const Mission2Presenter = ({
+	makeSaveDataFunctionList,
 	loading,
 	index,
 	normal,
@@ -131,7 +132,14 @@ const Mission2Presenter = ({
 				</ModlaWrapperSave>
 			)}
 			<FaqBtn src={btnFaq} alt='힌트버튼' onClick={modalFunction.toggleFaqModal} />
-			<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
+			<JobsBtn
+				src={btnJobs}
+				alt='직업버튼'
+				onClick={() => {
+					modalFunction.openModal();
+					makeSaveDataFunctionList.onClickJobCardCount();
+				}}
+			/>
 		</Wrapper>
 	);
 };

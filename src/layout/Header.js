@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { DBData } from "../api/api";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import devide from "../assets/icons/icn-devide.svg";
@@ -7,15 +8,27 @@ import leaveout from "../assets/icons/icn-leaveout.svg";
 import tempSave from "../assets/icons/icn-save@2x.png";
 import ProcessContext from "../contextApi/Process";
 import TempSaveContext from "../contextApi/TempSave";
+import DBdataContext from "../contextApi/DBdata";
 
-const Header = ({ match, location }) => {
+const Header = () => {
 	const { state } = useContext(ProcessContext);
 	const { modalState, modalActions } = useContext(TempSaveContext);
+	const { dataState } = useContext(DBdataContext);
 
-	const Logout = () => {
-		console.log(location);
+	const Logout = async () => {
+		// console.log(dataState.missionTwoData);
 		const ok = window.confirm("정말 나가시겠습니까?");
 		if (ok) {
+			if (dataState.missionOneData !== []) {
+				await DBData.missionOne(dataState.missionOneData);
+			}
+			if (dataState.missionTwoData !== []) {
+				await DBData.missionTwo(dataState.missionTwoData);
+			}
+			if (dataState.missionThreeData !== {}) {
+				await DBData.missionThree(dataState.missionThreeData);
+			}
+
 			sessionStorage.removeItem("studentId");
 			sessionStorage.removeItem("auth");
 			sessionStorage.removeItem("user");

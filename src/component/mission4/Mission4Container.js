@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Activity, SaveData } from "../../api/api";
+import { Activity, SaveData, DBData } from "../../api/api";
 import Mission4Presenter from "./Mission4Presenter";
 import Mission4MobilePresenter from "./mobileVersion/Mission4MobilePresenter";
 import ProcessContext from "../../contextApi/Process";
@@ -47,10 +47,48 @@ const Mission4Container = ({ history, location, match }) => {
 		itemIntro: "",
 	});
 	const [selectTab, setSelectTab] = useState(match.params.id);
+	const [saveData, setSaveData] = useState({
+		// 디비 저장에 관한 데이터 포멧
+		keyword: "", // 사회문제 분석 선택한 사회문제 키워드
+		timeOnPage: [], // 미션4 각 탭 체류 시간 (배열길이 : 4)
+		futureJob: [], // 미래인재역할 탭에서 선택한 미래인재 (배열길이 : 3)
+		price: 0, // 상품가격
+	});
+	const [startTime, setStartTime] = useState();
 
 	// only css 선택 된 탭 색상 바꾸기 이벤트 (tabclick) : only css 용도
 	const handleTabClick = (tab) => {
 		clickFunctionList.selectedTabFunction(tab);
+	};
+
+	const makeSaveDataFunctionList = {
+		// 정답 맞추는 시간 계산하기용 시간 값 가져오기
+		calculTime: () => {
+			const time = new Date();
+			const timeSec = time.getTime();
+			return timeSec;
+		},
+		// 체류시간 계산
+		calculTimeGap: () => {
+			const endTime = makeSaveDataFunctionList.calculTime();
+			const gap = (endTime - startTime) / 1000;
+			makeSaveDataFunctionList.setTimeOnPage(gap);
+			setStartTime(endTime);
+		},
+		// setTimeOnPage
+		setTimeOnPage: (time) => {
+			let tempArr = saveData.timeOnPage;
+			tempArr.push(time);
+			setSaveData({ ...saveData, timeOnPage: tempArr });
+		},
+		// 미애인재 배열만들기
+		setFutureJob: (role1, role2, role3) => {
+			setSaveData({ ...saveData, futureJob: [role1, role2, role3] });
+		},
+		// 상품가격 넣기
+		setProPrice: (proprice) => {
+			setSaveData({ ...saveData, price: parseInt(proprice) });
+		},
 	};
 
 	// 각 탭의 input 값 null check 및 구글 api request data 배열 만들기
@@ -346,11 +384,23 @@ const Mission4Container = ({ history, location, match }) => {
 			history.push(`/mission4/${tab}`);
 		},
 		onClickNextFuction: async (tab) => {
+			const tempArr = [];
 			if (tab === "social") {
 				// validation 체크 후 컨펌
 				const question = makeApiArr.getQuestion();
 				if (question.ok) {
 					setLoading(true);
+					// endTime 설정 및 사회문제 분석탭 체류시간 저장 및 다음텝 startTime 재설정
+					const endTime = makeSaveDataFunctionList.calculTime();
+					const gap = (endTime - startTime) / 1000;
+					tempArr.push(gap);
+					setSaveData({
+						...saveData,
+						timeOnPage: tempArr,
+						keyword: question.data[0],
+					});
+					setStartTime(endTime);
+					// endTime end
 					const result = await SaveData.save(6, question.data); // question api
 					if (result.data.ok) {
 						setLoading(false);
@@ -363,6 +413,9 @@ const Mission4Container = ({ history, location, match }) => {
 				const reason = makeApiArr.getDevelopmentReason();
 				if (reason.ok) {
 					setLoading(true);
+					// endTime 설정 및 사회문제 분석탭 체류시간 저장 및 다음텝 startTime 재설정
+					makeSaveDataFunctionList.calculTimeGap();
+					// endTime end
 					const result = await SaveData.save(7, reason.data);
 					if (result.data.ok) {
 						setLoading(false);
@@ -375,6 +428,19 @@ const Mission4Container = ({ history, location, match }) => {
 				const role = makeApiArr.getFutureHumanRole();
 				if (role.ok) {
 					setLoading(true);
+					// endTime 설정 및 사회문제 분석탭 체류시간 저장 및 다음텝 startTime 재설정
+					makeSaveDataFunctionList.calculTimeGap();
+					// endTime end
+					// 미래인재 넣기
+					//  1. 미래인재 1 : role.data[0]
+					//  2. 미래인재 2 : role.data[2]
+					//  3. 미래인재 3 : role.data[4]
+					makeSaveDataFunctionList.setFutureJob(
+						role.data[0],
+						role.data[2],
+						role.data[4]
+					);
+					// 미래인재넣기 end
 					const result = await SaveData.save(8, role.data);
 					if (result.data.ok) {
 						setLoading(false);
@@ -400,6 +466,9 @@ const Mission4Container = ({ history, location, match }) => {
 								alert("미래인재 역할 탭을 작성하고 다음을 눌러주세요.");
 								setLoading(false);
 							} else {
+								// endTime 설정 및 사회문제 분석탭 체류시간 저장 및 다음텝 startTime 재설정
+								makeSaveDataFunctionList.calculTimeGap();
+								// endTime end
 								const result = await SaveData.save(9, item.data);
 								if (result.data.ok) {
 									setLoading(false);
@@ -467,6 +536,7 @@ const Mission4Container = ({ history, location, match }) => {
 		},
 		// 파이널로 가기
 		goToFinalReport: async () => {
+			await DBData.missionFour(saveData);
 			actions.setMission4("ok");
 			await Activity.mission4EndStart();
 			history.push("/finalreport");
@@ -505,6 +575,8 @@ const Mission4Container = ({ history, location, match }) => {
 		toggleCompleteModal: async () => {
 			if (!isNaN(productPrice)) {
 				setLoading(true);
+				// db (saveData)에 상품가격넣기
+				makeSaveDataFunctionList.setProPrice(productPrice);
 				const result = await SaveData.save(11, [productPrice]);
 				if (result.data.ok) {
 					setLoading(false);
@@ -788,6 +860,9 @@ const Mission4Container = ({ history, location, match }) => {
 		// 미션3에서 진행에 이어서 미션4로 넘어올 경우
 		setPrevSelect(modalState.mission3Selected);
 		tempUse();
+		// 사회문제 분석 탭 스타트타임 설정
+		const start = makeSaveDataFunctionList.calculTime();
+		setStartTime(start);
 	}, [modalState.mission3Selected]);
 
 	return (
