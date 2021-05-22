@@ -10,7 +10,7 @@ const apiToken = axios.create({
 // 개발용
 // const api = axios.create({});
 // const apiToken = axios.create({
-//	headers: { token: sessionStorage.getItem("auth") },
+// 	headers: { token: sessionStorage.getItem("auth") },
 // });
 
 export const Student = {
