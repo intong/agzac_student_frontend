@@ -6,20 +6,9 @@
 @font-face {
 	font-family: 'NotoSansCJKkr';
 	font-weight: normal;
-	src: url("../src/assets/fonts/NotoSansCJKkr-Regular.otf") format(truetype);
-  }
-  
-  
-  @font-face {
-	font-family: 'NotoSansCJKkr-Medium';
-	font-weight: 500;
-	src: url("../src/assets/fonts/NotoSansCJKkr-Medium.otf") format(truetype);
-  }
-  
-  @font-face {
-	font-family: 'NotoSansCJKkr-Bold';
-	font-weight: bold;
-	src: url("../src/assets/fonts/NotoSansCJKkr-Bold.otf") format(truetype);
+	src: url("/src/assets/fonts/NotoSansKR-Regular.woff2")format("woff2");
+    src: url("../src/assets/fonts/NotoSansKR-Bold.woff2") format('woff2'),
+         url("../src/assets/fonts/NotoSansKR-Bold.woff") format('woff'),
   }
 
 html, body, div, span, applet, object, iframe,
@@ -40,9 +29,12 @@ time, mark, audio, video {
 	border: 0;
 	font: inherit;
 	vertical-align: baseline;
+	font-family: "NotoSansCJKkr";
 }
-input, button {
+input, button, textarea {
 	outline:none;
+	-webkit-appearance: none;
+    -moz-appearance: none;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 

@@ -1,7 +1,16 @@
 import styled from "styled-components";
-const InputDefault = ({ name, style, onChange, placeholder, wrong, value }) => {
+const InputDefault = ({
+	name,
+	style,
+	onChange,
+	placeholder,
+	wrong,
+	value,
+	id,
+}) => {
 	return (
 		<Input
+			id={id}
 			name={name}
 			style={style}
 			onChange={onChange}
@@ -13,7 +22,7 @@ const InputDefault = ({ name, style, onChange, placeholder, wrong, value }) => {
 };
 
 const Input = styled.input`
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	line-height: 1.57;
 	color: #0f0f15;
@@ -31,32 +40,43 @@ const Input = styled.input`
 	}
 `;
 
-const InputLineType = ({ style, onChange, placeholder }) => {
+const InputLineType = ({ style, onChange, placeholder, value }) => {
 	return (
-		<InputStyle style={style} onChange={onChange} placeholder={placeholder} />
+		<InputStyle
+			style={style}
+			onChange={onChange}
+			placeholder={placeholder}
+			value={value}
+		/>
 	);
 };
 const InputStyle = styled.input`
+	width: 200px;
 	outline: none;
-	border: 0;
 	border-bottom: 1px solid #e4e4e4;
 	padding-bottom: 8px;
 	::placeholder {
-		font-family: "NotoSansCJKkr";
+		font-family: NotoSansCJKkr;
 		font-size: 14px;
 		color: #d8d8d8;
 	}
 	&:focus {
-		border-bottom: solid 1px #0f0f15;
-		font-family: "NotoSansCJKkr";
+		border-bottom: 1px solid #0f0f15;
+		font-family: NotoSansCJKkr;
 		font-size: 14px;
 		color: #0f0f15;
 	}
 `;
 
-const TextArea = ({ style, onChange, placeholder }) => {
+const TextArea = ({ style, onChange, placeholder, id, value }) => {
 	return (
-		<StyledTextArea style={style} onChange={onChange} placeholder={placeholder} />
+		<StyledTextArea
+			style={style}
+			onChange={onChange}
+			placeholder={placeholder}
+			id={id}
+			value={value}
+		/>
 	);
 };
 
@@ -66,7 +86,7 @@ const StyledTextArea = styled.textarea`
 	border: solid 1px #e4e4e4;
 	background-color: #fcfcfc;
 	padding: 10px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: "14px";
 	font-weight: "normal";
 	font-stretch: "normal";

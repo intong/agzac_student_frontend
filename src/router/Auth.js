@@ -1,16 +1,35 @@
-import React, { useState } from "react";
-import { Route, Redirect } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Route } from "react-router-dom";
 import LoginContainer from "../component/login/LoginContainer";
 import Layout from "../layout/Layout";
+import LayoutMobile from "../layout/mobileVersion/LayoutMobile";
 
 const Auth = () => {
-	const [token, setToken] = useState(true);
+	const [token, setToken] = useState(null);
+	const [dimension] = useState({
+		width: window.innerWidth,
+		height: window.innerHeight,
+	});
+
+	useEffect(() => {
+		const settingToken = () => {
+			setToken(sessionStorage.getItem("auth"));
+		};
+		settingToken();
+	}, []);
 	return (
 		<>
-			{token ? (
+			{token !== null ? (
 				<>
-					<Route path='/' component={Layout} />
-					<Redirect to='/mainVideo' />
+					<Route
+						path='/'
+						component={dimension.width < 415 ? LayoutMobile : Layout}
+					/>
+					{/* <Redirect
+						to={{
+							pathname: "/mainVideo",
+						}}
+					/> */}
 				</>
 			) : (
 				<>

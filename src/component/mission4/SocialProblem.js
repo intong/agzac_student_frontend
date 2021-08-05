@@ -4,9 +4,13 @@ import { ButtonPrimary } from "../../ui/button/Button";
 import { TextArea } from "../../ui/inputBox/Input";
 import { Dropbox } from "../../ui/dropbox/Dropbox";
 
-const options = ["1", "6", "5", "4", "3", "2"];
-
-const SocialProblem = ({ clickFunctionList }) => {
+const SocialProblem = ({
+	socialProblem,
+	texts,
+	prevSelect,
+	clickFunctionList,
+}) => {
+	const options = prevSelect && prevSelect.studentAnswerList;
 	return (
 		<>
 			<RightBox>
@@ -15,6 +19,8 @@ const SocialProblem = ({ clickFunctionList }) => {
 					1가지를 선택해주세요.
 				</TitleRight>
 				<Dropbox
+					id='question'
+					item={socialProblem}
 					options={options}
 					placeholder='사회문제 현상 키워드 선택'
 					style={{ position: "absolute", top: "62px", left: "24px" }}
@@ -33,7 +39,11 @@ const SocialProblem = ({ clickFunctionList }) => {
 						left: "24px",
 						width: "556px",
 						height: "86px",
+						resize: "none",
+						overflowY: "auto",
 					}}
+					onChange={clickFunctionList.onChangeTextArea}
+					value={texts ? texts : ""}
 				/>
 				<ButtonPrimary
 					text='다음'
@@ -57,7 +67,7 @@ const RightBox = styled.div`
 const TitleRight = styled.div`
 	width: 549px;
 	height: 22px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -72,7 +82,7 @@ const TitleRight = styled.div`
 const TitleRight2 = styled.div`
 	width: 576px;
 	height: 44px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;

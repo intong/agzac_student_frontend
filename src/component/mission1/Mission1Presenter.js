@@ -1,186 +1,276 @@
 import React from "react";
 import styled from "styled-components";
-import { HelpModal } from "../../ui/modal/Modal";
+import ReactPlayer from "react-player";
+import { HelpModal, ModalBaseTwoBtn } from "../../ui/modal/Modal";
 import btnJobs from "../../assets/icons/btn-floaing-jobs.svg";
 import btnFaq from "../../assets/icons/btn-floating-faq.svg";
-import group from "../../assets/img/group@3x.png";
+import group from "../../assets/img/img-jobs-default@2x.png";
 import Footer from "../../layout/Footer";
 import close from "../../assets/icons/bnt-x-24.svg";
 import Answer1Default from "./Answer1Default";
 import Answer2Correct from "./Answer2Correct";
-import Answer3Wrong from "./Answer3Wrong";
-import { ModalBaseTwoBtn } from "../../ui/modal/Modal";
+import { jobCards } from "../JobCards";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Mission1Presenter = ({
+	loading,
+	inputArray,
+	prevMedia,
+	nextMedia,
+	answerMissionCards,
+	answerInputText,
+	index,
+	missionQuestion,
+	answerResult,
 	isOpen,
 	faqModal,
 	modalState,
 	processPercentage,
 	setProcessFunction,
 	modalFunction,
+	answerFunctionList,
+	makeSaveDataFunctionList,
 }) => {
 	return (
-		<Wrapper>
-			<BlockTop>
-				<TopContent>
-					<TextBoxTop>Mission 01</TextBoxTop>
-					<TextBoxMiddle>
-						4차산업형명과 관련된 미래인재 정보를 획득해 보세요.
-					</TextBoxMiddle>
-					<TextBoxBottom>
-						4차산업혁명과 동시에 인간의 삶은 많은 영역에서 변화가 시작되었습니다.
-						변화에 따라 다양한 직업이 사라지거나 새롭게 생겨났습니다. 지금부터
-						여러분은 제시된 미래인재의 정보와 직업이름을 매칭하여 완벽한 정보를
-						획득해야 합니다. 우측 하단의 💡표시를 눌러 직업이름을 확인하여 정확한
-						미래인재 정보를 획득해보세요!
-					</TextBoxBottom>
-				</TopContent>
-			</BlockTop>
-			<BlockBottom>
-				<BottomContent>
-					<LeftBlock>
-						<TextBoxBottomTitle>미래인재 정보</TextBoxBottomTitle>
-						<CardBlock>
-							<CardContainer>
-								<img
-									src={group}
-									alt=''
-									style={{ widht: "270px", height: "336px", objectFit: "cover" }}
-								/>
-							</CardContainer>
-							<ExplainContainer>
-								<TitleTodo>하는일</TitleTodo>
-								<ExplainTodo>
-									드론에 카메라, 센서, 통신장비 등을 탑재하여 정보를 수집하거나 사람을
-									대신하여 배송하는 드론을 설계 및 개발
-								</ExplainTodo>
-								<div
+		<LayOutContent>
+			<Wrapper>
+				<BlockTop>
+					<TopContent>
+						<TextBoxTop>Mission 01</TextBoxTop>
+						<TextBoxMiddle>
+							4차산업혁명과 관련된 미래인재 정보를 획득해 보세요.
+						</TextBoxMiddle>
+						<TextBoxBottom>
+							4차산업혁명과 동시에 인간의 삶은 많은 영역에서 변화가 시작되었습니다.
+							변화에 따라 다양한 직업이 사라지거나 새롭게 생겨났습니다. 지금부터
+							여러분은 제시된 미래인재의 정보와 직업이름을 매칭하여 완벽한 정보를
+							획득해야 합니다. 우측 하단의 💡표시를 눌러 직업이름을 확인하여 정확한
+							미래인재 정보를 획득해보세요!
+						</TextBoxBottom>
+					</TopContent>
+				</BlockTop>
+				<BlockBottom>
+					<BottomContent>
+						<LeftBlock>
+							<TextBoxBottomTitle>미래인재 정보</TextBoxBottomTitle>
+							<CardBlock>
+								{missionQuestion && (
+									<>
+										<CardContainer>
+											{answerResult ? (
+												<img
+													src={jobCards[answerMissionCards].imgUrl}
+													alt=''
+													style={{ widht: "270px", height: "336px", objectFit: "cover" }}
+												/>
+											) : (
+												<img
+													src={group}
+													alt=''
+													style={{ widht: "270px", height: "336px", objectFit: "cover" }}
+												/>
+											)}
+										</CardContainer>
+										<ExplainContainer>
+											<TitleTodo>하는일</TitleTodo>
+											<ExplainTodo>{missionQuestion[index - 1].todo}</ExplainTodo>
+											<BarUnder />
+											<TitleInterview>인터뷰</TitleInterview>
+											<ExplainInterview>
+												{missionQuestion[index - 1].interview}
+											</ExplainInterview>
+											<BarUnder />
+											<TitleSubject>학과</TitleSubject>
+											<ExplainSubject>{missionQuestion[index - 1].subject}</ExplainSubject>
+										</ExplainContainer>
+									</>
+								)}
+							</CardBlock>
+						</LeftBlock>
+						<RightBlock>
+							<TextBoxBottomTitle>직업이름 매칭</TextBoxBottomTitle>
+							<RightBox>
+								{/*오른쪽 정답화면 교체*/}
+								{answerResult === true ? (
+									<Answer2Correct
+										index={index}
+										modalFunction={modalFunction}
+										answerFunctionList={answerFunctionList}
+										makeSaveDataFunctionList={makeSaveDataFunctionList}
+									/>
+								) : (
+									<Answer1Default
+										index={index}
+										answerInputText={answerInputText}
+										setProcessFunction={setProcessFunction}
+										answerFunctionList={answerFunctionList}
+										wrong={answerResult}
+									/>
+								)}
+							</RightBox>
+						</RightBlock>
+					</BottomContent>
+					<ProgressWrpper>
+						<Progress>
+							<ProgressBackground></ProgressBackground>
+							<ProgressValue
+								processPercentage={Math.floor((index / 16) * 100)}
+							></ProgressValue>
+						</Progress>
+						<ProcessBarLabel>
+							<LabelText>미래인재 매칭 달성도</LabelText>
+							<LaberPercent>
+								<span
 									style={{
-										width: "258px",
-										height: "1px",
-										background: "#d8d8d8",
-										opacity: "0.3",
-										marginBottom: "12px",
+										fontFamily: "NotoSansCJKkr",
+										fontSize: "18px",
+										fontWeight: "bold",
+										lineHeight: "1.11",
+										color: "#0f0f15",
 									}}
-								></div>
-								<TitleInterview>인터뷰</TitleInterview>
-								<ExplainInterview>
-									사람이 들어가기 힘든 재난 현장에 드론을 보 내거나, 드론 택배를 개발할
-									수 있어요.
-								</ExplainInterview>
-								<div
-									style={{
-										width: "258px",
-										height: "1px",
-										background: "#d8d8d8",
-										opacity: "0.3",
-										marginBottom: "12px",
-									}}
-								></div>
-								<TitleSubject>학과</TitleSubject>
-								<ExplainSubject>기계공학, 항공우주공학, 전기전자 등</ExplainSubject>
-							</ExplainContainer>
-						</CardBlock>
-					</LeftBlock>
-					<RightBlock>
-						<TextBoxBottomTitle>직업이름 매칭</TextBoxBottomTitle>
-						<RightBox>
-							{/*정답화면 교체*/}
-							<Answer1Default setProcessFunction={setProcessFunction} />
-							{/* <Answer2Correct /> */}
-							{/* <Answer3Wrong /> */}
-						</RightBox>
-					</RightBlock>
-				</BottomContent>
-				<ProgressWrpper>
-					<Progress>
-						<ProgressBackground></ProgressBackground>
-						<ProgressValue processPercentage={processPercentage}></ProgressValue>
-					</Progress>
-					<ProcessBarLabel>
-						<LabelText>미래인재 매칭 달성도</LabelText>
-						<LaberPercent>
-							<span
-								style={{
-									fontFamily: "NotoSansCJKkr",
-									fontSize: "18px",
-									fontWeight: "bold",
-									lineHeight: "1.11",
-									color: "#0f0f15",
-								}}
-							>
-								{processPercentage}
-							</span>
-							&nbsp;%
-						</LaberPercent>
-					</ProcessBarLabel>
-				</ProgressWrpper>
+								>
+									{Math.floor((index / 16) * 100)}
+								</span>
+								&nbsp;%
+							</LaberPercent>
+						</ProcessBarLabel>
+					</ProgressWrpper>
+				</BlockBottom>
+				{/* Loading 화면 */}
+				{loading && (
+					<ModalWrapper>
+						<ModalAreaSave>
+							<ClipLoader color={"#ffc300"} style={{ margin: "0 auto" }} />
+						</ModalAreaSave>
+					</ModalWrapper>
+				)}
+				{/* 잡카드 모달 */}
+				{isOpen && (
+					<ModalWrapper>
+						<ModalArea>
+							<HelpModal modalFunction={modalFunction} />
+						</ModalArea>
+					</ModalWrapper>
+				)}
+				{/* 도움말 모달 */}
+				{faqModal && (
+					<ModalWrapper>
+						<ModalAreaFaq>
+							<CloseDiv
+								src={close}
+								alt='닫기버튼'
+								onClick={modalFunction.toggleFaqModal}
+							/>
+							<TextDiv>
+								이미지를 클릭하시면 직업에 대한 아미봇의 설명을 들을 수 있습니다.
+							</TextDiv>
+							<HelpArea></HelpArea>
+							<TextDiv1>
+								가려진 직업의 하는일과 인터뷰를 읽고 직업의 이름을 맞춰주세요.
+							</TextDiv1>
+							<HelpArea1></HelpArea1>
+							<TextDiv2>
+								전구 모양을 클릭하시면 16가지의 미래직업 이름을 알 수 있습니다.
+							</TextDiv2>
+							<HelpArea2></HelpArea2>
+						</ModalAreaFaq>
+					</ModalWrapper>
+				)}
+				<Footer />
+				{/* 임시저장하기 모달 */}
+				{modalState.saveModalOpen && (
+					<ModalWrapper>
+						<ModalAreaSave>
+							<ModalBaseTwoBtn
+								header='임시 저장 하기'
+								content='지금까지 입력한 정보가 저장 됩니다.'
+								confirmbtntext='확인'
+								cancelbtntext='취소'
+								cancelbtnEvent={modalFunction.toggleSaveModal}
+								closeModalEvent={modalFunction.toggleSaveModal}
+								confirmbtnEvent={modalFunction.modalConfimBtnEvent}
+							/>
+						</ModalAreaSave>
+					</ModalWrapper>
+				)}
+				{/* 문제 풀기 전 영상 플레이 모달 */}
+				{prevMedia && (
+					<ModalWrapper>
+						<ModalPrevNextMediaArea>
+							<CloseBtn src={close} onClick={modalFunction.togglePrevMediaModal} />
+							<ReactPlayer
+								url={missionQuestion && missionQuestion[index - 1].prev}
+								width='100%'
+								height='100%'
+								controls={true}
+							/>
+						</ModalPrevNextMediaArea>
+					</ModalWrapper>
+				)}
+
+				{/* 문제 푼 후 영상 플레이 모달 */}
+				{nextMedia && (
+					<ModalWrapper>
+						<ModalPrevNextMediaArea>
+							<CloseBtn src={close} onClick={modalFunction.toggleNextMediaModal} />
+							<ReactPlayer
+								url={missionQuestion && missionQuestion[index - 1].next}
+								width='100%'
+								height='100%'
+								controls={true}
+							/>
+						</ModalPrevNextMediaArea>
+					</ModalWrapper>
+				)}
 				<FaqBtn
 					src={btnFaq}
 					alt='힌트버튼'
 					onClick={modalFunction.toggleFaqModal}
 				/>
-				<JobsBtn src={btnJobs} alt='직업버튼' onClick={modalFunction.openModal} />
-			</BlockBottom>
-			{isOpen && (
-				<ModalWrapper>
-					<ModalArea>
-						<HelpModal modalFunction={modalFunction} />
-					</ModalArea>
-				</ModalWrapper>
-			)}
-			{faqModal && (
-				<ModalWrapperFaq>
-					<ModalAreaFaq>
-						<CloseDiv
-							src={close}
-							alt='닫기버튼'
-							onClick={modalFunction.toggleFaqModal}
-						/>
-						<TextDiv>* 이곳에 써주세요.</TextDiv>
-					</ModalAreaFaq>
-				</ModalWrapperFaq>
-			)}
-			<Footer />
-			{modalState.saveModalOpen && (
-				<ModalWrapperSave>
-					<ModalAreaSave>
-						<ModalBaseTwoBtn
-							header='임시 저장 하기'
-							content='지금까 입력한 정보가 저장 됩니다.'
-							confirmbtntext='확인'
-							cancelbtntext='취소'
-							confirmbtnEvent={modalFunction.handleSaveModalConfirmBtn}
-							cancelbtnEvent={modalFunction.toggleSaveModal}
-						/>
-					</ModalAreaSave>
-				</ModalWrapperSave>
-			)}
-		</Wrapper>
+				<JobsBtn
+					src={btnJobs}
+					alt='직업버튼'
+					onClick={() => {
+						modalFunction.openModal();
+						makeSaveDataFunctionList.onClickJobCardCount();
+					}}
+				/>
+			</Wrapper>
+		</LayOutContent>
 	);
 };
 
-const ModalWrapperSave = styled.div`
-	width: 100%;
-	height: 900px;
-	background: rgba(15, 15, 21, 0.8);
-	position: absolute;
-	top: 0px;
-	display: flex;
-	z-index: 20;
-`;
-const ModalAreaSave = styled.div`
-	margin: auto;
-`;
-
 const ModalWrapper = styled.div`
-	width: 100%;
-	height: 900px;
+	width: 100vw;
+	height: 100vh;
 	background: rgba(15, 15, 21, 0.8);
-	position: absolute;
+	position: fixed;
 	top: 0;
 	z-index: 20;
 	display: flex;
+`;
+const ModalPrevNextMediaArea = styled.div`
+	width: 944px;
+	height: 458px;
+	border-radius: 2px;
+	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
+	background: #ffffff;
+	margin: auto;
+	position: relative;
+`;
+const CloseBtn = styled.img`
+	width: 24px;
+	height: 24px;
+	filter: invert(100%);
+	position: absolute;
+	top: -30px;
+	right: 0px;
+	&:hover {
+		cursor: pointer;
+	}
+`;
+const ModalAreaSave = styled.div`
+	margin: auto;
 `;
 const ModalArea = styled.div`
 	width: 700px;
@@ -188,15 +278,6 @@ const ModalArea = styled.div`
 	position: absolute;
 	bottom: 122px;
 	right: 114px;
-`;
-const ModalWrapperFaq = styled.div`
-	width: 100%;
-	height: 900px;
-	background: rgba(15, 15, 21, 0.8);
-	position: absolute;
-	top: 0;
-	z-index: 20;
-	display: flex;
 `;
 const ModalAreaFaq = styled.div`
 	width: 944px;
@@ -208,8 +289,8 @@ const CloseDiv = styled.img`
 	width: 24px;
 	height: 24px;
 	position: absolute;
-	top: 480px;
-	right: 24px;
+	top: 200px;
+	left: 24px;
 	filter: invert(100%);
 	&:hover {
 		cursor: pointer;
@@ -217,18 +298,48 @@ const CloseDiv = styled.img`
 `;
 const TextDiv = styled.div`
 	padding-left: 10px;
-	width: 246px;
-	height: 42px;
+	width: 270px;
+	height: 100px;
 	line-height: 3;
 	border-radius: 2px;
 	border: solid 1px #e4e4e4;
-	font-family: "NotoSansCJKkr";
-	font-size: 14px;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
 	font-style: normal;
 	color: white;
 	position: absolute;
-	top: 509px;
-	right: 24px;
+	top: 250px;
+	left: 20px;
+`;
+const TextDiv1 = styled.div`
+	padding-left: 10px;
+	width: 270px;
+	height: 100px;
+	line-height: 3;
+	border-radius: 2px;
+	border: solid 1px #e4e4e4;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
+	font-style: normal;
+	color: white;
+	position: absolute;
+	top: 250px;
+	left: 320px;
+`;
+const TextDiv2 = styled.div`
+	padding-left: 10px;
+	width: 270px;
+	height: 100px;
+	line-height: 3;
+	border-radius: 2px;
+	border: solid 1px #e4e4e4;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
+	font-style: normal;
+	color: white;
+	position: absolute;
+	bottom: 150px;
+	right: -340px;
 `;
 
 const Progress = styled.div`
@@ -257,12 +368,11 @@ const ProgressValue = styled.div`
 	width: 0;
 	z-index: 2;
 	@keyframes load {
-		0% {
+		from {
 			width: 0;
 		}
-		100% {
-			width: ${(props) =>
-				props.processPercentage && `${props.processPercentage}%`};
+		to {
+			width: ${(props) => `${props.processPercentage}%`};
 		}
 	}
 `;
@@ -278,8 +388,8 @@ const ProcessBarLabel = styled.div`
 const LabelText = styled.div`
 	width: 123px;
 	height: 20px;
-	font-family: "NotoSansCJKkr";
-	font-size: 14px;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
 	font-weight: 500;
 	font-stretch: normal;
 	font-style: normal;
@@ -289,9 +399,14 @@ const LabelText = styled.div`
 `;
 const LaberPercent = styled.div``;
 
+const LayOutContent = styled.div`
+	width: 100vw;
+`;
 const Wrapper = styled.div`
 	min-width: 1024px;
 	max-width: 1920px;
+	overflow-x: hidden;
+	overflow-y: auto;
 `;
 
 const BlockTop = styled.div`
@@ -338,21 +453,22 @@ const CardContainer = styled.div`
 	/* margin-right: 16px; */
 `;
 const ExplainContainer = styled.div`
-	/* width: 286px;
-	height: 336px; */
+	width: 258px;
+	height: 308px;
 	border-radius: 2px;
 	border: solid 1px #e4e4e4;
 	background-color: #f8f8f8;
 	/* background: red; */
+	padding: 14px;
 	margin-left: 16px;
-
+	overflow: auto;
 	padding: 14px;
 `;
 const TitleTodo = styled.div`
 	width: 39px;
 	height: 20px;
-	font-family: "NotoSansCJKkr";
-	font-size: 14px;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
 	font-weight: 500;
 	line-height: 1.43;
 	color: #0f0f15;
@@ -360,18 +476,25 @@ const TitleTodo = styled.div`
 `;
 const ExplainTodo = styled.div`
 	width: 258px;
-	height: 66px;
-	font-family: "NotoSansCJKkr";
-	font-size: 14px;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
 	line-height: 1.57;
 	color: #0f0f15;
+	text-align: justify;
+	margin-bottom: 12px;
+`;
+const BarUnder = styled.div`
+	width: 258px;
+	height: 1px;
+	opacity: 0.3;
+	background-color: #d8d8d8;
 	margin-bottom: 12px;
 `;
 const TitleInterview = styled.div`
 	width: 39px;
 	height: 20px;
-	font-family: "NotoSansCJKkr";
-	font-size: 14px;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
 	font-weight: 500;
 	line-height: 1.43;
 	color: #0f0f15;
@@ -379,18 +502,18 @@ const TitleInterview = styled.div`
 `;
 const ExplainInterview = styled.div`
 	width: 258px;
-	height: 44px;
-	font-family: "NotoSansCJKkr";
-	font-size: 14px;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
 	line-height: 1.57;
 	color: #0f0f15;
+	text-align: justify;
 	margin-bottom: 12px;
 `;
 const TitleSubject = styled.div`
 	width: 26px;
 	height: 20px;
-	font-family: "NotoSansCJKkr";
-	font-size: 14px;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
 	font-weight: 500;
 	line-height: 1.43;
 	color: #0f0f15;
@@ -398,11 +521,11 @@ const TitleSubject = styled.div`
 `;
 const ExplainSubject = styled.div`
 	width: 258px;
-	height: 22px;
-	font-family: "NotoSansCJKkr";
-	font-size: 14px;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
 	line-height: 1.57;
 	color: #0f0f15;
+	text-align: justify;
 `;
 const RightBlock = styled.div`
 	margin-top: 39px;
@@ -411,16 +534,16 @@ const RightBlock = styled.div`
 const FaqBtn = styled.img`
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
 	vertical-align: text-top;
-	position: absolute;
-	top: 668px;
+	position: fixed;
+	bottom: 108px;
 	right: 30px;
 	&:hover {
 		cursor: pointer;
 	}
 `;
 const JobsBtn = styled.img`
-	position: absolute;
-	top: 746px;
+	position: fixed;
+	bottom: 30px;
 	right: 30px;
 	filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2));
 	&:hover {
@@ -431,18 +554,18 @@ const JobsBtn = styled.img`
 const TextBoxTop = styled.div`
 	width: 70px;
 	height: 14px;
-	font-family: "NotoSansCJKkr";
-	font-size: 14px;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
 	font-weight: 500;
 	line-height: 1;
 	color: #0f0f15;
 	padding-top: 40px;
 `;
 const TextBoxMiddle = styled.div`
-	width: 579px;
+	width: 944px;
 	height: 38px;
-	font-family: "NotoSansCJKkr";
-	font-size: 26px;
+	font-family: NotoSansCJKkr;
+	font-size: 1.625rem;
 	font-weight: 500;
 	color: #0f0f15;
 	margin-top: 8px;
@@ -451,18 +574,19 @@ const TextBoxBottom = styled.div`
 	width: 944px;
 	height: 66px;
 	opacity: 0.8;
-	font-family: "NotoSansCJKkr";
-	font-size: 14px;
+	font-family: NotoSansCJKkr;
+	font-size: 0.875rem;
 	font-weight: 500;
 	line-height: 1.57;
 	color: #0f0f15;
+	text-align: justify;
 `;
 
 const TextBoxBottomTitle = styled.div`
-	width: 104px;
+	width: 200px;
 	height: 24px;
-	font-family: "NotoSansCJKkr";
-	font-size: 18px;
+	font-family: NotoSansCJKkr;
+	font-size: 1.125rem;
 	font-weight: 500;
 	line-height: 1.33;
 	color: #0f0f15;
@@ -474,6 +598,30 @@ const ProgressWrpper = styled.div`
 	/* background: red; */
 	width: 944px;
 	margin: 0 auto;
+`;
+const HelpArea = styled.div`
+	border: 1px solid red;
+	width: 280px;
+	height: 370px;
+	position: absolute;
+	top: 370px;
+	left: 20px;
+`;
+const HelpArea1 = styled.div`
+	border: 1px solid red;
+	width: 280px;
+	height: 370px;
+	position: absolute;
+	top: 370px;
+	left: 320px;
+`;
+const HelpArea2 = styled.div`
+	border: 1px solid red;
+	width: 78px;
+	height: 80px;
+	position: absolute;
+	bottom: 20px;
+	right: -348px;
 `;
 
 export default Mission1Presenter;

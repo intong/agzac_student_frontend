@@ -1,9 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import Footer from "../../layout/Footer";
+import ReactPlayer from "react-player/youtube";
 import { InputDefault } from "../../ui/inputBox/Input";
 import { ButtonPrimary } from "../../ui/button/Button";
-import { ModalBaseTwoBtn } from "../../ui/modal/Modal";
+import {
+	ModalBaseTwoBtn,
+	ModalBase,
+	LoadingModal,
+	ModalTwoBtnLong,
+} from "../../ui/modal/Modal";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const inputStyle = {
 	width: "244px",
@@ -14,83 +21,163 @@ const inputStyle = {
 };
 
 const MainVideoPresenter = ({
+	loading,
+	companyName,
+	secretCode,
+	hasDataModal,
 	isModalOpen,
-	setProcessFunction,
+	answerFalseModal,
+	mediaAndSecretCode,
 	modalFunction,
+	functionList,
 }) => {
 	return (
-		<Wrapper>
-			<BlockTop>
-				<TopContent>
-					<TextDivTop>EY한영 아그작교실 영상시청</TextDivTop>
-					<TextDivMiddle>
-						기업을 설립하고 운영하기 위해 영상을 반드시 시청해주세요.
-					</TextDivMiddle>
-					<TextDivBottom>
-						영상을 시청한 후 나만의 기업 이름을 만들고,
-						<br />
-						영상 속에서 제시한 비밀코드를 입력한 후 정답 제출을 진행해 주세요!
-					</TextDivBottom>
-				</TopContent>
-			</BlockTop>
-			<BlockBottom>
-				<BottomContent>
-					<LeftBox>
-						<VideoPlayArea>영상</VideoPlayArea>
-					</LeftBox>
-					<RightBox>
-						<TitleText>기업이름과 비밀코드 입력</TitleText>
-						<HeaderText>새롭게 설립할 기업의 이름을 입력해주세요.</HeaderText>
-						<InputDefault style={inputStyle} />
-						<HeaderText style={{ marginTop: "16px" }}>
-							영상에서 제시한 비밀코드를 입력해주세요.
-						</HeaderText>
-						<InputDefault style={inputStyle} />
-						<ButtonPrimary
-							text='정답제출'
-							style={{ marginTop: "84px", marginLeft: "200px" }}
-							onClick={setProcessFunction}
-						/>
-					</RightBox>
-				</BottomContent>
-			</BlockBottom>
-			<Footer />
-			{/* alert 메세지 모달 */}
+		<LayOutContent>
+			{mediaAndSecretCode && (
+				<Wrapper>
+					<BlockTop>
+						<TopContent>
+							<TextDivTop>EY한영 아그작교실 영상시청</TextDivTop>
+							<TextDivMiddle>
+								기업을 설립하고 운영하기 위해 영상을 반드시 시청해주세요.
+							</TextDivMiddle>
+							<TextDivBottom>
+								영상을 시청한 후 나만의 기업 이름을 만들고, <br />
+								영상 속에서 제시한 비밀코드를 입력한 후 정답 제출을 진행해 주세요!
+							</TextDivBottom>
+						</TopContent>
+					</BlockTop>
+					<BlockBottom>
+						<BottomContent>
+							<LeftBox>
+								<VideoPlayArea>
+									<ReactPlayer
+										url={mediaAndSecretCode.openingMedia}
+										width='100%'
+										height='100%'
+										controls={true}
+									/>
+								</VideoPlayArea>
+							</LeftBox>
+							<RightBox>
+								<TitleText>기업이름과 비밀코드 입력</TitleText>
+								<HeaderText>새롭게 설립할 기업의 이름을 입력해주세요.</HeaderText>
+								<InputDefault
+									id='companyName'
+									style={inputStyle}
+									value={companyName === undefined ? "" : companyName}
+									onChange={functionList.onChangeCompanyName}
+								/>
+								<HeaderText style={{ marginTop: "16px" }}>
+									영상에서 제시한 비밀코드를 입력해주세요.
+								</HeaderText>
+								<InputDefault
+									id='secretCode'
+									style={inputStyle}
+									value={secretCode === undefined ? "" : secretCode}
+									onChange={functionList.onChangeSecretCode}
+								/>
+								<ButtonPrimary
+									text='정답제출'
+									style={{ marginTop: "84px", marginLeft: "200px" }}
+									onClick={functionList.onSubmit}
+								/>
+							</RightBox>
+						</BottomContent>
+					</BlockBottom>
+					<Footer />
+				</Wrapper>
+			)}
+			{/* 임시저장모달 */}
 			{isModalOpen && (
 				<ModalWrapper>
 					<ModalArea>
 						<ModalBaseTwoBtn
 							header='임시 저장 하기'
-							content='지금까 입력한 정보가 저장 됩니다.'
+							content='지금까지 입력한 정보가 저장 됩니다.'
 							confirmbtntext='확인'
 							cancelbtntext='취소'
-							confirmbtnEvent={modalFunction.handleConfirmBtn}
+							confirmbtnEvent={modalFunction.tempSaveSheet}
 							cancelbtnEvent={modalFunction.toggleModal}
+							closeModalEvent={modalFunction.toggleModal}
 						/>
 					</ModalArea>
 				</ModalWrapper>
 			)}
-		</Wrapper>
+
+			{/* 오답 알림 모달 */}
+			{answerFalseModal && (
+				<ModalWrapper>
+					<ModalArea>
+						<ModalBase
+							header='비밀코드 오답!'
+							content='비밀코드가 틀렸습니다. 다시 입력해 주세요.'
+							btntext='확인'
+							btnEvent={modalFunction.toggleAnswerFalseModal}
+							closeModalEvent={modalFunction.toggleAnswerFalseModal}
+						/>
+					</ModalArea>
+				</ModalWrapper>
+			)}
+			{/* 임시저장 데이터가 있는 지 확인하고 있으면 띄우는 모달 */}
+			{hasDataModal === undefined ? (
+				<ModalWrapper>
+					<ModalArea>
+						<LoadingModal />
+					</ModalArea>
+				</ModalWrapper>
+			) : hasDataModal === true ? (
+				<ModalWrapper>
+					<ModalArea>
+						<ModalTwoBtnLong
+							header='저장된 데이터 불러오기'
+							content='이미 작성된 데이터가 있습니다. 저장된 데이터를 불러올까요?'
+							confirmBtnOnClick={modalFunction.useTempData}
+							cancelBtnOnClick={modalFunction.cleanAllMission}
+						/>
+					</ModalArea>
+				</ModalWrapper>
+			) : (
+				<></>
+			)}
+			{/* Loading 화면 */}
+			{loading && (
+				<ModalWrapper>
+					<ModalArea>
+						<ClipLoader
+							color={"#ffc300"}
+							style={{ margin: "0 auto", zIndex: "100" }}
+						/>
+					</ModalArea>
+				</ModalWrapper>
+			)}
+		</LayOutContent>
 	);
 };
 
 const ModalWrapper = styled.div`
-	width: 100%;
-	height: 900px;
+	width: 100vw;
+	height: 100vh;
 	background: rgba(15, 15, 21, 0.8);
-	position: absolute;
+	position: fixed;
 	top: 0px;
 	display: flex;
 	z-index: 20;
+	-ms-overflow-style: none; /* IE and Edge */
 `;
 const ModalArea = styled.div`
 	margin: auto;
 `;
-
+const LayOutContent = styled.div`
+	width: 100vw;
+`;
 const Wrapper = styled.div`
 	/* background: lightgreen; */
 	min-width: 1024px;
 	max-width: 1920px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	margin: 0 auto;
 `;
 
 const BlockTop = styled.div`

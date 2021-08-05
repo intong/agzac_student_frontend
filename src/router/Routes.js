@@ -10,11 +10,12 @@ import FinalReport from "../component/finalReport/FinalReportContainer";
 const Routes = () => {
 	return (
 		<>
-			<Route path='/mainVideo' component={MainVideoContainer} />
-			<Route path='/mission1' component={Mission1Container} />
-			<Route path='/mission2' component={Mission2Container} />
-			<Route path='/mission3' component={Mission3Container} />
-			<Route path='/mission4' component={Mission4Container} />
+			{/* <Route path='/mainVideo' component={MainVideoContainer} /> */}
+			<Route exact path='/' component={MainVideoContainer} />
+			<Route path='/mission1/:id' component={Mission1Container} />
+			<Route path='/mission2/:id' component={Mission2Container} />
+			<Route path='/mission3/:id' component={Mission3Container} />
+			<Route path='/mission4/:id' component={Mission4Container} />
 			<Route path='/finalreport' component={FinalReport} />
 		</>
 	);

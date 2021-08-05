@@ -4,33 +4,51 @@ import { ButtonPrimary } from "../../ui/button/Button";
 import { Dropbox } from "../../ui/dropbox/Dropbox";
 
 const options = [
-	"option1",
-	"option2",
-	"option3",
-	"option4",
-	"option5",
-	"option6",
-	"option7",
-	"option8",
-	"option9",
-	"option10",
-	"option11",
-	"option12",
+	"드론개발자",
+	"사물인터넷전문가",
+	"인공지능과학자",
+	"3D프린터개발자",
+	"컴퓨터보안전문가",
+	"소프트웨어개발자",
+	"기능성게임기획자",
+	"VR엔지니어",
+	"지능형교통시스템전문가",
+	"프로파일러",
+	"재난대처전문가",
+	"신약개발연구원",
+	"환경공학기술자",
+	"신재생에너지전문가",
+	"업사이클러",
+	"탄소배출권거래중개인",
 ];
 
-const AnswerDefault = ({ normal, correct, setProcessFunction }) => {
+const AnswerDefault = ({
+	index,
+	missionQuestion,
+	normal,
+	correctFirst,
+	correctSeconds,
+	firstFeedback,
+	secondFeedback,
+	answerFunctionList,
+}) => {
 	const leftDropbox = {
 		position: "absolute",
 		left: "24px",
-		// border: normal === false && correct === false ? "1px solid #ff3737" : "",
+		border: normal === false && correctFirst === false ? "1px solid #ff3737" : "",
 	};
 	const rightDropbox = {
 		position: "absolute",
 		left: "320px",
-		// border: normal === false && correct === false ? "1px solid #ff3737" : "",
+		border:
+			normal === false && correctSeconds === false ? "1px solid #ff3737" : "",
 	};
 	return (
-		<RightBox normal={normal} correct={correct}>
+		<RightBox
+			normal={normal}
+			correctFirst={correctFirst}
+			correctSeconds={correctSeconds}
+		>
 			<Number>
 				<span
 					style={{
@@ -41,7 +59,7 @@ const AnswerDefault = ({ normal, correct, setProcessFunction }) => {
 						color: "#0f0f15",
 					}}
 				>
-					1
+					{index}
 				</span>{" "}
 				<span
 					style={{
@@ -91,25 +109,53 @@ const AnswerDefault = ({ normal, correct, setProcessFunction }) => {
 				}}
 			>
 				<Dropbox
+					id='futureOne'
 					style={leftDropbox}
 					options={options}
-					correct={correct}
 					placeholder='선택'
 				/>
 				<Dropbox
+					id='futureTwo'
 					style={rightDropbox}
 					options={options}
-					correct={correct}
 					placeholder='선택'
 				/>
 			</div>
-			<ButtonPrimary
-				text='정답제출'
-				style={{ position: "absolute", bottom: "24px", right: "24px" }}
-				onClick={setProcessFunction}
-			/>
-			<CorrectText correct={correct} normal={normal}>
-				{correct ? "정답입니다!" : "다시 한번 생각해 볼까요?"}
+			<FeedbackSection>
+				<LeftFeedback normal={normal} correctFirst={correctFirst}>
+					{firstFeedback && firstFeedback}
+				</LeftFeedback>
+				<RightFeedback normal={normal} correctSeconds={correctSeconds}>
+					{secondFeedback && secondFeedback}
+				</RightFeedback>
+			</FeedbackSection>
+			{normal ? (
+				<ButtonPrimary
+					text='정답제출'
+					style={{ position: "absolute", bottom: "24px", right: "24px" }}
+					onClick={answerFunctionList.checkAnswer}
+				/>
+			) : correctFirst === true && correctSeconds === true ? (
+				<ButtonPrimary
+					text='다음'
+					style={{ position: "absolute", bottom: "24px", right: "24px" }}
+					onClick={answerFunctionList.addIndex}
+				/>
+			) : (
+				<ButtonPrimary
+					text='정답제출'
+					style={{ position: "absolute", bottom: "24px", right: "24px" }}
+					onClick={answerFunctionList.checkAnswer}
+				/>
+			)}
+			<CorrectText
+				correctFirst={correctFirst}
+				correctSeconds={correctSeconds}
+				normal={normal}
+			>
+				{correctFirst && correctSeconds
+					? "정답입니다!"
+					: "다시 한번 생각해 볼까요?"}
 			</CorrectText>
 		</RightBox>
 	);
@@ -123,7 +169,9 @@ const RightBox = styled.div`
 	background: #ffffff;
 	border-radius: 2px;
 	border: ${(props) =>
-		props.correct === true && props.normal === false
+		props.correctFirst === true &&
+		props.correctSeconds === true &&
+		props.normal === false
 			? "1px solid #ffc300"
 			: "none"};
 	box-shadow: 0 0 10px 0 rgba(15, 15, 21, 0.05);
@@ -142,7 +190,7 @@ const Number = styled.div`
 const TitleRight = styled.div`
 	width: 83px;
 	height: 24px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 18px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -159,7 +207,7 @@ const TextContentBoxRight = styled.div`
 	height: 44px;
 	margin-left: 24px;
 	margin-bottom: 18px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -172,7 +220,7 @@ const TextContentBoxRight = styled.div`
 const Cate1 = styled.div`
 	width: 60px;
 	height: 22px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -187,7 +235,7 @@ const Cate1 = styled.div`
 const Cate2 = styled.div`
 	width: 60px;
 	height: 22px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: normal;
 	font-stretch: normal;
@@ -203,7 +251,7 @@ const CorrectText = styled.div`
 	display: ${(props) => props.normal === true && "none"};
 	width: 146px;
 	height: 20px;
-	font-family: "NotoSansCJKkr";
+	font-family: NotoSansCJKkr;
 	font-size: 14px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -211,8 +259,53 @@ const CorrectText = styled.div`
 	line-height: normal;
 	letter-spacing: normal;
 	color: ${(props) =>
-		props.normal === false && props.correct === true ? "#ffc300" : "#ff3737"};
+		props.normal === false &&
+		props.correctFirst === true &&
+		props.correctSeconds === true
+			? "#ffc300"
+			: "#ff3737"};
 	position: absolute;
 	top: 335px;
 	left: 24px;
+`;
+const FeedbackSection = styled.div`
+	margin-top: 65px;
+	margin-left: 24px;
+	position: relative;
+`;
+const LeftFeedback = styled.div`
+	display: ${(props) =>
+		props.normal === false && props.correctFirst === true ? "show" : "none"};
+	width: 270px;
+	height: 50px;
+	font-family: NotoSansCJKkr;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.57;
+	letter-spacing: normal;
+	color: #0f0f15;
+	text-align: justify;
+	position: absolute;
+	top: 0px;
+	left: 5px;
+`;
+const RightFeedback = styled.div`
+	display: ${(props) =>
+		props.normal === false && props.correctSeconds === true ? "show" : "none"};
+	width: 270px;
+	height: 50px;
+	font-family: NotoSansCJKkr;
+	font-size: 14px;
+	font-weight: normal;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.57;
+	letter-spacing: normal;
+	color: #0f0f15;
+	text-align: justify;
+	position: absolute;
+	top: 0px;
+	left: 300px;
 `;
