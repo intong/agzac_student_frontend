@@ -100,10 +100,17 @@ const Mission1Container = ({ history, match, location }) => {
 	// 임시저장하기 (사용처 : 임시저장 모달 confirm버튼 / 정답제출 버튼)
 	const tempSaveSheet = async () => {
 		// await DBData.missionOne(dataState.missionOneData);
-		linkDBapi(); //
-		const result = await SaveData.save(2, inputArray);
-		return result;
-	};
+		try{
+
+			linkDBapi(); //
+			const result = await SaveData.save(2, inputArray);
+			return result;
+		}catch(err){
+			console.log(err);
+
+			return false
+		}
+	}
 	const modalFunction = {
 		toggleLoadingModal: () => {
 			setLoading(!loading);
@@ -188,6 +195,10 @@ const Mission1Container = ({ history, match, location }) => {
 					setProcessPercentage(100);
 					setAnswerResult(undefined);
 					setProcessFunction();
+				}else if(!result){
+					setTimeout(()=>{
+						setLoading(false)
+					},60000)
 				}
 			} else {
 				goSaveDB(); // db저장함수
@@ -200,6 +211,10 @@ const Mission1Container = ({ history, match, location }) => {
 					setAnswerResult(undefined);
 					history.push(`/mission1/${parseInt(index) + 1}`);
 					makeSaveDataFunctionList.resetSaveData();
+				}else if(!result){
+					setTimeout(()=>{
+						setLoading(false)
+					},60000)
 				}
 			}
 		},
